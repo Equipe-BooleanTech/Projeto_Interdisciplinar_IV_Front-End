@@ -13,7 +13,7 @@
 <br>
 
 <p align='center'>
-  <a href="https://github.com/juanmesa2097/angular-boilerplate/blob/main/README.md">English</a> |
+  <a href="https://https://github.com/Equipe-BooleanTech/restaurantto-app/blob/main/README.md">English</a> |
   <strong>Español</strong> 
 </p>
 
@@ -73,14 +73,14 @@ Este es un proyecto que se enfoca en las últimas características y mejores pr�
 
 ### Utilizando plantilla de GitHub
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/juanmesa2097/angular-boilerplate)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/Equipe-BooleanTech/restaurantto-app)
 
 ---
 
 ### Clonando el repositorio localmente
 
 ```sh
-npx degit juanmesa2097/angular-boilerplate my-app && cd my-app && ./scripts/rename_project.sh my-app
+npx degit Equipe-BooleanTech/restaurantto-app my-app && cd my-app && ./scripts/rename_project.sh my-app
 ```
 
 ### Instalar dependencias
@@ -111,24 +111,24 @@ Por favor revise esta lista de verificación y modifíquela según sea necesario
 
 ## 📦 Despliegue en Vercel
 
-[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/juanmesa2097/angular-boilerplate)
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://https://github.com/Equipe-BooleanTech/restaurantto-app)
 
 ## 📦 Despliegue en Netlify
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/juanmesa2097/angular-boilerplate)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://https://github.com/Equipe-BooleanTech/restaurantto-app)
 
 ## 🐳 Docker
 
 Crear una imagen del proyecto.
 
 ```sh
-docker buildx build -t angular-boilerplate:latest .
+docker buildx build -t restaurantto-app:latest .
 ```
 
 Ejecutar la imagen del proyecto.
 
 ```sh
-docker run --rm -p 8080:80 -d angular-boilerplate:latest
+docker run --rm -p 8080:80 -d restaurantto-app:latest
 ```
 
 ## 🧙‍♂️ Comandos
