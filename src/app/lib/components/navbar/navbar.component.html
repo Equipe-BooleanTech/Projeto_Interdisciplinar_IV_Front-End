@@ -1,0 +1,11 @@
+<header class="bg-slate-50 h-[120px] w-full">
+    <nav class="flex flex-wrap justify-end h-full items-center">
+        <ul class="flex space-x-8 mr-10"> 
+            @for (link of navLinks; track $index) {
+                <li class="">
+                    <a href="{{ link.url }}" class="">{{link.name}}</a>
+            }
+        </ul>
+    </nav>
+</header>
+<div class="h-[10px] w-screen bg-[#741308]"></div>"

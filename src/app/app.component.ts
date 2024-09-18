@@ -1,9 +1,12 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from '@lib/components';
+
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [],
+    imports: [NavbarComponent, RouterOutlet],
     templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
