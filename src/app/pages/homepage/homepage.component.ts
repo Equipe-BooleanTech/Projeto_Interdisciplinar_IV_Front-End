@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { CardComponent } from '@lib/components';
+import { HomepageLayoutComponent } from '@lib/layouts';
+
 
 @Component({
     selector: 'app-homepage',
     standalone: true,
-    imports: [CardComponent],
+    imports: [HomepageLayoutComponent],
     templateUrl: './homepage.component.html',
     styles: ``,
 })

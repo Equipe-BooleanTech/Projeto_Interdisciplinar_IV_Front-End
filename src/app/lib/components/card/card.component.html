@@ -1,10 +1,10 @@
-<div class="border-2 border-[#740310] rounded-lg w-11/12 lg:w-[18%] m-4 p-2">
+<div class="border-2 border-[#740310] rounded-lg lg:w-96 h-64 mx-8 my-4 p-6">
   <div class="flex flex-col h-full">
     <!-- Caso isDemographic seja falso -->
     <div *ngIf="!isDemographic" class="flex justify-between items-center">
       <div class="flex items-start flex-col">
-        <span class="{{ iconClass }}"></span>
-        <h1 class="font-semibold text-[28px] mb-2">{{ title }}</h1>
+        <span class="{{ iconClass }} text-5xl text-[#741308] mx-auto"></span>
+        <h1 class="font-semibold text-[28px] mb-2 text-center">{{ title }}</h1>
         <p class="text-md text-gray-600">{{ description }}</p>
       </div>
     </div>
