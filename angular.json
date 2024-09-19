@@ -70,10 +70,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "restaurantto-app:build:production"
+              "buildTarget": "restaurantto-app:build:production"
             },
             "development": {
-              "browserTarget": "restaurantto-app:build:development"
+              "buildTarget": "restaurantto-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -81,7 +81,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "restaurantto-app:build"
+            "buildTarget": "restaurantto-app:build"
           }
         },
         "test": {

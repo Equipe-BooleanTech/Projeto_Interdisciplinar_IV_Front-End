@@ -25,7 +25,8 @@
     "paths": {
       "@lib/*": ["src/app/lib/*"],
       "@pages/*": ["src/app/pages/*"],
-      "@env/*": ["src/environments/*"]
+      "@env/*": ["src/environments/*"],
+      "@assets/*": ["src/assets/*"]
     }
   },
   "angularCompilerOptions": {
