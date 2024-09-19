@@ -15,8 +15,8 @@ export default {
     darkMode: 'class',
     theme: {
         fontFamily: {
-            display: ['Oswald', 'sans-serif'],
-            body: ['Poppins', 'sans-serif'],
+            display: ['DM Sans', 'sans-serif'],
+            body: ['DM Sans', 'sans-serif'],
         },
         container: {
             center: true,

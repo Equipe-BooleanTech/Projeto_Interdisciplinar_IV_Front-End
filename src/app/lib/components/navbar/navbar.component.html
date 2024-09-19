@@ -1,5 +1,8 @@
 <header class="bg-slate-50 h-[120px] w-full">
-    <nav class="flex flex-wrap justify-end h-full items-center">
+    <nav class="flex flex-wrap justify-between h-full items-center">          
+        <a href="/" class="ml-10">
+            <img src="../../assets/logo.svg" alt="Logotipo do app Restaurantto" class="h-[140px] w-[150px]">
+        </a>
         <ul class="flex space-x-8 mr-10"> 
             @for (link of navLinks; track $index) {
                 <li class="">
@@ -8,4 +11,4 @@
         </ul>
     </nav>
 </header>
-<div class="h-[10px] w-screen bg-[#741308]"></div>"
+<div class="h-[10px] w-screen bg-[#741308]"></div>
