@@ -1,0 +1,26 @@
+<div class="border-2 border-[#740310] rounded-lg w-11/12 lg:w-[18%] m-4 p-2">
+  <div class="flex flex-col h-full">
+    <!-- Caso isDemographic seja falso -->
+    <div *ngIf="!isDemographic" class="flex justify-between items-center">
+      <div class="flex items-start flex-col">
+        <span class="{{ iconClass }}"></span>
+        <h1 class="font-semibold text-[28px] mb-2">{{ title }}</h1>
+        <p class="text-md text-gray-600">{{ description }}</p>
+      </div>
+    </div>
+
+    <!-- Caso isDemographic seja verdadeiro -->
+    <div *ngIf="isDemographic" class="flex items-center mt-2 w-full">
+      <div class="flex items-center justify-center text-5xl rounded-full">
+      </div>
+      <div class="ml-4">
+        <h1 class="font-semibold text-[32px]">{{ metric }}</h1>
+        <p class="text-2xl font-bold text-gray-600">{{ metricTitle }}</p>
+        <div [ngClass]="isPositive ? 'text-green-500' : 'text-red-500'">
+          <span>{{ percentageChange }}%</span> 
+          <span class="text-xs"> Comparado à semana anterior</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
