@@ -1,1 +1,1 @@
-export * from './shared-data-service/shared-data-service.service';
+export * from './data-transfer/data-transfer.service';
