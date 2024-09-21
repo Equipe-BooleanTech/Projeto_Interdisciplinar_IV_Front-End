@@ -9,4 +9,5 @@ import { HomepageLayoutComponent } from '@lib/layouts';
     templateUrl: './homepage.component.html',
     styles: ``,
 })
-export class Homepage {}
+export class Homepage {
+}
