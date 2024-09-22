@@ -1,22 +1,16 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { AuthService } from '@lib/services';
-import { ThemeService } from '@lib/services/theme';
-import { LayoutHorizontalComponent } from './lib/components/layouts/layout-horizontal/layout-horizontal.component';
+import { Component, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from '@presentation/view/components';
+
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [CommonModule, RouterModule, LayoutHorizontalComponent],
+    imports: [NavbarComponent, RouterOutlet],
     templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-    isAuthenticated$ = inject(AuthService).isAuthenticated$;
-
-    private readonly _themeService = inject(ThemeService);
-
     ngOnInit(): void {
-        this._themeService.init();
+        throw new Error('Method not implemented.');
     }
 }

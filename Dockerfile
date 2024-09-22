@@ -5,20 +5,13 @@ FROM node:20-alpine as builder
 
 WORKDIR /app
 
-RUN npm i -g pnpm
-
 COPY . .
 
-RUN --mount=type=cache,id=pnpm-store,target=/root/.pnpm-store \
-    pnpm install --frozen-lockfile && \
-    pnpm build
-
-# ;---------------;
-# ; Runtime stage ;
+RUN npm run build
 # ;---------------;
 FROM nginx:stable-alpine as runtime
 
-COPY --from=builder /app/dist/angular-boilerplate /usr/share/nginx/html
+COPY --from=builder /app/dist/restaurantto-app /usr/share/nginx/html
 
 EXPOSE 80
 

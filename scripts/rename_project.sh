@@ -1,8 +1,8 @@
 #!/bin/bash
 
-current_project_name="angular-boilerplate"
-current_git_provider="github.com/juanmesa2097"
-current_git_username="juanmesa2097"
+current_project_name="restaurantto-app"
+current_git_provider="https://github.com/Equipe-BooleanTech"
+current_git_username="Equipe-BooleanTech"
 
 # Function to find files recursively
 find_files() {
