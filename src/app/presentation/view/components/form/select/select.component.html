@@ -1,0 +1,12 @@
+<label [for]="field.name">{{ field.label }}</label>
+<select
+    [id]="field.name"
+    [formControlName]="field.name"
+>
+    <option
+        *ngFor="let option of field.options"
+        [value]="option.value"
+    >
+        {{ option.label }}
+    </option>
+</select>

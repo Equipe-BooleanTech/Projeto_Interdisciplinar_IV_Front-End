@@ -1,1 +1,7 @@
-<p>form works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div *ngFor="let field of config.fields">
+    <app-input *ngIf="field.type !== 'textarea' && field.type !== 'select'" [field]="field" [form]="form"></app-input>
+    <app-textarea *ngIf="field.type === 'textarea'" [field]="field" [form]="form"></app-textarea>
+    <app-select *ngIf="field.type === 'select'" [field]="field" [form]="form"></app-select>
+  </div>
+</form>

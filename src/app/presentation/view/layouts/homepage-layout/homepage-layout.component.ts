@@ -91,6 +91,43 @@ export class HomepageLayoutComponent implements OnInit {
             image: '../../../../assets/section-04-layout.svg',
             reverse: true,
         },
+        form: {
+            title: 'Entre em contato conosco!',
+            description:
+                'Entre em contato conosco e descubra como podemos ajudar a transformar a gestão do seu negócio. Nossa equipe está pronta para esclarecer suas dúvidas, fornecer suporte e apresentar as melhores soluções para suas necessidades. Não hesite em nos enviar uma mensagem, estamos aqui para te atender!',
+            fields: [
+                {
+                    name: 'name',
+                    label: 'Nome',
+                    type: 'text',
+                    validations: [{ name: 'required' }],
+                },
+                {
+                    name: 'email',
+                    label: 'E-mail',
+                    type: 'email',
+                    validations: [{ name: 'required' }, { name: 'email' }],
+                },
+                {
+                    name: 'phone',
+                    label: 'Telefone',
+                    type: 'text',
+                    validations: [{ name: 'required' }],
+                },
+                {
+                    name: 'company',
+                    label: 'Empresa',
+                    type: 'text',
+                    validations: [{ name: 'required' }],
+                },
+                {
+                    name: 'message',
+                    label: 'Mensagem',
+                    type: 'textarea',
+                    validations: [{ name: 'required' }],
+                },
+            ],
+        },
     };
 
     ngOnInit(): void {
