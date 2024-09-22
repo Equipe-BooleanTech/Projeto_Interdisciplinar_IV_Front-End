@@ -23,10 +23,10 @@
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"],
     "paths": {
-      "@lib/*": ["src/app/lib/*"],
-      "@pages/*": ["src/app/pages/*"],
-      "@env/*": ["src/environments/*"],
-      "@assets/*": ["src/assets/*"]
+      "@data/*": ["src/app/data/*"],
+      "@domain/*": ["src/app/domain/*"],
+      "@infra/*": ["src/app/infra/*"],
+      "@presentation/*": ["src/app/presentation/*"],
     }
   },
   "angularCompilerOptions": {
