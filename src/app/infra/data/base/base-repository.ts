@@ -1,4 +1,4 @@
-export abstract class BaseRepository<T> {
+export abstract class BaseRepository<T>{
     abstract findAll(): T[];
     abstract findById(id: string): T;
     abstract save(entity: T): void;

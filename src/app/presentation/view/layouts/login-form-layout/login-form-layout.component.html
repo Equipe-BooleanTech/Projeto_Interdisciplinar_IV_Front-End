@@ -1,0 +1,45 @@
+<div class="w-full h-screen flex justify-center items-center bg-gray-100">
+  <!-- Container Principal -->
+  <div class="flex items-center justify-center space-x-10">
+    <!-- Logo Section -->
+    <div class="flex justify-center items-center mr-36">
+      <img src="assets/login.svg" alt="logo" class="w-96 h-96" />
+    </div>
+
+    <!-- Form Section -->
+    <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
+      <h2 class="text-center text-xl font-bold text-[#740318] mb-4">Bem vindo ao Restaurantto!</h2>
+      <p class="text-center text-gray-600 mb-6">Insira suas credenciais para acesso ao sistema.</p>
+
+      <app-form [formGroup]="form" (ngSubmit)="submit(form.value)" class="space-y-6">
+        <ng-container *ngFor="let field of config.fields">
+          <ng-container [ngSwitch]="field.component">
+            <div *ngSwitchCase="'input'" class="flex flex-col space-y-2">
+              <label [for]="field.name" class="text-gray-700 font-semibold">{{ field.placeholder }}</label>
+              <input
+                [id]="field.name"
+                [formControlName]="field.name"
+                [type]="field.type"
+                [placeholder]="field.placeholder"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#740318]"
+              />
+            </div>
+          </ng-container>
+        </ng-container>
+        <!-- Login Button -->
+        <button
+          type="submit"
+          class="w-full py-3 px-4 bg-[#740318] hover:bg-[#740318c9] text-white font-semibold rounded-lg transition duration-300 ease-in-out"
+          [disabled]="!form.valid"
+        >
+          Login
+      </button>
+      </app-form>
+
+      <!-- Forgot Password Link -->
+      <div class="text-right mt-4">
+        <a href="#" class="text-[#740318] hover:underline">Esqueceu sua senha?</a>
+      </div>
+    </div>
+  </div>
+</div>

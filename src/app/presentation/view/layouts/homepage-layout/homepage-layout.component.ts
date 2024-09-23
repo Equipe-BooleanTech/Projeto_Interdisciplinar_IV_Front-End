@@ -2,11 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { BannerLayoutComponent } from './banner-layout/banner-layout.component';
 import { DataTransferService } from '@infra/services';
 import { SectionLayoutComponent } from './section-layout/section-layout.component';
+import { CommonModule } from '@angular/common';
+import { FormLayoutComponent } from './form-layout/form-layout.component';
 
 @Component({
     selector: 'app-homepage-layout',
     standalone: true,
-    imports: [BannerLayoutComponent, SectionLayoutComponent],
+    imports: [
+        BannerLayoutComponent,
+        SectionLayoutComponent,
+        CommonModule,
+        FormLayoutComponent,
+    ],
     templateUrl: './homepage-layout.component.html',
     styles: [],
 })
@@ -90,6 +97,46 @@ export class HomepageLayoutComponent implements OnInit {
             },
             image: '../../../../assets/section-04-layout.svg',
             reverse: true,
+        },
+        form: {
+            title: 'Entre em contato conosco!',
+            description:
+                'Entre em contato conosco e descubra como podemos ajudar a transformar a gestão do seu negócio. Nossa equipe está pronta para esclarecer suas dúvidas, fornecer suporte e apresentar as melhores soluções para suas necessidades. Não hesite em nos enviar uma mensagem, estamos aqui para te atender!',
+            fields: [
+                {
+                    name: 'name',
+                    label: 'Nome',
+                    type: 'text',
+                    validations: [{ name: 'required' }],
+                },
+                {
+                    name: 'email',
+                    label: 'E-mail',
+                    type: 'email',
+                    validations: [{ name: 'required' }, { name: 'email' }],
+                },
+                {
+                    name: 'phone',
+                    label: 'Telefone',
+                    type: 'text',
+                    validations: [{ name: 'required' }],
+                },
+                {
+                    name: 'company',
+                    label: 'Empresa',
+                    type: 'text',
+                    validations: [{ name: 'required' }],
+                },
+                {
+                    name: 'message',
+                    label: 'Mensagem',
+                    type: 'textarea',
+                    validations: [{ name: 'required' }],
+                },
+            ],
+            button: {
+                text: 'Enviar',
+            },
         },
     };
 

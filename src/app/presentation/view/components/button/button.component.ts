@@ -10,6 +10,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ButtonComponent {
     @Input() link: string | undefined = '';
     @Input() class: string = '';
+    @Input() disabled: boolean = false;
 
     @Output() handlePropertyChange = new EventEmitter<{
         key: string;
