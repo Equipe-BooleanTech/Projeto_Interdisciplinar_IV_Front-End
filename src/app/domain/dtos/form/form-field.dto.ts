@@ -5,6 +5,8 @@ export interface FormFieldDto {
     label: string;
     type: string;
     value?: any;
+    placeholder?: string;
+    required?: boolean;
     options?: { label: string; value: any }[];
     validations?: Validation[];
 }

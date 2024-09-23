@@ -1,0 +1,11 @@
+<select
+  [ngClass]="class"
+  [formControlName]="formControlName"
+  [value]="value"
+  (change)="onSelectChange($event)"
+  class="form-select mt-1 block w-full"
+>
+  <option *ngFor="let option of options" [value]="option.value">
+    {{ option.label }}
+  </option>
+</select>

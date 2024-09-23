@@ -2,11 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { BannerLayoutComponent } from './banner-layout/banner-layout.component';
 import { DataTransferService } from '@infra/services';
 import { SectionLayoutComponent } from './section-layout/section-layout.component';
+import { CommonModule } from '@angular/common';
+import { FormLayoutComponent } from './form-layout/form-layout.component';
 
 @Component({
     selector: 'app-homepage-layout',
     standalone: true,
-    imports: [BannerLayoutComponent, SectionLayoutComponent],
+    imports: [
+        BannerLayoutComponent,
+        SectionLayoutComponent,
+        CommonModule,
+        FormLayoutComponent,
+    ],
     templateUrl: './homepage-layout.component.html',
     styles: [],
 })

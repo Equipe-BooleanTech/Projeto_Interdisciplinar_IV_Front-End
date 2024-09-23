@@ -1,0 +1,19 @@
+<section id="contato" class="min-h-screen h-full w-full">
+  <div class="flex flex-col justify-center items-center h-full w-full">
+    <div class="flex flex-col justify-center items-center w-full">
+      <h1 class="text-4xl font-bold text-center">{{homepageData?.form?.title}}</h1>
+      <p class="text-center">{{homepageData?.form?.description}}</p>
+    </div>
+    <div class="flex flex-col justify-center items-center w-full">
+      <app-form class="w-full" [formGroup]="form" (ngSubmit)="submit(form.value)">
+        <ng-container *ngFor="let field of config.fields">
+          <ng-container [ngSwitch]="field.component">
+            <app-form-input *ngSwitchCase="'input'" [formControlName]="field.name" [type]="field.type" [placeholder]="field.placeholder ?? ''" class="" />
+            <app-form-textarea *ngSwitchCase="'textarea'" [formControlName]="field.name" [placeholder]="field.placeholder ?? ''" class="" />
+          </ng-container>
+        </ng-container>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">{{homepageData?.form?.button?.text}}</button>
+      </app-form>
+    </div>
+  </div>
+</section>

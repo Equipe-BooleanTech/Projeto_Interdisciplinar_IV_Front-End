@@ -10,26 +10,18 @@ import {
 } from '@angular/forms';
 import { Validation } from '@domain/base';
 import { FormConfig } from '@domain/interfaces';
-import { SelectComponent } from './select/select.component';
-import { InputComponent } from './input/input.component';
-import { TextareaComponent } from './textarea/textarea.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-form',
     standalone: true,
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        SelectComponent,
-        InputComponent,
-        TextareaComponent,
-    ],
+    imports: [CommonModule, ReactiveFormsModule],
     templateUrl: './form.component.html',
     styles: ``,
 })
 export class FormComponent implements OnInit {
     @Input() config: FormConfig = { fields: [] };
+    @Input() class: string = '';
     @Output() submitForm = new EventEmitter<any>();
 
     form: FormGroup = this._formBuilder.group({});
@@ -78,7 +70,7 @@ export class FormComponent implements OnInit {
                 return null;
         }
     }
-    onSubmit(): void {
+    submit(): void {
         if (this.form.valid) {
             this.submitForm.emit(this.form.value);
         }
