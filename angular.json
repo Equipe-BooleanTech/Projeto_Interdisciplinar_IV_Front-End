@@ -26,6 +26,7 @@
           "options": {
             "outputPath": "dist/restaurantto-app",
             "index": "src/index.html",
+            "aot": true,
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
@@ -35,6 +36,7 @@
           },
           "configurations": {
             "production": {
+              "aot": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -76,7 +78,7 @@
               "buildTarget": "restaurantto-app:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
