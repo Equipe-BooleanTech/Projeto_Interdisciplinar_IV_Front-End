@@ -2,5 +2,6 @@
       [placeholder]="placeholder"
       [value]="value"
       (input)="onInput($event)"
-      class="form-textarea mt-1 block w-full"
+      [ngClass]="getClassList()"
+    
     ></textarea>

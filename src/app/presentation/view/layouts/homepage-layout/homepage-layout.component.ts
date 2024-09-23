@@ -134,6 +134,9 @@ export class HomepageLayoutComponent implements OnInit {
                     validations: [{ name: 'required' }],
                 },
             ],
+            button: {
+                text: 'Enviar',
+            },
         },
     };
 

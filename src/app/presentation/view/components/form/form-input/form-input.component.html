@@ -3,5 +3,6 @@
             [placeholder]="placeholder"
             [value]="value"
             (input)="onInput($event)"
-            class="form-input mt-1 block w-full"
+            [ngClass]="getClassList()"
+            
         />

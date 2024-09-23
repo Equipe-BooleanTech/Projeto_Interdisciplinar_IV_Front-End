@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { NgClass } from '@angular/common';
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -15,11 +16,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             multi: true,
         },
     ],
+    imports: [NgClass],
 })
 export class FormInputComponent implements ControlValueAccessor {
     @Input() type: string = '';
     @Input() placeholder: string = '';
     value: string = '';
+    @Input() class: string = '';
 
     onChange: any = () => {};
     onTouched: any = () => {};
@@ -41,5 +44,10 @@ export class FormInputComponent implements ControlValueAccessor {
         this.value = input.value;
         this.onChange(this.value);
         this.onTouched();
+    }
+
+    getClassList(): string {
+        const defaultClasses = 'form-input mt-1 outline-[#740318] border-2 border-[#740318] rounded-md shadow-sm focus:border-[#740318] focus:ring-[#740318] focus:ring-opacity-50';
+        return `${defaultClasses} ${this.class}`;
     }
 }
