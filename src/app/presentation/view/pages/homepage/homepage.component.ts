@@ -1,13 +1,32 @@
-import { Component } from '@angular/core';
-import { HomepageLayoutComponent } from '@presentation/view/layouts';
-
+import { Component, OnInit } from '@angular/core';
+import {
+    BannerLayoutComponent,
+    FormLayoutComponent,
+    SectionLayoutComponent,
+} from '.';
+import { homeData } from '@infra/data';
+import { DataTransferService } from '@infra/services';
+import { Homepage } from '@domain/interfaces';
 
 @Component({
     selector: 'app-homepage',
     standalone: true,
-    imports: [HomepageLayoutComponent],
+    imports: [
+        SectionLayoutComponent,
+        FormLayoutComponent,
+        BannerLayoutComponent,
+    ],
     templateUrl: './homepage.component.html',
     styles: ``,
 })
-export class HomepageComponent {
+export class HomepageComponent implements OnInit {
+    data: Homepage = homeData;
+    constructor(private _dataTransferService: DataTransferService) {}
+
+    ngOnInit(): void {
+        this.sendData();
+    }
+    sendData(): void {
+        this._dataTransferService.setData(homeData);
+    }
 }
