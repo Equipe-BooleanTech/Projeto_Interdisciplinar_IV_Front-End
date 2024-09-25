@@ -7,6 +7,7 @@ import {
 import { homeData } from '@infra/data';
 import { DataTransferService } from '@infra/services';
 import { Homepage } from '@domain/interfaces';
+import { FooterComponent } from '../../../components/footer/footer.component';
 
 @Component({
     selector: 'app-homepage',
@@ -15,6 +16,7 @@ import { Homepage } from '@domain/interfaces';
         SectionLayoutComponent,
         FormLayoutComponent,
         BannerLayoutComponent,
+        FooterComponent,
     ],
     templateUrl: './homepage.component.html',
     styles: ``,

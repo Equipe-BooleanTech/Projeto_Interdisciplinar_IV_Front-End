@@ -3,3 +3,4 @@ export * from './card/card.component';
 export * from './button/button.component';
 export * from './form/form.component';
 export * from './footer/footer.component';
+export * from './sidebar/sidebar.component';

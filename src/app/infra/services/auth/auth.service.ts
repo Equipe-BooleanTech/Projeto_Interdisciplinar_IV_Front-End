@@ -17,7 +17,7 @@ export class AuthService implements AuthRepository {
         data: InputSendLoginFormDto,
     ): Observable<OutputSendLoginFormDto> {
         const response = this._http
-            .post<OutputSendLoginFormDto>(`${this.apiBase}/auth`, data, {
+            .post<OutputSendLoginFormDto>(`${this.apiBase}/api/users/login`, data, {
                 observe: 'response',
             })
             .pipe(

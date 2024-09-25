@@ -1,7 +1,7 @@
-<div class="w-full h-screen flex justify-center items-center bg-gray-100">
-  <div class="flex items-center justify-center space-x-10">
-    <div class="flex justify-center items-center mr-36">
-      <img src="assets/login.svg" alt="logo" class="w-96 h-96" />
+<div class="w-full h-screen flex justify-center items-center bg-gray-100 p-4">
+  <div class="flex flex-col lg:flex-row items-center justify-center space-y-10 lg:space-y-0 lg:space-x-10">
+    <div class="flex justify-center items-center lg:mr-36 mb-6 lg:mb-0">
+      <img src="assets/login.svg" alt="logo" class="w-48 h-48 lg:w-96 lg:h-96" />
     </div>
 
     <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
@@ -29,7 +29,7 @@
           [disabled]="!form.valid"
         >
           Login
-      </button>
+        </button>
       </app-form>
       <div class="text-right mt-4">
         <a href="#" class="text-[#740318] hover:underline">Esqueceu sua senha?</a>
@@ -37,3 +37,4 @@
     </div>
   </div>
 </div>
+<app-footer></app-footer>

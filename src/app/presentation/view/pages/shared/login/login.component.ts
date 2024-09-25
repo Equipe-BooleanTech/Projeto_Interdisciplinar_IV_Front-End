@@ -16,17 +16,19 @@ import { OutputSendLoginFormDto } from '@domain/usecases/shared/authenticate/Out
 import { AuthService } from '@infra/services';
 import { ButtonComponent, FormComponent } from '@presentation/view/components';
 import { FormInputComponent } from '@presentation/view/components/form';
+import { FooterComponent } from "../../../components/footer/footer.component";
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     imports: [
-        FormComponent,
-        FormInputComponent,
-        ReactiveFormsModule,
-        CommonModule,
-        ButtonComponent,
-    ],
+    FormComponent,
+    FormInputComponent,
+    ReactiveFormsModule,
+    CommonModule,
+    ButtonComponent,
+    FooterComponent
+],
     standalone: true,
 })
 export class LoginComponent implements OnInit {
