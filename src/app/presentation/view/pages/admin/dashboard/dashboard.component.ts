@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { SidebarComponent } from '@presentation/view/components';
+import { SidebarComponent, CardComponent } from '@presentation/view/components';
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
-    imports: [SidebarComponent],
+    imports: [SidebarComponent, CardComponent],
     templateUrl: './dashboard.component.html',
     styles: ``,
 })

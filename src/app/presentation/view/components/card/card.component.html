@@ -1,7 +1,7 @@
-<div class="border-2 border-[#740310] rounded-lg lg:w-96 lg:h-64 mx-8 my-4 p-6">
+<div class="border-2 border-[#740310] rounded-lg lg:w-96 lg:h-64 mx-8 my-4 p-6" *ngIf="!isDemographic">
   <div class="flex flex-col h-full">
-    <!-- Caso isDemographic seja falso -->
-    <div *ngIf="!isDemographic" class="flex justify-between items-center">
+    
+    <div class="flex justify-between items-center">
       <div class="flex items-start flex-col">
         <span class="{{ iconClass }} text-5xl text-[#741308] mx-auto"></span>
         <h1 class="font-semibold text-[28px] mb-2 text-center mx-auto">{{ title }}</h1>
@@ -9,18 +9,26 @@
       </div>
     </div>
 
-    <!-- Caso isDemographic seja verdadeiro -->
-    <div *ngIf="isDemographic" class="flex items-center mt-2 w-full">
-      <div class="flex items-center justify-center text-5xl rounded-full">
+  </div>
+</div>
+
+<div class="rounded-lg lg:w-80 lg:h-48 w-11/12 mx-8 my-4" *ngIf="isDemographic">
+  <div class=" border-2 border-[#800020] rounded-lg p-4 flex flex-col justify-between h-full w-full">
+    <div class="flex justify-between items-center">
+      <div class="flex flex-col">
+        <h1 class="font-semibold text-[40px] text-gray-800">{{ metric }}</h1>
+        <p class="text-gray-600 text-lg font-bold">{{ metricTitle }}</p>
       </div>
-      <div class="ml-4">
-        <h1 class="font-semibold text-[32px]">{{ metric }}</h1>
-        <p class="text-2xl font-bold text-gray-600">{{ metricTitle }}</p>
-        <div [ngClass]="isPositive ? 'text-green-500' : 'text-red-500'">
-          <span>{{ percentageChange }}%</span> 
-          <span class="text-xs"> Comparado à semana anterior</span>
-        </div>
+      <div class="flex items-center justify-center lg:w-24 lg:h-24 h-16 w-16 rounded-full bg-[#f3e4e7]">
+        <span [class]="iconClass + ' text-3xl lg:text-5xl text-[#741308] m-auto'"></span>
       </div>
+    </div>
+    <div class="flex items-center justify-start">
+      <span [ngClass]="isPositive ? 'text-green-500' : 'text-red-500'" class="font-bold">
+        {{ percentageChange }}%
+      </span>
+      <span class="text-xs ml-2 text-gray-500">Comparado à semana anterior</span>
     </div>
   </div>
 </div>
+

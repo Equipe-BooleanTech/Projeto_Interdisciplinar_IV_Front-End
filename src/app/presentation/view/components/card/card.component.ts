@@ -1,4 +1,4 @@
-import { NgClass, NgIf} from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
@@ -18,9 +18,12 @@ export class CardComponent {
     @Input() metricTitle: string = '';
     @Input() metric: string = '';
 
-    @Output() handlePropertyChange = new EventEmitter<{ key: string; value: unknown }>();
+    @Output() handlePropertyChange = new EventEmitter<{
+        key: string;
+        value: unknown;
+    }>();
 
     setContent = (key: string, value: unknown): void => {
         this.handlePropertyChange.emit({ key, value });
-    }
+    };
 }
