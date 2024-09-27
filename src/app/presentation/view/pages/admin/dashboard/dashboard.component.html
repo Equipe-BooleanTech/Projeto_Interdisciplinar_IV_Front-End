@@ -1,13 +1,69 @@
 <app-sidebar>
-    <app-card
-  [isDemographic]="true"
-  [title]="'Total Users'"
-  [description]="'Total number of users'"
-  [iconClass]="'icon-[lucide--users-round]'"
-  [percentageChange]="20"
-  [isPositive]="true"
-  [metric]="'1000'"  
-  [metricTitle]="'Total Users'" 
-></app-card>
+  <main class="flex-1 p-4">
+    <h1 class="text-4xl font-bold text-center">Bem vindo(a), Thaís!</h1>
+
+    <div class="flex justify-end">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-4">
+        <div class="p-4 bg-white rounded-lg shadow-md">
+          <p class="text-2xl font-bold">160</p>
+          <p class="text-gray-500">Vendas</p>
+          <p class="text-red-600">▼ 2.64% em relação à semana anterior</p>
+        </div>
+        <div class="p-4 bg-white rounded-lg shadow-md">
+          <p class="text-2xl font-bold">80</p>
+          <p class="text-gray-500">Ingredientes</p>
+          <p class="text-green-600">▲ 12.0% em relação à semana anterior</p>
+        </div>
+        <div class="p-4 bg-white rounded-lg shadow-md">
+          <p class="text-2xl font-bold">60</p>
+          <p class="text-gray-500">Pedidos iFood</p>
+          <p class="text-red-600">▼ 2.64% em relação à semana anterior</p>
+        </div>
+        <div class="p-4 bg-white rounded-lg shadow-md">
+          <p class="text-2xl font-bold">40</p>
+          <p class="text-gray-500">Pratos</p>
+          <p class="text-red-600">▼ 10.64% em relação à semana anterior</p>
+        </div>
+      </div>
+    </div>
+  </main>    
+  <h2 class="text-2xl font-bold mt-8 text-center">Histórico de Pedidos</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-300 mt-4">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="py-2 px-4 border-b">Número do Pedido</th>
+              <th class="py-2 px-4 border-b">Data do Pedido</th>
+              <th class="py-2 px-4 border-b">Valor Recebido</th>
+              <th class="py-2 px-4 border-b">Status</th>
+              <th class="py-2 px-4 border-b"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-center">
+              <td class="py-2 px-4 border-b">#2841787258</td>
+              <td class="py-2 px-4 border-b">23/09/24</td>
+              <td class="py-2 px-4 border-b">R$948.55</td>
+              <td class="py-2 px-4 border-b text-yellow-500">Preparando</td>
+              <td class="py-2 px-4 border-b">...</td>
+            </tr>
+            <tr class="text-center">
+              <td class="py-2 px-4 border-b">#2841787257</td>
+              <td class="py-2 px-4 border-b">20/08/2024</td>
+              <td class="py-2 px-4 border-b">R$106.58</td>
+              <td class="py-2 px-4 border-b text-green-500">Em entrega</td>
+              <td class="py-2 px-4 border-b">...</td>
+            </tr>
+            <tr class="text-center">
+              <td class="py-2 px-4 border-b">#2841787251</td>
+              <td class="py-2 px-4 border-b">26/09/2024</td>
+              <td class="py-2 px-4 border-b">R$396.84</td>
+              <td class="py-2 px-4 border-b text-green-500">Em entrega</td>
+              <td class="py-2 px-4 border-b">...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
 
 </app-sidebar>
