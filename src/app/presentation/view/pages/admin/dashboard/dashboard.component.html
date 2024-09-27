@@ -3,28 +3,39 @@
     <h1 class="text-4xl font-bold text-center">Bem vindo(a), Thaís!</h1>
 
     <div class="flex justify-end">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-4">
-        <div class="p-4 bg-white rounded-lg shadow-md">
-          <p class="text-2xl font-bold">160</p>
-          <p class="text-gray-500">Vendas</p>
-          <p class="text-red-600">▼ 2.64% em relação à semana anterior</p>
-        </div>
-        <div class="p-4 bg-white rounded-lg shadow-md">
-          <p class="text-2xl font-bold">80</p>
-          <p class="text-gray-500">Ingredientes</p>
-          <p class="text-green-600">▲ 12.0% em relação à semana anterior</p>
-        </div>
-        <div class="p-4 bg-white rounded-lg shadow-md">
-          <p class="text-2xl font-bold">60</p>
-          <p class="text-gray-500">Pedidos iFood</p>
-          <p class="text-red-600">▼ 2.64% em relação à semana anterior</p>
-        </div>
-        <div class="p-4 bg-white rounded-lg shadow-md">
-          <p class="text-2xl font-bold">40</p>
-          <p class="text-gray-500">Pratos</p>
-          <p class="text-red-600">▼ 10.64% em relação à semana anterior</p>
-        </div>
-      </div>
+      <app-card
+      [isDemographic]="true"
+      iconClass="'icon-ingredientes'"
+      title="Ingredientes"
+      description="Total de ingredientes disponíveis"
+      [metric]="'80'"
+      [percentageChange]="12.0"
+      [isPositive]="true"
+      metricTitle="Ingredientes"
+    ></app-card>
+
+    <!-- Card for Pedidos iFood -->
+    <app-card
+      [isDemographic]="true"
+      iconClass="'icon-pedidos'"
+      title="Pedidos iFood"
+      description="Total de pedidos pelo iFood"
+      [metric]="'60'"
+      [percentageChange]="-2.64"
+      [isPositive]="false"
+      metricTitle="Pedidos iFood"
+    ></app-card>
+    <app-card
+      [isDemographic]="true"
+      iconClass="'icon-pratos'"
+      title="Pratos"
+      description="Total de pratos disponíveis"
+      [metric]="'40'"
+      [percentageChange]="-10.64"
+      [isPositive]="false"
+      metricTitle="Pratos"
+    ></app-card>
+      
     </div>
   </main>    
   <h2 class="text-2xl font-bold mt-8 text-center">Histórico de Pedidos</h2>

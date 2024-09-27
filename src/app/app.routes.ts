@@ -11,6 +11,6 @@ export const routes: Routes = [
     { path: '', component: HomepageComponent },
     { path: 'login', component: LoginComponent },
     { path: 'admin', component: DashboardComponent },
-    { path: 'cash-flow', component: PainelContadorComponent},
+    { path: 'admin/controle-caixa/painel-contador', component: PainelContadorComponent},
     { path: '**', component: NotFoundComponent }, 
 ];
