@@ -22,7 +22,7 @@ export const sidebarData = {
                     id: 22,
                     title: 'Finanças',
                     icon: 'icon-[mdi--finance] p-4',
-                    link: '/admin/controle-caixa/subitem2',
+                    link: '/admin/controle-caixa/financas',
                 },
             ],
         },

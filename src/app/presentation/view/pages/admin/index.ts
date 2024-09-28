@@ -1,4 +1,5 @@
 export * from './cash-flow/cash-flow.component'
+export * from './cash-flow/painel-contador/painel-contador.component'
 export * from './dashboard/dashboard.component'
 export * from './menu/menu.component'
 export * from './orders/orders.component'

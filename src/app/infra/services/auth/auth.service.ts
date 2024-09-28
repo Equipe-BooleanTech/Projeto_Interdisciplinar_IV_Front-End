@@ -17,14 +17,18 @@ export class AuthService implements AuthRepository {
         data: InputSendLoginFormDto,
     ): Observable<OutputSendLoginFormDto> {
         const response = this._http
-            .post<OutputSendLoginFormDto>(`${this.apiBase}/api/users/login`, data, {
-                observe: 'response',
-            })
+            .post<OutputSendLoginFormDto>(
+                `${this.apiBase}/api/users/login`,
+                data,
+                {
+                    observe: 'response',
+                },
+            )
             .pipe(
                 map((response: HttpResponse<OutputSendLoginFormDto>) => {
                     const finalResponse: OutputSendLoginFormDto = {
                         statusCode: response.status,
-                        message: response?.body?.message ?? 'Mensagem padrão', 
+                        message: response?.body?.message ?? 'Mensagem padrão',
                     };
                     return finalResponse;
                 }),
