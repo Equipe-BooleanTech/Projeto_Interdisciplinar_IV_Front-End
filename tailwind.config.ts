@@ -14,6 +14,14 @@ export default {
     content: ['./src/**/*.{html,ts}', './projects/**/*.{html,ts}'],
     darkMode: 'class',
     theme: {
+        colors: {
+            primary: '#740318',
+            base: '#FAFAFA',
+            success: '#2E7D32',
+            warning: '#FFA000',
+            danger: '#D32F2F',
+            info: '#1976D2',
+        },
         fontFamily: {
             display: ['DM Sans', 'sans-serif'],
             body: ['DM Sans', 'sans-serif'],
@@ -24,5 +32,11 @@ export default {
         },
         extend: {},
     },
-    plugins: [...TAILWIND_PLUGINS, ...CUSTOM_PLUGINS],
+    plugins: [
+        ...TAILWIND_PLUGINS,
+        ...CUSTOM_PLUGINS,
+        require('flowbite/plugin')({
+            charts: true,
+        }),
+    ],
 };
