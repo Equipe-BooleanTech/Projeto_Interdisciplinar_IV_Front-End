@@ -1,3 +1,5 @@
+import { prospectionFields } from '@infra/data/static';
+
 export interface Homepage {
     intro: {
         title: string;
@@ -14,7 +16,7 @@ export interface Homepage {
         title: string;
         description: string;
     }[];
-    section: {
+    section1: {
         title: string;
         description: string;
         button: {
@@ -22,26 +24,42 @@ export interface Homepage {
             link: string;
         };
         image: string;
-        reverse: string;
+        reverse: boolean;
     };
-    form: {
+    section2: {
         title: string;
         description: string;
         button: {
             text: string;
             link: string;
         };
-        fields: {
-            component: string;
-            name: string;
-            type: string;
-            label: string;
-            value: string;
-            placeholder: string;
-            validations: {
-                name: string;
-                message: string;
-            }[];
-        }[];
+        image: string;
+        reverse: boolean;
+    };
+    section3: {
+        title: string;
+        description: string;
+        button: {
+            text: string;
+            link: string;
+        };
+        image: string;
+        reverse: boolean;
+    };
+    section4: {
+        title: string;
+        description: string;
+        button: {
+            text: string;
+            link: string;
+        };
+        image: string;
+        reverse: boolean;
+    };
+    form: {
+        title: string;
+        description: string;
+        fields: typeof prospectionFields;
+        submitButtonLabel: string;
     };
 }

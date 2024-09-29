@@ -1,6 +1,6 @@
 {
   "name": "restaurantto-app",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Restaurantto App - Front-end System",
   "type": "module",
   "private": true,
@@ -33,8 +33,10 @@
     "@angular/platform-browser": "^18.2.4",
     "@angular/platform-browser-dynamic": "^18.2.4",
     "@angular/router": "^18.2.4",
+    "apexcharts": "^3.53.0",
     "axios": "^1.7.7",
     "dotenv": "^16.4.5",
+    "flowbite": "^2.5.2",
     "restaurantto-app": "file:",
     "rxjs": "~7.8.1",
     "tslib": "^2.7.0",

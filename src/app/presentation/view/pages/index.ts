@@ -1,1 +1,2 @@
-export * from './homepage/homepage.component';
+export * from './shared'
+export * from './admin'
