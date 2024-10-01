@@ -1,0 +1,24 @@
+<app-sidebar>
+    <app-form [formGroup]="form" class="space-y-6">
+        <ng-container *ngFor="let field of config.fields">
+            <ng-container [ngSwitch]="field.type">
+                <div *ngSwitchCase="'input'" class="flex flex-col space-y-2">
+                    <label [for]='field.name' class="text-sm font-medium text-gray-700">
+                        {{ field.label }}
+                    </label>
+                    <app-form-input [formControlName]="field.name"
+                        [type]="field.type"
+                        [placeholder]="field.placeholder"
+                        class="p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                </div>
+
+                <div *ngSwitchCase="'select'" class="flex flex-col space-y-2">
+                    <label [for]='field.name' class="text-sm font-medium text-gray-700">
+                        {{ field.label }}
+                    </label>
+                   
+                </div>
+            </ng-container>
+        </ng-container>
+    </app-form>
+</app-sidebar>
