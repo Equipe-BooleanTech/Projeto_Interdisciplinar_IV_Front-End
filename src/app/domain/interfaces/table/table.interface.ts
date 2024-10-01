@@ -9,4 +9,8 @@ export interface TableConfig {
         placeholder: string;
         value: string;
     };
+    pagination?: {
+        pageRange: number;
+        totalItems: number;
+    };
 }

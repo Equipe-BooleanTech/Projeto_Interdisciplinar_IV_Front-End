@@ -10,13 +10,7 @@ import { TableConfig } from '@domain/interfaces';
     styles: ``,
 })
 export class TableComponent {
-
-    @Input() tableConfig: TableConfig ={};
-    @Input() totalItems: number = 0;
-    @Input() pageRange: number = 0;
-
-
-    
+    @Input() tableConfig: TableConfig = {};
 
     onFilterClick(filter: { isActive: boolean; text: string }): void {
         if (!this.tableConfig.filters) return;
@@ -37,21 +31,31 @@ export class TableComponent {
     }
 
     onPageIncrease(): void {
-        if (this.pageRange < this.totalItems) {
-            this.pageRange += 6;
-        }
+        const pagination = this.tableConfig.pagination;
+        if (
+            pagination &&
+            pagination.pageRange !== undefined &&
+            pagination.totalItems !== undefined
+        ) {
+            if (pagination.pageRange < pagination.totalItems) {
+                pagination.pageRange += 6;
+            }
 
-        if (this.pageRange > this.totalItems) {
-            this.pageRange = this.totalItems;
+            if (pagination.pageRange > pagination.totalItems) {
+                pagination.pageRange = pagination.totalItems;
+            }
         }
     }
 
     onPageDecrease(): void {
-        if (this.pageRange - 6 > 0) {
-            this.pageRange -= 6;
-        }
-        if (this.pageRange < 6) {
-            this.pageRange = 6;
+        const pagination = this.tableConfig.pagination;
+        if (pagination && pagination.pageRange !== undefined) {
+            if (pagination.pageRange - 6 > 0) {
+                pagination.pageRange -= 6;
+            }
+            if (pagination.pageRange < 6) {
+                pagination.pageRange = 6;
+            }
         }
     }
 }
