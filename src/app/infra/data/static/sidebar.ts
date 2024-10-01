@@ -5,6 +5,14 @@ export const sidebarData = {
             title: 'Dashboard',
             icon: 'icon-[lucide--home] p-4',
             link: '/admin',
+            subItems: [
+                {
+                    id: 11,
+                    title: 'Colaboradores',
+                    icon: 'icon-[lucide--users] p-4',
+                    link: '/admin/colaboradores',
+                },
+            ],
         },
         {
             id: 2,

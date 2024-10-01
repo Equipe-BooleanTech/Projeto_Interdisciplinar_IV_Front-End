@@ -28,7 +28,7 @@ export const routes: Routes = [
         component: PainelContadorComponent,
     },
     {
-        path: 'admin/colaborador',
+        path: 'admin/colaboradores',
         component: ColaboradorComponent,
     },
     {

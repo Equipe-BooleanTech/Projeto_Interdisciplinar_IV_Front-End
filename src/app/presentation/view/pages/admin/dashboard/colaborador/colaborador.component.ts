@@ -14,80 +14,71 @@ import {
     styles: ``,
 })
 export class ColaboradorComponent {
-    totalItems: number = 20;
-    pageRange: number = 6;
-
     constructor() {}
 
-    tabela: TableConfig = {
-        title: 'Table Title',
+    tabela: TableConfig<{
+        role: string;
+        name: string;
+        status: string;
+        lastAccess: string;
+        action: string;
+    }> = {
+        title: 'Employee Roles and Status',
         filters: [
-            { isActive: true, text: 'Filter 1' },
-            { isActive: false, text: 'Filter 2' },
-            { isActive: false, text: 'Filter 3' },
+            { isActive: true, text: 'Ativo' },
+            { isActive: false, text: 'Inativo' },
         ],
-        metrics: 'Table Metrics',
-        header: ['Header 1', 'Header 2', 'Header 3'],
+        metrics: 'Total: 4 items, 3 Active, 1 Inactive',
+        header: ['Nome e Função', 'Status', 'Data de Último Acesso', 'Ações'],
         data: [
             {
-                component: 'text',
-                value: {
-                    numero: '#2841782758',
-                    data: '9/23/16',
-                    valor: '$948.55',
-                    status: 'Shipping',
+                rowData: {
+                    role: 'Chefe de Cozinha',
+                    name: 'Henrique Costa',
+                    status: 'Ativo',
+                    lastAccess: '17/11/2023',
+                    action: 'Detalhes',
                 },
+                componentType: ['text', 'text', 'text', 'button'],
             },
             {
-                component: 'text',
-                value: {
-                    numero: '#2841782758',
-                    data: '9/23/16',
-                    valor: '$948.55',
-                    status: 'Shipping',
+                rowData: {
+                    role: 'Gerente',
+                    name: 'Henrique Costa',
+                    status: 'Inativo',
+                    lastAccess: '17/11/2023',
+                    action: 'Detalhes',
                 },
+                componentType: ['text', 'text', 'text', 'button'],
             },
             {
-                component: 'text',
-                value: {
-                    numero: '#2841782758',
-                    data: '9/23/16',
-                    valor: '$948.55',
-                    status: 'Shipping',
+                rowData: {
+                    role: 'Garçom',
+                    name: 'Henrique Costa',
+                    status: 'Ativo',
+                    lastAccess: '17/11/2023',
+                    action: 'Detalhes',
                 },
+                componentType: ['text', 'text', 'text', 'button'],
             },
             {
-                component: 'text',
-                value: {
-                    numero: '#2841782758',
-                    data: '9/23/16',
-                    valor: '$948.55',
-                    status: 'Shipping',
+                rowData: {
+                    role: 'Recepcionista',
+                    name: 'Julia Almeida',
+                    status: 'Ativo',
+                    lastAccess: '12/09/2023',
+                    action: 'Detalhes',
                 },
-            },
-            {
-                component: 'text',
-                value: {
-                    numero: '#2841782758',
-                    data: '9/23/16',
-                    valor: '$948.55',
-                    status: 'Shipping',
-                },
-            },
-            {
-                component: 'text',
-                value: {
-                    numero: '#2841782758',
-                    data: '9/23/16',
-                    valor: '$948.55',
-                    status: 'Shipping',
-                },
+                componentType: ['text', 'text', 'text', 'button'],
             },
         ],
-        totalPages: Math.round(this.totalItems / 6),
         search: {
-            placeholder: 'Procure por...',
+            placeholder: 'Search by name or role',
             value: '',
+        },
+        pagination: {
+            pageRange: 4,
+            totalItems: 4,
         },
     };
 }
