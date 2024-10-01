@@ -3,10 +3,17 @@ export interface TableConfig {
     filters?: { isActive: boolean; text: string }[];
     metrics?: string;
     header?: string[];
-    data?: any;
+    data?: {
+        component: string;
+        value: any;
+    }[];
     totalPages?: number;
     search?: {
         placeholder: string;
         value: string;
+    };
+    pagination?: {
+        pageRange: number;
+        totalItems: number;
     };
 }
