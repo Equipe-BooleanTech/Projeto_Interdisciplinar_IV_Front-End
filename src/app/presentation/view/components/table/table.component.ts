@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { TableConfig } from '@domain/interfaces';
+import { RowData, TableConfig } from '@domain/interfaces';
 
 @Component({
     selector: 'app-table',
@@ -9,8 +9,8 @@ import { TableConfig } from '@domain/interfaces';
     templateUrl: './table.component.html',
     styles: ``,
 })
-export class TableComponent {
-    @Input() tableConfig: TableConfig = {};
+export class TableComponent<T> {
+    @Input() tableConfig!: TableConfig<T>;
 
     onFilterClick(filter: { isActive: boolean; text: string }): void {
         if (!this.tableConfig.filters) return;
@@ -22,6 +22,10 @@ export class TableComponent {
                 f.isActive = false;
             }
         });
+    }
+
+    getRowDataValue(rowData: RowData, key: string): string {
+        return rowData[key as keyof RowData];
     }
 
     onSearch(value: string): void {

@@ -17,12 +17,18 @@ import { TableComponent } from '../../../components/table/table.component';
     styles: ``,
 })
 export class DashboardComponent {
-        tabela: TableConfig = {
+    tabela: TableConfig<{
+        numero: string;
+        data: string;
+        nomeCliente: string;
+        valor: string;
+        status: string;
+    }> = {
         title: 'Histórico de Pedidos',
         filters: [
-            { isActive: false, text: 'Shipping' },
-            { isActive: false, text: 'Delivered' },
-            { isActive: false, text: 'Canceled' },
+            { isActive: false, text: 'Em entrega' },
+            { isActive: false, text: 'Entregues' },
+            { isActive: false, text: 'Cancelados' },
         ],
         pagination: {
             pageRange: 10,
@@ -30,65 +36,34 @@ export class DashboardComponent {
         },
         metrics: 'Total: 5 pedidos',
         header: [
-            'Data do Pedido',
             'Número do Pedido',
-            'Status',
+            'Data do Pedido',
+            'Nome do Cliente',
             'Valor Recebido',
-            'Customer Name',
+            'Status',
         ],
         data: [
             {
-                component: 'text',
-                value: {
+                rowData: {
                     numero: '#2841782758',
                     data: '9/23/16',
+                    nomeCliente: 'John Doe',
                     valor: '$948.55',
                     status: 'Shipping',
-                    customerName: 'John Doe',
                 },
+                componentType: ['text', 'text', 'text', 'text', 'text'],
             },
             {
-                component: 'text',
-                value: {
+                rowData: {
                     numero: '#2841782758',
                     data: '9/23/16',
+                    nomeCliente: 'Jane Smith',
                     valor: '$948.55',
                     status: 'Shipping',
-                    customerName: 'Jane Smith',
                 },
-            },
-            {
-                component: 'text',
-                value: {
-                    numero: '#2841782758',
-                    data: '9/23/16',
-                    valor: '$948.55',
-                    status: 'Shipping',
-                    customerName: 'Alice Johnson',
-                },
-            },
-            {
-                component: 'text',
-                value: {
-                    numero: '#2841782758',
-                    data: '9/23/16',
-                    valor: '$948.55',
-                    status: 'Shipping',
-                    customerName: 'Bob Brown',
-                },
-            },
-            {
-                component: 'text',
-                value: {
-                    numero: '#2841782758',
-                    data: '9/23/16',
-                    valor: '$948.55',
-                    status: 'Shipping',
-                    customerName: 'Charlie Davis',
-                },
+                componentType: ['text', 'text', 'text', 'text', 'text'],
             },
         ],
-        totalPages: 2,
         search: {
             placeholder: 'Buscar pedido',
             value: '',
