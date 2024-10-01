@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { TableConfig } from '@domain/interfaces';
 import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { TableConfig } from '@domain/interfaces';
 
 @Component({
     selector: 'app-table',
@@ -10,34 +10,19 @@ import { CommonModule } from '@angular/common';
     styles: ``,
 })
 export class TableComponent {
-    totalItems: number = 28;
-    pageRange: number = 6;
-    constructor() {}
 
-    tableConfig: TableConfig = {
-        title: 'Table Title',
-        filters: [
-            { isActive: true, text: 'Filter 1' },
-            { isActive: false, text: 'Filter 2' },
-            { isActive: false, text: 'Filter 3' },
-        ],
-        metrics: 'Table Metrics',
-        header: ['Header 1', 'Header 2', 'Header 3'],
-        data: [
-            { id: 1, name: 'Name 1', description: 'Description 1' },
-            { id: 2, name: 'Name 2', description: 'Description 2' },
-            { id: 3, name: 'Name 3', description: 'Description 3' },
-        ],
-        totalPages: Math.round(this.totalItems / 6),
-        search: {
-            placeholder: 'Procure por...',
-            value: '',
-        },
-    };
+    @Input() tableConfig: TableConfig ={};
+    @Input() totalItems: number = 0;
+    @Input() pageRange: number = 0;
+
+
+    
 
     onFilterClick(filter: { isActive: boolean; text: string }): void {
+        if (!this.tableConfig.filters) return;
+
         filter.isActive = !filter.isActive;
-        //Deixando os outros filtros inativos
+        // Deixando os outros filtros inativos
         this.tableConfig.filters.forEach((f) => {
             if (f.text !== filter.text) {
                 f.isActive = false;
@@ -46,6 +31,8 @@ export class TableComponent {
     }
 
     onSearch(value: string): void {
+        if (!this.tableConfig.search) return;
+
         this.tableConfig.search.value = value;
     }
 
