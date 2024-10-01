@@ -25,7 +25,7 @@ import { FormInputComponent } from '../../../../../../components/form/form-input
 })
 export class FormFichaComponent implements OnInit {
     form: FormGroup = new FormGroup({});
-
+    method: 'POST' | 'PUT' = 'POST';
     constructor(
         private _formBuilder: FormBuilder,
         private _formValidateService: FormValidateService,
@@ -126,5 +126,9 @@ export class FormFichaComponent implements OnInit {
         } else {
             console.log('Form is invalid');
         }
+    }
+
+    goBack() {
+        console.log('Go back');
     }
 }
