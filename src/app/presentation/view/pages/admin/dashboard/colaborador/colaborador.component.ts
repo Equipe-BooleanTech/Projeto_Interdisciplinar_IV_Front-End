@@ -6,6 +6,14 @@ import {
     TableComponent,
 } from '@presentation/view/components';
 
+interface ExampleRowData {
+    numero: string;
+    data: string;
+    nomeCliente: string;
+    valor: string;
+    status: string;
+}
+
 @Component({
     selector: 'app-colaborador',
     standalone: true,
@@ -16,69 +24,40 @@ import {
 export class ColaboradorComponent {
     constructor() {}
 
-    tabela: TableConfig<{
-        role: string;
-        name: string;
-        status: string;
-        lastAccess: string;
-        action: string;
-    }> = {
-        title: 'Employee Roles and Status',
-        filters: [
-            { isActive: true, text: 'Ativo' },
-            { isActive: false, text: 'Inativo' },
-        ],
-        metrics: 'Total: 4 items, 3 Active, 1 Inactive',
-        header: ['Nome e Função', 'Status', 'Data de Último Acesso', 'Ações'],
+    tabela: TableConfig<ExampleRowData> = {
+        title: 'Example Table',
+        filters: [{ isActive: true, text: 'Active' }],
+        metrics: 'Metrics',
+        header: ['numero', 'data', 'nomeCliente', 'valor', 'status'],
         data: [
             {
                 rowData: {
-                    role: 'Chefe de Cozinha',
-                    name: 'Henrique Costa',
-                    status: 'Ativo',
-                    lastAccess: '17/11/2023',
-                    action: 'Detalhes',
+                    numero: '#2841782758',
+                    data: '9/23/16',
+                    nomeCliente: 'John Doe',
+                    valor: '$948.55',
+                    status: 'Shipping',
                 },
-                componentType: ['text', 'text', 'text', 'button'],
+                componentType: ['text', 'text', 'text', 'text', 'text'],
             },
             {
                 rowData: {
-                    role: 'Gerente',
-                    name: 'Henrique Costa',
-                    status: 'Inativo',
-                    lastAccess: '17/11/2023',
-                    action: 'Detalhes',
+                    numero: '#2841782759',
+                    data: '9/24/16',
+                    nomeCliente: 'Jane Doe',
+                    valor: '$123.45',
+                    status: 'Delivered',
                 },
-                componentType: ['text', 'text', 'text', 'button'],
-            },
-            {
-                rowData: {
-                    role: 'Garçom',
-                    name: 'Henrique Costa',
-                    status: 'Ativo',
-                    lastAccess: '17/11/2023',
-                    action: 'Detalhes',
-                },
-                componentType: ['text', 'text', 'text', 'button'],
-            },
-            {
-                rowData: {
-                    role: 'Recepcionista',
-                    name: 'Julia Almeida',
-                    status: 'Ativo',
-                    lastAccess: '12/09/2023',
-                    action: 'Detalhes',
-                },
-                componentType: ['text', 'text', 'text', 'button'],
+                componentType: ['text', 'text', 'text', 'text', 'text'],
             },
         ],
         search: {
-            placeholder: 'Search by name or role',
+            placeholder: 'Search...',
             value: '',
         },
         pagination: {
-            pageRange: 4,
-            totalItems: 4,
+            pageRange: 10,
+            totalItems: 2,
         },
     };
 }
