@@ -6,14 +6,6 @@ import {
     TableComponent,
 } from '@presentation/view/components';
 
-interface ExampleRowData {
-    numero: string;
-    data: string;
-    nomeCliente: string;
-    valor: string;
-    status: string;
-}
-
 @Component({
     selector: 'app-colaborador',
     standalone: true,
@@ -24,17 +16,25 @@ interface ExampleRowData {
 export class ColaboradorComponent {
     constructor() {}
 
-    tabela: TableConfig<ExampleRowData> = {
+
+    tabela: TableConfig<{
+        numero: string;
+        data: string;
+        cliente: string;
+        valor: string;
+        status: string;
+    }> = {
         title: 'Example Table',
+        rowOrder: ['numero', 'data', 'cliente', 'valor', 'status'],
         filters: [{ isActive: true, text: 'Active' }],
         metrics: 'Metrics',
-        header: ['numero', 'data', 'nomeCliente', 'valor', 'status'],
+        header: ['Numero', 'Data', 'Nome do Cliente', 'Valor', 'Status'],
         data: [
             {
                 rowData: {
                     numero: '#2841782758',
                     data: '9/23/16',
-                    nomeCliente: 'John Doe',
+                    cliente: 'John Doe',
                     valor: '$948.55',
                     status: 'Shipping',
                 },
@@ -44,7 +44,7 @@ export class ColaboradorComponent {
                 rowData: {
                     numero: '#2841782759',
                     data: '9/24/16',
-                    nomeCliente: 'Jane Doe',
+                    cliente: 'Jane Doe',
                     valor: '$123.45',
                     status: 'Delivered',
                 },

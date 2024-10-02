@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { TableConfig } from '@domain/interfaces';
-import { CardComponent, SidebarComponent } from '@presentation/view/components';
+import { CardComponent, SidebarComponent, TableComponent } from '@presentation/view/components';
 import { LineColumnComponent } from '@presentation/view/components/chart';
-import { TableComponent } from '../../../components/table/table.component';
 
 @Component({
     selector: 'app-dashboard',
@@ -24,6 +23,7 @@ export class DashboardComponent {
         valor: string;
         status: string;
     }> = {
+        rowOrder: ['numero', 'data', 'nomeCliente', 'valor', 'status'],
         title: 'Histórico de Pedidos',
         filters: [
             { isActive: false, text: 'Em entrega' },

@@ -9,7 +9,7 @@ import {  TableConfig } from '@domain/interfaces';
     templateUrl: './table.component.html',
     styles: ``,
 })
-export class TableComponent<T> {
+export class TableComponent<T extends Record<string, unknown>> {
     @Input() tableConfig!: TableConfig<T>;
 
     onFilterClick(filter: { isActive: boolean; text: string }): void {
