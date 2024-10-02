@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { SidebarComponent } from '@presentation/view/components';
+import { ButtonComponent, CardComponent, SidebarComponent } from '@presentation/view/components';
 
 @Component({
   selector: 'app-stock-control',
   standalone: true,
-  imports: [SidebarComponent],
+  imports: [SidebarComponent, CardComponent, ButtonComponent],
   templateUrl: './stock-control.component.html',
   styles: ``
 })
