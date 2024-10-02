@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { RowData, TableConfig } from '@domain/interfaces';
+import {  TableConfig } from '@domain/interfaces';
 
 @Component({
     selector: 'app-table',
@@ -24,8 +24,8 @@ export class TableComponent<T> {
         });
     }
 
-    getRowDataValue(rowData: RowData, key: string): string {
-        return rowData[key as keyof RowData];
+    getRowDataValue(rowData: T, key: string): any {
+        return (rowData as any)[key];
     }
 
     onSearch(value: string): void {

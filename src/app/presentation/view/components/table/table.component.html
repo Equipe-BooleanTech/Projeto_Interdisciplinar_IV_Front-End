@@ -37,10 +37,10 @@
               <ng-container *ngIf="dataItem.rowData">
                 <!-- Check the type of the component -->
                 <button *ngIf="dataItem.componentType[j] === 'button'" class="bg-primary">
-                  {{ dataItem.rowData.toString() }}
+                            {{ getRowDataValue(dataItem.rowData, key) }}
                 </button>
                 <span *ngIf="dataItem.componentType[j] === 'text'">
-                  {{ dataItem.rowData.toString() }}
+                            {{ getRowDataValue(dataItem.rowData, key) }}
                 </span>
               </ng-container>
             </td>
