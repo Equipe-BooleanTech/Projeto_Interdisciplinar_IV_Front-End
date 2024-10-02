@@ -3,7 +3,7 @@
     <h1 class="text-4xl font-bold text-center">Bem-vindo(a), Thaís!</h1>
     <div class="flex 2xl:flex-nowrap flex-wrap">
       <div class="flex lg:justify-start flex-wrap w-full 2xl:w-1/2 justify-center mb-8 overflow-hidden m-4">
-        <app-line-column class="w-full min-h-1"></app-line-column>
+        <app-line-column class="w-full min-h-1" [metrics]="chartMetrics" [options]="chartData"></app-line-column>
       </div>
 
       <div class="flex 2xl:justify-end flex-wrap 2xl:w-1/2 w-full justify-center items-center">
@@ -44,8 +44,7 @@
 
     <h2 class="text-2xl font-bold mt-8 text-center">Histórico de Pedidos</h2>
    
-      <app-table [tableConfig]="tabela">
-      </app-table>
+      <app-table [tableConfig]="tabela"></app-table>
     
   </main>
 </app-sidebar>

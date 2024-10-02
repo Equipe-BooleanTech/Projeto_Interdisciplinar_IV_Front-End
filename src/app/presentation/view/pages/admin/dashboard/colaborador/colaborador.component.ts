@@ -56,8 +56,8 @@ export class ColaboradorComponent {
             value: '',
         },
         pagination: {
-            pageRange: 10,
-            totalItems: 2,
+            pageRange: 7,
+            totalItems: 6,
         },
     };
 }

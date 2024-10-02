@@ -2,19 +2,19 @@
   <div class="flex justify-between pb-4 mb-4 border-b border-gray-200 dark:border-gray-700">
     <div class="flex items-center">
       <div>
-        <h5 class="leading-none text-2xl font-bold text-gray-900 dark:text-white pb-1">R$5000,00</h5>
-        <p class="text-sm font-normal text-gray-500 dark:text-gray-400">Faturamento Bruto</p>
+        <h5 class="leading-none text-2xl font-bold text-gray-900 dark:text-white pb-1">R${{metrics?.data?.grossAmount}},00</h5>
+        <p class="text-sm font-normal text-gray-500 dark:text-gray-400">{{metrics?.data?.shortDescription}}</p>
       </div>
     </div>
   </div>
   <div class="grid grid-cols-2">
     <dl class="flex items-center">
-      <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal me-1">Total de pedidos:</dt>
-      <dd class="text-gray-900 text-sm dark:text-white font-semibold">50</dd>
+      <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal me-1">Total de {{metrics?.data?.title}}:</dt>
+      <dd class="text-gray-900 text-sm dark:text-white font-semibold">{{metrics?.data?.total}}</dd>
     </dl>
     <dl class="flex items-center justify-end">
-      <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal me-1">Média de pedidos: </dt>
-      <dd class="text-gray-900 text-sm dark:text-white font-semibold">32</dd>
+      <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal me-1">Média de {{metrics?.data?.title}}: </dt>
+      <dd class="text-gray-900 text-sm dark:text-white font-semibold">{{metrics?.data?.average}}</dd>
     </dl>
   </div>
   <div id="column-chart" class="h-full w-full"></div>
