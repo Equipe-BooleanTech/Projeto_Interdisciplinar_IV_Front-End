@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -27,6 +24,7 @@ import {
     FormTextareaComponent,
     FormComponent,
 } from '@presentation/view/components/form';
+import { catchError, of } from 'rxjs';
 
 @Component({
     selector: 'app-form-layout',
@@ -79,13 +77,33 @@ export class FormLayoutComponent implements OnInit {
     }
 
     submit(data: InputSendProspectionFormDto): void {
-        this._prospectionService.sendForm(data).subscribe((response) => {
-            const output: OutputSendProspectionFormDto = {
-                statusCode: response.statusCode,
-                message: response.message,
-            };
-            this.handleResponse(output);
-        });
+        this._prospectionService
+            .sendForm(data)
+            .pipe(
+                catchError((err) => {
+                    if (err instanceof HttpErrorResponse) {
+                        alert(`Ocorreu um erro: ${err.message}`);
+                    } else if (err instanceof Error) {
+                        alert(`Ocorreu um erro: ${err.message}`);
+                    } else {
+                        alert('Ocorreu um erro desconhecido.');
+                    }
+                    return of();
+                }),
+            )
+            .subscribe((response) => {
+                const output: OutputSendProspectionFormDto = {
+                    statusCode: response.statusCode,
+                    message: response.message,
+                };
+                this.handleResponse(output);
+                if (output.statusCode === 201) {
+                    alert(
+                        'Formulário criado com sucesso! Entraremos em contato em até 3 dias úteis!',
+                    );
+                    window.location.reload();
+                }
+            });
     }
 
     handleResponse(output: OutputSendProspectionFormDto): void {
