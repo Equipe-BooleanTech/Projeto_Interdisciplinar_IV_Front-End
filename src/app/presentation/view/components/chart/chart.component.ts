@@ -1,13 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { ChartMetrics, ChartOptions, LineColumnData } from '@domain/interfaces';
-import { LineColumnComponent } from '.';
+import {
+    ChartMetrics,
+    ChartOptions,
+    LineColumnData,
+    PieData,
+} from '@domain/interfaces';
+import { LineColumnComponent, PieComponent } from '.';
 
-type ChartData = LineColumnData; //Adicionar mais tipos de gráficos
+type ChartData = LineColumnData | PieData; //Adicionar mais tipos de gráficos
 @Component({
     selector: 'app-chart',
     standalone: true,
-    imports: [CommonModule, LineColumnComponent],
+    imports: [CommonModule, LineColumnComponent, PieComponent],
     templateUrl: './chart.component.html',
     styles: ``,
 })

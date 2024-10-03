@@ -81,8 +81,63 @@ export interface ChartOptions<T> {
     };
 }
 
+export interface PieChartOptions {
+    type: string;
+    series: number[];
+    colors: string[];
+    chart: {
+        height: number;
+        width: string;
+        type: string;
+    };
+    stroke: {
+        colors: string[];
+        lineCap: string;
+    };
+    plotOptions: {
+        pie: {
+            labels: {
+                show: boolean;
+            };
+            size: string;
+            dataLabels: {
+                offset: number;
+            };
+        };
+    };
+    labels: string[];
+    dataLabels: {
+        enabled: boolean;
+        style: {
+            fontFamily: string;
+        };
+    };
+    legend: {
+        position: string;
+        fontFamily: string;
+    };
+    yaxis: {
+        labels: {
+            formatter: (value: number) => string;
+        };
+    };
+    xaxis: {
+        labels: {
+            formatter: (value: number) => string;
+        };
+        axisTicks: {
+            show: boolean;
+        };
+        axisBorder: {
+            show: boolean;
+        };
+    };
+}
+
 export interface ChartMetrics<T> {
-    data: T;
+    title?: string;
+    subtitle?: string;
+    data: T[] | T;
 }
 
 // Abaixo, seguem as diferentes implementações de gráficos que podem ser utilizadas no projeto.
@@ -94,6 +149,12 @@ export interface LineColumnData {
     title: string;
     total: number;
     average: number;
+}
+
+export interface PieData {
+    title: string;
+    dateRange: string;
+    options: { href: string; text: string }[];
 }
 
 // ...

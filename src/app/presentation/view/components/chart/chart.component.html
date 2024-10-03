@@ -2,4 +2,7 @@
     <div *ngIf="type === 'column-chart'">
         <app-line-column [chartMetrics]="chartMetrics"></app-line-column>
     </div>
+    <div *ngIf="type === 'pie-chart'">
+        <app-pie [metrics]="chartMetrics" [options]="options" class="w-full h-full"></app-pie>
+    </div>
 </div>

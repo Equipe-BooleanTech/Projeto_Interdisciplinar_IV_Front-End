@@ -24,7 +24,7 @@ export class LineColumnComponent implements AfterViewInit {
           }>
         | undefined;
 
-    @Input() metrics: ChartMetrics<ChartData> | undefined;
+    @Input() chartMetrics: ChartMetrics<ChartData> | undefined;
 
     constructor() {}
     ngAfterViewInit(): void {

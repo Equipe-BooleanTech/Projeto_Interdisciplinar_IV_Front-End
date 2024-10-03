@@ -1,30 +1,20 @@
 <app-sidebar>
     <h1 class="text-4xl font-bold text-center mb-8">Gerenciamento de Caixa</h1>
 
-    <div class="w-full flex lg:justify-between justify-center items-center mx-auto">
-        <app-card class="flex-1"
-            [isDemographic]="true"
-            iconClass="icon-[mdi--delivery-dining-outline]"
-            [metric]="'R$249'"
-            [percentageChange]="2.84" 
-            [isPositive]="true"
-            metricTitle="em Delivery">
+    <div class="w-full flex justify-between items-center mx-auto">
+        <app-card class="flex-1 max-w-xs mr-4" [isDemographic]="true" iconClass="icon-[mdi--delivery-dining-outline]"
+            [metric]="'R$249'" [percentageChange]="2.84" [isPositive]="true" metricTitle="em Delivery">
         </app-card>
 
-        
-        <app-card class="w-full flex justify-end"
-            [isDemographic]="true"
-            iconClass="icon-[material-symbols--table-bar-outline]"
-            [metric]="'R$1.290'"
-            [percentageChange]="0" 
-            [isPositive]="true"
-            metricTitle="Pelas mesas">
+        <app-card class="flex-1 max-w-xs ml-4" [isDemographic]="true"
+            iconClass="icon-[material-symbols--table-bar-outline]" [metric]="'R$1.290'" [percentageChange]="0"
+            [isPositive]="true" metricTitle="Pelas mesas">
         </app-card>
     </div>
 
     <div class="flex justify-center mt-10 mb-10 overflow-hidden m-4">
         <div class="w-full">
-            <app-line-column class="lg:w-full w-full min-h-1"></app-line-column>
+            <app-line-column class="w-full h-96" [chartMetrics]="chartMetrics" [options]="chartData"></app-line-column>
         </div>
     </div>
 </app-sidebar>

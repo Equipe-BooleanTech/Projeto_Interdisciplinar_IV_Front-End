@@ -1,1 +1,32 @@
-<p>orders works!</p>
+<app-sidebar>
+    <main class="flex-1 p-4 w-full">
+
+        <h1 class="text-4xl font-bold text-center">Gerenciamento de Pedidos</h1>
+        <h3 class="m-8 p-4 text-center">
+            Neste módulo do sistema, você poderá conferir os últimos pedidos realizados na plataforma, bem como via apps
+            externos (iFood, Rappi, Uber Eats).
+        </h3>
+
+
+        <div class="flex lg:justify-end flex-wrap w-full justify-center items-center mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+                <app-card class="w-full" [isDemographic]="true" iconClass="icon-[mdi--delivery-dining-electric]"
+                    title="Pedidos" [metric]="'60'" [percentageChange]="2.84" [isPositive]="false"
+                    metricTitle="Pedidos Delivery">
+                </app-card>
+                <app-card class="w-full" [isDemographic]="true" iconClass="icon-[hugeicons--chair-02]" title="Mesas"
+                    [metric]="'80'" [percentageChange]="0" [isPositive]="true" metricTitle="Mesas Cadastradas">
+                </app-card>
+                <app-card class="w-full" [isDemographic]="true" iconClass="icon-[ion--ticket-outline]"
+                    title="Pedidos Totais" [metric]="'90'" [percentageChange]="1.20" [isPositive]="true"
+                    metricTitle="Pedidos">
+                </app-card>
+            </div>
+        </div>
+
+
+        <div class="w-full mb-8 m-4">
+            <app-line-column class="w-full h-96"></app-line-column>
+        </div>
+    </main>
+</app-sidebar>
