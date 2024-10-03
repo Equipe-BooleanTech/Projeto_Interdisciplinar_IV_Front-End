@@ -9,7 +9,7 @@ import {  TableConfig } from '@domain/interfaces';
     templateUrl: './table.component.html',
     styles: ``,
 })
-export class TableComponent<T> {
+export class TableComponent<T extends Record<string, unknown>> {
     @Input() tableConfig!: TableConfig<T>;
 
     onFilterClick(filter: { isActive: boolean; text: string }): void {
@@ -58,7 +58,7 @@ export class TableComponent<T> {
                 pagination.pageRange -= 6;
             }
             if (pagination.pageRange < 6) {
-                pagination.pageRange = 6;
+                pagination.pageRange = Math.min(pagination.totalItems, 6);
             }
         }
     }

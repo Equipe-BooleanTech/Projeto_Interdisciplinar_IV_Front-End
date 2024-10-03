@@ -76,7 +76,7 @@ export const sidebarData = {
                     id: 42,
                     title: 'Fichas Técnicas',
                     icon: 'icon-[clarity--form-line] p-4',
-                    link: '/admin/estoque/insumos',
+                    link: '/admin/estoque/fichas-tecnicas/',
                 },
             ],
         },

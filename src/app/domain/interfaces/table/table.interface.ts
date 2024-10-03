@@ -3,6 +3,10 @@ export interface DataItem<T> {
     componentType: string[];
 }
 
+export interface RowData {
+    [key: string]: string;
+}
+
 export interface TableConfig<T> {
     title: string;
     filters: { isActive: boolean; text: string }[];
@@ -17,4 +21,5 @@ export interface TableConfig<T> {
         pageRange: number;
         totalItems: number;
     };
+    rowOrder: string[];
 }
