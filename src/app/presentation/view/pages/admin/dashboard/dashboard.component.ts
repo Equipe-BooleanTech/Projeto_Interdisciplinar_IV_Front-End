@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { ChartMetrics, ChartOptions, TableConfig } from '@domain/interfaces';
+import {
+    LineColumnChartOptions,
+    LineColumnMetrics,
+    TableConfig,
+} from '@domain/interfaces';
 import {
     CardComponent,
     SidebarComponent,
@@ -82,7 +86,7 @@ export class DashboardComponent {
         },
     };
 
-    chartData: ChartOptions<{ x: string; y: number }> = {
+    chartData: LineColumnChartOptions<{ x: string; y: number }> = {
         colors: ['#A21420', '#FDBA8C'],
         series: [
             {
@@ -189,14 +193,12 @@ export class DashboardComponent {
         },
     };
 
-    chartMetrics: ChartMetrics<ChartData> = {
-        data: {
-            grossAmount: 5000,
-            shortDescription: 'Faturamento Bruto',
-            metric: 'pedidos',
-            title: 'pedidos',
-            total: 50,
-            average: 32,
-        },
+    chartMetrics: LineColumnMetrics = {
+        grossAmount: 5000,
+        shortDescription: 'Faturamento Bruto',
+        metric: 'pedidos',
+        title: 'pedidos',
+        total: 50,
+        average: 32,
     };
 }

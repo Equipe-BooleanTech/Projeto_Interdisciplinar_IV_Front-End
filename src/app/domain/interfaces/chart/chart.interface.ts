@@ -1,4 +1,4 @@
-export interface ChartOptions<T> {
+export interface LineColumnChartOptions<T> {
     colors: string[];
     series: {
         name: string;
@@ -134,15 +134,9 @@ export interface PieChartOptions {
     };
 }
 
-export interface ChartMetrics<T> {
-    title?: string;
-    subtitle?: string;
-    data: T[] | T;
-}
-
 // Abaixo, seguem as diferentes implementações de gráficos que podem ser utilizadas no projeto.
 
-export interface LineColumnData {
+export interface LineColumnMetrics {
     grossAmount: number;
     shortDescription: string;
     metric: string;
@@ -151,7 +145,7 @@ export interface LineColumnData {
     average: number;
 }
 
-export interface PieData {
+export interface PieMetrics {
     title: string;
     dateRange: string;
     options: { href: string; text: string }[];

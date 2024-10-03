@@ -1,11 +1,6 @@
 import { Component, Input, AfterViewInit } from '@angular/core';
-import { ChartMetrics, PieChartOptions } from '@domain/interfaces';
+import { PieChartOptions, PieMetrics } from '@domain/interfaces';
 
-interface ChartData {
-    title: string;
-    dateRange: string;
-    options: { href: string; text: string }[];
-}
 @Component({
     selector: 'app-pie',
     standalone: true,
@@ -16,7 +11,7 @@ interface ChartData {
 export class PieComponent implements AfterViewInit {
     constructor() {}
     @Input() options: PieChartOptions | undefined;
-    @Input() metrics: ChartMetrics<ChartData> | undefined;
+    @Input() metrics: PieMetrics | undefined;
 
     ngAfterViewInit(): void {
         if (
