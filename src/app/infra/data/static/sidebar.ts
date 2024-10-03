@@ -5,6 +5,14 @@ export const sidebarData = {
             title: 'Dashboard',
             icon: 'icon-[lucide--home] p-4',
             link: '/admin',
+            subItems: [
+                {
+                    id: 11,
+                    title: 'Colaboradores',
+                    icon: 'icon-[lucide--users] p-4',
+                    link: '/admin/colaboradores',
+                },
+            ],
         },
         {
             id: 2,
@@ -22,7 +30,7 @@ export const sidebarData = {
                     id: 22,
                     title: 'Finanças',
                     icon: 'icon-[mdi--finance] p-4',
-                    link: '/admin/controle-caixa/subitem2',
+                    link: '/admin/controle-caixa/financas',
                 },
             ],
         },
@@ -68,7 +76,7 @@ export const sidebarData = {
                     id: 42,
                     title: 'Fichas Técnicas',
                     icon: 'icon-[clarity--form-line] p-4',
-                    link: '/admin/estoque/insumos',
+                    link: '/admin/estoque/fichas-tecnicas/',
                 },
             ],
         },

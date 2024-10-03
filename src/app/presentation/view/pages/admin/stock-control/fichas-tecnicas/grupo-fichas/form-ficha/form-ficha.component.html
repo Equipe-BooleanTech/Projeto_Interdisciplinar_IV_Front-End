@@ -1,0 +1,28 @@
+<app-sidebar>
+    <app-form [formGroup]="form" (ngSubmit)="submit()" class="w-11/12  bg-white p-8 rounded-lg shadow-md">
+      <ng-container *ngFor="let field of config.fields">
+        <ng-container [ngSwitch]="field.component">
+          <div *ngSwitchCase="'input'" class="flex flex-col space-y-2">
+            <label [for]="field.name" class="text-gray-700 font-semibold">{{ field.placeholder }}</label>
+            <input [id]="field.name" [formControlName]="field.name" [type]="field.type"
+                   [placeholder]="field.placeholder"
+                   class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#740318]" />
+          </div>
+        </ng-container>
+        <ng-container *ngIf="field.component === 'select'" class="flex flex-col space-y-2">
+          <label [for]="field.name" class="text-gray-700 font-semibold">{{ field.placeholder }}</label>
+          <select [id]="field.name" [formControlName]="field.name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#740318]">
+            <option *ngFor="let option of field.options" [value]="option.value">{{ option.label }}</option>
+          </select>
+          </ng-container>
+        
+      </ng-container>
+      <div class="flex justify-end items-center">
+        <button type="submit"
+                class="py-2 px-4 bg-[#740318] hover:bg-[#740318c9] text-white font-semibold rounded-lg transition duration-300 ease-in-out"
+                [disabled]="!form.valid">
+          {{method === 'POST' ? 'Cadastrar Ficha' : 'Atualizar Ficha'}}
+        </button>
+      </div>
+    </app-form>
+</app-sidebar>

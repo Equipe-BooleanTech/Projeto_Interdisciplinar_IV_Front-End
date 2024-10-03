@@ -1,69 +1,50 @@
 <app-sidebar>
-  <main class="flex-1 p-4">
-    <h1 class="text-4xl font-bold text-center">Bem vindo(a), Thaís!</h1>
+  <main class="flex-1 p-4 w-full ">
+    <h1 class="text-4xl font-bold text-center">Bem-vindo(a), Thaís!</h1>
+    <div class="flex 2xl:flex-nowrap flex-wrap">
+      <div class="flex lg:justify-start flex-wrap w-full 2xl:w-1/2 justify-center mb-8 overflow-hidden m-4">
+        <app-line-column class="w-full min-h-1" [chartMetrics]="chartMetrics" [options]="chartData"></app-line-column>
+      </div>
 
-    <div class="flex justify-end">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-4">
-        <div class="p-4 bg-white rounded-lg shadow-md">
-          <p class="text-2xl font-bold">160</p>
-          <p class="text-gray-500">Vendas</p>
-          <p class="text-red-600">▼ 2.64% em relação à semana anterior</p>
-        </div>
-        <div class="p-4 bg-white rounded-lg shadow-md">
-          <p class="text-2xl font-bold">80</p>
-          <p class="text-gray-500">Ingredientes</p>
-          <p class="text-green-600">▲ 12.0% em relação à semana anterior</p>
-        </div>
-        <div class="p-4 bg-white rounded-lg shadow-md">
-          <p class="text-2xl font-bold">60</p>
-          <p class="text-gray-500">Pedidos iFood</p>
-          <p class="text-red-600">▼ 2.64% em relação à semana anterior</p>
-        </div>
-        <div class="p-4 bg-white rounded-lg shadow-md">
-          <p class="text-2xl font-bold">40</p>
-          <p class="text-gray-500">Pratos</p>
-          <p class="text-red-600">▼ 10.64% em relação à semana anterior</p>
+      <div class="flex 2xl:justify-end flex-wrap 2xl:w-1/2 w-full justify-center items-center">
+        <div class="grid md:grid-cols-2 w-full">
+          <app-card class="flex-1"
+          [isDemographic]="true" 
+          iconClass="icon-[icon-park-outline--tomato]" 
+          title="Ingredientes"
+          [metric]="'80'" 
+          [percentageChange]="12.0" 
+          [isPositive]="true" metricTitle="Ingredientes"></app-card>
+          <app-card 
+          [isDemographic]="true" 
+          iconClass="icon-[mdi--delivery-dining-electric]" 
+          title="Pedidos iFood"
+          [metric]="'200'"
+          [percentageChange]="-2.64" 
+          [isPositive]="false" 
+          metricTitle="Vendas Totais"></app-card>
+          <app-card 
+          [isDemographic]="true" 
+          iconClass="icon-[fluent-emoji-high-contrast--fork-and-knife-with-plate]"
+          title="Pratos" 
+          [metric]="'40'" 
+          [percentageChange]="-10.64" 
+          [isPositive]="false"
+          metricTitle="Pratos"></app-card>
+          <app-card 
+          [isDemographic]="true" 
+          iconClass="icon-[octicon--people-24]" 
+          [metric]="'40'" 
+          [percentageChange]="100"
+          [isPositive]="true" 
+          metricTitle="Colaboradores"></app-card>
         </div>
       </div>
     </div>
-  </main>    
-  <h2 class="text-2xl font-bold mt-8 text-center">Histórico de Pedidos</h2>
-      <div class="overflow-x-auto">
-        <table class="min-w-full bg-white border border-gray-300 mt-4">
-          <thead>
-            <tr class="bg-gray-100">
-              <th class="py-2 px-4 border-b">Número do Pedido</th>
-              <th class="py-2 px-4 border-b">Data do Pedido</th>
-              <th class="py-2 px-4 border-b">Valor Recebido</th>
-              <th class="py-2 px-4 border-b">Status</th>
-              <th class="py-2 px-4 border-b"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="text-center">
-              <td class="py-2 px-4 border-b">#2841787258</td>
-              <td class="py-2 px-4 border-b">23/09/24</td>
-              <td class="py-2 px-4 border-b">R$948.55</td>
-              <td class="py-2 px-4 border-b text-yellow-500">Preparando</td>
-              <td class="py-2 px-4 border-b">...</td>
-            </tr>
-            <tr class="text-center">
-              <td class="py-2 px-4 border-b">#2841787257</td>
-              <td class="py-2 px-4 border-b">20/08/2024</td>
-              <td class="py-2 px-4 border-b">R$106.58</td>
-              <td class="py-2 px-4 border-b text-green-500">Em entrega</td>
-              <td class="py-2 px-4 border-b">...</td>
-            </tr>
-            <tr class="text-center">
-              <td class="py-2 px-4 border-b">#2841787251</td>
-              <td class="py-2 px-4 border-b">26/09/2024</td>
-              <td class="py-2 px-4 border-b">R$396.84</td>
-              <td class="py-2 px-4 border-b text-green-500">Em entrega</td>
-              <td class="py-2 px-4 border-b">...</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
 
-
+    <h2 class="text-2xl font-bold mt-8 text-center">Histórico de Pedidos</h2>
+   
+      <app-table [tableConfig]="tabela"></app-table>
+    
+  </main>
 </app-sidebar>

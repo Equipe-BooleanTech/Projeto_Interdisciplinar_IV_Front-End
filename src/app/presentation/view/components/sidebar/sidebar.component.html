@@ -1,6 +1,6 @@
-<section class="flex h-screen">
+<section class="flex h-screen min-h-screen z-20" [style.height.px]="viewHeight | async">
   <!-- Sidebar -->
-  <div [ngClass]="{'w-64': isExpanded, 'w-20': !isExpanded}" class="bg-[#741308] text-white font-semibold flex flex-col transition-all duration-300">
+  <div [ngClass]="{'md:w-64 w-1/2 z-20': isExpanded, 'w-20': !isExpanded}" class="bg-[#741308] text-white font-semibold flex flex-col transition-all duration-300 h-full overflow-y-auto">
     <div class="flex items-center justify-between p-4">
       <button (click)="toggleSidebar()" class="focus:outline-none">
         <span class="p-4" [ngClass]="{'icon-[icon-park-outline--left-c]': isExpanded, 'icon-[icon-park-outline--right-c]': !isExpanded}"></span>
@@ -27,7 +27,7 @@
     </nav>
   </div>
   <!-- Main content -->
-  <div class="flex-1 p-4">
+  <div class="flex-1 md:p-4">
     <ng-content></ng-content>
   </div>
 </section>

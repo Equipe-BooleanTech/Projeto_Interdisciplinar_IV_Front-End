@@ -1,0 +1,1 @@
+export * from './painel-contador/painel-contador.component'
