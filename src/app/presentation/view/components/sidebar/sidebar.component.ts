@@ -1,7 +1,8 @@
-import { OnInit, Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { sidebarData } from '@infra/data';
 import { BehaviorSubject } from 'rxjs';
+import { SidebarItem } from '@domain/interfaces';
 
 @Component({
     standalone: true,
@@ -10,13 +11,41 @@ import { BehaviorSubject } from 'rxjs';
     imports: [CommonModule],
 })
 export class SidebarComponent implements OnInit {
-    sidebarItems = sidebarData.sidebarItems;
-    isExpanded: boolean = true;
-    isSidebarVisible: boolean = false;
+    sidebarItems: SidebarItem[] = sidebarData.data;
+    isShowing: boolean = true;
+    isSidebarExpanded: boolean = true;
     viewHeight = new BehaviorSubject<string | number>('100vh');
 
     ngOnInit(): void {
         this.setViewHeight();
+    }
+
+    openMobileSidebar(): void {
+        this.isShowing = true;
+    }
+
+    closeMobileSidebar(): void {
+        this.isShowing = false;
+    }
+
+    toggleSubItems(item: SidebarItem, event: Event): void {
+        if (!item.isExpanded) {
+            event.preventDefault();
+        }
+        this.sidebarItems.reduce((previousState, currentItem) => {
+            if (currentItem !== item) {
+                currentItem.isExpanded = false;
+            }
+            return currentItem;
+        });
+        item.isExpanded = true;
+    }
+
+    getItemLink(item: SidebarItem): string {
+        if (item.isExpanded) {
+            return item.link;
+        }
+        return '';
     }
 
     setViewHeight(): void {
@@ -24,7 +53,7 @@ export class SidebarComponent implements OnInit {
     }
 
     toggleSidebar(): void {
-        this.isExpanded = !this.isExpanded;
+        this.isSidebarExpanded = !this.isSidebarExpanded;
         this.setViewHeight();
     }
 }

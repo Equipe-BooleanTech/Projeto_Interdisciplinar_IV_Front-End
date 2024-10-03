@@ -11,14 +11,6 @@ import {
 } from '@presentation/view/components';
 import { LineColumnComponent } from '@presentation/view/components/chart';
 
-interface ChartData {
-    grossAmount: number;
-    shortDescription: string;
-    metric: string;
-    title: string;
-    total: number;
-    average: number;
-}
 @Component({
     selector: 'app-dashboard',
     standalone: true,
