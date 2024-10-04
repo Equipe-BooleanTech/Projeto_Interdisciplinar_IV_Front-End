@@ -1,0 +1,50 @@
+export const supplierFileds = {
+    fields: [
+        {
+            component: 'input',
+            name: 'nameSupplier',
+            type: 'text',
+            label: 'Nome do Fornecedor: *',
+            id: 'fullName',
+            value: '',
+            placeholder: 'Digite aqui o nome do Fornecedor...',
+            validations: [
+                {
+                    name: 'required',
+                    message: 'Nome do Fornecedor é obrigatório',
+                    value: '',  
+                },
+            ],
+        },
+        {
+            component: 'input',
+            name: 'CNPJ',
+            type: 'text',
+            label: 'CNPJ: *',
+            id: 'CNPJ',
+            placeholder: 'Digite aqui o CNPJ do Fornecedor...',
+            value: '',
+            validations: [],
+        },
+        {
+            component: 'input',
+            name: 'contact',
+            type: 'text',
+            id: 'contact',
+            value: '',
+            placeholder: 'Digite o nome do contato do Fornecedor...',
+            label: 'Nome Contato:',
+            validations: [],
+        },
+        {
+            component: 'input',
+            name: 'phone',
+            type: 'text',
+            id: 'phone',
+            value: '',
+            placeholder: 'Digite o número de telefone do Fornecedor...',
+            label: 'Nome Contato:',
+            validations: [],
+        },
+    ],
+};
