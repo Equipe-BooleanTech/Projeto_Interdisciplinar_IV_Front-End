@@ -21,7 +21,7 @@ export class ProspectionService implements ProspectionRepository {
     ): Observable<OutputSendProspectionFormDto> {
         const response = this._http
             .post<OutputSendProspectionFormDto>(
-                `${this.apiBase}/api/users/create`,
+                `${this.apiBase}/api/users/prospects`,
                 data,
                 {
                     observe: 'response',
