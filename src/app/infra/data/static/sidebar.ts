@@ -70,7 +70,7 @@ export const sidebarData = {
                     id: 41,
                     title: 'Ingredientes',
                     icon: 'icon-[icon-park-outline--tomato] p-4',
-                    link: '/admin/estoque/produtos',
+                    link: '/admin/estoque/ingredientes',
                 },
                 {
                     id: 42,

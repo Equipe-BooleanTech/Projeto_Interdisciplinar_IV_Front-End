@@ -23,7 +23,7 @@ export class ColaboradorComponent {
         lastAccess: string;
         action: string;
     }> = {
-        title: 'Employee Roles and Status',
+        title: 'Colaboradores Cadastrados e Status',
         filters: [
             { isActive: true, text: 'Ativo' },
             { isActive: false, text: 'Inativo' },
@@ -81,4 +81,9 @@ export class ColaboradorComponent {
             totalItems: 4,
         },
     };
+    cadastrarNovoColaborador() {
+        // Lógica para abrir o formulário de cadastro ou navegar para a página de cadastro
+        console.log('Abrir formulário de cadastro');
+    }
+    
 }
