@@ -1,5 +1,7 @@
-export const sidebarData = {
-    sidebarItems: [
+import { SidebarData } from '@domain/interfaces';
+
+export const sidebarData: SidebarData = {
+    data: [
         {
             id: 1,
             title: 'Dashboard',
@@ -13,6 +15,7 @@ export const sidebarData = {
                     link: '/admin/colaboradores',
                 },
             ],
+            isExpanded: false,
         },
         {
             id: 2,
@@ -33,6 +36,7 @@ export const sidebarData = {
                     link: '/admin/controle-caixa/financas',
                 },
             ],
+            isExpanded: false,
         },
         {
             id: 3,
@@ -59,6 +63,7 @@ export const sidebarData = {
                     link: '/admin/pedidos/controle-de-mesas',
                 },
             ],
+            isExpanded: false,
         },
         {
             id: 4,
@@ -76,9 +81,10 @@ export const sidebarData = {
                     id: 42,
                     title: 'Fichas Técnicas',
                     icon: 'icon-[clarity--form-line] p-4',
-                    link: '/admin/estoque/insumos',
+                    link: '/admin/estoque/fichas-tecnicas/',
                 },
             ],
+            isExpanded: false,
         },
         {
             id: 5,
@@ -99,6 +105,7 @@ export const sidebarData = {
                     link: '/admin/cardapio-digital/editar-pratos',
                 },
             ],
+            isExpanded: false,
         },
     ],
 };

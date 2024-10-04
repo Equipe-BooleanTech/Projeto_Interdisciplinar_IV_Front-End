@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { RowData, TableConfig } from '@domain/interfaces';
+import {  TableConfig } from '@domain/interfaces';
 
 @Component({
     selector: 'app-table',
@@ -9,7 +9,7 @@ import { RowData, TableConfig } from '@domain/interfaces';
     templateUrl: './table.component.html',
     styles: ``,
 })
-export class TableComponent<T> {
+export class TableComponent<T extends Record<string, unknown>> {
     @Input() tableConfig!: TableConfig<T>;
 
     onFilterClick(filter: { isActive: boolean; text: string }): void {
@@ -24,8 +24,8 @@ export class TableComponent<T> {
         });
     }
 
-    getRowDataValue(rowData: RowData, key: string): string {
-        return rowData[key as keyof RowData];
+    getRowDataValue(rowData: T, key: string): any {
+        return (rowData as any)[key];
     }
 
     onSearch(value: string): void {
@@ -58,7 +58,7 @@ export class TableComponent<T> {
                 pagination.pageRange -= 6;
             }
             if (pagination.pageRange < 6) {
-                pagination.pageRange = 6;
+                pagination.pageRange = Math.min(pagination.totalItems, 6);
             }
         }
     }

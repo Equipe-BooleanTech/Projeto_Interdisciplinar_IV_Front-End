@@ -21,4 +21,5 @@ export interface TableConfig<T> {
         pageRange: number;
         totalItems: number;
     };
+    rowOrder: string[];
 }
