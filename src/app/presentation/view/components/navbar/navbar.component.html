@@ -1,16 +1,15 @@
 <header class="bg-slate-50 w-full">
-  <nav [ngClass]="{'h-auto': isOpen, 'h-[120px]': !isOpen}" class="flex flex-wrap justify-between items-center px-4 md:px-10 transition-all duration-300 ease-in-out">
+  <nav [ngClass]="{'h-auto': isNavbarOpen, 'h-[120px]': !isNavbarOpen}" class="flex flex-wrap justify-between items-center px-4 lg:px-10 transition-all duration-300 ease-in-out">
     <a href="/" class="flex-shrink-0">
-      <img src="../../assets/logo.svg" alt="Logotipo do app Restaurantto" class="h-[100px] md:h-[140px] w-[100px] md:w-[150px]">
+      <img src="../../assets/logo.svg" alt="Logotipo do app Restaurantto" class="h-[100px] lg:h-[140px] w-[100px] lg:w-[150px]">
     </a>
-    <div class="block md:hidden">
+    <div class="block lg:hidden">
       <button class="text-gray-700 focus:outline-none" (click)="toggleMenu()">
-        <i class="p-4" [ngClass]="isOpen ? 'icon-[ri--close-line]' : 'icon-[ic--outline-menu]'"></i>
+        <i class="p-4" [ngClass]="isNavbarOpen ? 'icon-[ri--close-line]' : 'icon-[ic--outline-menu]'"></i>
       </button>
     </div>
-    <ul [ngClass]="{'block': isOpen, 'hidden': !isOpen}" class="w-full md:flex md:items-center md:w-auto space-y-2 md:space-y-0 md:space-x-8 my-4 md:mt-0">
-      <li *ngFor="let link of navLinks; let i = index" class="text-center md:text-left">
-        <a [href]="link.url" class="block md:inline-block text-gray-700 hover:text-gray-900">{{ link.name }}</a>
+    <ul [ngClass]="{'block': isNavbarOpen, 'hidden': !isNavbarOpen}" class="w-full lg:flex lg:items-center lg:w-auto space-y-2 lg:space-y-0 lg:space-x-8 my-4 lg:mt-0"> <li *ngFor="let link of navLinks; let i = index" class="text-center lg:text-left">
+        <a [href]="link.url" class="block lg:inline-block text-gray-700 hover:text-gray-900">{{ link.name }}</a>
       </li>
     </ul>
   </nav>

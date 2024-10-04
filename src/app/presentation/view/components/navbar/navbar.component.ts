@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { SidebarService } from '@infra/services';
 
 @Component({
     selector: 'app-navbar',
@@ -8,7 +9,11 @@ import {CommonModule} from '@angular/common';
     templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
-    isOpen: boolean = false;
+    isNavbarOpen: boolean = false;
+    isAuthenticated: boolean = true;
+
+    constructor(private _sidebarService: SidebarService) {}
+
     navLinks = [
         { name: 'Início', url: '#inicio' },
         { name: 'Funcionalidades', url: '#funcionalidades' },
@@ -16,6 +21,10 @@ export class NavbarComponent {
     ];
 
     toggleMenu(): void {
-        this.isOpen = !this.isOpen;
+        if (this.isAuthenticated) {
+            this._sidebarService.toggleSidebar();
+        } else {
+            this.isNavbarOpen = !this.isNavbarOpen;
+        }
     }
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { sidebarData } from '@infra/data';
 import { BehaviorSubject } from 'rxjs';
 import { SidebarItem } from '@domain/interfaces';
+import { SidebarService } from '@infra/services';
 
 @Component({
     standalone: true,
@@ -11,13 +12,19 @@ import { SidebarItem } from '@domain/interfaces';
     imports: [CommonModule],
 })
 export class SidebarComponent implements OnInit {
+    isOpen$ = this._sidebarService.isOpen$;
     sidebarItems: SidebarItem[] = sidebarData.data;
     isShowing: boolean = true;
     isSidebarExpanded: boolean = true;
     viewHeight = new BehaviorSubject<string | number>('100vh');
 
+    constructor(private _sidebarService: SidebarService) {}
+
     ngOnInit(): void {
         this.setViewHeight();
+        this.isOpen$.subscribe((isOpen) => {
+            this.isShowing = isOpen;
+        });
     }
 
     openMobileSidebar(): void {
@@ -55,5 +62,9 @@ export class SidebarComponent implements OnInit {
     toggleSidebar(): void {
         this.isSidebarExpanded = !this.isSidebarExpanded;
         this.setViewHeight();
+    }
+
+    toggleMobileSidebar(): void {
+        this._sidebarService.toggleSidebar();
     }
 }
