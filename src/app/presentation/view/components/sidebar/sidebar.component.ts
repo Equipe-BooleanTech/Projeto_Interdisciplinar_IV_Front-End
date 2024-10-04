@@ -58,13 +58,4 @@ export class SidebarComponent implements OnInit {
     setViewHeight(): void {
         this.viewHeight.next(document.body.scrollHeight);
     }
-
-    toggleSidebar(): void {
-        this.isSidebarExpanded = !this.isSidebarExpanded;
-        this.setViewHeight();
-    }
-
-    toggleMobileSidebar(): void {
-        this._sidebarService.toggleSidebar();
-    }
 }

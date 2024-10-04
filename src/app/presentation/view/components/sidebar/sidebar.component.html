@@ -1,12 +1,8 @@
 <section class="lg:flex h-screen min-h-screen z-20" [style.height.px]="viewHeight | async">
   <!-- Sidebar -->
-  <div [ngClass]="{'lg:w-64 w-1/2 z-20': isSidebarExpanded, 'w-20': !isSidebarExpanded}"
+  <div
     class="bg-[#741308] text-white font-semibold flex-col transition-all duration-300 h-full overflow-y-auto hidden lg:flex">
     <div class="flex items-center justify-between p-4">
-      <button (click)="toggleSidebar()" (keyup.enter)="toggleSidebar()" tabindex="0" class="focus:outline-none">
-        <span class="p-4"
-          [ngClass]="{'icon-[icon-park-outline--left-c]': isSidebarExpanded, 'icon-[icon-park-outline--right-c]': !isSidebarExpanded}"></span>
-      </button>
     </div>
     <nav class="flex-1 px-2 py-4 space-y-2">
       <ng-container *ngFor="let item of sidebarItems">
