@@ -12,6 +12,7 @@
         <a [href]="link.url" class="block lg:inline-block text-gray-700 hover:text-gray-900">{{ link.name }}</a>
       </li>
     </ul>
+    <app-button [ngClass]="isAuthenticated ? 'hidden' : 'block bg-primary px-4 py-2 rounded-md'" link="/login">Já é nosso cliente?</app-button>
   </nav>
 </header>
 <div class="h-[10px] w-full bg-[#741308]"></div>
