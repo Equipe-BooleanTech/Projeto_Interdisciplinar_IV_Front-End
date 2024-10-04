@@ -1,130 +1,89 @@
 import { Component } from '@angular/core';
-import { CardComponent } from '@presentation/view/components';
-import { LineColumnComponent } from '@presentation/view/components/chart';
-import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
-import { LineColumnChartOptions, LineColumnMetrics } from '@domain/interfaces';
+import { TableConfig } from '@domain/interfaces';
+import {
+    ButtonComponent,
+    SidebarComponent,
+    TableComponent,
+} from '@presentation/view/components';
 
 @Component({
-    selector: 'app-cash-flow',
+    selector: 'app-colaborador',
     standalone: true,
-    imports: [SidebarComponent, LineColumnComponent, CardComponent],
-    templateUrl: './cash-flow.component.html',
+    imports: [SidebarComponent, TableComponent, ButtonComponent],
+    templateUrl: './colaborador.component.html',
     styles: ``,
 })
-export class CashFlowComponent {
-    chartMetrics: LineColumnMetrics = {
-        grossAmount: 5000,
-        shortDescription: 'Faturamento Total',
-        metric: 'R$',
-        title: 'Vendas',
-        total: 5000,
-        average: 5000,
-    };
+export class ColaboradorComponent {
+    constructor() {}
 
-    chartData: LineColumnChartOptions<{ x: string; y: number }> = {
-        colors: ['#A21420', '#FDBA8C'],
-        series: [
+    tabela: TableConfig<{
+        role: string;
+        name: string;
+        status: string;
+        lastAccess: string;
+        action: string;
+    }> = {
+        rowOrder: ['name', 'role', 'status', 'lastAccess', 'action'],
+        title: 'Colaboradores Cadastrados e Status',
+        filters: [
+            { isActive: true, text: 'Ativo' },
+            { isActive: false, text: 'Inativo' },
+        ],
+        metrics: 'Total: 4 items, 3 Active, 1 Inactive',
+        header: ['Nome', 'Função', 'Status', 'Data de Último Acesso', 'Ações'],
+        data: [
             {
-                name: 'Fauramento Total',
-                color: '#A21420',
-                data: [
-                    { x: 'Segunda-feira', y: 250 },
-                    { x: 'Tue', y: 122 },
-                    { x: 'Wed', y: 63 },
-                    { x: 'Thu', y: 421 },
-                    { x: 'Fri', y: 122 },
-                    { x: 'Sat', y: 323 },
-                    { x: 'Sun', y: 111 },
-                ],
+                rowData: {
+                    role: 'Chefe de Cozinha',
+                    name: 'Henrique Costa',
+                    status: 'Ativo',
+                    lastAccess: '17/11/2023',
+                    action: 'Detalhes',
+                },
+                componentType: ['text', 'text', 'text', 'text', 'button'],
             },
             {
-                name: 'Faturamento Online',
-                color: '#FDBA8C',
-                data: [
-                    { x: 'Segunda-feira', y: 500 },
-                    { x: 'Tue', y: 113 },
-                    { x: 'Wed', y: 341 },
-                    { x: 'Thu', y: 224 },
-                    { x: 'Fri', y: 522 },
-                    { x: 'Sat', y: 411 },
-                    { x: 'Sun', y: 243 },
-                ],
+                rowData: {
+                    role: 'Gerente',
+                    name: 'Henrique Costa',
+                    status: 'Inativo',
+                    lastAccess: '17/11/2023',
+                    action: 'Detalhes',
+                },
+                componentType: ['text', 'text', 'text', 'text', 'button'],
+            },
+            {
+                rowData: {
+                    role: 'Garçom',
+                    name: 'Henrique Costa',
+                    status: 'Ativo',
+                    lastAccess: '17/11/2023',
+                    action: 'Detalhes',
+                },
+                componentType: ['text', 'text', 'text', 'text', 'button'],
+            },
+            {
+                rowData: {
+                    role: 'Recepcionista',
+                    name: 'Julia Almeida',
+                    status: 'Ativo',
+                    lastAccess: '12/09/2023',
+                    action: 'Detalhes',
+                },
+                componentType: ['text', 'text', 'text', 'text', 'button'],
             },
         ],
-        chart: {
-            type: 'bar',
-            height: '100%',
-            width: '100%',
-            fontFamily: 'Dm Sans, sans-serif',
-            toolbar: {
-                show: false,
-            },
+        search: {
+            placeholder: 'Search by name or role',
+            value: '',
         },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: '70%',
-                borderRadiusApplication: 'end',
-                borderRadius: 8,
-            },
-        },
-        tooltip: {
-            shared: true,
-            intersect: false,
-            style: {
-                fontFamily: 'Dm Sans, sans-serif',
-            },
-        },
-        states: {
-            hover: {
-                filter: {
-                    type: 'darken',
-                    value: 1,
-                },
-            },
-        },
-        stroke: {
-            show: true,
-            width: 0,
-            colors: ['transparent'],
-        },
-        grid: {
-            show: false,
-            strokeDashArray: 4,
-            padding: {
-                left: 2,
-                right: 2,
-                top: -14,
-            },
-        },
-        dataLabels: {
-            enabled: false,
-        },
-        legend: {
-            show: false,
-        },
-        xaxis: {
-            floating: false,
-            labels: {
-                show: true,
-                style: {
-                    fontFamily: 'Dm Sans, sans-serif',
-                    cssClass:
-                        'text-xs font-normal fill-gray-500 dark:fill-gray-400',
-                },
-            },
-            axisBorder: {
-                show: false,
-            },
-            axisTicks: {
-                show: false,
-            },
-        },
-        yaxis: {
-            show: false,
-        },
-        fill: {
-            opacity: 1,
+        pagination: {
+            pageRange: 4,
+            totalItems: 4,
         },
     };
+    cadastrarNovoColaborador(): void {
+        // Lógica para abrir o formulário de cadastro ou navegar para a página de cadastro
+        console.log('Abrir formulário de cadastro');
+    }
 }

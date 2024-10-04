@@ -1,7 +1,7 @@
 <section class="lg:flex h-screen min-h-screen z-20" [style.height.px]="viewHeight | async">
   <!-- Sidebar -->
   <div
-    class="bg-[#741308] text-white font-semibold flex-col transition-all duration-300 h-full overflow-y-auto hidden lg:flex">
+    class="bg-[#741308] text-white font-semibold flex-col transition-all duration-300 h-full overflow-y-auto hidden w-64 lg:flex">
     <div class="flex items-center justify-between p-4">
     </div>
     <nav class="flex-1 px-2 py-4 space-y-2">
@@ -9,14 +9,14 @@
         <div class="group">
           <a [href]="item.link" class="flex items-center p-2 text-base font-medium rounded-lg hover:bg-[#d33f3f]">
             <i [class]="item.icon"></i>
-            <span *ngIf="isSidebarExpanded" class="ml-4">{{ item.title }}</span>
-            <i *ngIf="item.subItems && isSidebarExpanded" class="fas fa-chevron-down ml-auto"></i>
+            <span class="ml-4">{{ item.title }}</span>
+            <i *ngIf="item.subItems" class="fas fa-chevron-down ml-auto"></i>
           </a>
           <div *ngIf="item.subItems" class="hidden group-hover:block pl-4">
             <ng-container *ngFor="let subItem of item.subItems">
               <a [href]="subItem.link" class="block p-2 text-sm font-medium rounded-lg hover:bg-[#d33f3f]">
                 <i [class]="subItem.icon"></i>
-                <span *ngIf="isSidebarExpanded" class="ml-4">{{ subItem.title }}</span>
+                <span class="ml-4">{{ subItem.title }}</span>
               </a>
             </ng-container>
           </div>

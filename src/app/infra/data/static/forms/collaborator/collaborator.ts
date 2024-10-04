@@ -1,8 +1,8 @@
-export const supplierFileds = {
+export const collaboratorFields = {
     fields: [
         {
             component: 'input',
-            name: 'nameEmployee',
+            name: 'name',
             type: 'text',
             label: 'Nome do Colaborador: *',
             id: 'fullName',
@@ -12,7 +12,7 @@ export const supplierFileds = {
                 {
                     name: 'required',
                     message: 'Nome do Colaborador é obrigatório',
-                    value: '',  
+                    value: '',
                 },
             ],
         },

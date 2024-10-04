@@ -1,110 +1,70 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ButtonComponent, FormComponent, SidebarComponent } from '@presentation/view/components';
+import {
+    FormBuilder,
+    FormGroup,
+    ReactiveFormsModule,
+    ValidatorFn,
+} from '@angular/forms';
+import { collaboratorFields } from '@infra/data';
+import { FormValidateService } from '@infra/services';
+import {
+    ButtonComponent,
+    FormComponent,
+    SidebarComponent,
+} from '@presentation/view/components';
+import { FormInputComponent } from '@presentation/view/components/form';
 
 @Component({
-  selector: 'app-cadastro-colaborador',
-  standalone: true,
-  imports: [SidebarComponent, FormComponent, ButtonComponent, ReactiveFormsModule, CommonModule],
-  templateUrl: './cadastro-colaborador.component.html',
-  styles: ``
+    selector: 'app-cadastro-colaborador',
+    standalone: true,
+    imports: [
+        SidebarComponent,
+        FormComponent,
+        ButtonComponent,
+        ReactiveFormsModule,
+        CommonModule,
+        FormInputComponent,
+        FormComponent,
+    ],
+    templateUrl: './cadastro-colaborador.component.html',
+    styles: ``,
 })
 export class CadastroColaboradorComponent implements OnInit {
-  employeeForm!: FormGroup;
-  
-  employeeFields = {
-    fields: [
-        {
-            component: 'input',
-            name: 'nameEmployee',
-            type: 'text',
-            label: 'Nome do Colaborador: *',
-            id: 'fullName',
-            value: '',
-            placeholder: 'Digite aqui o nome do Colaborador...',
-            validations: [
-                {
-                    name: 'required',
-                    message: 'Nome do Colaborador é obrigatório',
-                    value: '',  
-                },
-            ],
-        },
-        {
-            component: 'input',
-            name: 'CPF',
-            type: 'text',
-            label: 'CPF: *',
-            id: 'CPF',
-            placeholder: 'Digite aqui o CPF do Colaborador...',
-            value: '',
-            validations: [
-              {
-                name: 'required',
-                message: 'CPF do Colaborador é obrigatório',
-                value: '',  
-            },
-            ],
-        },
-        {
-            component: 'input',
-            name: 'email',
-            type: 'text',
-            id: 'email',
-            value: '',
-            placeholder: 'Digite o email institucional...',
-            label: 'Email institucional:',
-            validations: [],
-        },
-        {
-            component: 'input',
-            name: 'phone',
-            type: 'text',
-            id: 'phone',
-            value: '',
-            placeholder: 'Digite o número de telefone do colaborador...',
-            label: 'Telefone: ',
-            validations: [],
-        },
-        {
-          component: 'select',
-          name: 'categorysupplier',
-          label: 'Função: ',
-          options: [
-            { value: '', label: 'Selecione uma função' },
-            { value: '1', label: 'Ajudante geral' },
-            { value: '2', label: 'Garçom' },
-            { value: '3', label: 'Gerente' },
-            { value: '4', label: 'Chefe de Cozinha' },
-            { value: '5', label: 'Ajudante de Cozinha' },
-          ],
-        },
-      
-    ],
-  };
-  constructor(private fb: FormBuilder) {}
+    collaboratorForm: FormGroup = new FormGroup({});
+    collaboratorFormFields = collaboratorFields;
 
-  ngOnInit(): void {
-    this.initForm();
-  }
+    constructor(
+        private _fb: FormBuilder,
+        private _formValidateService: FormValidateService,
+    ) {}
 
-  private initForm() {
-    this.employeeForm = this.fb.group({
-      nameEmployee: ['', Validators.required],
-      CPF: ['', Validators.required], 
-      email: ['', [Validators.email]], 
-      phone: [''], 
-    });
-  }
-
-  onSubmit() {
-    if (this.employeeForm.valid) {
-      console.log(this.employeeForm.value);
-      
-    } else {
+    ngOnInit(): void {
+        this._initForm();
     }
-  }
+
+    private _initForm(): void {
+        this.collaboratorForm = this._fb.group(
+            this.collaboratorFormFields.fields.reduce(
+                (formFields, field) => {
+                    formFields[field.name] = [
+                        field.value || '',
+                        this._formValidateService.bindValidations(
+                            field.validations || [],
+                        ),
+                    ];
+                    return formFields;
+                },
+                {} as { [key: string]: [string, ValidatorFn | null] },
+            ),
+        );
+    }
+
+    onSubmit(): void {
+        if (this.collaboratorForm.valid) {
+            console.log(this.collaboratorForm.value);
+        } else {
+            console.log('Formulário inválido');
+        }
+    }
 }
-
-

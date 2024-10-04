@@ -12,7 +12,7 @@ export const ingredientsFileds = {
                 {
                     name: 'required',
                     message: 'Nome do ingrediente é obrigatório',
-                    value: '',  
+                    value: '',
                 },
             ],
         },
@@ -21,13 +21,13 @@ export const ingredientsFileds = {
             name: 'categorysupplier',
             label: 'Fornecedor: ',
             options: [
-              { value: '1', label: 'Gomes da Costa' },
-              { value: '2', label: 'Oxan' },
-              { value: '3', label: 'Assai' },
-              { value: '4', label: 'Atacadão' },
-              { value: '5', label: 'Unilever' },
+                { value: '1', label: 'Gomes da Costa' },
+                { value: '2', label: 'Oxan' },
+                { value: '3', label: 'Assai' },
+                { value: '4', label: 'Atacadão' },
+                { value: '5', label: 'Unilever' },
             ],
-          },
+        },
         {
             component: 'input',
             name: 'description',
@@ -48,6 +48,5 @@ export const ingredientsFileds = {
             label: 'Empresa:',
             validations: [],
         },
-        
     ],
 };

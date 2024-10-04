@@ -12,7 +12,7 @@ export const supplierFileds = {
                 {
                     name: 'required',
                     message: 'Nome do Fornecedor é obrigatório',
-                    value: '',  
+                    value: '',
                 },
             ],
         },
@@ -33,7 +33,7 @@ export const supplierFileds = {
             id: 'contact',
             value: '',
             placeholder: 'Digite o nome do contato do Fornecedor...',
-            label: 'Nome Contato:',
+            label: 'Nome para contato:',
             validations: [],
         },
         {
@@ -43,7 +43,7 @@ export const supplierFileds = {
             id: 'phone',
             value: '',
             placeholder: 'Digite o número de telefone do Fornecedor...',
-            label: 'Nome Contato:',
+            label: 'Número de telefone:',
             validations: [],
         },
     ],
