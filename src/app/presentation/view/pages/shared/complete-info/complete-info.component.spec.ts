@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChartComponent } from './chart.component';
+import { CompleteInfoComponent } from './complete-info.component';
 
-describe('ChartComponent', () => {
-  let component: ChartComponent;
-  let fixture: ComponentFixture<ChartComponent>;
+describe('CompleteInfoComponent', () => {
+  let component: CompleteInfoComponent;
+  let fixture: ComponentFixture<CompleteInfoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ChartComponent]
+      imports: [CompleteInfoComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ChartComponent);
+    fixture = TestBed.createComponent(CompleteInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

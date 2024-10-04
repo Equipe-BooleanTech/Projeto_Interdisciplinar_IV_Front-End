@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ChartMetrics, ChartOptions } from '@domain/interfaces';
+import { LineColumnChartOptions, LineColumnMetrics } from '@domain/interfaces';
 import { CardComponent, SidebarComponent } from '@presentation/view/components';
 import { LineColumnComponent } from '@presentation/view/components/chart';
 
@@ -20,7 +20,7 @@ interface ChartData {
     styles: ``,
 })
 export class PainelContadorComponent {
-    chartData: ChartOptions<{ x: string; y: number }> = {
+    chartData: LineColumnChartOptions<{ x: string; y: number }> = {
         colors: ['#A21420', '#FDBA8C'],
         series: [
             {
@@ -127,14 +127,12 @@ export class PainelContadorComponent {
         },
     };
 
-    chartMetrics: ChartMetrics<ChartData> = {
-        data: {
-            grossAmount: 5000,
-            shortDescription: 'Faturamento Bruto',
-            metric: 'pedidos',
-            title: 'pedidos',
-            total: 50,
-            average: 32,
-        },
+    chartMetrics: LineColumnMetrics = {
+        grossAmount: 5000,
+        shortDescription: 'Faturamento Bruto',
+        metric: 'pedidos',
+        title: 'pedidos',
+        total: 50,
+        average: 32,
     };
 }

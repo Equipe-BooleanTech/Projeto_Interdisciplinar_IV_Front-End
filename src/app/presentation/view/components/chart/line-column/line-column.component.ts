@@ -1,15 +1,7 @@
 import { Component, AfterViewInit, Input } from '@angular/core';
 import ApexCharts from 'apexcharts';
-import { ChartMetrics, ChartOptions } from '@domain/interfaces';
+import {  LineColumnChartOptions, LineColumnMetrics } from '@domain/interfaces';
 
-interface ChartData {
-    grossAmount: number;
-    shortDescription: string;
-    metric: string;
-    title: string;
-    total: number;
-    average: number;
-}
 
 @Component({
     standalone: true,
@@ -18,13 +10,13 @@ interface ChartData {
 })
 export class LineColumnComponent implements AfterViewInit {
     @Input() options:
-        | ChartOptions<{
+        | LineColumnChartOptions<{
               x: string;
               y: number;
           }>
         | undefined;
 
-    @Input() chartMetrics: ChartMetrics<ChartData> | undefined;
+    @Input() chartMetrics: LineColumnMetrics | undefined;
 
     constructor() {}
     ngAfterViewInit(): void {

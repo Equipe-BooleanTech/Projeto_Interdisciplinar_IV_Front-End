@@ -3,7 +3,7 @@
     <div class="flex justify-between items-start w-full">
         <div class="flex-col items-center">
             <div class="flex items-center mb-1">
-                <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">{{metrics?.data?.title}}</h5>
+                <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">{{metrics?.title}}</h5>
             </div>
             <button id="dateRangeButton" data-dropdown-toggle="dateRangeDropdown"
                 data-dropdown-ignore-click-outside-class="datepicker" type="button"
@@ -74,7 +74,7 @@
             <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown" data-dropdown-placement="bottom"
                 class="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 text-center inline-flex items-center dark:hover:text-white"
                 type="button">
-                {{metrics?.data?.dateRange}}
+                {{metrics?.dateRange}}
                <span class="icon-[mdi--arrow-down-drop]"></span>
             </button>
             <div id="lastDaysdropdown"

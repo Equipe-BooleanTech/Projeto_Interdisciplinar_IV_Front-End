@@ -2,16 +2,8 @@ import { Component } from '@angular/core';
 import { CardComponent } from '@presentation/view/components';
 import { LineColumnComponent } from '@presentation/view/components/chart';
 import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
-import { ChartMetrics, ChartOptions } from '@domain/interfaces';
+import { LineColumnChartOptions, LineColumnMetrics } from '@domain/interfaces';
 
-interface CashFlowMetrics {
-    title: string;
-    grossAmount: number;
-    shortDescription: string;
-    metric: string;
-    total: number;
-    average: number;
-}
 @Component({
     selector: 'app-cash-flow',
     standalone: true,
@@ -20,20 +12,16 @@ interface CashFlowMetrics {
     styles: ``,
 })
 export class CashFlowComponent {
-    chartMetrics: ChartMetrics<CashFlowMetrics> = {
-        title: 'Faturamento',
-        subtitle: 'Faturamento total e online',
-        data: {
-            grossAmount: 5000,
-            shortDescription: 'Faturamento Total',
-            metric: 'R$',
-            title: 'Vendas',
-            total: 5000,
-            average: 5000,
-        },
+    chartMetrics: LineColumnMetrics = {
+        grossAmount: 5000,
+        shortDescription: 'Faturamento Total',
+        metric: 'R$',
+        title: 'Vendas',
+        total: 5000,
+        average: 5000,
     };
 
-    chartData: ChartOptions<{ x: string; y: number }> = {
+    chartData: LineColumnChartOptions<{ x: string; y: number }> = {
         colors: ['#A21420', '#FDBA8C'],
         series: [
             {

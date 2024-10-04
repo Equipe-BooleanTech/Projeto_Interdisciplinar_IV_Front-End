@@ -1,25 +1,31 @@
 import { Routes } from '@angular/router';
 import {
+    CadastroColaboradorComponent,
     CashFlowComponent,
+    ColaboradorComponent,
     DashboardComponent,
+    FichasTecnicasComponent,
+    FormFichaComponent,
+    FornecedorComponent,
+    GrupoFichasComponent,
     HomepageComponent,
+    IngredientesComponent,
     LoginComponent,
     NotFoundComponent,
-    PainelContadorComponent,
-    ColaboradorComponent,
-    FichasTecnicasComponent,
-    GrupoFichasComponent,
-    FormFichaComponent,
-    StockControlComponent,
     OrdersComponent,
+    PainelContadorComponent,
+    StockControlComponent,
 } from '@presentation/view/pages';
-
-
 
 export const routes: Routes = [
     { path: '', component: HomepageComponent },
     { path: 'login', component: LoginComponent },
     { path: 'admin', component: DashboardComponent },
+
+    {
+        path: 'admin/colaboradores/cadastrar-colaborador',
+        component: CadastroColaboradorComponent,
+    },
 
     { path: 'admin/controle-caixa', component: CashFlowComponent },
     {
@@ -40,6 +46,16 @@ export const routes: Routes = [
         path: 'admin/estoque/fichas-tecnicas/grupo-fichas/form-ficha',
         component: FormFichaComponent,
     },
+
+    {
+        path: 'admin/estoque/cadastrar-fornecedor',
+        component: FornecedorComponent,
+    },
+    {
+        path: 'admin/estoque/cadastrar-ingrediente',
+        component: IngredientesComponent,
+    },
+
     { path: 'admin/pedidos', component: OrdersComponent },
 
     { path: '**', component: NotFoundComponent },
