@@ -1,30 +1,48 @@
 <app-sidebar>
-  <main class="flex-1 p-4 w-full">
-    <h1 class="text-4xl font-bold text-center">Bem vindo(a), Thaís!</h1>
-    <div class="flex lg:flex-nowrap flex-wrap">
-      <div class="flex lg:justify-start flex-wrap lg:w-1/2 justify-center w-full">
-        <app-line-column></app-line-column>
+  <main class="flex-1 p-4 w-full ">
+    <h1 class="text-4xl font-bold text-center">Bem-vindo(a), Thaís!</h1>
+    <div class="flex 2xl:flex-nowrap flex-wrap">
+      <div class="flex lg:justify-start flex-wrap w-full 2xl:w-1/2 justify-center mb-8 overflow-hidden m-4">
+        <app-line-column class="w-full min-h-1" [chartMetrics]="chartMetrics" [options]="chartData"></app-line-column>
       </div>
 
-      <div class="flex lg:justify-end flex-wrap lg:w-1/2 w-full justify-center items-center">
-        <app-card [isDemographic]="true" iconClass="icon-[icon-park-outline--tomato]" title="Ingredientes"
-          [metric]="'80'" [percentageChange]="12.0" [isPositive]="true" metricTitle="Ingredientes"></app-card>
-        <app-card [isDemographic]="true" iconClass="icon-[mdi--delivery-dining-electric]" title="Pedidos iFood"
-          [metric]="'200'" [percentageChange]="-2.64" [isPositive]="false" metricTitle="Pedidos iFood"></app-card>
-        <app-card [isDemographic]="true" iconClass="icon-[fluent-emoji-high-contrast--fork-and-knife-with-plate]"
-          title="Pratos" [metric]="'40'" [percentageChange]="-10.64" [isPositive]="false"
+      <div class="flex 2xl:justify-end flex-wrap 2xl:w-1/2 w-full justify-center items-center">
+        <div class="grid md:grid-cols-2 w-full">
+          <app-card class="flex-1"
+          [isDemographic]="true" 
+          iconClass="icon-[icon-park-outline--tomato]" 
+          title="Ingredientes"
+          [metric]="'80'" 
+          [percentageChange]="12.0" 
+          [isPositive]="true" metricTitle="Ingredientes"></app-card>
+          <app-card 
+          [isDemographic]="true" 
+          iconClass="icon-[mdi--delivery-dining-electric]" 
+          title="Pedidos iFood"
+          [metric]="'200'"
+          [percentageChange]="-2.64" 
+          [isPositive]="false" 
+          metricTitle="Vendas Totais"></app-card>
+          <app-card 
+          [isDemographic]="true" 
+          iconClass="icon-[fluent-emoji-high-contrast--fork-and-knife-with-plate]"
+          title="Pratos" 
+          [metric]="'40'" 
+          [percentageChange]="-10.64" 
+          [isPositive]="false"
           metricTitle="Pratos"></app-card>
-        <app-card [isDemographic]="true" iconClass="icon-[tdesign--money]" [metric]="'40'" [percentageChange]="10.64"
-          [isPositive]="true" metricTitle="Vendas"></app-card>
-
+          <app-card 
+          [isDemographic]="true" 
+          iconClass="icon-[octicon--people-24]" 
+          [metric]="'40'" 
+          [percentageChange]="100"
+          [isPositive]="true" 
+          metricTitle="Colaboradores"></app-card>
+        </div>
       </div>
-
     </div>
-
+   
+      <app-table [tableConfig]="tabela"></app-table>
+    
   </main>
-  <h2 class="text-2xl font-bold mt-8 text-center">Histórico de Pedidos</h2>
-  <div class="overflow-x-auto">
-  </div>
-
-
 </app-sidebar>

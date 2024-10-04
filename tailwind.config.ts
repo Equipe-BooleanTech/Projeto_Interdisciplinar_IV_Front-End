@@ -30,7 +30,11 @@ export default {
             center: true,
             padding: '1.5rem',
         },
-        extend: {},
+        extend: {
+            screens: {
+            'xl': '1280px',
+            '2xl': '1440px'
+        }},
     },
     plugins: [
         ...TAILWIND_PLUGINS,

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { TableConfig } from '@domain/interfaces';
 import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import {  TableConfig } from '@domain/interfaces';
 
 @Component({
     selector: 'app-table',
@@ -9,35 +9,14 @@ import { CommonModule } from '@angular/common';
     templateUrl: './table.component.html',
     styles: ``,
 })
-export class TableComponent {
-    totalItems: number = 28;
-    pageRange: number = 6;
-    constructor() {}
-
-    tableConfig: TableConfig = {
-        title: 'Table Title',
-        filters: [
-            { isActive: true, text: 'Filter 1' },
-            { isActive: false, text: 'Filter 2' },
-            { isActive: false, text: 'Filter 3' },
-        ],
-        metrics: 'Table Metrics',
-        header: ['Header 1', 'Header 2', 'Header 3'],
-        data: [
-            { id: 1, name: 'Name 1', description: 'Description 1' },
-            { id: 2, name: 'Name 2', description: 'Description 2' },
-            { id: 3, name: 'Name 3', description: 'Description 3' },
-        ],
-        totalPages: Math.round(this.totalItems / 6),
-        search: {
-            placeholder: 'Procure por...',
-            value: '',
-        },
-    };
+export class TableComponent<T extends Record<string, unknown>> {
+    @Input() tableConfig!: TableConfig<T>;
 
     onFilterClick(filter: { isActive: boolean; text: string }): void {
+        if (!this.tableConfig.filters) return;
+
         filter.isActive = !filter.isActive;
-        //Deixando os outros filtros inativos
+        // Deixando os outros filtros inativos
         this.tableConfig.filters.forEach((f) => {
             if (f.text !== filter.text) {
                 f.isActive = false;
@@ -45,26 +24,42 @@ export class TableComponent {
         });
     }
 
+    getRowDataValue(rowData: T, key: string): any {
+        return (rowData as any)[key];
+    }
+
     onSearch(value: string): void {
+        if (!this.tableConfig.search) return;
+
         this.tableConfig.search.value = value;
     }
 
     onPageIncrease(): void {
-        if (this.pageRange < this.totalItems) {
-            this.pageRange += 6;
-        }
+        const pagination = this.tableConfig.pagination;
+        if (
+            pagination &&
+            pagination.pageRange !== undefined &&
+            pagination.totalItems !== undefined
+        ) {
+            if (pagination.pageRange < pagination.totalItems) {
+                pagination.pageRange += 6;
+            }
 
-        if (this.pageRange > this.totalItems) {
-            this.pageRange = this.totalItems;
+            if (pagination.pageRange > pagination.totalItems) {
+                pagination.pageRange = pagination.totalItems;
+            }
         }
     }
 
     onPageDecrease(): void {
-        if (this.pageRange - 6 > 0) {
-            this.pageRange -= 6;
-        }
-        if (this.pageRange < 6) {
-            this.pageRange = 6;
+        const pagination = this.tableConfig.pagination;
+        if (pagination && pagination.pageRange !== undefined) {
+            if (pagination.pageRange - 6 > 0) {
+                pagination.pageRange -= 6;
+            }
+            if (pagination.pageRange < 6) {
+                pagination.pageRange = Math.min(pagination.totalItems, 6);
+            }
         }
     }
 }
