@@ -11,7 +11,7 @@
             
             <!-- Campo input para Nome do Fornecedor -->
             <label *ngSwitchCase="'input'" [for]="field.id" class="block w-full my-2 text-sm font-medium">{{ field.label }}</label>
-            <input 
+            <app-form-input 
               *ngSwitchCase="'input'" 
               [type]="field.type" 
               [id]="field.id" 

@@ -9,6 +9,7 @@ import {
 import { FormValidateService } from '@infra/services';
 import { FormComponent, SidebarComponent } from '@presentation/view/components';
 import { FormInputComponent } from '../../../../../../components/form/form-input/form-input.component';
+import { fichaFormFields } from '@infra/data';
 
 @Component({
     selector: 'app-form-ficha',
@@ -24,7 +25,8 @@ import { FormInputComponent } from '../../../../../../components/form/form-input
     styles: ``,
 })
 export class FormFichaComponent implements OnInit {
-    form: FormGroup = new FormGroup({});
+    fichaForm: FormGroup = new FormGroup({});
+    fichaFields = fichaFormFields;
     method: 'POST' | 'PUT' = 'POST';
     constructor(
         private _formBuilder: FormBuilder,
@@ -32,15 +34,15 @@ export class FormFichaComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.form = this._formBuilder.group(
-            this.config.fields.reduce(
+        this.fichaForm = this._formBuilder.group(
+            this.fichaFields.fields.reduce(
                 (formFields: { [key: string]: any[] }, field) => {
                     formFields[field.name] = [
                         field.value || '',
                         this._formValidateService.bindValidations(
                             field.validations?.map((validation) => ({
                                 ...validation,
-                                value: validation.name || '', // Garantir que 'value' esteja presente
+                                value: validation.name || '', 
                             })) || [],
                         ),
                     ];
@@ -51,78 +53,9 @@ export class FormFichaComponent implements OnInit {
         );
     }
 
-    config = {
-        fields: [
-            {
-                component: 'input',
-                name: 'nome',
-                type: 'text',
-                label: 'Nome do Item:*',
-                value: '',
-                placeholder: 'Digite aqui o nome do item...',
-                validations: [
-                    { name: 'required', message: 'Campo obrigatório' },
-                ],
-            },
-            {
-                component: 'select',
-                options: [
-                    { value: '1', label: 'Entrada' },
-                    { value: '2', label: 'Prato Principal' },
-                    { value: '3', label: 'Sobremesa' },
-                    { value: '4', label: 'Bebida' },
-                    { value: '5', label: 'Outros' },
-                ],
-                name: 'ingredientes',
-                type: 'text',
-                label: 'Ingredientes:*',
-                value: '',
-                placeholder: 'Selecione os ingredientes...',
-                validations: [
-                    { name: 'required', message: 'Campo obrigatório' },
-                ],
-            },
-            {
-                component: 'input',
-                name: 'tempo',
-                type: 'text',
-                label: 'Tempo de Preparo:',
-                value: '',
-                placeholder: 'Digite aqui o tempo de preparo...',
-            },
-            {
-                component: 'input',
-                name: 'custo',
-                type: 'text',
-                label: 'Custo final:*',
-                value: '',
-                placeholder: 'Digite aqui o custo final...',
-                validations: [
-                    { name: 'required', message: 'Campo obrigatório' },
-                ],
-            },
-            {
-                component: 'input',
-                name: 'rendimentoPorcao',
-                type: 'text',
-                label: 'Redimento porção:',
-                value: '',
-                placeholder: 'Digite aqui o rendimento por porção...',
-            },
-            {
-                component: 'input',
-                name: 'rendimentoTotal',
-                type: 'text',
-                label: 'Redimento total:',
-                value: '',
-                placeholder: 'Digite aqui o rendimento total em porções...',
-            },
-        ],
-    };
-
     submit(): void {
-        if (this.form.valid) {
-            console.log(this.form.value);
+        if (this.fichaForm.valid) {
+            console.log(this.fichaForm.value);
         } else {
             console.log('Form is invalid');
         }
