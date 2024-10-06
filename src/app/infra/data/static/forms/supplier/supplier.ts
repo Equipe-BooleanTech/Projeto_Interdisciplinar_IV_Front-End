@@ -24,7 +24,19 @@ export const supplierFileds = {
             id: 'CNPJ',
             placeholder: 'Digite aqui o CNPJ do Fornecedor...',
             value: '',
-            validations: [],
+            validations: [
+                {
+                    name: 'required',
+                    message: 'CNPJ do Fornecedor é obrigatório',
+                    value: '',
+                },
+                {
+                    name: 'pattern',
+                    message: 'Formato de CNPJ inválido',
+                    value: /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$|^\d{14}$/ // Regex para validar o formato do CNPJ
+                }
+            ],
+                
         },
         {
             component: 'input',

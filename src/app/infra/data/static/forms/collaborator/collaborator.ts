@@ -24,7 +24,13 @@ export const collaboratorFields = {
             id: 'CPF',
             placeholder: 'Digite aqui o CPF do Colaborador...',
             value: '',
-            validations: [],
+            validations: [
+                {
+                    name: 'required',
+                    message: 'CPF do Colaborador é obrigatório',
+                    value: '',
+                },
+            ],
         },
         {
             component: 'input',
@@ -43,7 +49,7 @@ export const collaboratorFields = {
             id: 'phone',
             value: '',
             placeholder: 'Digite o número de telefone do colaborador...',
-            label: 'Nome Contato:',
+            label: 'Telefone:',
             validations: [],
         },
     ],

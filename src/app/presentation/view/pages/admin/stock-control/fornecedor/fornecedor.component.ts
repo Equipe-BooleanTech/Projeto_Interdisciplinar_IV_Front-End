@@ -6,14 +6,14 @@ import {
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
+import { supplierFileds } from '@infra/data';
+import { FormValidateService } from '@infra/services';
 import {
     ButtonComponent,
     FormComponent,
     SidebarComponent,
 } from '@presentation/view/components';
-import { FormInputComponent } from '../../../../components/form/form-input/form-input.component';
-import { supplierFileds } from '@infra/data';
-import { FormValidateService } from '@infra/services';
+import { FormInputComponent } from '@presentation/view/components/form';
 
 @Component({
     selector: 'app-fornecedor',
@@ -25,22 +25,25 @@ import { FormValidateService } from '@infra/services';
         ReactiveFormsModule,
         CommonModule,
         FormInputComponent,
-    ],
+    ] as const,
     templateUrl: './fornecedor.component.html',
     styles: ``,
 })
 export class FornecedorComponent implements OnInit {
     supplierForm: FormGroup = new FormGroup({});
     suppliersFields = supplierFileds;
+collaboratorForm: any;
 
     constructor(
         private _fb: FormBuilder,
         private _formValidateService: FormValidateService,
     ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this._initForm();
+    }
 
-    initForm(): void {
+    private _initForm(): void {
         this.supplierForm = this._fb.group(
             this.suppliersFields.fields.reduce(
                 (formFields, field) => {

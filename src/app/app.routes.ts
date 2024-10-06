@@ -16,6 +16,8 @@ import {
     PainelContadorComponent,
     StockControlComponent,
 } from '@presentation/view/pages';
+import { DashFornecedoresComponent } from '@presentation/view/pages/admin/stock-control/fornecedor/dash-fornecedores/dash-fornecedores.component';
+import { DashIngredientesComponent } from '@presentation/view/pages/admin/stock-control/ingredientes/dash-ingredientes/dash-ingredientes.component';
 
 export const routes: Routes = [
     { path: '', component: HomepageComponent },
@@ -34,10 +36,7 @@ export const routes: Routes = [
     },
     { path: 'admin/colaboradores', component: ColaboradorComponent },
     { path: 'admin/estoque', component: StockControlComponent },
-    {
-        path: 'admin/estoque/fichas-tecnicas',
-        component: FichasTecnicasComponent,
-    },
+    { path: 'admin/estoque/fichas-tecnicas', component: FichasTecnicasComponent},
     {
         path: 'admin/estoque/fichas-tecnicas/grupo-fichas',
         component: GrupoFichasComponent,
@@ -54,6 +53,14 @@ export const routes: Routes = [
     {
         path: 'admin/estoque/cadastrar-ingrediente',
         component: IngredientesComponent,
+    },
+    {
+        path: 'admin/estoque/fornecedor/dash-fornecedores',
+        component: DashFornecedoresComponent,
+    },
+    {
+        path: 'admin/estoque/ingredientes',
+        component: DashIngredientesComponent,
     },
 
     { path: 'admin/pedidos', component: OrdersComponent },

@@ -18,7 +18,7 @@
 
                     <div *ngIf="collaboratorForm.get(field.name)?.invalid && collaboratorForm.get(field.name)?.touched"
                         class="h-6">
-                        <span *ngIf="field.validations && field.validations[0]">{{ field.validations[0].message
+                        <span *ngIf="field.validations && field.validations[0]"  class="text-red-500">{{ field.validations[0].message
                             }}</span>
                     </div>
                 </ng-container>

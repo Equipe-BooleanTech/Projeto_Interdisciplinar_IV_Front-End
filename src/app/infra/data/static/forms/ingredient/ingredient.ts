@@ -37,7 +37,13 @@ export const ingredientFields = {
             id: 'description',
             placeholder: 'Faça uma breve descrição do ingrediente...',
             value: '',
-            validations: [],
+            validations: [
+                {
+                    name: 'required',
+                    message: 'Descrição é obrigatória',
+                    value: '',
+                },
+            ],
         },
         {
             component: 'input',
