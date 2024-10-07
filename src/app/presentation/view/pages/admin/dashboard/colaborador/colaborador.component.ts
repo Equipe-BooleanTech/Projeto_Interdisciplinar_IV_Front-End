@@ -16,48 +16,74 @@ import {
 export class ColaboradorComponent {
     constructor() {}
 
-
     tabela: TableConfig<{
-        numero: string;
-        data: string;
-        cliente: string;
-        valor: string;
+        role: string;
+        name: string;
         status: string;
+        lastAccess: string;
+        action: string;
     }> = {
-        title: 'Example Table',
-        rowOrder: ['numero', 'data', 'cliente', 'valor', 'status'],
-        filters: [{ isActive: true, text: 'Active' }],
-        metrics: 'Metrics',
-        header: ['Numero', 'Data', 'Nome do Cliente', 'Valor', 'Status'],
+        rowOrder: ['name', 'role', 'status', 'lastAccess', 'action'],
+        title: 'Colaboradores Cadastrados e Status',
+        filters: [
+            { isActive: true, text: 'Ativo' },
+            { isActive: false, text: 'Inativo' },
+        ],
+        metrics: 'Total: 4 items, 3 Active, 1 Inactive',
+        header: ['Nome', 'Função', 'Status', 'Data de Último Acesso', 'Ações'],
         data: [
             {
                 rowData: {
-                    numero: '#2841782758',
-                    data: '9/23/16',
-                    cliente: 'John Doe',
-                    valor: '$948.55',
-                    status: 'Shipping',
+                    role: 'Chefe de Cozinha',
+                    name: 'Henrique Costa',
+                    status: 'Ativo',
+                    lastAccess: '17/11/2023',
+                    action: 'Detalhes',
                 },
-                componentType: ['text', 'text', 'text', 'text', 'text'],
+                componentType: ['text', 'text', 'text', 'text', 'button'],
             },
             {
                 rowData: {
-                    numero: '#2841782759',
-                    data: '9/24/16',
-                    cliente: 'Jane Doe',
-                    valor: '$123.45',
-                    status: 'Delivered',
+                    role: 'Gerente',
+                    name: 'Henrique Costa',
+                    status: 'Inativo',
+                    lastAccess: '17/11/2023',
+                    action: 'Detalhes',
                 },
-                componentType: ['text', 'text', 'text', 'text', 'text'],
+                componentType: ['text', 'text', 'text', 'text', 'button'],
+            },
+            {
+                rowData: {
+                    role: 'Garçom',
+                    name: 'Henrique Costa',
+                    status: 'Ativo',
+                    lastAccess: '17/11/2023',
+                    action: 'Detalhes',
+                },
+                componentType: ['text', 'text', 'text', 'text', 'button'],
+            },
+            {
+                rowData: {
+                    role: 'Recepcionista',
+                    name: 'Julia Almeida',
+                    status: 'Ativo',
+                    lastAccess: '12/09/2023',
+                    action: 'Detalhes',
+                },
+                componentType: ['text', 'text', 'text', 'text', 'button'],
             },
         ],
         search: {
-            placeholder: 'Search...',
+            placeholder: 'Search by name or role',
             value: '',
         },
         pagination: {
-            pageRange: 7,
-            totalItems: 6,
+            pageRange: 4,
+            totalItems: 4,
         },
     };
+    cadastrarNovoColaborador(): void {
+        // Lógica para abrir o formulário de cadastro ou navegar para a página de cadastro
+        console.log('Abrir formulário de cadastro');
+    }
 }

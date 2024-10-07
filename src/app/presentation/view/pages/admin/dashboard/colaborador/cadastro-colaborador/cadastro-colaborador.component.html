@@ -1,0 +1,34 @@
+<app-sidebar>
+    <div class="w-full flex flex-col justify-center items-center">
+        <h1 class="text-4xl font-bold text-center my-6">Cadastrar Novo Colaborador</h1>
+        <p class="text-center my-4 w-full lg:w-1/2">Aqui você pode adicionar um colaborador, incluindo informações
+            relevantes.</p>
+    </div>
+
+    <div class="flex justify-center border-2 border-[#740318] rounded-md w-11/12 items-center mx-auto">
+        <app-form [formGroup]="collaboratorForm" (ngSubmit)="onSubmit()" class="w-full h-full bg-white p-8">
+            <ng-container *ngFor="let field of collaboratorFormFields.fields">
+                <ng-container [ngSwitch]="field.component">
+                    <!-- Input Field -->
+                    <label *ngSwitchCase="'input'" [for]="field.id" class="block w-full my-2 text-sm font-medium">
+                        {{ field.label }}</label>
+                    <app-form-input *ngSwitchCase="'input'" [type]="field.type" [id]="field.id"
+                        [formControlName]="field.name" [placeholder]="field.placeholder"
+                        class="w-full" />
+
+                    <div *ngIf="collaboratorForm.get(field.name)?.invalid && collaboratorForm.get(field.name)?.touched"
+                        class="h-6">
+                        <span *ngIf="field.validations && field.validations[0]"  class="text-red-500">{{ field.validations[0].message
+                            }}</span>
+                    </div>
+                </ng-container>
+            </ng-container>
+
+            <button type="submit"
+                class="bg-[#740318] hover:bg-[#740318c9] disabled:bg-[#740318c9] text-white font-semibold py-3 px-4 w-full rounded transition ease-in-out duration-300 mt-4"
+                [disabled]="!collaboratorForm.valid">
+                Salvar Colaborador
+            </button>
+        </app-form>
+    </div>
+</app-sidebar>

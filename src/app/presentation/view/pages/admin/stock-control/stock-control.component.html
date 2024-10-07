@@ -1,42 +1,61 @@
 <app-sidebar>
     <h1 class="text-4xl font-bold text-center mb-8">Controle de Estoque</h1>
     <h3 class="m-8 p-4 text-center">Gerencie o estoque de seu restaurante através dessa página.</h3>
-
-
+    
+    
     <div class="flex lg:justify-end flex-wrap w-full justify-center items-center mb-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
-            <app-card class="w-full" [isDemographic]="true" iconClass="icon-[icon-park-outline--tomato]"
-                title="ingradientes" [metric]="'60'" [percentageChange]="2.84" [isPositive]="true"
-                metricTitle="Ingredientes">
+            <app-card class="w-full"
+              [isDemographic]="true" 
+              iconClass="icon-[icon-park-outline--tomato]" 
+              title="ingradientes"
+              [metric]="'60'" 
+              [percentageChange]="2.84" 
+              [isPositive]="true" metricTitle="Ingredientes">
             </app-card>
-            <app-card class="w-full" [isDemographic]="true" iconClass="icon-[streamline--store-1]" title="fornecedores"
-                [metric]="'20'" [percentageChange]="0" [isPositive]="true" metricTitle="Fornecedores">
+            <app-card class="w-full"
+              [isDemographic]="true" 
+              iconClass="icon-[streamline--store-1]" 
+              title="fornecedores"
+              [metric]="'20'" 
+              [percentageChange]="0" 
+              [isPositive]="true" metricTitle="Fornecedores">
             </app-card>
-            <app-card class="w-full" [isDemographic]="true" iconClass="icon-[fluent--form-sparkle-20-regular]"
-                title="fichas" [metric]="'180'" [percentageChange]="1.20" [isPositive]="true"
-                metricTitle="Fichas Cadastradas">
+            <app-card class="w-full"
+              [isDemographic]="true" 
+              iconClass="icon-[fluent--form-sparkle-20-regular]" 
+              title="fichas"
+              [metric]="'180'" 
+              [percentageChange]="1.20" 
+              [isPositive]="true" metricTitle="Fichas Cadastradas">
             </app-card>
-
+            
         </div>
     </div>
 
     <div class="flex justify-between mt-4 w-full px-20">
 
-        <app-button [link]="'/estoque/cadastrar-fornecedor'"
-            [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'" [disabled]="false">
+        <app-button 
+            [link]="'./admin/estoque/cadastrar-fornecedor'"
+            [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'"
+            [disabled]="false">
             Cadastrar Novo Fornecedor
         </app-button>
-
-        <app-button [link]="'/estoque/gerar-relatorio'"
-            [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'" [disabled]="false">
+    
+        <app-button 
+            [link]="'./admin/estoque/gerar-relatorio'"
+            [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'"
+            [disabled]="false">
             Gerar Relatório de Estoque
         </app-button>
-
-        <app-button [link]="'/estoque/cadastrar-produto'"
-            [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'" [disabled]="false">
-            Cadastrar Novo Produto
+    
+        <app-button 
+            [link]="'./admin/estoque/cadastrar-ingrediente'"
+            [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'"
+            [disabled]="false">
+            Cadastrar Novo Ingrediente
         </app-button>
     </div>
-
+    
 
 </app-sidebar>

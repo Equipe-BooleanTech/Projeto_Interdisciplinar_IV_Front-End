@@ -12,7 +12,7 @@
       </li>
     </ul>
     <!-- Métricas -->
-    <span class="text-lg font-bold">{{ tableConfig.metrics }}</span>
+    <span class="text-lg font-bold ">{{ tableConfig.metrics }}</span>
   </div>
   <div class="w-full h-[2px] my-2 bg-gray-300"></div>
   <div class="w-full flex justify-center items-center my-4">
@@ -30,19 +30,19 @@
           </th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let dataItem of tableConfig.data; let i = index" class="bg-white border-b">
-          <td *ngFor="let key of tableConfig.rowOrder" class="px-6 py-4">
-            <!-- Check the type of the component -->
-            <button *ngIf="dataItem.componentType[i] === 'button'" class="bg-primary">
-              {{ dataItem.rowData[key] }}
-            </button>
-            <span *ngIf="dataItem.componentType[i] === 'text'">
-                {{ dataItem.rowData[key] }}
-            </span>
-          </td>
-        </tr>
-      </tbody>
+    <tbody>
+      <tr *ngFor="let dataItem of tableConfig.data; let i = index" class="bg-white border-b">
+        <td *ngFor="let key of tableConfig.rowOrder; let j = index" class="px-6 py-4">
+          <button *ngIf="dataItem.componentType[j] === 'button'" class="bg-primary px-4 py-2 rounded-md text-white">
+            {{ dataItem.rowData[key] }}
+          </button>
+          <span *ngIf="dataItem.componentType[j] === 'text'">
+            {{ dataItem.rowData[key] }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+
     <tfoot class="bg-[#74031820]">
       <tr>
         <td colspan="100%" class="p-2 text-right">
