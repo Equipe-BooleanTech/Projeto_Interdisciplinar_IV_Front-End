@@ -12,12 +12,12 @@ import {
     IngredientesComponent,
     LoginComponent,
     NotFoundComponent,
-    OrdersComponent,
-    PainelContadorComponent,
+    //OrdersComponent,
+    //PainelContadorComponent,
     StockControlComponent,
+    DashFornecedoresComponent,
+    DashIngredientesComponent,
 } from '@presentation/view/pages';
-import { DashFornecedoresComponent } from '@presentation/view/pages/admin/stock-control/fornecedor/dash-fornecedores/dash-fornecedores.component';
-import { DashIngredientesComponent } from '@presentation/view/pages/admin/stock-control/ingredientes/dash-ingredientes/dash-ingredientes.component';
 
 export const routes: Routes = [
     { path: '', component: HomepageComponent },
@@ -30,13 +30,20 @@ export const routes: Routes = [
     },
 
     { path: 'admin/controle-caixa', component: CashFlowComponent },
-    {
+   /* 
+   {
         path: 'admin/controle-caixa/painel-contador',
         component: PainelContadorComponent,
     },
+    */
     { path: 'admin/colaboradores', component: ColaboradorComponent },
     { path: 'admin/estoque', component: StockControlComponent },
-    { path: 'admin/estoque/fichas-tecnicas', component: FichasTecnicasComponent},
+    /*
+    {
+        path: 'admin/estoque/fichas-tecnicas',
+        component: FichasTecnicasComponent,
+    },
+    */
     {
         path: 'admin/estoque/fichas-tecnicas/grupo-fichas',
         component: GrupoFichasComponent,
@@ -55,7 +62,7 @@ export const routes: Routes = [
         component: IngredientesComponent,
     },
     {
-        path: 'admin/estoque/fornecedor/dash-fornecedores',
+        path: 'admin/estoque/fornecedores',
         component: DashFornecedoresComponent,
     },
     {
@@ -63,7 +70,7 @@ export const routes: Routes = [
         component: DashIngredientesComponent,
     },
 
-    { path: 'admin/pedidos', component: OrdersComponent },
+    //{ path: 'admin/pedidos', component: OrdersComponent },
 
     { path: '**', component: NotFoundComponent },
 ];
