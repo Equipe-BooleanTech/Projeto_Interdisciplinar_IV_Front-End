@@ -29,7 +29,6 @@
               [percentageChange]="1.20" 
               [isPositive]="true" metricTitle="Fichas Cadastradas">
             </app-card>
-            
         </div>
     </div>
 
@@ -55,6 +54,10 @@
             [disabled]="false">
             Cadastrar Novo Ingrediente
         </app-button>
+    </div>
+
+    <div class="flex justify-center items-center mx-auto w-full">
+        <app-pie class="w-full h-full flex m-auto justify-center items-center" [options]="data" [metrics]="metrics" [id]="'stock-chart'"></app-pie>
     </div>
     
 
