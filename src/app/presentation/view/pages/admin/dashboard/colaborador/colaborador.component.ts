@@ -26,10 +26,11 @@ export class ColaboradorComponent {
         rowOrder: ['name', 'role', 'status', 'lastAccess', 'action'],
         title: 'Colaboradores Cadastrados e Status',
         filters: [
-            { isActive: true, text: 'Ativo' },
-            { isActive: false, text: 'Inativo' },
+            { isActive: true, text: 'Todos' },
+            { isActive: false, text: 'Ativos' },
+            { isActive: false, text: 'Inativos' },
         ],
-        metrics: 'Total: 4 items, 3 Active, 1 Inactive',
+        metrics: 'Total: 4 colaboradores, 3 ativos, 1 inativo',
         header: ['Nome', 'Função', 'Status', 'Data de Último Acesso', 'Ações'],
         data: [
             {

@@ -4,7 +4,7 @@ import {
     CashFlowComponent,
     ColaboradorComponent,
     DashboardComponent,
-    FichasTecnicasComponent,
+    //FichasTecnicasComponent,
     FormFichaComponent,
     FornecedorComponent,
     GrupoFichasComponent,
