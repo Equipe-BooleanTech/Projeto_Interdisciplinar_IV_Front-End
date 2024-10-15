@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
+import { LineColumnChartOptions, LineColumnMetrics } from '@domain/interfaces';
 import { CardComponent } from '@presentation/view/components';
 import { LineColumnComponent } from '@presentation/view/components/chart';
 import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
-import { LineColumnChartOptions, LineColumnMetrics } from '@domain/interfaces';
 
 @Component({
     selector: 'app-cash-flow',
@@ -25,16 +25,16 @@ export class CashFlowComponent {
         colors: ['#A21420', '#FDBA8C'],
         series: [
             {
-                name: 'Fauramento Total',
+                name: 'Faturamento Total',
                 color: '#A21420',
                 data: [
                     { x: 'Segunda-feira', y: 250 },
-                    { x: 'Tue', y: 122 },
-                    { x: 'Wed', y: 63 },
-                    { x: 'Thu', y: 421 },
-                    { x: 'Fri', y: 122 },
-                    { x: 'Sat', y: 323 },
-                    { x: 'Sun', y: 111 },
+                    { x: 'Terça-feira', y: 122 },
+                    { x: 'Quarta-feira', y: 63 },
+                    { x: 'Quinta-feira', y: 421 },
+                    { x: 'Sexta-feira', y: 122 },
+                    { x: 'Sábado', y: 323 },
+                    { x: 'Domingo', y: 111 },
                 ],
             },
             {
@@ -42,15 +42,15 @@ export class CashFlowComponent {
                 color: '#FDBA8C',
                 data: [
                     { x: 'Segunda-feira', y: 500 },
-                    { x: 'Tue', y: 113 },
-                    { x: 'Wed', y: 341 },
-                    { x: 'Thu', y: 224 },
-                    { x: 'Fri', y: 522 },
-                    { x: 'Sat', y: 411 },
-                    { x: 'Sun', y: 243 },
+                    { x: 'Terça-feira', y: 113 },
+                    { x: 'Quarta-feira', y: 341 },
+                    { x: 'Quinta-feira', y: 224 },
+                    { x: 'Sexta-feira', y: 522 },
+                    { x: 'Sábado', y: 411 },
+                    { x: 'Domingo', y: 243 },
                 ],
             },
-        ],
+        ],            
         chart: {
             type: 'bar',
             height: '100%',
