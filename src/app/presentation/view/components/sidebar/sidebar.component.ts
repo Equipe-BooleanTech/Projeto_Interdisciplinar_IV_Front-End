@@ -23,6 +23,7 @@ export class SidebarComponent implements OnInit {
         this.setViewHeight();
         this.isOpen$.subscribe((isOpen) => {
             this.isShowing = isOpen;
+            this.setViewHeight();
         });
     }
 

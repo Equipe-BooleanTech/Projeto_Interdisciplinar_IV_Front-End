@@ -86,7 +86,7 @@ export interface PieChartOptions {
     series: number[];
     colors: string[];
     chart: {
-        height: number;
+        height: string;
         width: string;
         type: string;
     };

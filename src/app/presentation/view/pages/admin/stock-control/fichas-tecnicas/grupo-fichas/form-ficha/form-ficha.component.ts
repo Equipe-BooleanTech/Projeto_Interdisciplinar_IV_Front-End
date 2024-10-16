@@ -64,4 +64,6 @@ export class FormFichaComponent implements OnInit {
     goBack() {
         console.log('Go back');
     }
+
+    // merge 
 }

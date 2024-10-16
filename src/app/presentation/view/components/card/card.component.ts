@@ -17,6 +17,8 @@ export class CardComponent {
     @Input() isPositive: boolean = false;
     @Input() metricTitle: string = '';
     @Input() metric: string = '';
+    @Input() image!: string; // Definindo a propriedade de entrada 'image'
+    @Input() buttonText!: string;
 
     @Output() handlePropertyChange = new EventEmitter<{
         key: string;

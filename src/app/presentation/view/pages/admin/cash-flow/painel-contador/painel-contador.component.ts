@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LineColumnChartOptions, LineColumnMetrics } from '@domain/interfaces';
-import { CardComponent, SidebarComponent } from '@presentation/view/components';
+import { ButtonComponent, CardComponent, SidebarComponent } from '@presentation/view/components';
 import { LineColumnComponent } from '@presentation/view/components/chart';
 
 interface ChartData {
@@ -15,7 +15,7 @@ interface ChartData {
 @Component({
     selector: 'app-painel-contador',
     standalone: true,
-    imports: [SidebarComponent, LineColumnComponent, CardComponent],
+    imports: [SidebarComponent, LineColumnComponent, CardComponent, ButtonComponent],
     templateUrl: './painel-contador.component.html',
     styles: ``,
 })

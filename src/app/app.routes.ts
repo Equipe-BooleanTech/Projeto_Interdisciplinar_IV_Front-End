@@ -4,7 +4,10 @@ import {
     CashFlowComponent,
     ColaboradorComponent,
     DashboardComponent,
-    FichasTecnicasComponent,
+    DashFornecedoresComponent,
+    DashIngredientesComponent,
+    FinancasComponent,
+    //FichasTecnicasComponent,
     FormFichaComponent,
     FornecedorComponent,
     GrupoFichasComponent,
@@ -12,12 +15,12 @@ import {
     IngredientesComponent,
     LoginComponent,
     NotFoundComponent,
-    OrdersComponent,
-    PainelContadorComponent,
+    NovaFinancaComponent,
+    //OrdersComponent,
+    //PainelContadorComponent,
     StockControlComponent,
+    UltimasTransacoesComponent,
 } from '@presentation/view/pages';
-import { DashFornecedoresComponent } from '@presentation/view/pages/admin/stock-control/fornecedor/dash-fornecedores/dash-fornecedores.component';
-import { DashIngredientesComponent } from '@presentation/view/pages/admin/stock-control/ingredientes/dash-ingredientes/dash-ingredientes.component';
 
 export const routes: Routes = [
     { path: '', component: HomepageComponent },
@@ -30,13 +33,20 @@ export const routes: Routes = [
     },
 
     { path: 'admin/controle-caixa', component: CashFlowComponent },
-    {
+   /* 
+   {
         path: 'admin/controle-caixa/painel-contador',
         component: PainelContadorComponent,
     },
+    */
     { path: 'admin/colaboradores', component: ColaboradorComponent },
     { path: 'admin/estoque', component: StockControlComponent },
-    { path: 'admin/estoque/fichas-tecnicas', component: FichasTecnicasComponent},
+    /*
+    {
+        path: 'admin/estoque/fichas-tecnicas',
+        component: FichasTecnicasComponent,
+    },
+    */
     {
         path: 'admin/estoque/fichas-tecnicas/grupo-fichas',
         component: GrupoFichasComponent,
@@ -55,15 +65,27 @@ export const routes: Routes = [
         component: IngredientesComponent,
     },
     {
-        path: 'admin/estoque/fornecedor/dash-fornecedores',
+        path: 'admin/estoque/fornecedores',
         component: DashFornecedoresComponent,
     },
     {
         path: 'admin/estoque/ingredientes',
         component: DashIngredientesComponent,
     },
+    {
+        path: 'admin/controle-caixa/ultimas-transacoes',
+        component: UltimasTransacoesComponent,
+    },
+    {
+        path: 'admin/controle-caixa/financas',
+        component: FinancasComponent,
+    },
+    {
+        path: 'admin/controle-caixa/financas/nova-financa',
+        component: NovaFinancaComponent,
+    },
 
-    { path: 'admin/pedidos', component: OrdersComponent },
+    //{ path: 'admin/pedidos', component: OrdersComponent },
 
     { path: '**', component: NotFoundComponent },
 ];
