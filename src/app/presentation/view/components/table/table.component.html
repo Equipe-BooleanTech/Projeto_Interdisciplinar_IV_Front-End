@@ -1,6 +1,6 @@
 <div class="p-6">
   <h1 class="text-3xl font-bold mb-4">{{ tableConfig.title }}</h1>
-  <div class="flex justify-between items-center mb-4">
+  <div class="flex justify-between items-center mb-4 flex-wrap">
     <!-- Filtros -->
     <ul class="flex space-x-4">
       <li *ngFor="let filter of tableConfig.filters; let i = index">
@@ -12,7 +12,7 @@
       </li>
     </ul>
     <!-- Métricas -->
-    <span class="text-lg font-bold">{{ tableConfig.metrics }}</span>
+    <span class="text-lg font-bold ">{{ tableConfig.metrics }}</span>
   </div>
   <div class="w-full h-[2px] my-2 bg-gray-300"></div>
   <div class="w-full flex justify-center items-center my-4">

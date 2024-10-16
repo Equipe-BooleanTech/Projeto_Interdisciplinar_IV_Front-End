@@ -1,4 +1,5 @@
 export * from './button/button.component';
+export * from './chart'
 export * from './card/card.component';
 export * from './footer/footer.component';
 export * from './form/form.component';

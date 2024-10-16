@@ -1,23 +1,23 @@
 <app-sidebar>
-  <div class="w-full flex flex-col justify-center items-center ">
-    <h1 class="text-4xl font-bold text-center my-6">Cadastrar Novo Produto</h1>
+  <div class="w-full flex flex-col justify-center items-center">
+    <h1 class="text-4xl font-bold text-center my-6">Cadastrar Novo Ingrediente</h1>
     <p class="text-center my-4 w-full lg:w-1/2">Aqui você pode cadastrar um novo ingrediente para entrada no estoque.</p>
   </div>
 
-  <div class="flex justify-center border-2 border-[#740318] m-4 p-8">
+  <div class="flex justify-center border-2 border-[#740318] mx-auto rounded-md">
     <app-form [formGroup]="ingredientForm" (ngSubmit)="onSubmit()" class="w-full bg-white p-8 rounded-lg">
-      <ng-container *ngFor="let field of ingredientsFileds.fields">
+      <ng-container *ngFor="let field of ingredientFormFields.fields">
         <ng-container [ngSwitch]="field.component">
 
           <!-- Campo input -->
           <label *ngSwitchCase="'input'" [for]="field.id" class="block w-full my-2 text-sm font-medium">{{ field.label }}</label>
-          <input 
+          <app-form-input 
             *ngSwitchCase="'input'" 
-            [type]="field.type" 
+            [type]="field.type || 'text'" 
             [id]="field.id" 
-            [formControlName]="field.name" 
-            [placeholder]="field.placeholder" 
-            class="w-full my-2 border border-gray-300 p-3 rounded-lg min-h-[48px]" />
+            [formControlName]="field.name || ''" 
+            [placeholder]="field.placeholder || ''" 
+            class="w-full" />
           
           <div *ngIf="ingredientForm.get(field.name)?.invalid && ingredientForm.get(field.name)?.touched" class="h-6">
             <span *ngIf="field.validations && field.validations[0]" class="text-red-500">{{ field.validations[0].message }}</span>
@@ -29,7 +29,7 @@
             *ngSwitchCase="'select'" 
             [id]="field.name" 
             [formControlName]="field.name" 
-            class="w-full my-2 border border-gray-300 p-3 rounded-lg min-h-[48px]">
+            class="w-full form-select mt-1 outline-[#740318] border-2 border-[#740318] rounded-md shadow-sm focus:border-[#740318] focus:ring-[#740318] focus:ring-opacity-50">
             <option *ngFor="let option of field.options" [value]="option.value">{{ option.label }}</option>
           </select>
 

@@ -1,28 +1,34 @@
 <app-sidebar>
-    <app-form [formGroup]="form" (ngSubmit)="submit()" class="w-11/12  bg-white p-8 rounded-lg shadow-md">
-      <ng-container *ngFor="let field of config.fields">
+  <div class="w-full flex flex-col justify-center items-center">
+    <h1 class="text-4xl font-bold text-center my-6">Cadastrar Ficha Técnica</h1>
+    <p class="text-center my-4 w-full lg:w-1/2">Aqui você pode cadastrar uma ficha técnica.</p>
+  </div>
+
+  <div class="flex justify-center border-2 border-[#740318] w-11/12 mx-auto">
+<app-form [formGroup]="fichaForm" (ngSubmit)="submit()" class="w-full bg-white p-8 rounded-lg">
+      <ng-container *ngFor="let field of fichaFields.fields">
         <ng-container [ngSwitch]="field.component">
-          <div *ngSwitchCase="'input'" class="flex flex-col space-y-2">
-            <label [for]="field.name" class="text-gray-700 font-semibold">{{ field.placeholder }}</label>
-            <input [id]="field.name" [formControlName]="field.name" [type]="field.type"
-                   [placeholder]="field.placeholder"
-                   class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#740318]" />
+
+          <!-- Campo input para Nome do Fornecedor -->
+          <label *ngSwitchCase="'input'" [for]="field.name" class="block w-full my-2 text-sm font-medium">{{ field.label }}</label>
+          <app-form-input *ngSwitchCase="'input'" [type]="field.type" [id]="field.name" [formControlName]="field.name"
+            [placeholder]="field.placeholder" class="w-full my-2 border" />
+          
+          <div *ngIf="fichaForm.get(field.name)?.invalid && fichaForm.get(field.name)?.touched" class="h-6">
+            <span *ngIf="field.validations && field.validations[0]" class="text-red-500">
+              {{ field.validations[0].message }}
+            </span>
           </div>
+
+
         </ng-container>
-        <ng-container *ngIf="field.component === 'select'" class="flex flex-col space-y-2">
-          <label [for]="field.name" class="text-gray-700 font-semibold">{{ field.placeholder }}</label>
-          <select [id]="field.name" [formControlName]="field.name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#740318]">
-            <option *ngFor="let option of field.options" [value]="option.value">{{ option.label }}</option>
-          </select>
-          </ng-container>
-        
       </ng-container>
-      <div class="flex justify-end items-center">
-        <button type="submit"
-                class="py-2 px-4 bg-[#740318] hover:bg-[#740318c9] text-white font-semibold rounded-lg transition duration-300 ease-in-out"
-                [disabled]="!form.valid">
-          {{method === 'POST' ? 'Cadastrar Ficha' : 'Atualizar Ficha'}}
-        </button>
-      </div>
+
+      <button type="submit"
+        class="bg-[#740318] hover:bg-[#740318c9] disabled:bg-[#740318c9] text-white font-semibold py-3 px-4 w-full rounded transition ease-in-out duration-300 mt-4"
+        [disabled]="!fichaForm.valid">
+        Salvar ficha
+      </button>
     </app-form>
+  </div>
 </app-sidebar>

@@ -83,6 +83,12 @@ export const sidebarData: SidebarData = {
                     icon: 'icon-[clarity--form-line] p-4',
                     link: '/admin/estoque/fichas-tecnicas/',
                 },
+                {
+                    id: 43,
+                    title: 'Fornecedores',
+                    icon: 'icon-[game-icons--hand-truck] p-4',
+                    link: '/admin/estoque/fornecedores',
+                },
             ],
             isExpanded: false,
         },

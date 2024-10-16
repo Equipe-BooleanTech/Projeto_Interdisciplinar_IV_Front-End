@@ -1,11 +1,11 @@
-export const ingredientsFileds = {
+export const ingredientFields = {
     fields: [
         {
             component: 'input',
-            name: 'nameIngredient',
+            name: 'name',
             type: 'text',
             label: 'Nome do ingrediente: *',
-            id: 'fullName',
+            id: 'name',
             value: '',
             placeholder: 'Digite aqui o nome do ingrediente...',
             validations: [
@@ -19,6 +19,7 @@ export const ingredientsFileds = {
         {
             component: 'select',
             name: 'categorysupplier',
+            id: 'categorysupplier',
             label: 'Fornecedor: ',
             options: [
                 { value: '1', label: 'Gomes da Costa' },
@@ -34,9 +35,15 @@ export const ingredientsFileds = {
             type: 'desc',
             label: 'Descrição: *',
             id: 'description',
-            placeholder: 'Faça uma breve descrição do produto...',
+            placeholder: 'Faça uma breve descrição do ingrediente...',
             value: '',
-            validations: [],
+            validations: [
+                {
+                    name: 'required',
+                    message: 'Descrição é obrigatória',
+                    value: '',
+                },
+            ],
         },
         {
             component: 'input',
@@ -44,8 +51,8 @@ export const ingredientsFileds = {
             type: 'text',
             id: 'price',
             value: '',
-            placeholder: 'Digite o valor do produto...',
-            label: 'Empresa:',
+            placeholder: 'Digite o valor do ingrediente...',
+            label: 'Preço: ',
             validations: [],
         },
     ],
