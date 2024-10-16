@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import { Injectable } from '@angular/core';
 import {
-    Validators,
-    ValidatorFn,
     AbstractControl,
     ValidationErrors,
+    ValidatorFn,
+    Validators,
 } from '@angular/forms';
 
 @Injectable({
@@ -35,35 +35,31 @@ export class FormValidateService {
         switch (validation.name) {
             case 'required':
                 return (control: AbstractControl): ValidationErrors | null => {
-                    return Validators.required(control)
-                        ? { required: validation.message }
-                        : null;
+                    return control.value ? null : { required: validation.message };
                 };
             case 'min':
                 return (control: AbstractControl): ValidationErrors | null => {
-                    return Validators.min(validation.value as number)(control)
-                        ? { min: validation.message }
-                        : null;
+                    return control.value && control.value >= validation.value
+                        ? null
+                        : { min: validation.message };
                 };
             case 'max':
                 return (control: AbstractControl): ValidationErrors | null => {
-                    return Validators.max(validation.value as number)(control)
-                        ? { max: validation.message }
-                        : null;
+                    return control.value && control.value <= validation.value
+                        ? null
+                        : { max: validation.message };
                 };
             case 'email':
                 return (control: AbstractControl): ValidationErrors | null => {
                     return Validators.email(control)
-                        ? { email: validation.message }
-                        : null;
+                        ? null
+                        : { email: validation.message };
                 };
             case 'pattern':
                 return (control: AbstractControl): ValidationErrors | null => {
-                    return Validators.pattern(
-                        validation.value as RegExp | string,
-                    )(control)
-                        ? { pattern: validation.message }
-                        : null;
+                    return Validators.pattern(validation.value as RegExp | string)(control)
+                        ? null
+                        : { pattern: validation.message };
                 };
             default:
                 return (control: AbstractControl): ValidationErrors | null =>

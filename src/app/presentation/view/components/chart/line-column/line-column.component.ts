@@ -1,7 +1,6 @@
 import { Component, AfterViewInit, Input } from '@angular/core';
 import ApexCharts from 'apexcharts';
-import {  LineColumnChartOptions, LineColumnMetrics } from '@domain/interfaces';
-
+import { LineColumnChartOptions, LineColumnMetrics } from '@domain/interfaces';
 
 @Component({
     standalone: true,

@@ -1,8 +1,5 @@
 import { Observable } from 'rxjs';
-import {
-    InputSendLoginFormDto,
-    OutputSendLoginFormDto,
-} from '@domain/dtos';
+import { InputSendLoginFormDto, OutputSendLoginFormDto } from '@domain/dtos';
 
 export interface AuthRepository {
     sendCredentials(

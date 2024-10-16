@@ -15,7 +15,6 @@ export class SidebarComponent implements OnInit {
     isOpen$ = this._sidebarService.isOpen$;
     sidebarItems: SidebarItem[] = sidebarData.data;
     isShowing: boolean = true;
-    isSidebarExpanded: boolean = true;
     viewHeight = new BehaviorSubject<string | number>('100vh');
 
     constructor(private _sidebarService: SidebarService) {}
@@ -24,6 +23,7 @@ export class SidebarComponent implements OnInit {
         this.setViewHeight();
         this.isOpen$.subscribe((isOpen) => {
             this.isShowing = isOpen;
+            this.setViewHeight();
         });
     }
 
@@ -39,7 +39,7 @@ export class SidebarComponent implements OnInit {
         if (!item.isExpanded) {
             event.preventDefault();
         }
-        this.sidebarItems.reduce((previousState, currentItem) => {
+        this.sidebarItems.reduce((currentItem) => {
             if (currentItem !== item) {
                 currentItem.isExpanded = false;
             }

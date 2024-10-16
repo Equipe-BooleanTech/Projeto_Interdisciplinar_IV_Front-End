@@ -1,150 +1,67 @@
 <p align="center">
-  <img src="https://api.iconify.design/logos:angular-icon.svg" alt="Angular brand" width="100" height="100"/>
+  <img src="https://restaurantto-pdv.vercel.app/assets/logo.svg" alt="Logo do Restaurantto" width="100" height="100"/>
 </p>
 
-<h1 align="center">Angular Boilerplate</h1>
-
+<h1 align="center">Restaurantto - PDV + ERP para restaurantes</h1>
 <br>
 
 <p align='center'>
-  <a href="https://angularboilerplate.vercel.app/">Live site (Demo)</a>
+  <a href="https://restaurantto-pdv.vercel.app/">Site (Demo)</a>
 </p>
 
 <br>
 
-<p align='center'>
-  <strong>English</strong> |
-  <a href="https://https://github.com/Equipe-BooleanTech/restaurantto-app/blob/main/README.es-CO.md">Español</a>
-</p>
+O Restauranto nasceu da necessidade de automatizar processos em restaurantes e lanchonetes. Este sistema de gerenciamento foi projetado especificamente para atender às demandas desse setor, aumentando a produtividade de todos os envolvidos no restaurante: desde o chefe de cozinha, que cria e disponibiliza as receitas no cardápio, até o cliente, que pode acessar o menu digital e fazer pedidos diretamente pelo sistema.
 
-<br>
+## ⚗️ Tecnologias empregadas e funcionalidades
 
-This opinionated Angular starter focuses on the latest Angular features and best practices. It offers essential features for flexibility and scalability, minimizing unnecessary overhead. The codebase is lightweight yet robust, allowing developers to choose their preferred technologies like UI component libraries, state management, server-side rendering, etc. Its flexible boilerplate enables easy customization and adaptation to unique project requirements.
+### Tecnologias
 
-## ⚗️ Features
-
-- [Angular 16](https://angular.io/docs)
-- [PNPM](https://pnpm.io/), [esbuild](https://esbuild.github.io/)
-- [Standalone components](https://angular.io/guide/standalone-components)
-- [Signals](https://angular.io/guide/signals)
-- [Lazy loading](https://angular.io/guide/lazy-loading-ngmodules)
-- [PWA](https://angular.io/guide/service-worker-getting-started)
-- [I18n](https://ngneat.github.io/transloco/)
+- [Angular 18](https://angular.dev/)
+- [PWA (Em Breve!!)](https://angular.dev/ecosystem/service-workers/getting-started)
 - [TailwindCSS](https://tailwindcss.com/)
-- OS/Light/Dark themes
-- Lightweight, fast, and built using state-of-the-art technology.
+- [Cypress (Em Breve!!)](https://www.cypress.io/)
+-
 
-## ✅ Ready-to-use
+### Funcionalidades
 
-### UI Frameworks
+- [X] Componentes reutilizáveis, permitindo uma maior flexibilidade e fluidez na construção de páginas.
+- [X] Angular Router, permitindo um gerenciamento eficiente das rotas da aplicação.
+- [ ] Estruturação de uma arquitetura limpa, empregando boas práticas de desenvolvimento de software aplicadas ao Angular.
+- [ ] Segurança no intercâmbio de informações no sistema, separando-as entre diferentes atores e suas respectivas responsabilidades.
+- [ ] Responsividade e acessibilidade, permitindo a usuários de diferentes dispositivos acessarem a plataforma de forma fácil e eficiente.
+- [ ] Sistema rápido, performático e eficiente.
 
-- [TailwindCSS](https://tailwindcss.com/)
+### Ícones
 
-### Icons
+- [Iconify](https://iconify.design) - um compilado de ícones de diferentes provedores em um site unificado! [🔍Icônes](https://icones.netlify.app/).
+- [@iconify/tailwind](https://docs.iconify.design/usage/css/tailwind/) - Ícones CSS.
 
-- [Iconify](https://iconify.design) - use icons from any icon sets [🔍Icônes](https://icones.netlify.app/).
-- [@iconify/tailwind](https://docs.iconify.design/usage/css/tailwind/) - Pure CSS icons.
+## ⚙ Pré-requisitos
 
-### Add-ons
+- [Node.js](https://nodejs.org/en/)
+- Docker (opcional): <https://www.docker.com/>
 
-- <https://github.com/ngneat/transloco>
-- <https://github.com/tailwindlabs/tailwindcss>
-  - <https://github.com/tailwindlabs/tailwindcss-aspect-ratio>
-  - <https://github.com/tailwindlabs/tailwindcss-forms>
-  - <https://github.com/tailwindlabs/tailwindcss-typography>
-  - <https://github.com/tailwindlabs/prettier-plugin-tailwindcss>
-- <https://github.com/iconify/iconify>
-  - <https://github.com/iconify/iconify/tree/main/plugins/tailwind>
+## 🏹 Contribuições
 
-## ⚙ Prerequisites
+Contribuições serão sempre bem-vindas! Para começar, leia o regulamento (em breve) execute os passos abaixo!
 
-- Node.js ([^16.14.0 || ^18.10.0](https://angular.io/guide/versions)): <https://nodejs.org/en/>
-- PNPM: <https://pnpm.io/>
-- Docker (optional): <https://www.docker.com/>
+###
 
-## 🏹 Start development
-
-> **Note:**
-> You have three options to start a new project based on this template:
->
-> 1. Create a new GitHub repository from this template.
-> 2. Clone this repository to start with a clean git history.
-> 3. Scaffold a project fork on StackBlitz.
-
-### Using the GitHub template
-
-[Create a repo from this template on GitHub](https://https://github.com/Equipe-BooleanTech/restaurantto-app/generate).
-
----
-
-### Cloning the repository locally
-
-```sh
-npx degit Equipe-BooleanTech/restaurantto-app my-app && cd my-app && ./scripts/rename_project.sh my-app
+```
+  git clone https://github.com/HenriqueCosta05/Restaurantto-frontend
 ```
 
-### Install dependencies
+### Instalar dependências
 
-```sh
-pnpm install # run `npm install -g pnpm` if you don't have pnpm installed
+```
+  npm install
 ```
 
-### Run project
+### Executar o projeto
 
-```sh
-pnpm dev
+```
+npm run dev
 ```
 
 ---
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/Equipe-BooleanTech/restaurantto-app)
-
-## 📝 Checklist
-
-Please review this checklist and modify it as necessary to meet your project requirements.
-
-- [ ] Run the `./scripts/rename_project.sh` script to rename the project.
-- [ ] Change the title in `src/index.html` and the favicon in `src/favicon.ico` to match your project.
-- [ ] Decide whether to continue using [simple-git-hooks](https://github.com/toplenboren/simple-git-hooks) and [lint-staged](https://github.com/okonet/lint-staged) for your project.
-- [ ] Clean up the README file to provide clear instructions about your project.
-- [ ] Modify the pages in the project to meet your specific requirements.
-
-## 📦 Deploy to Vercel
-
-[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://https://github.com/Equipe-BooleanTech/restaurantto-app)
-
-## 📦 Deploy to Netlify
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://https://github.com/Equipe-BooleanTech/restaurantto-app)
-
-## 🐳 Docker
-
-Create an image of the project.
-
-```sh
-docker buildx build -t restaurantto-app:latest .
-```
-
-Run the image of the project.
-
-```sh
-docker run --rm -p 8080:80 -d restaurantto-app:latest
-```
-
-## 🧙‍♂️ Commands
-
-| Command         | Description                                              | npm                     | yarn                 | pnpm                 |
-| --------------- | -------------------------------------------------------- | ----------------------- | -------------------- | -------------------- |
-| `dev`           | Starts the development server                            | `npm run dev`           | `yarn dev`           | `pnpm dev`           |
-| `dev:host`      | Starts the development server with a custom host         | `npm run dev`           | `yarn dev`           | `pnpm dev`           |
-| `build`         | Builds the production code                               | `npm run build`         | `yarn build`         | `pnpm build`         |
-| `watch`         | Builds the production code and watches for changes       | `npm run watch`         | `yarn watch`         | `pnpm watch`         |
-| `test`          | Runs the unit tests                                      | `npm run test`          | `yarn test`          | `pnpm test`          |
-| `test:e2e`      | Open Cypress                                             | `npm run test`          | `yarn test`          | `pnpm test`          |
-| `test:headless` | Runs the unit tests in headless mode                     | `npm run test:headless` | `yarn test:headless` | `pnpm test:headless` |
-| `lint`          | Runs the linter                                          | `npm run lint`          | `yarn lint`          | `pnpm lint`          |
-| `lint:fix`      | Runs the linter and fixes any linting errors             | `npm run lint:fix`      | `yarn lint:fix`      | `pnpm lint:fix`      |
-| `lint:staged`   | Runs the linter on staged files                          | `npm run lint:staged`   | `yarn lint:staged`   | `pnpm lint:staged`   |
-| `stylelint`     | Runs the style linter                                    | `npm run stylelint`     | `yarn stylelint`     | `pnpm stylelint`     |
-| `stylelint:fix` | Runs the style linter and fixes any style linting errors | `npm run stylelint:fix` | `yarn stylelint:fix` | `pnpm stylelint:fix` |
-| `format`        | Formats the code with prettier                           | `npm run format`        | `yarn format`        | `pnpm format`        |

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarService } from '@infra/services';
+import { ButtonComponent } from '@presentation/view/components';
 
 @Component({
     selector: 'app-navbar',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, ButtonComponent],
     templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
