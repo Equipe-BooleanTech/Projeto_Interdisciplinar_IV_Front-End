@@ -24,6 +24,7 @@
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"],
     "paths": {
+      "@assets/*": ["src/assets/*"],
       "@data/*": ["src/app/data/*"],
       "@domain/*": ["src/app/domain/*"],
       "@infra/*": ["src/app/infra/*"],
