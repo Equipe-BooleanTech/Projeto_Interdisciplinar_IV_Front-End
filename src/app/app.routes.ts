@@ -18,6 +18,7 @@ import {
     StockControlComponent,
     UltimasTransacoesComponent,
 } from '@presentation/view/pages';
+import { TestComponent } from '@presentation/view/pages/shared/test/test.component';
 
 export const routes: Routes = [
     { path: '', component: HomepageComponent },
@@ -70,6 +71,10 @@ export const routes: Routes = [
     {
         path: 'admin/estoque/ingredientes',
         component: DashIngredientesComponent,
+    },
+    {
+        path: 'teste',
+        component: TestComponent,
     },
 
     { path: '**', component: NotFoundComponent },
