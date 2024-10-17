@@ -1,7 +1,7 @@
-<section class="lg:flex h-screen min-h-screen z-20" [style.height.px]="viewHeight | async">
+<section class="lg:flex">
   <!-- Sidebar -->
   <div
-    class="bg-[#741308] text-white font-semibold flex-col transition-all duration-300 h-full overflow-y-auto hidden w-64 lg:flex" id="sidebar"> 
+    class="bg-primary sticky top-0 text-white font-semibold h-screen overflow-y-auto hidden w-64 lg:block" id="sidebar"> 
     <div class="flex items-center justify-between p-4">
     </div>
     <nav class="flex-1 px-2 py-4 space-y-2">
@@ -28,7 +28,7 @@
   <!--Mobile -->
   <div class="lg:hidden fixed inset-0 z-30 bg-[#741308] text-white font-semibold flex-col transition-all duration-300 h-full w-64 overflow-y-auto drop-shadow-xl"
       [ngClass]="isShowing ? 'flex' : 'hidden'"
-      *ngIf="isOpen$ && isShowing">
+      *ngIf="isShowing">
       <div class="flex items-center justify-between p-4">
           <button (click)="closeMobileSidebar()" (keyup.enter)="closeMobileSidebar()" tabindex="0"
               class="focus:outline-none">

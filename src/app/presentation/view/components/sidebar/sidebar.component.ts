@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
 import { sidebarData } from '@domain/static/data';
 import { SidebarItem } from '@domain/static/interfaces';
 import { SidebarService } from '@domain/static/services';
@@ -11,20 +11,30 @@ import { BehaviorSubject } from 'rxjs';
     templateUrl: './sidebar.component.html',
     imports: [CommonModule],
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
     isOpen$ = this._sidebarService.isOpen$;
     sidebarItems: SidebarItem[] = sidebarData.data;
     isShowing: boolean = true;
     viewHeight = new BehaviorSubject<string | number>('100vh');
+    private resizeObserver: ResizeObserver | undefined;
 
-    constructor(private _sidebarService: SidebarService) {}
+    constructor(private _sidebarService: SidebarService, private elRef: ElementRef) {}
 
     ngOnInit(): void {
-        this.setViewHeight();
         this.isOpen$.subscribe((isOpen) => {
             this.isShowing = isOpen;
-            this.setViewHeight();
+            this.getScreenHeight();
         });
+    }
+
+    ngAfterViewInit(): void {
+        
+    }
+
+    ngOnDestroy(): void {
+        if (this.resizeObserver) {
+            this.resizeObserver.disconnect();
+        }
     }
 
     openMobileSidebar(): void {
@@ -55,7 +65,7 @@ export class SidebarComponent implements OnInit {
         return '';
     }
 
-    setViewHeight(): void {
-        this.viewHeight.next(document.body.scrollHeight);
+    getScreenHeight(): string {
+        return document.body.style.height;
     }
 }

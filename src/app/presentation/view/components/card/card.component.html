@@ -1,4 +1,4 @@
-<div class="border-2 border-[#740310] rounded-lg w-full xl:w-96 xl:h-64 xl:mx-8 xl:my-4 mx-auto p-6" *ngIf="!isDemographic">
+<div class="border-2 border-[#740310] rounded-lg w-full xl:w-96 xl:h-64 xl:mx-8 xl:my-4 mx-auto p-6" *ngIf="!isDemographic && !hasRedirection">
   <div class="flex flex-col h-full">
     
     <div class="flex xl:justify-between justify-center items-center">
@@ -29,6 +29,23 @@
       </span>
       <span class="text-xs ml-2 text-gray-500">Comparado à semana anterior</span>
     </div>
+  </div>
+</div>
+
+<div class="border border-primary rounded-md shadow-md w-full overflow-hidden max-w-sm" *ngIf="hasRedirection">
+  <!-- Imagem -->
+  <div class="image-container">
+    <img src="../../../../../assets/section-01-layout.svg" class="w-full object-cover"/>
+  </div>
+  <!-- Título -->
+  <div class="text-container p-4 text-center">
+    <h3 class="text-lg font-semibold">Grupo de Fichas 1</h3>
+  </div>
+  <!-- Botão-->
+  <div class="button-container text-center mb-4">
+    <button class="bg-primary text-white px-4 py-2 rounded-md hover:bg-red-900">
+      Visualizar fichas
+    </button>
   </div>
 </div>
 
