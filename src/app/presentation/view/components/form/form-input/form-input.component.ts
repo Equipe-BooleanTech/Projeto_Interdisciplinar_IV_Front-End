@@ -23,8 +23,8 @@ import {
     imports: [NgClass],
 })
 export class FormInputComponent implements ControlValueAccessor {
-    @Input() type: string = 'text';
-    @Input() placeholder: string = '';
+    @Input() type?: string = 'text';
+    @Input() placeholder?: string = '';
     @Input() id!: string;
     @Input() control!: FormControl;
     @Input() value: string = '';

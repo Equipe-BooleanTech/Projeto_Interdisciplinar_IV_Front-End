@@ -4,6 +4,9 @@ import {
     CashFlowComponent,
     ColaboradorComponent,
     DashboardComponent,
+    DashFornecedoresComponent,
+    DashIngredientesComponent,
+    FinancasComponent,
     FormFichaComponent,
     FornecedorComponent,
     GrupoFichasComponent,
@@ -11,11 +14,9 @@ import {
     IngredientesComponent,
     LoginComponent,
     NotFoundComponent,
+    NovaFinancaComponent,
     StockControlComponent,
-    DashFornecedoresComponent,
-    FinancasComponent,
     UltimasTransacoesComponent,
-    DashIngredientesComponent,
 } from '@presentation/view/pages';
 
 export const routes: Routes = [
@@ -35,6 +36,10 @@ export const routes: Routes = [
     {
         path: 'admin/controle-caixa/financas',
         component: FinancasComponent,
+    },
+    {
+        path: 'admin/controle-caixa/financas/nova-financa',
+        component: NovaFinancaComponent,
     },
     { path: 'admin/controle-caixa', component: CashFlowComponent },
 
