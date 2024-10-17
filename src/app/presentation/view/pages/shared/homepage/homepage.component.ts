@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Homepage } from '@domain/static/interfaces';
+import { homeData } from '@domain/static/data';
 import {
     BannerLayoutComponent,
     FormLayoutComponent,
     SectionLayoutComponent,
 } from '.';
-import { homeData } from '@infra/data';
-import { DataTransferService } from '@infra/services';
-import { Homepage } from '@domain/interfaces';
 import { FooterComponent } from '../../../components/footer/footer.component';
+import { DataTransferService } from '@domain/static/services';
 
 @Component({
     selector: 'app-homepage',

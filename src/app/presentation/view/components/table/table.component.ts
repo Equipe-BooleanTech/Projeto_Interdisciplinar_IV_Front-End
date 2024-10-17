@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import {  TableConfig } from '@domain/interfaces';
+import { TableConfig } from '@domain/static/interfaces';
 
 @Component({
     selector: 'app-table',

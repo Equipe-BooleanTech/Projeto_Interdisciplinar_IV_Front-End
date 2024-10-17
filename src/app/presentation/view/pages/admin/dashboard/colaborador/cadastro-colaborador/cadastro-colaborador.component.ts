@@ -6,8 +6,8 @@ import {
     ReactiveFormsModule,
     ValidatorFn,
 } from '@angular/forms';
-import { collaboratorFields } from '@infra/data';
-import { FormValidateService } from '@infra/services';
+import { collaboratorFields } from '@domain/static/data';
+import { FormValidateService } from '@domain/static/services';
 import {
     ButtonComponent,
     FormComponent,

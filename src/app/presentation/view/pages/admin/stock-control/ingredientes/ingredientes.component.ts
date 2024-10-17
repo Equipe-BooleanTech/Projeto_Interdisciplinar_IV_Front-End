@@ -6,8 +6,8 @@ import {
     ReactiveFormsModule,
     ValidatorFn,
 } from '@angular/forms';
-import { ingredientFields } from '@infra/data';
-import { FormValidateService } from '@infra/services';
+import { ingredientFields } from '@domain/static/data';
+import { FormValidateService } from '@domain/static/services';
 import {
     ButtonComponent,
     FormComponent,

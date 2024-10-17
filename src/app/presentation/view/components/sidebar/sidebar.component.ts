@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { sidebarData } from '@infra/data';
+import { Component, OnInit } from '@angular/core';
+import { sidebarData } from '@domain/static/data';
+import { SidebarItem } from '@domain/static/interfaces';
+import { SidebarService } from '@domain/static/services';
 import { BehaviorSubject } from 'rxjs';
-import { SidebarItem } from '@domain/interfaces';
-import { SidebarService } from '@infra/services';
 
 @Component({
     standalone: true,

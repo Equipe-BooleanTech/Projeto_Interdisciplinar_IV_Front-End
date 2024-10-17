@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PieChartOptions, PieMetrics } from '@domain/interfaces';
+import { PieChartOptions, PieMetrics } from '@domain/static/interfaces';
 
 @Component({
     selector: 'app-pie',

@@ -3,7 +3,7 @@ import {
     LineColumnChartOptions,
     LineColumnMetrics,
     TableConfig,
-} from '@domain/interfaces';
+} from '@domain/static/interfaces';
 import {
     CardComponent,
     SidebarComponent,

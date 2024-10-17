@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TableConfig } from '@domain/interfaces';
+import { TableConfig } from '@domain/static/interfaces';
 import {
     ButtonComponent,
     SidebarComponent,

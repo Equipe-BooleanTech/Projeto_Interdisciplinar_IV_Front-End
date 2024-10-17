@@ -1,3 +1,4 @@
-export interface UseCase<Request, Response> {
-    execute(request: Request): Promise<Response>;
+import { Observable } from 'rxjs';
+export interface UseCase<S, T> {
+    execute(params: S): Observable<T>;
 }

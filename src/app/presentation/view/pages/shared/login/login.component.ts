@@ -11,24 +11,26 @@ import {
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
-import { InputSendLoginFormDto } from '@domain/usecases/shared/authenticate/InputSendLoginFormDto/InputSendLoginFormDto';
-import { OutputSendLoginFormDto } from '@domain/usecases/shared/authenticate/OutputSendLoginFormDto/OutputSendLoginFormDto';
-import { AuthService } from '@infra/services';
-import { ButtonComponent, FormComponent } from '@presentation/view/components';
+import { InputSendLoginFormDto, OutputSendLoginFormDto } from '@domain/dtos';
+import { AuthenticateUseCase } from '@domain/usecases';
+import {
+    ButtonComponent,
+    FormComponent,
+    FooterComponent,
+} from '@presentation/view/components';
 import { FormInputComponent } from '@presentation/view/components/form';
-import { FooterComponent } from "../../../components/footer/footer.component";
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     imports: [
-    FormComponent,
-    FormInputComponent,
-    ReactiveFormsModule,
-    CommonModule,
-    ButtonComponent,
-    FooterComponent
-],
+        FormComponent,
+        FormInputComponent,
+        ReactiveFormsModule,
+        CommonModule,
+        ButtonComponent,
+        FooterComponent,
+    ],
     standalone: true,
 })
 export class LoginComponent implements OnInit {
@@ -36,7 +38,7 @@ export class LoginComponent implements OnInit {
 
     constructor(
         private _formBuilder: FormBuilder,
-        private _authService: AuthService,
+        private _authService: AuthenticateUseCase,
     ) {}
     config = {
         fields: [

@@ -1,16 +1,11 @@
 import { Component } from '@angular/core';
-import { LineColumnChartOptions, LineColumnMetrics } from '@domain/interfaces';
+import {
+    LineColumnChartOptions,
+    LineColumnMetrics,
+} from '@domain/static/interfaces';
 import { CardComponent, SidebarComponent } from '@presentation/view/components';
 import { LineColumnComponent } from '@presentation/view/components/chart';
 
-interface ChartData {
-    grossAmount: number;
-    shortDescription: string;
-    metric: string;
-    title: string;
-    total: number;
-    average: number;
-}
 
 @Component({
     selector: 'app-painel-contador',

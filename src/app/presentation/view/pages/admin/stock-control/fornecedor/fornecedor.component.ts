@@ -6,8 +6,8 @@ import {
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
-import { supplierFileds } from '@infra/data';
-import { FormValidateService } from '@infra/services';
+import { supplierFileds } from '@domain/static/data';
+import { FormValidateService } from '@domain/static/services';
 import {
     ButtonComponent,
     FormComponent,
@@ -32,7 +32,7 @@ import { FormInputComponent } from '@presentation/view/components/form';
 export class FornecedorComponent implements OnInit {
     supplierForm: FormGroup = new FormGroup({});
     suppliersFields = supplierFileds;
-collaboratorForm: any;
+    collaboratorForm: any;
 
     constructor(
         private _fb: FormBuilder,

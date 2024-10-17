@@ -7,23 +7,23 @@ import {
     ReactiveFormsModule,
     ValidatorFn,
 } from '@angular/forms';
-import { Homepage } from '@domain/interfaces';
 import {
     InputSendProspectionFormDto,
     OutputSendProspectionFormDto,
-} from '@domain/usecases/prospection';
-import { prospectionFields } from '@infra/data/static';
+} from '@domain/dtos';
+import { prospectionFields } from '@domain/static/data';
+import { Homepage } from '@domain/static/interfaces';
 import {
     DataTransferService,
     FormValidateService,
-    ProspectionService,
-} from '@infra/services';
+} from '@domain/static/services';
+import { SendProspectionFormUseCase } from '@domain/usecases/prospection';
 import { ButtonComponent } from '@presentation/view/components';
 import {
+    FormComponent,
     FormInputComponent,
     FormSelectComponent,
     FormTextareaComponent,
-    FormComponent,
 } from '@presentation/view/components/form';
 import { catchError, of } from 'rxjs';
 
@@ -48,7 +48,7 @@ export class FormLayoutComponent implements OnInit {
     config = prospectionFields;
 
     constructor(
-        private _prospectionService: ProspectionService,
+        private _prospectionService: SendProspectionFormUseCase,
         private _formBuilder: FormBuilder,
         private _dataTransferService: DataTransferService,
         private _formValidateService: FormValidateService,

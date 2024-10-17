@@ -1,0 +1,17 @@
+<app-sidebar>
+
+    <h1 class="text-4xl font-bold text-center mb-8">Gerenciamento de Finanças</h1>
+    <h3 class="m-8 p-4 text-center">Crie um grupo de finanças e associe-as a um grupo,
+        permitindo um fácil gerenciamento das contas a pagar de seu restaurante.</h3>
+    <div class="flex justify-center space-x-4 mt-8">
+        <app-button [link]="'./admin/controle-caixa/financas/nova-financa'"
+            [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'" [disabled]="false">
+            Cadastrar Nova Finança
+        </app-button>
+        <app-button [link]="'./admin/controle-caixa/financas/relatorio-financa'"
+            [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'" [disabled]="false">
+            Gerar Relatório de Finanças
+        </app-button>
+    </div>
+
+</app-sidebar>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SidebarService } from '@infra/services';
 import { ButtonComponent } from '@presentation/view/components';
+import { SidebarService } from '@domain/static/services';
 
 @Component({
     selector: 'app-navbar',

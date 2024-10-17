@@ -6,10 +6,10 @@ import {
     ReactiveFormsModule,
     ValidatorFn,
 } from '@angular/forms';
-import { FormValidateService } from '@infra/services';
+import { fichaFormFields } from '@domain/static/data';
+import { FormValidateService } from '@domain/static/services';
 import { FormComponent, SidebarComponent } from '@presentation/view/components';
-import { FormInputComponent } from '../../../../../../components/form/form-input/form-input.component';
-import { fichaFormFields } from '@infra/data';
+import { FormInputComponent } from '@presentation/view/components/form';
 
 @Component({
     selector: 'app-form-ficha',
@@ -42,7 +42,7 @@ export class FormFichaComponent implements OnInit {
                         this._formValidateService.bindValidations(
                             field.validations?.map((validation) => ({
                                 ...validation,
-                                value: validation.name || '', 
+                                value: validation.name || '',
                             })) || [],
                         ),
                     ];
@@ -61,9 +61,9 @@ export class FormFichaComponent implements OnInit {
         }
     }
 
-    goBack() {
+    goBack(): void {
         console.log('Go back');
     }
 
-    // merge 
+    // merge
 }
