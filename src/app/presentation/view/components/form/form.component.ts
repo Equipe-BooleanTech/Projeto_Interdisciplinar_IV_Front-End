@@ -22,6 +22,9 @@ import { FormConfig } from '@domain/static/interfaces';
 export class FormComponent implements OnInit {
     @Input() config: FormConfig = { fields: [] };
     @Input() class: string = '';
+    @Input() formGroup!: FormGroup;
+    @Input() formControlName: string | undefined;
+    @Output() onSubmit = new EventEmitter<void>();
     @Output() submitForm = new EventEmitter<any>();
 
     form: FormGroup = this._formBuilder.group({});
