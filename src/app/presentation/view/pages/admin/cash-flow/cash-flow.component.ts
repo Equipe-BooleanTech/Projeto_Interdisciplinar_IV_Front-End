@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
-import { CardComponent } from '@presentation/view/components';
+import {
+    LineColumnChartOptions,
+    LineColumnMetrics,
+} from '@domain/static/interfaces';
+import { CardComponent, ButtonComponent } from '@presentation/view/components';
 import { LineColumnComponent } from '@presentation/view/components/chart';
 import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
-import { LineColumnChartOptions, LineColumnMetrics } from '@domain/interfaces';
 
 @Component({
     selector: 'app-cash-flow',
     standalone: true,
-    imports: [SidebarComponent, LineColumnComponent, CardComponent],
+    imports: [SidebarComponent, LineColumnComponent, CardComponent, ButtonComponent],
     templateUrl: './cash-flow.component.html',
     styles: ``,
 })

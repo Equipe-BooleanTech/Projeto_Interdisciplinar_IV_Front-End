@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { services } from '@infra/services';
+import { services } from '@domain/static/services';
 import {
     FooterComponent,
     NavbarComponent,

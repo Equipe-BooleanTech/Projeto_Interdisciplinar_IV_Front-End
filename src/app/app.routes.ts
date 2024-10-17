@@ -4,7 +4,6 @@ import {
     CashFlowComponent,
     ColaboradorComponent,
     DashboardComponent,
-    //FichasTecnicasComponent,
     FormFichaComponent,
     FornecedorComponent,
     GrupoFichasComponent,
@@ -12,10 +11,10 @@ import {
     IngredientesComponent,
     LoginComponent,
     NotFoundComponent,
-    //OrdersComponent,
-    //PainelContadorComponent,
     StockControlComponent,
     DashFornecedoresComponent,
+    FinancasComponent,
+    UltimasTransacoesComponent,
     DashIngredientesComponent,
 } from '@presentation/view/pages';
 
@@ -29,21 +28,19 @@ export const routes: Routes = [
         component: CadastroColaboradorComponent,
     },
 
-    { path: 'admin/controle-caixa', component: CashFlowComponent },
-   /* 
-   {
-        path: 'admin/controle-caixa/painel-contador',
-        component: PainelContadorComponent,
+    {
+        path: 'admin/controle-caixa/ultimas-transacoes',
+        component: UltimasTransacoesComponent,
     },
-    */
+    {
+        path: 'admin/controle-caixa/financas',
+        component: FinancasComponent,
+    },
+    { path: 'admin/controle-caixa', component: CashFlowComponent },
+
     { path: 'admin/colaboradores', component: ColaboradorComponent },
     { path: 'admin/estoque', component: StockControlComponent },
-    /*
-    {
-        path: 'admin/estoque/fichas-tecnicas',
-        component: FichasTecnicasComponent,
-    },
-    */
+
     {
         path: 'admin/estoque/fichas-tecnicas/grupo-fichas',
         component: GrupoFichasComponent,
@@ -69,8 +66,6 @@ export const routes: Routes = [
         path: 'admin/estoque/ingredientes',
         component: DashIngredientesComponent,
     },
-
-    //{ path: 'admin/pedidos', component: OrdersComponent },
 
     { path: '**', component: NotFoundComponent },
 ];

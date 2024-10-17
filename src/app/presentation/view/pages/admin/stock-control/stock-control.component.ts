@@ -1,10 +1,10 @@
-import { Component, AfterViewInit } from '@angular/core';
-import { PieChartOptions, PieMetrics } from '@domain/interfaces';
+import { AfterViewInit, Component } from '@angular/core';
+import { PieChartOptions, PieMetrics } from '@domain/static/interfaces';
 import {
     ButtonComponent,
     CardComponent,
-    SidebarComponent,
     PieComponent,
+    SidebarComponent,
 } from '@presentation/view/components';
 
 import ApexCharts from 'apexcharts';
