@@ -6,6 +6,7 @@ import {
     DashboardComponent,
     DashFornecedoresComponent,
     DashIngredientesComponent,
+    FichasTecnicasComponent,
     FinancasComponent,
     FormFichaComponent,
     FornecedorComponent,
@@ -50,6 +51,10 @@ export const routes: Routes = [
     {
         path: 'admin/estoque/fichas-tecnicas/grupo-fichas',
         component: GrupoFichasComponent,
+    },
+    {
+        path: 'admin/estoque/fichas-tecnicas',
+        component: FichasTecnicasComponent,
     },
     {
         path: 'admin/estoque/fichas-tecnicas/grupo-fichas/form-ficha',
