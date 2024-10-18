@@ -20,6 +20,8 @@ export class CardComponent {
     @Input() metricTitle: string = '';
     @Input() metric: string = '';
     @Input() link: string = '';
+    @Input() buttonText: string = '';
+    @Input() imgSrc: string = '';
 
     @Output() handlePropertyChange = new EventEmitter<{
         key: string;

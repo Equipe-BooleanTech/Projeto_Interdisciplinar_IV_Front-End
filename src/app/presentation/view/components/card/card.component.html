@@ -35,16 +35,16 @@
 <div class="border border-primary rounded-md shadow-md w-full overflow-hidden max-w-sm" *ngIf="hasRedirection">
   <!-- Imagem -->
   <div class="image-container">
-    <img src="../../../../../assets/section-01-layout.svg" class="w-full object-cover"/>
+    <img src="{{imgSrc}}" class="w-full object-cover" alt="idk"/>
   </div>
   <!-- Título -->
   <div class="text-container p-4 text-center">
-    <h3 class="text-lg font-semibold">Grupo de Fichas 1</h3>
+    <h3 class="text-lg font-semibold">{{title}}</h3>
   </div>
   <!-- Botão-->
   <div class="button-container text-center mb-4">
     <button class="bg-primary text-white px-4 py-2 rounded-md hover:bg-red-900">
-      Visualizar fichas
+      {{buttonText}}
     </button>
   </div>
 </div>
