@@ -1,1 +1,35 @@
-<p>fichas-tecnicas works!</p>
+<app-sidebar>
+
+    <h1 class="text-4xl font-bold text-center mb-8">Fichas Técnicas</h1>
+    <h3 class="m-8 p-4 text-center">Fichas técnicas permitem aos chefes de cozinha, fornecedores e gerentes o gerenciamento de pratos e seus respectivos ingredientes. 
+        Crie uma nova ficha ou um grupo de fichas!</h3>
+    <div class="flex justify-center space-x-4 mt-8">
+        <app-button [link]="'./admin/estoque/fichas-tecnicas/nova-ficha-tecnica'"
+            [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'" [disabled]="false">
+            Adicionar Nova Ficha Técnica
+        </app-button>
+        <app-button [link]="'./admin/estoque/fichas-tecnicas/novo-grupo-fichas-tecnicas'"
+            [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'" [disabled]="false">
+            Adicionar Novo Grupo de Fichas
+        </app-button>
+        
+    </div>
+    <div class="w-full min-h-96 flex justify-center items-center space-x-8">
+        <app-card [hasRedirection]="true" title="Massas" 
+                  imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcH-pQOXZlBSW2L_xJEzzkwtmUjUUP7wItQg&s" 
+                  [buttonText]="'Ver mais'" 
+                  class="w-64 h-64 object-cover"></app-card>
+    
+        <app-card [hasRedirection]="true" title="Proteinas" 
+                  imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDAm9A4uM8UdwNuqUwRnRz5b0jZDyLCLrVfQ&s" 
+                  [buttonText]="'Ver mais'" 
+                  class="w-64 h-64 object-cover"></app-card>
+    
+        <app-card [hasRedirection]="true" title="Verduras" 
+                  imgSrc="https://cdn-icons-png.flaticon.com/512/5346/5346400.png" 
+                  [buttonText]="'Ver mais'" 
+                  class="w-64 h-64 object-cover"></app-card>
+    </div>
+    
+
+</app-sidebar>

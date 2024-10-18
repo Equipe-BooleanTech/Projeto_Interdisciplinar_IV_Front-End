@@ -1,5 +1,12 @@
 <app-sidebar>
-    
+    <div class="flex justify-end items-center my-4">
+        <app-button
+        [link]="'./admin/estoque/cadastrar-fornecedor'"
+        [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'"
+        [disabled]="false">
+                Cadastrar Novo Fornecedor
+        </app-button>
+    </div>
     <app-table [tableConfig]="tabela">
         <app-button></app-button>
     </app-table>
