@@ -67,6 +67,9 @@ export class UltimasTransacoesComponent {
             },
         ],
         search: {
+            onSearch: (value: string) => {
+                console.log(value);
+            },
             placeholder: 'Buscar por Pedido',
             value: '',
         },

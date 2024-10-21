@@ -1,6 +1,7 @@
 export * from './button/button.component';
 export * from './chart'
 export * from './card/card.component';
+export * from './card-list/card-list.component';
 export * from './footer/footer.component';
 export * from './form/form.component';
 export * from './navbar/navbar.component';

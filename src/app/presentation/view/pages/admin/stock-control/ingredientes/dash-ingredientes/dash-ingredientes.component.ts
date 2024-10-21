@@ -112,6 +112,9 @@ export class DashIngredientesComponent {
         search: {
             placeholder: 'Buscar por ingrediente',
             value: '',
+            onSearch: (value: string) => {
+                console.log(value);
+            },
         },
         pagination: {
             pageRange: 10,

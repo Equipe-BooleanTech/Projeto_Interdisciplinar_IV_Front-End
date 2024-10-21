@@ -75,8 +75,11 @@ export class ColaboradorComponent {
             },
         ],
         search: {
-            placeholder: 'Search by name or role',
+            placeholder: 'Procure por nome ou função...',
             value: '',
+            onSearch: (value: string) => {
+                console.log(value);
+            },
         },
         pagination: {
             pageRange: 4,
