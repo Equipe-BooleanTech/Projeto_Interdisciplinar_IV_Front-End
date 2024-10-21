@@ -57,7 +57,7 @@ export const routes: Routes = [
         component: FichasTecnicasComponent,
     },
     {
-        path: 'admin/estoque/fichas-tecnicas/grupo-fichas/form-ficha',
+        path: 'admin/estoque/fichas-tecnicas/nova-ficha',
         component: FormFichaComponent,
     },
 

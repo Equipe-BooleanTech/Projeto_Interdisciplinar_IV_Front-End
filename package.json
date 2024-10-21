@@ -1,6 +1,6 @@
 {
   "name": "restaurantto-app",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Restaurantto App - Front-end System",
   "type": "module",
   "private": true,
