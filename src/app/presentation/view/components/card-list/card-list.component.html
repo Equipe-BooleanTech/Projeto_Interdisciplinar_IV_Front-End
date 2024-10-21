@@ -1,0 +1,23 @@
+<div class="p-6">
+    <h1 class="text-3xl font-bold mb-4">{{ cardListConfig.title }}</h1>
+    <div class="flex justify-between items-center mb-4 flex-wrap">
+        <!-- Filtros -->
+        <ul class="flex space-x-4">
+            <li *ngFor="let filter of cardListConfig.filters; let i = index">
+                <button [ngClass]="{
+                        'text-primary font-bold underline underline-offset-2': filter.isActive
+                    }" (click)="onFilterClick(filter)">
+                    {{ filter.text }}
+                </button>
+            </li>
+        </ul>
+        <!-- Métricas -->
+        <span class="text-lg font-bold ">{{ cardListConfig.metrics }}</span>
+    </div>
+    <div class="w-full h-[2px] my-2 bg-gray-300"></div>
+    <app-searchbar [searchBarConfig]="cardListConfig.search"></app-searchbar>
+    <!--Cards-->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full">
+        <app-card *ngFor="let card of cardListConfig.cards" [title]="card.heading" [buttonText]="card.buttonText" [link]="card.link" [imgSrc]="card.imgSrc" [hasRedirection]="true"></app-card>
+    </div>
+</div>

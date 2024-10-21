@@ -74,6 +74,9 @@ export class DashboardComponent {
         ],
         search: {
             placeholder: 'Buscar pedido',
+            onSearch: (value: string) => {
+                console.log(value);
+            },
             value: '',
         },
     };

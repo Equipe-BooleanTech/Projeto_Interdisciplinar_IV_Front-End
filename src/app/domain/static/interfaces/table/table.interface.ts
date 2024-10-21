@@ -16,6 +16,7 @@ export interface TableConfig<T> {
     search: {
         placeholder: string;
         value: string;
+        onSearch: (value: string) => void;
     };
     pagination: {
         pageRange: number;

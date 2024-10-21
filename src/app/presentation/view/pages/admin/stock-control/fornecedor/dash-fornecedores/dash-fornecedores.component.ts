@@ -23,9 +23,6 @@ import {
     styles: ``,
 })
 export class DashFornecedoresComponent {
-    TableConfig: any;
-    tableConfig: any;
-
     constructor() {}
 
     tabela: TableConfig<{
@@ -111,6 +108,9 @@ export class DashFornecedoresComponent {
         search: {
             placeholder: 'Buscar por fornecedor',
             value: '',
+            onSearch: (value: string) => {
+                console.log(value);
+            },
         },
         pagination: {
             pageRange: 10,
