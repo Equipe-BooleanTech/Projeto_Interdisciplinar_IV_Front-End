@@ -1,6 +1,7 @@
 import { NgClass, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ButtonComponent } from "../button/button.component";
+import { RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-card',

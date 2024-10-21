@@ -43,9 +43,9 @@
   </div>
   <!-- Botão-->
   <div class="button-container text-center mb-4">
-    <button class="bg-primary text-white px-4 py-2 rounded-md hover:bg-red-900">
+    <app-button class="px-4 py-2 rounded-md hover:bg-red-900" *ngIf="hasRedirection" [link]="link">
       {{buttonText}}
-    </button>
+    </app-button>
   </div>
 </div>
 

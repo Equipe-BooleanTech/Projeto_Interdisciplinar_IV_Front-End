@@ -1,5 +1,3 @@
-<a [href]="link" class="text-white no-underline">
-        <button [class]="class" [disabled]="disabled">
-            <ng-content></ng-content>
-        </button>
+<a [href]="link" [class]="class" [ngClass]="{ 'text-white bg-primary no-underline': true }" [attr.disabled]="disabled ? true : null">
+    <ng-content></ng-content>
 </a>
