@@ -1,18 +1,47 @@
 <app-sidebar>
     <h1 class="text-4xl font-bold text-center mb-8">Painel do Contador</h1>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div class="flex justify-end mb-4">
+        <app-button
+            [link]="'./admin/controle-caixa/ultimas-transacoes'"
+            [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'"
+            [disabled]="false">
+            Últimas Transações
+        </app-button>
+    </div>
 
-        <app-table [tableConfig]="tabela"></app-table>
+    <app-table [tableConfig]="tabela"></app-table>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 m-8">
 
         <div class="flex justify-evenly items-center">
             <app-pie class="w-full flex m-auto justify-center items-end"
-                    [options]="data"    
-                    [metrics]="metrics" 
-                    [id]="'stock-chart'"></app-pie>
-
+                [options]="data"
+                [metrics]="metrics"
+                [id]="'stock-chart'">
+            </app-pie>
         </div>
-        <app-card class="flex-1 max-w-xs mr-4" >
-        </app-card>
+
+        <div class="flex flex-col justify-between items-center">
+            <div class="flex flex-row justify-center gap-x-8 m-8 p-8">
+                <app-card 
+                    [hasRedirection]="true" 
+                    title="Relatórios mensais" 
+                    imgSrc="https://i.ibb.co/1RMHvDz/logo.jpg"
+                    [buttonText]="'Baixar PDF'" 
+                    class="w-64 h-64 object-cover">
+                </app-card>
+            
+                <app-card 
+                    [hasRedirection]="true" 
+                    title="Impostos e Gastos" 
+                    imgSrc="https://i.ibb.co/1RMHvDz/logo.jpg"
+                    [buttonText]="'Baixar PDF'" 
+                    class="w-64 h-64 object-cover">
+                </app-card>
+            </div>
+        </div>
+        
+
     </div>
 </app-sidebar>

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {
+    CardList,
     PieChartOptions,
     PieMetrics,
     TableConfig
@@ -8,13 +9,14 @@ import {
 import { ButtonComponent, CardComponent, SidebarComponent } from '@presentation/view/components';
 import { LineColumnComponent, PieComponent } from '@presentation/view/components/chart';
 import ApexCharts from 'apexcharts';
+import { CardListComponent } from "../../../../components/card-list/card-list.component";
 import { TableComponent } from "../../../../components/table/table.component";
 
 
 @Component({
     selector: 'app-painel-contador',
     standalone: true,
-    imports: [SidebarComponent, LineColumnComponent, CardComponent, TableComponent, PieComponent, CommonModule, ButtonComponent],
+    imports: [SidebarComponent, LineColumnComponent, CardComponent, TableComponent, PieComponent, CommonModule, ButtonComponent, CardListComponent],
     templateUrl: './painel-contador.component.html',
     styles: ``,
 })
@@ -94,8 +96,8 @@ metrics: PieMetrics = {
 };
 data: PieChartOptions = {
     type: 'pie',
-    series: [12.8, 26.8, 20.4, 40],
-    colors: ['#740318', '#FDBA8C', '#118632', '#F4BE3775'],
+    series: [28, 72],
+    colors: ['#740318', '#07f227'],
     chart: {
         height: '100%',
         width: '100%',
@@ -116,7 +118,7 @@ data: PieChartOptions = {
             },
         },
     },
-    labels: ['Despesas', 'Receitas', 'Faturamento Bruto', 'Faturamento Liquido'],
+    labels: ['Despesas', 'Receitas'],
     dataLabels: {
         enabled: true,
         style: {
@@ -161,5 +163,37 @@ ngAfterViewInit(): void {
     }
 }
 
+cardListConfig: CardList = {
+    title: 'Teste',
+    cards: [
+        {
+            heading: 'Teste 1',
+            buttonText: 'Ver mais',
+            link: '/',
+            imgSrc: '../../../../../../assets/logo.svg',
+        },
+        {
+            heading: 'Teste 1',
+            buttonText: 'Ver mais',
+            link: '/',
+            imgSrc: '../../../../../../assets/logo.svg',
+        },
+    ],
+    filters: [],
+    metrics: '',
+    header: [],
+    data: [],
+    search: {
+        placeholder: '',
+        value: '',
+        onSearch: function (value: string): void {
+            throw new Error('Function not implemented.');
+        }
+    },
+    pagination: {
+        pageRange: 0,
+        totalItems: 0
+    },
+    rowOrder: []
 }
-
+}
