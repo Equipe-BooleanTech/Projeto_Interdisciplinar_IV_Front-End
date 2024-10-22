@@ -1,133 +1,165 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {
-    LineColumnChartOptions,
-    LineColumnMetrics,
+    PieChartOptions,
+    PieMetrics,
+    TableConfig
 } from '@domain/static/interfaces';
-import { CardComponent, SidebarComponent } from '@presentation/view/components';
-import { LineColumnComponent } from '@presentation/view/components/chart';
+import { ButtonComponent, CardComponent, SidebarComponent } from '@presentation/view/components';
+import { LineColumnComponent, PieComponent } from '@presentation/view/components/chart';
+import ApexCharts from 'apexcharts';
+import { TableComponent } from "../../../../components/table/table.component";
 
 
 @Component({
     selector: 'app-painel-contador',
     standalone: true,
-    imports: [SidebarComponent, LineColumnComponent, CardComponent],
+    imports: [SidebarComponent, LineColumnComponent, CardComponent, TableComponent, PieComponent, CommonModule, ButtonComponent],
     templateUrl: './painel-contador.component.html',
     styles: ``,
 })
 export class PainelContadorComponent {
-    chartData: LineColumnChartOptions<{ x: string; y: number }> = {
-        colors: ['#A21420', '#FDBA8C'],
-        series: [
-            {
-                name: 'Fauramento Total',
-                color: '#A21420',
-                data: [
-                    { x: 'Mon', y: 231 },
-                    { x: 'Tue', y: 122 },
-                    { x: 'Wed', y: 63 },
-                    { x: 'Thu', y: 421 },
-                    { x: 'Fri', y: 122 },
-                    { x: 'Sat', y: 323 },
-                    { x: 'Sun', y: 111 },
-                ],
+
+    constructor() {}
+
+tabela: TableConfig<{
+    titulo: string;
+    valor: string;
+}> = {
+    rowOrder: ['titulo', 'valor'],
+    title: 'Ultimas Movimentações',
+    filters: [
+        { isActive: false, text: 'Últimos 30 dias' },
+        { isActive: false, text: 'Últimos 60 dias' },
+        { isActive: false, text: 'Últimos 90 dias' },
+    ],
+    metrics: 'Total: 5 relatórios',
+    header: ['Título', 'Valor'],
+    data: [
+        {
+            rowData: {
+                titulo: 'Faturamento Bruto',
+                valor: 'R$12.500,00',
             },
-            {
-                name: 'Faturamento Online',
-                color: '#FDBA8C',
-                data: [
-                    { x: 'Mon', y: 232 },
-                    { x: 'Tue', y: 113 },
-                    { x: 'Wed', y: 341 },
-                    { x: 'Thu', y: 224 },
-                    { x: 'Fri', y: 522 },
-                    { x: 'Sat', y: 411 },
-                    { x: 'Sun', y: 243 },
-                ],
+            componentType: ['text', 'text'],
+        },
+        {
+            rowData: {
+                titulo: 'Despesas Operacionais',
+                valor: 'R$8.000,00',
             },
-        ],
-        chart: {
-            type: 'bar',
-            height: '100%',
-            width: '100%',
-            fontFamily: 'Dm Sans, sans-serif',
-            toolbar: {
-                show: false,
+            componentType: ['text', 'text'],
+        },
+        {
+            rowData: {
+                titulo: 'Lucro Líquido',
+                valor: 'R$4.500,00',
             },
+            componentType: ['text', 'text'],
         },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: '70%',
-                borderRadiusApplication: 'end',
-                borderRadius: 8,
+        {
+            rowData: {
+                titulo: 'Impostos',
+                valor: 'R$2.500,00',
             },
+            componentType: ['text', 'text'],
         },
-        tooltip: {
-            shared: true,
-            intersect: false,
-            style: {
-                fontFamily: 'Dm Sans, sans-serif',
+        {
+            rowData: {
+                titulo: 'Total Recebido',
+                valor: 'R$62.450,00',
             },
+            componentType: ['text', 'text'],
         },
-        states: {
-            hover: {
-                filter: {
-                    type: 'darken',
-                    value: 1,
-                },
-            },
-        },
-        stroke: {
-            show: true,
-            width: 0,
-            colors: ['transparent'],
-        },
-        grid: {
-            show: false,
-            strokeDashArray: 4,
-            padding: {
-                left: 2,
-                right: 2,
-                top: -14,
-            },
-        },
-        dataLabels: {
-            enabled: false,
-        },
-        legend: {
-            show: false,
-        },
-        xaxis: {
-            floating: false,
+    ],
+    search: {
+        placeholder: '',
+        value: '',
+        onSearch: function (value: string): void {
+            throw new Error('Function not implemented.');
+        }
+    },
+    pagination: {
+        pageRange: 0,
+        totalItems: 0
+    }
+};
+metrics: PieMetrics = {
+    title: '',
+    dateRange: '08/10/2023 - 08/10/2024',
+    options: [
+        { href: '#', text: 'Exportar' },
+        { href: '#', text: 'Compartilhar' },
+    ],
+};
+data: PieChartOptions = {
+    type: 'pie',
+    series: [12.8, 26.8, 20.4, 40],
+    colors: ['#740318', '#FDBA8C', '#118632', '#F4BE3775'],
+    chart: {
+        height: '100%',
+        width: '100%',
+        type: 'pie',
+    },
+    stroke: {
+        colors: ['white'],
+        lineCap: '',
+    },
+    plotOptions: {
+        pie: {
             labels: {
                 show: true,
-                style: {
-                    fontFamily: 'Dm Sans, sans-serif',
-                    cssClass:
-                        'text-xs font-normal fill-gray-500 dark:fill-gray-400',
-                },
             },
-            axisBorder: {
-                show: false,
-            },
-            axisTicks: {
-                show: false,
+            size: '100%',
+            dataLabels: {
+                offset: -25,
             },
         },
-        yaxis: {
+    },
+    labels: ['Despesas', 'Receitas', 'Faturamento Bruto', 'Faturamento Liquido'],
+    dataLabels: {
+        enabled: true,
+        style: {
+            fontFamily: 'DM Sans, sans-serif',
+        },
+    },
+    legend: {
+        position: 'bottom',
+        fontFamily: 'DM Sans, sans-serif',
+    },
+    yaxis: {
+        labels: {
+            formatter: function (value) {
+                return value + '%';
+            },
+        },
+    },
+    xaxis: {
+        labels: {
+            formatter: function (value) {
+                return value + '%';
+            },
+        },
+        axisTicks: {
             show: false,
         },
-        fill: {
-            opacity: 1,
+        axisBorder: {
+            show: false,
         },
-    };
-
-    chartMetrics: LineColumnMetrics = {
-        grossAmount: 5000,
-        shortDescription: 'Faturamento Bruto',
-        metric: 'pedidos',
-        title: 'pedidos',
-        total: 50,
-        average: 32,
-    };
+    },
+};
+ngAfterViewInit(): void {
+    if (
+        document.getElementById('stock-chart') &&
+        typeof ApexCharts !== 'undefined'
+    ) {
+        const chart = new ApexCharts(
+            document.getElementById('stock-chart'),
+            this.data,
+        );
+        chart.render();
+    }
 }
+
+}
+

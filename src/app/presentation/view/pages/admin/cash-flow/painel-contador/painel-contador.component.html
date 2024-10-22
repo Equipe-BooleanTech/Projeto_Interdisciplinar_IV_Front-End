@@ -1,26 +1,18 @@
 <app-sidebar>
-    <h1 class="text-4xl font-bold text-center">Painel do Contador</h1>
+    <h1 class="text-4xl font-bold text-center mb-8">Painel do Contador</h1>
 
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
+        <app-table [tableConfig]="tabela"></app-table>
 
-    <div class="flex lg:justify-end flex-wrap lg:w-1/2 w-full justify-center items-center">
-        <div class="flex gap-60 w-full">
-            <app-card class="flex-1">
+        <div class="flex justify-evenly items-center">
+            <app-pie class="w-full flex m-auto justify-center items-end"
+                    [options]="data"    
+                    [metrics]="metrics" 
+                    [id]="'stock-chart'"></app-pie>
 
-            </app-card>
-            <app-card class="flex-1">
-
-            </app-card>
         </div>
+        <app-card class="flex-1 max-w-xs mr-4" >
+        </app-card>
     </div>
-
-
-
-    <div class="flex justify-center mb-10 overflow-hidden m-4">
-        <div class="w-full">
-            <app-line-column class="lg:w-full w-full min-h-1 p-4" [chartMetrics]="chartMetrics"
-                [options]="chartData"></app-line-column>
-        </div>
-    </div>
-
 </app-sidebar>

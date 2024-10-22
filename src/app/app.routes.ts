@@ -16,9 +16,11 @@ import {
     LoginComponent,
     NotFoundComponent,
     NovaFinancaComponent,
+    PainelContadorComponent,
     StockControlComponent,
     UltimasTransacoesComponent,
 } from '@presentation/view/pages';
+import { NovoGrupoComponent } from '@presentation/view/pages/admin/stock-control/fichas-tecnicas/grupo-fichas/novo-grupo/novo-grupo.component';
 import { TestComponent } from '@presentation/view/pages/shared/test/test.component';
 
 export const routes: Routes = [
@@ -60,7 +62,10 @@ export const routes: Routes = [
         path: 'admin/estoque/fichas-tecnicas/nova-ficha',
         component: FormFichaComponent,
     },
-
+    {
+        path: 'admin/estoque/fichas-tecnicas/novo-grupo',
+        component: NovoGrupoComponent,
+    },
     {
         path: 'admin/estoque/cadastrar-fornecedor',
         component: FornecedorComponent,
@@ -76,6 +81,10 @@ export const routes: Routes = [
     {
         path: 'admin/estoque/ingredientes',
         component: DashIngredientesComponent,
+    },
+    {
+        path: 'admin/controle-caixa/painel-contador',
+        component: PainelContadorComponent,
     },
     {
         path: 'teste',
