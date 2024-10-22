@@ -11,6 +11,7 @@ import {
     FormFichaComponent,
     FornecedorComponent,
     GrupoFichasComponent,
+    GrupoFinancasComponent,
     HomepageComponent,
     IngredientesComponent,
     LoginComponent,
@@ -36,6 +37,10 @@ export const routes: Routes = [
     {
         path: 'admin/controle-caixa/ultimas-transacoes',
         component: UltimasTransacoesComponent,
+    },
+    {
+        path: 'admin/controle-caixa/financas/grupo-financas',
+        component: GrupoFinancasComponent,
     },
     {
         path: 'admin/controle-caixa/financas',
