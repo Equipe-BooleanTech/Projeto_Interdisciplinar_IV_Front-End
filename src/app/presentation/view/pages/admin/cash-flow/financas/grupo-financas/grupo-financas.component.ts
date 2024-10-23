@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { TableConfig } from '@domain/static/interfaces';
 import { ButtonComponent, SidebarComponent, TableComponent } from '@presentation/view/components';
 
@@ -11,7 +12,8 @@ import { ButtonComponent, SidebarComponent, TableComponent } from '@presentation
   styles: ``
 })
 export class GrupoFinancasComponent {
-  constructor() {}
+
+  constructor(private router: Router) {}
 
 tabela: TableConfig<{
     titulo: string;
@@ -34,7 +36,7 @@ tabela: TableConfig<{
         titulo: 'Fornecedor',
         visualizar: 'Visualizar finança',
         editar: 'Editar finança',
-        ultimaAtualizacao: '9/23/16',
+        ultimaAtualizacao: '24/10/2024',
       },
       componentType: ['text', 'button', 'button', 'text'],
     },
@@ -43,7 +45,7 @@ tabela: TableConfig<{
         titulo: 'Reembolso',
         visualizar: 'Visualizar finança',
         editar: 'Editar finança',
-        ultimaAtualizacao: '4/21/12',
+        ultimaAtualizacao: '21/04/2024',
       },
       componentType: ['text', 'button', 'button', 'text'],
     },
@@ -52,7 +54,7 @@ tabela: TableConfig<{
         titulo: 'Estoque',
         visualizar: 'Visualizar finança',
         editar: 'Editar finança',
-        ultimaAtualizacao: '12/4/17',
+        ultimaAtualizacao: '12/10/2024',
       },
       componentType: ['text', 'button', 'button', 'text'],
     },
@@ -72,5 +74,9 @@ tabela: TableConfig<{
   filters: [],
   metrics: ''
 };
+ voltar() {
+    // Navegue para o caminho específico
+    this.router.navigate(['./admin/controle-caixa/financas']);
+  }
 
 }

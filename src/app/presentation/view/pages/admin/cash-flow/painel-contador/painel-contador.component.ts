@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import {
     CardList,
@@ -22,7 +22,7 @@ import { TableComponent } from "../../../../components/table/table.component";
 })
 export class PainelContadorComponent {
 
-    constructor() {}
+    constructor(private location: Location) {}
 
 tabela: TableConfig<{
     titulo: string;
@@ -196,4 +196,7 @@ cardListConfig: CardList = {
     },
     rowOrder: []
 }
+voltar() {
+    this.location.back();
+  }
 }

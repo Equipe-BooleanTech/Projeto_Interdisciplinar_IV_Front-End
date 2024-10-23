@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { TableConfig } from '@domain/static/interfaces';
 import {
@@ -14,7 +15,7 @@ import {
     styles: ``,
 })
 export class GrupoFichasComponent {
-    constructor() {}
+    constructor(private location: Location) {}
 
     tabela: TableConfig<{
         prato: string;
@@ -83,4 +84,7 @@ export class GrupoFichasComponent {
             totalItems: 5,
         },
     };
+    voltar() {
+        this.location.back();
+      }
 }

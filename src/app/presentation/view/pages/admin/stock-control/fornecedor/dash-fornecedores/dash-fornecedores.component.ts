@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableConfig } from '@domain/static/interfaces';
@@ -23,7 +23,7 @@ import {
     styles: ``,
 })
 export class DashFornecedoresComponent {
-    constructor() {}
+    constructor(private location: Location) {}
 
     tabela: TableConfig<{
         supplier: string;
@@ -117,4 +117,7 @@ export class DashFornecedoresComponent {
             totalItems: 10,
         },
     };
+    voltar() {
+        this.location.back();
+      }
 }
