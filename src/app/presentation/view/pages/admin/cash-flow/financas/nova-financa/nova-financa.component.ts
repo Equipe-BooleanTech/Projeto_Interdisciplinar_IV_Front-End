@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn } from '@angular/forms';
+import { Router } from '@angular/router';
 import { financeFields } from '@domain/static/data/forms/finance/finance';
 import { FormValidateService } from '@domain/static/services';
 import { ButtonComponent, FormComponent, SidebarComponent } from '@presentation/view/components';
@@ -19,6 +20,7 @@ export class NovaFinancaComponent implements OnInit {
   financeFormFields = financeFields;
 
   constructor(
+    private router: Router,
       private _fb: FormBuilder,
       private _formValidateService: FormValidateService,
   ) {}
@@ -49,5 +51,9 @@ export class NovaFinancaComponent implements OnInit {
       } else {
           console.log('Formulário inválido');
       }
+  }
+  voltar() {
+    // Navegue para o caminho específico
+    this.router.navigate(['./admin/controle-caixa/financas']);
   }
 }

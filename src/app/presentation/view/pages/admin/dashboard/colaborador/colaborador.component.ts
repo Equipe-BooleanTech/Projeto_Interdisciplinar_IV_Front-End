@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { TableConfig } from '@domain/static/interfaces';
 import {
@@ -14,7 +15,7 @@ import {
     styles: ``,
 })
 export class ColaboradorComponent {
-    constructor() {}
+    constructor(private location: Location) {}
 
     tabela: TableConfig<{
         role: string;
@@ -90,4 +91,7 @@ export class ColaboradorComponent {
         // Lógica para abrir o formulário de cadastro ou navegar para a página de cadastro
         console.log('Abrir formulário de cadastro');
     }
+    voltar() {
+        this.location.back();
+      }
 }
