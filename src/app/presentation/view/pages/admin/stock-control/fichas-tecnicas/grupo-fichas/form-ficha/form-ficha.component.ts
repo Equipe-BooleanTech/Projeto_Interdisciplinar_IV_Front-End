@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { fichaFormFields } from '@domain/static/data';
 import { FormValidateService } from '@domain/static/services';
-import { FormComponent, SidebarComponent } from '@presentation/view/components';
+import { ButtonComponent, FormComponent, SidebarComponent } from '@presentation/view/components';
 import { FormInputComponent } from '@presentation/view/components/form';
 
 @Component({
@@ -20,6 +20,7 @@ import { FormInputComponent } from '@presentation/view/components/form';
         ReactiveFormsModule,
         CommonModule,
         FormInputComponent,
+        ButtonComponent,
     ],
     templateUrl: './form-ficha.component.html',
     styles: ``,

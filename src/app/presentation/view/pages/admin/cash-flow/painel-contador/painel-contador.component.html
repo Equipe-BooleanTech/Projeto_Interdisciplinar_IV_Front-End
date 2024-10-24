@@ -5,9 +5,10 @@
 
         <app-button
           [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'"
-          [disabled]="false"
-          (click)="voltar()">
-          Voltar
+          [link]="'./admin/controle-caixa'"
+          [disabled]="false">
+            Voltar
+          
         </app-button>
         <app-button
             [link]="'./admin/controle-caixa/ultimas-transacoes'"

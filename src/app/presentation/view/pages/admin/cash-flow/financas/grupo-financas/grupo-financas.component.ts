@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+
 import { TableConfig } from '@domain/static/interfaces';
 import { ButtonComponent, SidebarComponent, TableComponent } from '@presentation/view/components';
 
@@ -13,7 +13,7 @@ import { ButtonComponent, SidebarComponent, TableComponent } from '@presentation
 })
 export class GrupoFinancasComponent {
 
-  constructor(private router: Router) {}
+  constructor() {}
 
 tabela: TableConfig<{
     titulo: string;
@@ -74,9 +74,6 @@ tabela: TableConfig<{
   filters: [],
   metrics: ''
 };
- voltar() {
-    // Navegue para o caminho específico
-    this.router.navigate(['./admin/controle-caixa/financas']);
-  }
+ 
 
 }
