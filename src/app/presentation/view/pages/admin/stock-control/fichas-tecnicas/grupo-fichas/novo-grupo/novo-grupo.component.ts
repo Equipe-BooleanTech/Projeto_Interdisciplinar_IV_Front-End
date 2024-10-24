@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn } from '@angular/forms';
 import { groupFormFields } from '@domain/static/data/forms/group/group';
 import { FormValidateService } from '@domain/static/services';
-import { FormComponent, SidebarComponent } from '@presentation/view/components';
+import { ButtonComponent, FormComponent, SidebarComponent } from '@presentation/view/components';
 import { FormInputComponent } from '@presentation/view/components/form';
 
 @Component({
@@ -14,7 +14,7 @@ import { FormInputComponent } from '@presentation/view/components/form';
     FormComponent,
     ReactiveFormsModule,
     CommonModule,
-    FormInputComponent],
+    FormInputComponent, ButtonComponent],
   templateUrl: './novo-grupo.component.html',
   styles: ``
 })

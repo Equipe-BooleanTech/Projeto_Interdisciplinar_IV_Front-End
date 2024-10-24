@@ -3,15 +3,16 @@
 
         <app-button
           [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'"
+          [link]="'./admin'"
           [disabled]="false"
-          (click)="voltar()">
+          >
           Voltar
         </app-button>
         <app-button
-          [link]="'./admin/estoque/cadastrar-fornecedor'"
+          [link]="'admin/colaboradores/cadastrar-colaborador'"
           [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'"
           [disabled]="false">
-          Cadastrar Novo Fornecedor
+          Cadastrar Novo Colaborador
         </app-button>
       </div>
 
