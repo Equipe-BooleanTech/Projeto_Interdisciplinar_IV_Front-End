@@ -12,6 +12,7 @@ import {
     Validators,
 } from '@angular/forms';
 import { InputSendLoginFormDto, OutputSendLoginFormDto } from '@domain/dtos';
+import { loginFields } from '@domain/static/data';
 import { AuthenticateUseCase } from '@domain/usecases';
 import {
     ButtonComponent,
@@ -35,46 +36,14 @@ import { FormInputComponent } from '@presentation/view/components/form';
 })
 export class LoginComponent implements OnInit {
     form: FormGroup = new FormGroup({});
-
+    loginFields = loginFields;
     constructor(
         private _formBuilder: FormBuilder,
         private _authService: AuthenticateUseCase,
     ) {}
-    config = {
-        fields: [
-            {
-                component: 'input',
-                name: 'email',
-                type: 'email',
-                label: 'Email',
-                value: '',
-                placeholder: 'Digite seu email',
-                validations: [
-                    {
-                        name: 'required',
-                        message: 'Email é obrigatório',
-                    },
-                ],
-            },
-            {
-                component: 'input',
-                name: 'password',
-                type: 'password',
-                value: '',
-                label: 'Senha: *',
-                placeholder: 'Digite sua senha',
-                validations: [
-                    {
-                        name: 'required',
-                        message: 'Senha obrigatória',
-                    },
-                ],
-            },
-        ],
-    };
-    ngOnInit(): void {
+       ngOnInit(): void {
         this.form = this._formBuilder.group({});
-        this.config.fields.forEach((field) => {
+        this.loginFields.fields.forEach((field) => {
             const control = this._formBuilder.control(
                 field.value || '',
                 this._bindValidations(field.validations || []),
@@ -123,4 +92,5 @@ export class LoginComponent implements OnInit {
     handleResponse(output: OutputSendLoginFormDto): void {
         console.log(output);
     }
+
 }

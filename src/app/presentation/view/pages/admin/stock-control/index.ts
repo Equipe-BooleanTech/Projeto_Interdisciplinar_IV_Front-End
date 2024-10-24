@@ -6,4 +6,4 @@ export * from './fornecedor/dash-fornecedores/dash-fornecedores.component';
 export * from './fornecedor/fornecedor.component';
 export * from './ingredientes/dash-ingredientes/dash-ingredientes.component';
 export * from './ingredientes/ingredientes.component';
-
+export * from './fichas-tecnicas/grupo-fichas/novo-grupo/novo-grupo.component';

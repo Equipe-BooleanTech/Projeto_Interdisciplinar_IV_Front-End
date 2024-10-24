@@ -20,8 +20,8 @@ import {
     PainelContadorComponent,
     StockControlComponent,
     UltimasTransacoesComponent,
+    NovoGrupoComponent,
 } from '@presentation/view/pages';
-import { NovoGrupoComponent } from '@presentation/view/pages/admin/stock-control/fichas-tecnicas/grupo-fichas/novo-grupo/novo-grupo.component';
 import { TestComponent } from '@presentation/view/pages/shared/test/test.component';
 
 export const routes: Routes = [
