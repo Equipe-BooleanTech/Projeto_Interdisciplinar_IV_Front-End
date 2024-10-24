@@ -11,13 +11,16 @@ import {
     FormFichaComponent,
     FornecedorComponent,
     GrupoFichasComponent,
+    GrupoFinancasComponent,
     HomepageComponent,
     IngredientesComponent,
     LoginComponent,
     NotFoundComponent,
     NovaFinancaComponent,
+    PainelContadorComponent,
     StockControlComponent,
     UltimasTransacoesComponent,
+    NovoGrupoComponent,
 } from '@presentation/view/pages';
 import { TestComponent } from '@presentation/view/pages/shared/test/test.component';
 
@@ -34,6 +37,10 @@ export const routes: Routes = [
     {
         path: 'admin/controle-caixa/ultimas-transacoes',
         component: UltimasTransacoesComponent,
+    },
+    {
+        path: 'admin/controle-caixa/financas/grupo-financas',
+        component: GrupoFinancasComponent,
     },
     {
         path: 'admin/controle-caixa/financas',
@@ -60,7 +67,10 @@ export const routes: Routes = [
         path: 'admin/estoque/fichas-tecnicas/nova-ficha',
         component: FormFichaComponent,
     },
-
+    {
+        path: 'admin/estoque/fichas-tecnicas/novo-grupo',
+        component: NovoGrupoComponent,
+    },
     {
         path: 'admin/estoque/cadastrar-fornecedor',
         component: FornecedorComponent,
@@ -76,6 +86,10 @@ export const routes: Routes = [
     {
         path: 'admin/estoque/ingredientes',
         component: DashIngredientesComponent,
+    },
+    {
+        path: 'admin/controle-caixa/painel-contador',
+        component: PainelContadorComponent,
     },
     {
         path: 'teste',

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/unbound-method */
 import { Injectable } from '@angular/core';
 import {
     AbstractControl,
@@ -34,9 +33,7 @@ export class FormValidateService {
     }): ValidatorFn {
         switch (validation.name) {
             case 'required':
-                return (control: AbstractControl): ValidationErrors | null => {
-                    return control.value ? null : { required: validation.message };
-                };
+                return Validators.required;
             case 'min':
                 return (control: AbstractControl): ValidationErrors | null => {
                     return control.value && control.value >= validation.value
@@ -51,15 +48,15 @@ export class FormValidateService {
                 };
             case 'email':
                 return (control: AbstractControl): ValidationErrors | null => {
-                    return Validators.email(control)
-                        ? null
-                        : { email: validation.message };
+                    const result = Validators.email(control);
+                    return result ? { email: validation.message } : null;
                 };
             case 'pattern':
                 return (control: AbstractControl): ValidationErrors | null => {
-                    return Validators.pattern(validation.value as RegExp | string)(control)
-                        ? null
-                        : { pattern: validation.message };
+                    const result = Validators.pattern(
+                        validation.value as RegExp | string,
+                    )(control);
+                    return result ? { pattern: validation.message } : null;
                 };
             default:
                 return (control: AbstractControl): ValidationErrors | null =>
