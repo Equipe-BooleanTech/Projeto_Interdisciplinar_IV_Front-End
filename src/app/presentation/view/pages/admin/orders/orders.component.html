@@ -25,8 +25,9 @@
         </div>
 
 
-        <div class="w-full mb-8 m-4">
-            <app-line-column class="w-full h-96"></app-line-column>
+        <div class="flex justify-center lg:justify-start flex-wrap w-full h-full mb-8 overflow-hidden">
+            <app-line-column class="w-full h-full min-h-1" [chartMetrics]="chartMetrics" [options]="chartData"></app-line-column>
         </div>
+        
     </main>
 </app-sidebar>

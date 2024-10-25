@@ -21,11 +21,13 @@ export const groupFormFields = {
             name: 'categorygroup',
             id: 'categorygroup',
             label: 'Tipo de Grupo: ',
-            value: '', // Valor padrão
+            value: '', 
             options: [
-                { value: '1', label: 'Despesa' },
-                { value: '2', label: 'Receita' },
-                { value: '3', label: 'Faturamento' },
+                { value: '1', label: 'Proteina' },
+                { value: '2', label: 'Verdura' },
+                { value: '3', label: 'Legumes' },
+                { value: '3', label: 'Frutas' },
+
                 
             ],
         },

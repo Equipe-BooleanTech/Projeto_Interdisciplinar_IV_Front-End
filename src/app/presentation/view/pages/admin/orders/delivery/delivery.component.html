@@ -1,0 +1,21 @@
+<app-sidebar>
+    <div class="flex justify-between items-center my-4">
+
+        <app-button
+            [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'"
+            [link]="'./admin/pedidos'"
+            [disabled]="false"
+            >
+            Voltar
+      </app-button>
+    </div>
+      <div class="w-full flex flex-col justify-center items-center">
+        <h1 class="text-4xl font-bold text-center my-6">Delivery</h1>
+        <p class="text-center my-4 w-full lg:w-1/2">
+            Verifique os últimos pedidos realizados, atualizando os status em tempo real.
+        </p>
+    </div>
+
+    <app-table [tableConfig]="tabela">
+    </app-table>
+</app-sidebar>

@@ -21,7 +21,7 @@ export const financeFields = {
             name: 'categorysupplier',
             id: 'categorysupplier',
             label: 'Fornecedor: ',
-            value: '', // Valor padrão
+            value: '', 
             options: [
                 { value: '1', label: 'Gomes da Costa' },
                 { value: '2', label: 'Oxan' },
