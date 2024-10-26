@@ -6,8 +6,10 @@ import {
     ReactiveFormsModule,
     ValidatorFn,
 } from '@angular/forms';
+import { RegisterColaborattorDto } from '@domain/dtos';
 import { collaboratorFields } from '@domain/static/data';
 import { FormValidateService } from '@domain/static/services';
+import { RegisterColaborattorUseCase } from '@domain/usecases/admin';
 import {
     ButtonComponent,
     FormComponent,
@@ -37,6 +39,7 @@ export class CadastroColaboradorComponent implements OnInit {
     constructor(
         private _fb: FormBuilder,
         private _formValidateService: FormValidateService,
+        private _registerColaborattorUseCase: RegisterColaborattorUseCase,
     ) {}
 
     ngOnInit(): void {
@@ -63,6 +66,13 @@ export class CadastroColaboradorComponent implements OnInit {
     onSubmit(): void {
         if (this.collaboratorForm.valid) {
             console.log(this.collaboratorForm.value);
+            this._registerColaborattorUseCase
+                .registerColaborattor(
+                    this.collaboratorForm.value as RegisterColaborattorDto,
+                )
+                .subscribe((response) => {
+                    console.log(response);
+                });
         } else {
             console.log('Formulário inválido');
         }

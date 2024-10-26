@@ -1,0 +1,1 @@
+export * from './register-collaborator.usecase/register-collaborator.usecase';

@@ -38,7 +38,7 @@ export const collaboratorFields = {
         },
         {
             component: 'input',
-            name: 'CPF',
+            name: 'cpf',
             type: 'text',
             label: 'CPF: *',
             id: 'CPF',
