@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { InputSendLoginFormDto, OutputSendLoginFormDto } from '@domain/dtos';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import { API_URL } from 'src/app/shared';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class AuthenticateUseCase {
     sendCredentials(
         data: InputSendLoginFormDto,
     ): Observable<OutputSendLoginFormDto> {
-        const response = this._http
+        return this._http
             .post<OutputSendLoginFormDto>(
                 `${this.apiBase}/api/users/login`,
                 data,
@@ -26,11 +26,26 @@ export class AuthenticateUseCase {
                 map((response: HttpResponse<OutputSendLoginFormDto>) => {
                     const finalResponse: OutputSendLoginFormDto = {
                         statusCode: response.status,
-                        message: response?.body?.message ?? 'Mensagem padrão',
+                        token: response.body?.token,
                     };
                     return finalResponse;
                 }),
+                catchError((error) => {
+                    return of({
+                        statusCode: error.error.statusCode,
+                        message: error.error.message,
+                    });
+                }),
             );
-        return response;
+    }
+
+    isLoggedIn(): boolean {
+        return document.cookie.includes('token');
+    }
+
+    logout(): void {
+        document.cookie =
+            'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        console.log(document.cookie);
     }
 }

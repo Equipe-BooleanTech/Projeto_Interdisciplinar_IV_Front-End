@@ -20,6 +20,7 @@ import {
     FooterComponent,
 } from '@presentation/view/components';
 import { FormInputComponent } from '@presentation/view/components/form';
+import { TokenService } from 'src/app/security';
 
 @Component({
     selector: 'app-login',
@@ -40,8 +41,9 @@ export class LoginComponent implements OnInit {
     constructor(
         private _formBuilder: FormBuilder,
         private _authService: AuthenticateUseCase,
+        private _tokenService: TokenService
     ) {}
-       ngOnInit(): void {
+    ngOnInit(): void {
         this.form = this._formBuilder.group({});
         this.loginFields.fields.forEach((field) => {
             const control = this._formBuilder.control(
@@ -83,14 +85,21 @@ export class LoginComponent implements OnInit {
         this._authService.sendCredentials(data).subscribe((response) => {
             const output: OutputSendLoginFormDto = {
                 statusCode: response.statusCode,
-                message: response.message,
+                token: response.token,
             };
+            if (output.token) {
+                this._tokenService.setToken(output.token);
+            }
             this.handleResponse(output);
         });
     }
 
     handleResponse(output: OutputSendLoginFormDto): void {
-        console.log(output);
+        if (output.statusCode === 200) {
+            document.cookie = `token=${output.token}; expires=${new Date().getDate() + 1}`;
+            window.location.href = '/admin';
+        } else {
+            alert('Usuário ou senha inválidos');
+        }
     }
-
 }
