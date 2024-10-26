@@ -1,4 +1,4 @@
 export interface OutputSendLoginFormDto {
-    statusCode: number;
-    message: string;
+    token?: string;
+    statusCode?: number;
 }

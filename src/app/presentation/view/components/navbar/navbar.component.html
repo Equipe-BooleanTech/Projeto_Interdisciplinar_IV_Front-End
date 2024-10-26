@@ -1,18 +1,26 @@
-<header class="bg-slate-50 w-full">
-  <nav [ngClass]="{'h-auto': isNavbarOpen, 'h-[120px]': !isNavbarOpen}" class="flex flex-wrap justify-between items-center px-4 lg:px-10 transition-all duration-300 ease-in-out">
-    <a href="/" class="flex-shrink-0">
+<header class="bg-slate-50 w-full lg:p-0">
+  <nav [ngClass]="{'h-auto': isNavbarOpen, 'h-[120px]': !isNavbarOpen}" class="flex flex-wrap justify-between items-center transition-all duration-300 ease-in-out px-4 lg:px-12">
+  <a href="/" class="flex-shrink-0">
       <img src="../../assets/logo.svg" alt="Logotipo do app Restaurantto" class="h-[100px] lg:h-[140px] w-[100px] lg:w-[150px]">
     </a>
-    <div class="block lg:hidden">
+    <div class="lg:hidden">
       <button class="text-gray-700 focus:outline-none" (click)="toggleMenu()">
         <i class="p-4" [ngClass]="isNavbarOpen ? 'icon-[ri--close-line]' : 'icon-[ic--outline-menu]'"></i>
       </button>
     </div>
+    
     <ul [ngClass]="{'block': isNavbarOpen, 'hidden': !isNavbarOpen}" class="w-full lg:flex lg:items-center lg:w-auto space-y-2 lg:space-y-0 lg:space-x-8 my-4 lg:mt-0"> <li *ngFor="let link of navLinks; let i = index" class="text-center lg:text-left">
         <a [href]="link.url" class="block lg:inline-block text-gray-700 hover:text-gray-900">{{ link.name }}</a>
       </li>
     </ul>
-    <app-button [ngClass]="isAuthenticated ? 'hidden' : 'block bg-primary px-4 py-2 rounded-md'" link="/login">Já é nosso cliente?</app-button>
+    <app-button
+      [ngClass]="isNavbarOpen ? 'block' : 'hidden lg:block'"
+      [class]="'bg-primary px-4 py-2 rounded-md mb-8 lg:mb-0'"
+      [link]="getLink()"
+      (click)="handleClick()"
+    >
+      {{ isAuthenticated ? "Sair da conta" : "Já é nosso cliente? Faça Login." }}
+    </app-button>  
   </nav>
 </header>
 <div class="h-[10px] w-full bg-[#741308]"></div>
