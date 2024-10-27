@@ -6,8 +6,11 @@ import {
     ReactiveFormsModule,
     ValidatorFn,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RegisterIngredientDto } from '@domain/dtos';
 import { ingredientFields } from '@domain/static/data';
 import { FormValidateService } from '@domain/static/services';
+import { RegisterIngredientUseCase } from '@domain/usecases/admin';
 import {
     ButtonComponent,
     FormComponent,
@@ -36,6 +39,8 @@ export class IngredientesComponent implements OnInit {
     constructor(
         private _fb: FormBuilder,
         private _formValidateService: FormValidateService,
+        private _router: Router,
+        private _registerIngredientUseCase: RegisterIngredientUseCase,
     ) {}
     ngOnInit(): void {
         this._initForm();
@@ -61,6 +66,14 @@ export class IngredientesComponent implements OnInit {
     onSubmit(): void {
         if (this.ingredientForm.valid) {
             console.log(this.ingredientForm.value);
+            this._registerIngredientUseCase
+                .registerIngredient(
+                    this.ingredientForm.value as RegisterIngredientDto,
+                )
+                .subscribe((response) => {
+                    alert('Ingrediente cadastrado com sucesso!');
+                    this._router.navigate(['/admin/estoque/ingredientes']);
+                });
         } else {
             console.log('Formulário inválido');
         }
