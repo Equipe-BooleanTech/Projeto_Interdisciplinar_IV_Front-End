@@ -1,12 +1,12 @@
 {
   "name": "restaurantto-app",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "Restaurantto App - Front-end System",
   "type": "module",
   "private": true,
   "scripts": {
     "ng": "ng",
-    "dev": "ng serve",
+    "dev": "ng serve --proxy-config src/proxy.conf.json",
     "dev:host": "ng serve --host 0.0.0.0 --disable-host-check",
     "clean": "rm -rf dist",
     "build": "ng build",

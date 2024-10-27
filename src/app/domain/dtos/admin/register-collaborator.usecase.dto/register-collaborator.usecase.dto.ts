@@ -2,7 +2,7 @@ export interface RegisterColaborattorDto {
     email: string;
     name: string;
     phone: string;
-    CPF: string;
+    cpf: string;
     cep: string;
     address: string;
     addressNumber: string;
@@ -13,7 +13,9 @@ export interface RegisterColaborattorDto {
     message: string;
     enterprise: string;
     password: string;
-    function: string;
+    role: string;
+    isProspecting: boolean;
+    isEmployee: boolean;
 }
 
 export interface RegisterColaborattorResponseDto {

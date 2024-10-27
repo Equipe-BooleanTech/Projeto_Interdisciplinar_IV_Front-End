@@ -27,8 +27,6 @@ export const groupFormFields = {
                 { value: '2', label: 'Verdura' },
                 { value: '3', label: 'Legumes' },
                 { value: '3', label: 'Frutas' },
-
-                
             ],
         },
         {

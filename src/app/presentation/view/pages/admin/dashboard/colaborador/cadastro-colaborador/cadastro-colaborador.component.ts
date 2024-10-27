@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
     FormBuilder,
     FormGroup,
@@ -15,7 +16,10 @@ import {
     FormComponent,
     SidebarComponent,
 } from '@presentation/view/components';
-import { FormInputComponent } from '@presentation/view/components/form';
+import {
+    FormInputComponent,
+    FormSelectComponent,
+} from '@presentation/view/components/form';
 
 @Component({
     selector: 'app-cadastro-colaborador',
@@ -27,6 +31,7 @@ import { FormInputComponent } from '@presentation/view/components/form';
         ReactiveFormsModule,
         CommonModule,
         FormInputComponent,
+        FormSelectComponent,
         FormComponent,
     ],
     templateUrl: './cadastro-colaborador.component.html',
@@ -38,6 +43,7 @@ export class CadastroColaboradorComponent implements OnInit {
 
     constructor(
         private _fb: FormBuilder,
+        private _router: Router,
         private _formValidateService: FormValidateService,
         private _registerColaborattorUseCase: RegisterColaborattorUseCase,
     ) {}
@@ -71,7 +77,8 @@ export class CadastroColaboradorComponent implements OnInit {
                     this.collaboratorForm.value as RegisterColaborattorDto,
                 )
                 .subscribe((response) => {
-                    console.log(response);
+                    alert('Colaborador cadastrado com sucesso!');
+                    this._router.navigate(['/admin/colaboradores']);
                 });
         } else {
             console.log('Formulário inválido');

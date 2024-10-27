@@ -2,16 +2,6 @@ export const collaboratorFields = {
     fields: [
         {
             component: 'input',
-            name: 'email',
-            type: 'text',
-            id: 'email',
-            value: '',
-            placeholder: 'Digite o email institucional...',
-            label: 'Email institucional:',
-            validations: [],
-        },
-        {
-            component: 'input',
             name: 'name',
             type: 'text',
             label: 'Nome do Colaborador: *',
@@ -28,13 +18,35 @@ export const collaboratorFields = {
         },
         {
             component: 'input',
+            name: 'email',
+            type: 'text',
+            id: 'email',
+            value: '',
+            placeholder: 'Digite o email institucional...',
+            label: 'Email institucional: *',
+            validations: [
+                {
+                    name: 'required',
+                    message: 'Email institucional é obrigatório',
+                    value: '',
+                },
+            ],
+        },
+        {
+            component: 'input',
             name: 'phone',
             type: 'text',
             id: 'phone',
             value: '',
             placeholder: 'Digite o número de telefone do colaborador...',
-            label: 'Telefone:',
-            validations: [],
+            label: 'Telefone: *',
+            validations: [
+                {
+                    name: 'required',
+                    message: 'Telefone do Colaborador é obrigatório',
+                    value: '',
+                },
+            ],
         },
         {
             component: 'input',
@@ -42,7 +54,7 @@ export const collaboratorFields = {
             type: 'text',
             label: 'CPF: *',
             id: 'CPF',
-            placeholder: 'Digite aqui o CPF do Colaborador...',
+            placeholder: 'Digite aqui o CPF do colaborador...',
             value: '',
             validations: [
                 {
@@ -53,14 +65,53 @@ export const collaboratorFields = {
             ],
         },
         {
+            component: 'select',
+            name: 'role',
+            type: 'select',
+            id: 'role',
+            value: '',
+            label: 'Cargo: *',
+            options: [
+                {
+                    value: '',
+                    label: 'Selecione o cargo desejado...',
+                },
+                {
+                    value: 'ROLE_ADMIN',
+                    label: 'Gerente',
+                },
+                {
+                    value: 'ROLE_CHEF',
+                    label: 'Chefe de Cozinha',
+                },
+                {
+                    value: 'ROLE_USER',
+                    label: 'Garçom',
+                },
+            ],
+            validations: [
+                {
+                    name: 'required',
+                    message: 'Cargo do colaborador é obrigatório',
+                    value: '',
+                },
+            ],
+        },
+        {
             component: 'input',
             name: 'cep',
             type: 'text',
             id: 'cep',
             value: '',
-            placeholder: 'Digite o CEP',
+            placeholder: 'Digite o CEP do colaborador...',
             label: 'CEP:',
-            validations: [],
+            validations: [
+                {
+                    name: 'required',
+                    message: 'CEP do Colaborador é obrigatório',
+                    value: '',
+                },
+            ],
         },
         {
             component: 'input',
@@ -70,7 +121,13 @@ export const collaboratorFields = {
             value: '',
             placeholder: 'Digite o endereço do colaborador...',
             label: 'Endereço:',
-            validations: [],
+            validations: [
+                {
+                    name: 'required',
+                    message: 'Endereço do colaborador é obrigatório',
+                    value: '',
+                },
+            ],
         },
         {
             component: 'input',
@@ -79,8 +136,14 @@ export const collaboratorFields = {
             id: 'addressNumber',
             value: '',
             placeholder: 'Digite o número do endereço do colaborador...',
-            label: 'Número:',
-            validations: [],
+            label: 'Número: *',
+            validations: [
+                {
+                    name: 'required',
+                    message: 'Número do endereço do colaborador é obrigatório',
+                    value: '',
+                },
+            ],
         },
         {
             component: 'input',
@@ -88,18 +151,31 @@ export const collaboratorFields = {
             type: 'text',
             id: 'city',
             value: '',
-            placeholder: 'Digite a cidade',
-            label: 'Cidade:',
-            validations: [],
-        },{
+            placeholder: 'Digite a cidade do colaborador...',
+            label: 'Cidade: *',
+            validations: [
+                {
+                    name: 'required',
+                    message: 'Cidade do colaborador é obrigatório',
+                    value: '',
+                },
+            ],
+        },
+        {
             component: 'input',
             name: 'state',
             type: 'text',
             id: 'state',
             value: '',
-            placeholder: 'Digite o estado',
-            label: 'Estado:',
-            validations: [],
+            placeholder: 'Digite o Estado do colaborador...',
+            label: 'Estado: *',
+            validations: [
+                {
+                    name: 'required',
+                    message: 'Estado do colaborador é obrigatório',
+                    value: '',
+                },
+            ],
         },
         {
             component: 'input',
@@ -108,57 +184,23 @@ export const collaboratorFields = {
             id: 'neighborhood',
             value: '',
             placeholder: 'Digite o bairro',
-            label: 'Bairro:',
-            validations: [],
+            label: 'Bairro: *',
+            validations: [
+                {
+                    name: 'required',
+                    message: 'Bairro do colaborador é obrigatório',
+                    value: '',
+                },
+            ],
         },
         {
             component: 'input',
             name: 'cnpj',
             type: 'text',
-            id: 'cnoj',
+            id: 'cnpj',
             value: '',
-            placeholder: 'Digite o CNPJ',
+            placeholder: 'Digite o CNPJ, se aplicável...',
             label: 'CNPJ:',
-            validations: [],
-        },
-        {
-            component: 'input',
-            name: 'message',
-            type: 'text',
-            id: 'message',
-            value: '',
-            placeholder: '',
-            label: 'Mensagem:',
-            validations: [],
-        },
-        {
-            component: 'input',
-            name: 'enterprise',
-            type: 'text',
-            id: 'enterprise',
-            value: '',
-            placeholder: 'Digite o nome da empresa',
-            label: 'Empresa:',
-            validations: [],
-        },
-        {
-            component: 'input',
-            name: 'password',
-            type: 'text',
-            id: 'password',
-            value: '',
-            placeholder: 'Insira uma senha...',
-            label: 'Senha escolhida:',
-            validations: [],
-        },
-        {
-            component: 'input',
-            name: 'function',
-            type: 'text',
-            id: 'function',
-            value: '',
-            placeholder: 'Digite o cargo do colaborador...',
-            label: 'Função:',
             validations: [],
         },
     ],
