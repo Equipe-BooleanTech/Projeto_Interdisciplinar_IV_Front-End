@@ -1,6 +1,6 @@
 export interface RegisterColaborattorDto {
     email: string;
-    name: string;
+    fullName: string;
     phone: string;
     cpf: string;
     cep: string;
