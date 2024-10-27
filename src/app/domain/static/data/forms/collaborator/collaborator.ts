@@ -2,7 +2,7 @@ export const collaboratorFields = {
     fields: [
         {
             component: 'input',
-            name: 'name',
+            name: 'fullName',
             type: 'text',
             label: 'Nome do Colaborador: *',
             id: 'fullName',
