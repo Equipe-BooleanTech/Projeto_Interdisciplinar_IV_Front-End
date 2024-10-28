@@ -7,10 +7,10 @@ import {
     Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterSupplierDto } from '@domain/dtos/admin/register-supplier.usecase.dto/register-supplier.usecase.dto';
 import { supplierFileds } from '@domain/static/data';
+import { SuppliersUseCase } from '@domain/usecases/admin';
 import { FormValidateService } from '@domain/static/services';
-import { RegisterSupplierUseCase } from '@domain/usecases/admin';
+import { RegisterSupplierDto } from '@domain/dtos';
 import {
     ButtonComponent,
     FormComponent,
@@ -41,7 +41,7 @@ export class FornecedorComponent implements OnInit {
         private _fb: FormBuilder,
         private _formValidateService: FormValidateService,
         private _router: Router,
-        private _registerSupplierUseCase: RegisterSupplierUseCase,
+        private _suppliersUseCase: SuppliersUseCase,
     ) {}
 
     ngOnInit(): void {
@@ -68,11 +68,9 @@ export class FornecedorComponent implements OnInit {
     onSubmit(): void {
         if (this.supplierForm.valid) {
             console.log(this.supplierForm.value);
-            this._registerSupplierUseCase
-                .registerSupplier(
-                    this.supplierForm.value as RegisterSupplierDto,
-                )
-                .subscribe((response) => {
+            this._suppliersUseCase
+                .createSupplier(this.supplierForm.value as RegisterSupplierDto)
+                .subscribe(() => {
                     alert('Fornecedor cadastrado com sucesso!');
                     this._router.navigate(['/admin/estoque/fornecedores']);
                 });

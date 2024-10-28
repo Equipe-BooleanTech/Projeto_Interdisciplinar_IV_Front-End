@@ -7,7 +7,7 @@ import {
     ValidatorFn,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterIngredientDto, RegisterSupplierDto } from '@domain/dtos';
+import { PaginatedResponse, SupplierDto, IngredientDto } from '@domain/dtos';
 import { ingredientFields } from '@domain/static/data/forms/ingredient/ingredient';
 import { FormValidateService } from '@domain/static/services';
 import { IngredientsUseCase, SuppliersUseCase } from '@domain/usecases/admin';
@@ -42,11 +42,12 @@ export class IngredientesComponent implements OnInit {
         private _formValidateService: FormValidateService,
         private _router: Router,
         private _ingredientUseCase: IngredientsUseCase,
-        private _supplierUseCase: SuppliersUseCase) {}
+        private _supplierUseCase: SuppliersUseCase,
+    ) {}
 
     ngOnInit(): void {
         this._initForm();
-        this._loadSuppliers(); 
+        this._loadSuppliers();
     }
 
     private _initForm(): void {
@@ -65,32 +66,35 @@ export class IngredientesComponent implements OnInit {
             ),
         );
     }
-private _loadSuppliers(): void {
-     this._supplierUseCase.getSuppliers().pipe(
-        map((suppliers: RegisterSupplierDto[]) => suppliers.map((supplier) => ({
-            value: supplier,
-            label: supplier.name,
-        })))
-    )
-    .subscribe((supplierOptions) => {
-        const supplierField = this.ingredientFormFields.fields.find(
-            (field) => field.name === 'supplier'
-        );
-        if (supplierField) {
-            supplierField.options = supplierOptions;
-        }
-    });
-}
-    
+    private _loadSuppliers(): void {
+        this._supplierUseCase
+            .getSuppliers()
+            .pipe(
+                map((response: PaginatedResponse<SupplierDto>) =>
+                    response.content.map((supplier) => ({
+                        value: JSON.stringify(
+                            JSON.parse(JSON.stringify(supplier)),
+                        ),
+                        label: supplier.name,
+                    })),
+                ),
+            )
+            .subscribe((supplierOptions) => {
+                const supplierField = this.ingredientFormFields.fields.find(
+                    (field) => field.name === 'supplier',
+                );
+                if (supplierField) {
+                    supplierField.options = supplierOptions;
+                }
+            });
+    }
 
     onSubmit(): void {
         if (this.ingredientForm.valid) {
             console.log(this.ingredientForm.value);
             this._ingredientUseCase
-                .createIngredient(
-                    this.ingredientForm.value as RegisterIngredientDto,
-                )
-                .subscribe((response) => {
+                .createIngredient(this.ingredientForm.value as IngredientDto)
+                .subscribe(() => {
                     alert('Ingrediente cadastrado com sucesso!');
                     this._router.navigate(['/admin/estoque/ingredientes']);
                 });
