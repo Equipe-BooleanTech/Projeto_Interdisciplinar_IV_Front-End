@@ -1,3 +1,5 @@
+
+
 export const ingredientFields = {
     fields: [
         {
@@ -22,11 +24,7 @@ export const ingredientFields = {
             id: 'categorysupplier',
             label: 'Fornecedor: ',
             options: [
-                { value: '1', label: 'Gomes da Costa' },
-                { value: '2', label: 'Oxan' },
-                { value: '3', label: 'Assai' },
-                { value: '4', label: 'Atacadão' },
-                { value: '5', label: 'Unilever' },
+                {value: {}, label: "Selecione um fornecedor..."},
             ],
         },
         {

@@ -6,5 +6,7 @@ export * from './admin/register-colaborattor';
 
 export * from './admin/register-supplier';
 
-export * from './admin/register-ingredient';
+export * from './admin/ingredient.repository/ingredient.repository';
+
+export * from './admin/supplier.repository/supplier.repository';
 

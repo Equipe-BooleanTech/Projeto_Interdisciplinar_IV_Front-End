@@ -3,7 +3,7 @@ import { RegisterSupplierDto, RegisterSupplierResponseDto } from '@domain/dtos';
 import { Observable } from 'rxjs';
 
 export interface RegisterSupplierUseCaseRepository {
-    registerColaborattor(
+    registerSupplier(
         data: RegisterSupplierDto,
     ): Observable<RegisterSupplierResponseDto>;
 }

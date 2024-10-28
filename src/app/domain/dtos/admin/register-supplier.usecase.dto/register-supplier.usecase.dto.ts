@@ -1,8 +1,8 @@
 export interface RegisterSupplierDto {
-    name: String;
-    cnpj: String;
-    contact: String;
-    phone: String;
+    name: string;
+    cnpj: string;
+    contact: string;
+    phone: string;
 }
 
 export interface RegisterSupplierResponseDto {

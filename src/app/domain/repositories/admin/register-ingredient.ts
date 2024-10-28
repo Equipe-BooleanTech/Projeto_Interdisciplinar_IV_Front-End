@@ -1,9 +1,11 @@
 
-import { RegisterIngredientDto, RegisterIngredientResponseDto } from '@domain/dtos';
+import { RegisterIngredientDto, RegisterIngredientResponseDto, RegisterSupplierDto } from '@domain/dtos';
 import { Observable } from 'rxjs';
 
 export interface RegisterIngredientUseCaseRepository {
-    registerColaborattor(
+    registerIngredient(
         data: RegisterIngredientDto,
     ): Observable<RegisterIngredientResponseDto>;
+
+    getSuppliers(): Observable<RegisterSupplierDto>;
 }

@@ -7,16 +7,17 @@ import {
     ValidatorFn,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterIngredientDto } from '@domain/dtos';
-import { ingredientFields } from '@domain/static/data';
+import { RegisterIngredientDto, RegisterSupplierDto } from '@domain/dtos';
+import { ingredientFields } from '@domain/static/data/forms/ingredient/ingredient';
 import { FormValidateService } from '@domain/static/services';
-import { RegisterIngredientUseCase } from '@domain/usecases/admin';
+import { IngredientsUseCase, SuppliersUseCase } from '@domain/usecases/admin';
 import {
     ButtonComponent,
     FormComponent,
     SidebarComponent,
 } from '@presentation/view/components';
 import { FormInputComponent } from '@presentation/view/components/form';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-ingredientes',
@@ -40,10 +41,12 @@ export class IngredientesComponent implements OnInit {
         private _fb: FormBuilder,
         private _formValidateService: FormValidateService,
         private _router: Router,
-        private _registerIngredientUseCase: RegisterIngredientUseCase,
-    ) {}
+        private _ingredientUseCase: IngredientsUseCase,
+        private _supplierUseCase: SuppliersUseCase) {}
+
     ngOnInit(): void {
         this._initForm();
+        this._loadSuppliers(); 
     }
 
     private _initForm(): void {
@@ -62,12 +65,29 @@ export class IngredientesComponent implements OnInit {
             ),
         );
     }
+private _loadSuppliers(): void {
+     this._supplierUseCase.getSuppliers().pipe(
+        map((suppliers: RegisterSupplierDto[]) => suppliers.map((supplier) => ({
+            value: supplier,
+            label: supplier.name,
+        })))
+    )
+    .subscribe((supplierOptions) => {
+        const supplierField = this.ingredientFormFields.fields.find(
+            (field) => field.name === 'supplier'
+        );
+        if (supplierField) {
+            supplierField.options = supplierOptions;
+        }
+    });
+}
+    
 
     onSubmit(): void {
         if (this.ingredientForm.valid) {
             console.log(this.ingredientForm.value);
-            this._registerIngredientUseCase
-                .registerIngredient(
+            this._ingredientUseCase
+                .createIngredient(
                     this.ingredientForm.value as RegisterIngredientDto,
                 )
                 .subscribe((response) => {

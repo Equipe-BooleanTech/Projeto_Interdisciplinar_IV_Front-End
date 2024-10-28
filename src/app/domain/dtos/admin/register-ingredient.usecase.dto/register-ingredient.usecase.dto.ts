@@ -1,11 +1,13 @@
+import { RegisterSupplierDto } from "../register-supplier.usecase.dto/register-supplier.usecase.dto";
+
 export interface RegisterIngredientDto {
-    name: String;
-    unit: String;
-    price: String;
-    quantity: String;
-    description: String;
-    sif?: String;
-    supplier: String;
+    name: string;
+    unit: string;
+    price: string;
+    quantity: string;
+    description: string;
+    sif?: string;
+    supplier: RegisterSupplierDto;
 }
 
 export interface RegisterIngredientResponseDto {

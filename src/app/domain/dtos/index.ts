@@ -5,7 +5,8 @@ export * from './prospection/send-prospection-form.usecase.dto/send-prospection-
 
 export * from './admin/register-collaborator.usecase.dto/register-collaborator.usecase.dto';
 
-export * from './admin/register-supplier.usecase.dto/register-supplier.usecase.dto';
 
-export * from './admin/register-ingredient.usecase.dto/register-ingredient.usecase.dto';
+export * from './admin/supplier.usecase.dto/supplier.usecase.dto';
+
+export * from './admin/ingredient.usecase.dto/ingredient.usecase.dto';
 
