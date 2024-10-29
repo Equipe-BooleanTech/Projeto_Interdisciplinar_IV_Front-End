@@ -1,3 +1,5 @@
+
+
 export const ingredientFields = {
     fields: [
         {
@@ -18,32 +20,22 @@ export const ingredientFields = {
         },
         {
             component: 'select',
-            name: 'categorysupplier',
+            name: 'supplier',
             id: 'categorysupplier',
             label: 'Fornecedor: ',
             options: [
-                { value: '1', label: 'Gomes da Costa' },
-                { value: '2', label: 'Oxan' },
-                { value: '3', label: 'Assai' },
-                { value: '4', label: 'Atacadão' },
-                { value: '5', label: 'Unilever' },
+                {value: {}, label: "Selecione um fornecedor..."},
             ],
         },
         {
             component: 'input',
-            name: 'description',
+            name: 'unit',
             type: 'desc',
-            label: 'Descrição: *',
-            id: 'description',
-            placeholder: 'Faça uma breve descrição do ingrediente...',
+            label: 'Unidade:',
+            id: 'unit',
+            placeholder: 'Digite a unidade de medida (ex: kg, gramas, unitário)',
             value: '',
-            validations: [
-                {
-                    name: 'required',
-                    message: 'Descrição é obrigatória',
-                    value: '',
-                },
-            ],
+            validations: [],
         },
         {
             component: 'input',
@@ -53,6 +45,36 @@ export const ingredientFields = {
             value: '',
             placeholder: 'Digite o valor do ingrediente...',
             label: 'Preço: ',
+            validations: [],
+        },
+        {
+            component: 'input',
+            name: 'quantity',
+            type: 'text',
+            id: 'quantity',
+            value: '',
+            placeholder: 'Digite a quantidade do ingrediente...',
+            label: 'Quantidade: ',
+            validations: [],
+        },
+        {
+            component: 'input',
+            name: 'description',
+            type: 'text',
+            id: 'description',
+            value: '',
+            placeholder: 'Digite a descrição...',
+            label: 'Descrição: ',
+            validations: [],
+        },
+        {
+            component: 'input',
+            name: 'sif',
+            type: 'text',
+            id: 'sif',
+            value: '',
+            placeholder: 'Digite o sif (para produtos de origem animal)',
+            label: 'Sif: (se houver ) ',
             validations: [],
         },
     ],

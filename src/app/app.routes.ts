@@ -3,11 +3,14 @@ import {
     CadastroColaboradorComponent,
     CashFlowComponent,
     ColaboradorComponent,
+    ControleMesasComponent,
     DashboardComponent,
     DashFornecedoresComponent,
     DashIngredientesComponent,
+    DeliveryComponent,
     FichasTecnicasComponent,
     FinancasComponent,
+    ForgotPasswordComponent,
     FormFichaComponent,
     FornecedorComponent,
     GrupoFichasComponent,
@@ -15,6 +18,7 @@ import {
     HomepageComponent,
     IngredientesComponent,
     LoginComponent,
+    NotAuthorizedComponent,
     NotFoundComponent,
     NovaFinancaComponent,
     NovoGrupoComponent,
@@ -22,9 +26,6 @@ import {
     PainelContadorComponent,
     StockControlComponent,
     UltimasTransacoesComponent,
-    NotAuthorizedComponent,
-    ControleMesasComponent,
-    DeliveryComponent,
     UltimosPedidosComponent,
 } from '@presentation/view/pages';
 
@@ -33,6 +34,10 @@ import { SecurityGuard } from './security';
 export const routes: Routes = [
     { path: '', component: HomepageComponent },
     { path: 'login', component: LoginComponent },
+    {
+        path: 'forgot-password',
+        component: ForgotPasswordComponent,
+    },
     {
         path: 'admin',
         component: DashboardComponent,
