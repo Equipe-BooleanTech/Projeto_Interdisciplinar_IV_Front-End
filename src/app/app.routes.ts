@@ -10,6 +10,7 @@ import {
     DeliveryComponent,
     FichasTecnicasComponent,
     FinancasComponent,
+    ForgotPasswordComponent,
     FormFichaComponent,
     FornecedorComponent,
     GrupoFichasComponent,
@@ -28,21 +29,19 @@ import {
     UltimosPedidosComponent,
 } from '@presentation/view/pages';
 
-import { ForgotPasswordComponent } from '@presentation/view/pages/shared/login/forgot-password/forgot-password.component';
 import { SecurityGuard } from './security';
 
 export const routes: Routes = [
     { path: '', component: HomepageComponent },
     { path: 'login', component: LoginComponent },
     {
+        path: 'forgot-password',
+        component: ForgotPasswordComponent,
+    },
+    {
         path: 'admin',
         component: DashboardComponent,
         canActivate: [SecurityGuard],
-    },
-    {
-        path: 'forgot-password',
-        component: ForgotPasswordComponent,
-        
     },
 
     {
