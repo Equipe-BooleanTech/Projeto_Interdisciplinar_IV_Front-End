@@ -29,6 +29,7 @@ import {
 } from '@presentation/view/pages';
 
 import { ForgotPasswordComponent } from '@presentation/view/pages/shared/login/forgot-password/forgot-password.component';
+import { SatisfactionComponent } from '@presentation/view/pages/shared/satisfaction/satisfaction.component';
 import { SecurityGuard } from './security';
 
 export const routes: Routes = [
@@ -43,6 +44,10 @@ export const routes: Routes = [
         path: 'forgot-password',
         component: ForgotPasswordComponent,
         
+    },
+    {
+        path: 'admin/satisfaction',
+        component: SatisfactionComponent,
     },
 
     {

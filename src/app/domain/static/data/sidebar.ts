@@ -92,6 +92,7 @@ export const sidebarData: SidebarData = {
             ],
             isExpanded: false,
         },
+       
         {
             id: 5,
             title: 'Cardápio digital',
@@ -111,6 +112,14 @@ export const sidebarData: SidebarData = {
                     link: '/admin/cardapio-digital/editar-pratos',
                 },
             ],
+            isExpanded: false,
+        },
+        {
+            id: 6,
+            title: 'Pesquisa de Satisfação',
+            icon: 'icon-[wpf--search] p-4',
+            link: '/admin/satisfaction',
+            subItems: [],
             isExpanded: false,
         },
     ],
