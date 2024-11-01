@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import {
     FormBuilder,
     FormGroup,
     ReactiveFormsModule,
     ValidatorFn,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { RegisterColaborattorDto } from '@domain/dtos';
 import { collaboratorFields } from '@domain/static/data';
 import { FormValidateService } from '@domain/static/services';
@@ -83,5 +83,7 @@ export class CadastroColaboradorComponent implements OnInit {
         } else {
             console.log('Formulário inválido');
         }
-    }
+       
+}
+   
 }

@@ -2,7 +2,7 @@ export const supplierFileds = {
     fields: [
         {
             component: 'input',
-            name: 'nameSupplier',
+            name: 'name',
             type: 'text',
             label: 'Nome do Fornecedor: *',
             id: 'fullName',
@@ -18,7 +18,7 @@ export const supplierFileds = {
         },
         {
             component: 'input',
-            name: 'CNPJ',
+            name: 'cnpj',
             type: 'text',
             label: 'CNPJ: *',
             id: 'CNPJ',
