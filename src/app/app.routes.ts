@@ -23,6 +23,7 @@ import {
     NovoGrupoComponent,
     OrdersComponent,
     PainelContadorComponent,
+    QuestionsComponent,
     StockControlComponent,
     UltimasTransacoesComponent,
     UltimosPedidosComponent,
@@ -48,6 +49,10 @@ export const routes: Routes = [
     {
         path: 'admin/satisfaction',
         component: SatisfactionComponent,
+    },
+    {
+        path: 'admin/questions',
+        component: QuestionsComponent,
     },
 
     {

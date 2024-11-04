@@ -1,0 +1,12 @@
+<div class="faq-item my-4">
+    <h3 
+      class="cursor-pointer bg-[#741308] text-white py-3 px-4 rounded-md"
+      (click)="toggle()">
+      {{ question }}
+    </h3>
+    <p 
+      *ngIf="isVisible" 
+      class="bg-gray-100 p-4 border-l-4 border-[#741308] mt-2">
+      {{ answer }}
+    </p>
+</div>

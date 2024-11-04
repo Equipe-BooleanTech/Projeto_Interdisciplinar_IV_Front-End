@@ -122,5 +122,13 @@ export const sidebarData: SidebarData = {
             subItems: [],
             isExpanded: false,
         },
+        {
+            id: 7,
+            title: 'FAQ',
+            icon: 'icon-[mingcute--question-line] p-4',
+            link: '/admin/questions',
+            subItems: [],
+            isExpanded: false,
+        },
     ],
 };
