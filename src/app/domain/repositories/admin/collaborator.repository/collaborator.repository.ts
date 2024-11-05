@@ -3,7 +3,7 @@ import { Observable } from "rxjs";
 
 export interface CollaboratorRepositoryUseCase {
     //GET (ALL)
-    getAllCollaborators(): Observable<GetAllCollaboratorsDto>;
+    getAllCollaborators(page: number, size: number): Observable<GetAllCollaboratorsDto>;
     //GET (BY ID)
     getCollaborator(id: string): Observable<CollaboratorDto>;
     //POST

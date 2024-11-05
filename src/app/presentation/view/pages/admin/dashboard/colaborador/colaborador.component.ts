@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { CollaboratorDto } from '@domain/dtos';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CollaboratorDto, GetAllCollaboratorsDto } from '@domain/dtos';
 import { TableConfig } from '@domain/static/interfaces';
 import { CollaboratorUseCase } from '@domain/usecases/admin';
 import {
@@ -8,6 +8,7 @@ import {
     SidebarComponent,
     TableComponent,
 } from '@presentation/view/components';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-colaborador',
@@ -16,37 +17,64 @@ import {
     templateUrl: './colaborador.component.html',
     styles: ``,
 })
-export class ColaboradorComponent implements OnInit {
+export class ColaboradorComponent implements OnInit, OnDestroy {
+    private subscription: Subscription | null = null;
+    currentPage = 1;
+    pageSize = 6;
+
     constructor(
         private location: Location,
         private collaboratorUseCase: CollaboratorUseCase,
     ) {}
 
     ngOnInit(): void {
-        this.collaboratorUseCase
-            .getAllCollaborators()
-            .subscribe((response: { content: CollaboratorDto[] }) => {
-                            const collaborators = response.content;
-                console.log(collaborators);
-                this.tabela.data = collaborators.map((collaborator) => ({
-                    rowData: {
-                        role:
-                            collaborator.roles === 'ROLE_ADMIN'
-                                ? 'Administrador'
-                                : collaborator.roles === 'ROLE_CHEF'
-                                  ? 'Chefe de Cozinha'
-                                  : 'Garçom',
-                        name: collaborator.fullName,
-                        status: collaborator.isEmployee ? 'Ativo' : 'Inativo',
-                        action: 'Ver mais',
-                    },
-                    componentType: ['text', 'text', 'text', 'button'],
-                }));
+        this.subscription = this.collaboratorUseCase.collaborators$.subscribe(
+            (collaborators: CollaboratorDto[]) => {
+                this.tabela.data = collaborators.map(
+                    (collaborator: CollaboratorDto) => ({
+                        rowData: {
+                            role:
+                                collaborator.roles === 'ROLE_ADMIN'
+                                    ? 'Administrador'
+                                    : collaborator.roles === 'ROLE_CHEF'
+                                      ? 'Chefe de Cozinha'
+                                      : 'Garçom',
+                            name: collaborator.fullName,
+                            status: collaborator.isEmployee
+                                ? 'Ativo'
+                                : 'Inativo',
+                            action: 'Ver mais',
+                        },
+                        componentType: ['text', 'text', 'text', 'button'],
+                    }),
+                );
+            },
+        );
 
-                this.tabela.pagination.totalItems = collaborators.length;
-                this.tabela.pagination.pageRange = collaborators.length / 2;
-                this.tabela.metrics = `Mostrando ${collaborators.length} de ${collaborators.length} colaboradores`;
-            });
+        this.fetchCollaborators();
+    }
+
+    fetchCollaborators(): void {
+        this.collaboratorUseCase.getAllCollaborators(this.currentPage - 1, this.pageSize).subscribe(
+            (response: GetAllCollaboratorsDto) => {
+                this.tabela.pagination.totalItems = response.totalElements;
+                this.tabela.pagination.totalPages = Math.ceil(response.totalElements / this.pageSize);
+                this.tabela.metrics = `Mostrando ${response.content.length} de ${response.totalElements} colaboradores`;
+            }
+        );
+    }
+
+    onPageChange(page: number): void {
+        if (page >= 1 && page <= this.tabela.pagination.totalPages!) {
+            this.currentPage = page;
+            this.fetchCollaborators();
+        }
+    }
+
+    ngOnDestroy(): void {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 
     tabela: TableConfig<{
@@ -62,11 +90,9 @@ export class ColaboradorComponent implements OnInit {
             { isActive: false, text: 'Ativos' },
             { isActive: false, text: 'Inativos' },
         ],
-        metrics: "Mostrando {0} de {1} colaboradores",
+        metrics: "",
         header: ['Nome', 'Função', 'Status', 'Ações'],
-        data: [
-            
-        ],
+        data: [],
         search: {
             placeholder: 'Procure por nome ou função...',
             value: '',
@@ -75,11 +101,13 @@ export class ColaboradorComponent implements OnInit {
             },
         },
         pagination: {
-            pageRange: 4,
+            pageRange: 1,
             totalItems: 0,
+            totalPages: 0,
+            onPageChange: (page: number) => this.onPageChange(page),
         },
-        };
-    
+    };
+
     voltar() {
         this.location.back();
     }

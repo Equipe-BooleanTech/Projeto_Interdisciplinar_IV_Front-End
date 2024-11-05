@@ -45,17 +45,17 @@
           <div class="flex items-center justify-between mx-2">
             <span class="text-sm text-gray-700">
               {{ tableConfig.pagination.pageRange }} de
-              {{ tableConfig.pagination.totalItems }}
+              {{ tableConfig.pagination.totalPages }}
             </span>
             <div class="flex items-center space-x-2">
               <button class="flex items-center justify-center w-8 h-8 rounded-full text-gray-700 border border-gray-500"
                 (click)="onPageDecrease()"
-                [disabled]="tableConfig.pagination.totalItems < tableConfig.pagination.pageRange">
+                [disabled]="tableConfig.pagination.totalPages! < tableConfig.pagination.pageRange">
                 <span class="icon-[formkit--left]"></span>
               </button>
               <button class="flex items-center justify-center w-8 h-8 rounded-full text-gray-700 border border-gray-500"
                 (click)="onPageIncrease()"
-                [disabled]="tableConfig.pagination.totalItems < tableConfig.pagination.pageRange">
+                [disabled]="tableConfig.pagination.totalPages! < tableConfig.pagination.pageRange">
                 <span class="icon-[formkit--right]"></span>
               </button>
             </div>

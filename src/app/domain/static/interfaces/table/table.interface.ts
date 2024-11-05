@@ -21,6 +21,8 @@ export interface TableConfig<T> {
     pagination: {
         pageRange: number;
         totalItems: number;
+        totalPages?: number;
+        onPageChange?: (page: number) => void;
     };
     rowOrder: string[];
 }
