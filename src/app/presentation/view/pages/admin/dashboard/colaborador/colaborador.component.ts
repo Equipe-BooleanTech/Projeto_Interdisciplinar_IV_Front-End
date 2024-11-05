@@ -1,6 +1,8 @@
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CollaboratorDto } from '@domain/dtos';
 import { TableConfig } from '@domain/static/interfaces';
+import { CollaboratorUseCase } from '@domain/usecases/admin';
 import {
     ButtonComponent,
     SidebarComponent,
@@ -14,66 +16,56 @@ import {
     templateUrl: './colaborador.component.html',
     styles: ``,
 })
-export class ColaboradorComponent {
-    constructor(private location: Location) {}
+export class ColaboradorComponent implements OnInit {
+    constructor(
+        private location: Location,
+        private collaboratorUseCase: CollaboratorUseCase,
+    ) {}
+
+    ngOnInit(): void {
+        this.collaboratorUseCase
+            .getAllCollaborators()
+            .subscribe((response: { content: CollaboratorDto[] }) => {
+                            const collaborators = response.content;
+                console.log(collaborators);
+                this.tabela.data = collaborators.map((collaborator) => ({
+                    rowData: {
+                        role:
+                            collaborator.roles === 'ROLE_ADMIN'
+                                ? 'Administrador'
+                                : collaborator.roles === 'ROLE_CHEF'
+                                  ? 'Chefe de Cozinha'
+                                  : 'Garçom',
+                        name: collaborator.fullName,
+                        status: collaborator.isEmployee ? 'Ativo' : 'Inativo',
+                        action: 'Ver mais',
+                    },
+                    componentType: ['text', 'text', 'text', 'button'],
+                }));
+
+                this.tabela.pagination.totalItems = collaborators.length;
+                this.tabela.pagination.pageRange = collaborators.length / 2;
+                this.tabela.metrics = `Mostrando ${collaborators.length} de ${collaborators.length} colaboradores`;
+            });
+    }
 
     tabela: TableConfig<{
         role: string;
         name: string;
         status: string;
-        lastAccess: string;
         action: string;
     }> = {
-        rowOrder: ['name', 'role', 'status', 'lastAccess', 'action'],
+        rowOrder: ['name', 'role', 'status', 'action'],
         title: 'Colaboradores Cadastrados e Status',
         filters: [
             { isActive: true, text: 'Todos' },
             { isActive: false, text: 'Ativos' },
             { isActive: false, text: 'Inativos' },
         ],
-        metrics: 'Total: 4 colaboradores, 3 ativos, 1 inativo',
-        header: ['Nome', 'Função', 'Status', 'Data de Último Acesso', 'Ações'],
+        metrics: "Mostrando {0} de {1} colaboradores",
+        header: ['Nome', 'Função', 'Status', 'Ações'],
         data: [
-            {
-                rowData: {
-                    role: 'Chefe de Cozinha',
-                    name: 'Henrique Costa',
-                    status: 'Ativo',
-                    lastAccess: '17/11/2023',
-                    action: 'Detalhes',
-                },
-                componentType: ['text', 'text', 'text', 'text', 'button'],
-            },
-            {
-                rowData: {
-                    role: 'Gerente',
-                    name: 'Henrique Costa',
-                    status: 'Inativo',
-                    lastAccess: '17/11/2023',
-                    action: 'Detalhes',
-                },
-                componentType: ['text', 'text', 'text', 'text', 'button'],
-            },
-            {
-                rowData: {
-                    role: 'Garçom',
-                    name: 'Henrique Costa',
-                    status: 'Ativo',
-                    lastAccess: '17/11/2023',
-                    action: 'Detalhes',
-                },
-                componentType: ['text', 'text', 'text', 'text', 'button'],
-            },
-            {
-                rowData: {
-                    role: 'Recepcionista',
-                    name: 'Julia Almeida',
-                    status: 'Ativo',
-                    lastAccess: '12/09/2023',
-                    action: 'Detalhes',
-                },
-                componentType: ['text', 'text', 'text', 'text', 'button'],
-            },
+            
         ],
         search: {
             placeholder: 'Procure por nome ou função...',
@@ -84,14 +76,11 @@ export class ColaboradorComponent {
         },
         pagination: {
             pageRange: 4,
-            totalItems: 4,
+            totalItems: 0,
         },
-    };
-    cadastrarNovoColaborador(): void {
-        // Lógica para abrir o formulário de cadastro ou navegar para a página de cadastro
-        console.log('Abrir formulário de cadastro');
-    }
+        };
+    
     voltar() {
         this.location.back();
-      }
+    }
 }

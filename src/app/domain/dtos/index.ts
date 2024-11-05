@@ -11,3 +11,5 @@ export * from './admin/supplier.usecase.dto/supplier.usecase.dto';
 
 export * from './admin/ingredient.usecase.dto/ingredient.usecase.dto';
 
+export * from './admin/collaborator.usecase.dto/collaborator.usecase.dto';
+
