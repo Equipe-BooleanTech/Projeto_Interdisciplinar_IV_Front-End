@@ -1,81 +1,30 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-    CollaboratorDto,
-    CollaboratorResponseDto,
-    CreateCollaboratorDto,
-    DeleteCollaboratorDto,
-    GetAllCollaboratorsDto,
-    GetCollaboratorDto,
-    UpdateCollaboratorDto,
-    
-} from '@domain/dtos';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { CollaboratorDto, PaginatedResponse } from '@domain/dtos';
 import { CollaboratorRepositoryUseCase } from '@domain/repositories';
-import { Observable, BehaviorSubject, throwError, interval } from 'rxjs';
-import { catchError, tap, switchMap } from 'rxjs/operators';
-
-import { API_URL, ErrorService } from 'src/app/shared';
+import { ErrorService, BaseUseCase } from "@domain/base"
+import {API_URL} from '@shared/constants'
 
 @Injectable({
     providedIn: 'root',
 })
-export class CollaboratorUseCase implements CollaboratorRepositoryUseCase {
+export class CollaboratorUseCase extends BaseUseCase<CollaboratorDto> {
     private apiBase = API_URL;
-    private collaboratorsSubject = new BehaviorSubject<CollaboratorDto[]>([]);
-    collaborators$ = this.collaboratorsSubject.asObservable();
 
-    constructor(
-        private _http: HttpClient,
-        private _errorService: ErrorService,
-    ) {}
+    constructor(_http: HttpClient, _errorService: ErrorService) {
+        super(_http, _errorService);
+    }
 
     getAllCollaborators(
         page: number,
         size: number,
-    ): Observable<GetAllCollaboratorsDto> {
-        return this._http
-            .get<GetAllCollaboratorsDto>(
-                `${this.apiBase}/api/users/get-users?page=${page}&size=${size}`,
-            )
-            .pipe(
-                tap((response) =>
-                    this.collaboratorsSubject.next(response.content),
-                ),
-                catchError(this._errorService.handleError),
-            );
+    ): Observable<PaginatedResponse<CollaboratorDto>> {
+        return this.getAll(`${this.apiBase}/api/users/get-users`, page, size);
     }
 
-    getCollaborator(id: string): Observable<CollaboratorDto> {
-        return this._http.get<CollaboratorDto>(
-            `${this.apiBase}/api/collaborators/get-collaborator/${id}`
-        ).pipe(
-            catchError(this._errorService.handleError)
-        );
+    registerCollaborator(data: CollaboratorDto): Observable<CollaboratorDto> {
+        return this.create(`${this.apiBase}/api/users/create-complete`, data)
     }
     
-    createCollaborator(
-        collaborator: CollaboratorDto,
-    ): Observable<CollaboratorDto> {
-        return this._http.post<CollaboratorDto>(
-            `${this.apiBase}/api/collaborators/create-collaborator`,
-            collaborator,
-        );
-    }
-
-    updateCollaborator(
-        collaborator: CollaboratorDto,
-        id: string,
-    ): Observable<CollaboratorDto> {
-        return this._http.put<CollaboratorDto>(
-            `${this.apiBase}/api/collaborators/update-collaborator/${id}`,
-            collaborator,
-        );
-    }
-
-    deleteCollaborator(id: string): Observable<CollaboratorResponseDto> {
-        return this._http.delete<CollaboratorResponseDto>(
-            `${this.apiBase}/api/collaborators/delete-collaborator/${id}`,
-            {},
-        );
-    }
 }

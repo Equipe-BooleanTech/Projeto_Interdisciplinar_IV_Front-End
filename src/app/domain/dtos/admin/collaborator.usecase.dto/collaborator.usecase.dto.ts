@@ -19,57 +19,5 @@ export interface CollaboratorDto {
 }
 
 export interface CollaboratorResponseDto{
-    statusCode: number;
     message?: string;
-}
-
-// GET (By Id)
-export interface GetCollaboratorDto{
-    id: string;
-}
-
-// Get (All)
-export interface GetAllCollaboratorsDto {
-    content: CollaboratorDto[];
-    pageable: {
-        pageNumber: number;
-        pageSize: number;
-        sort: {
-            empty: boolean;
-            sorted: boolean;
-            unsorted: boolean;
-        };
-        offset: number;
-        paged: boolean;
-        unpaged: boolean;
-    };
-    last: boolean;
-    totalPages: number;
-    totalElements: number;
-    size: number;
-    number: number;
-    sort: {
-        empty: boolean;
-        sorted: boolean;
-        unsorted: boolean;
-    };
-    numberOfElements: number;
-    first: boolean;
-    empty: boolean;
-}
-
-// POST
-export interface CreateCollaboratorDto {
-    collaborator: CollaboratorDto;
-}
-
-// PUT
-export interface UpdateCollaboratorDto {
-    id: string;
-    collaborator: CollaboratorDto;
-}
-
-// DELETE
-export interface DeleteCollaboratorDto {
-    id: string;
 }

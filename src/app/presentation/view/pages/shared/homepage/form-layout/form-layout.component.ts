@@ -18,6 +18,7 @@ import {
     FormValidateService,
 } from '@domain/static/services';
 import { SendProspectionFormUseCase } from '@domain/usecases/prospection';
+import { ToastrService } from 'ngx-toastr';
 import { ButtonComponent } from '@presentation/view/components';
 import {
     FormComponent,
@@ -52,6 +53,7 @@ export class FormLayoutComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private _dataTransferService: DataTransferService,
         private _formValidateService: FormValidateService,
+        private toastr: ToastrService
     ) {}
 
     ngOnInit(): void {
@@ -98,11 +100,13 @@ export class FormLayoutComponent implements OnInit {
                     message: response.message,
                 };
                 this.handleResponse(output);
-                if (output.statusCode === 201) {
-                    alert(
-                        'Formulário criado com sucesso! Entraremos em contato em até 3 dias úteis!',
-                    );
-                    window.location.reload();
+                if (output.statusCode === 201) {                       
+                     this.toastr.success("Agradecemos pelo seu interesse. Entraremos em contato em breve!", "Sucesso!")  
+
+                    setTimeout(() => {
+                        window.location.reload();
+
+                    }, 3000)
                 }
             });
     }

@@ -6,11 +6,12 @@ import {
     ReactiveFormsModule,
     ValidatorFn,
 } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { RegisterColaborattorDto } from '@domain/dtos';
+import { CollaboratorDto, CollaboratorResponseDto } from '@domain/dtos';
 import { collaboratorFields } from '@domain/static/data';
 import { FormValidateService } from '@domain/static/services';
-import { RegisterColaborattorUseCase } from '@domain/usecases/admin';
+import { CollaboratorUseCase } from '@domain/usecases/admin';
 import {
     ButtonComponent,
     FormComponent,
@@ -20,6 +21,8 @@ import {
     FormInputComponent,
     FormSelectComponent,
 } from '@presentation/view/components/form';
+
+import { DEFAULT_PASSWORD } from '@shared/constants';
 
 @Component({
     selector: 'app-cadastro-colaborador',
@@ -40,12 +43,14 @@ import {
 export class CadastroColaboradorComponent implements OnInit {
     collaboratorForm: FormGroup = new FormGroup({});
     collaboratorFormFields = collaboratorFields;
+    public defaultPassword = DEFAULT_PASSWORD;
 
     constructor(
         private _fb: FormBuilder,
         private _router: Router,
         private _formValidateService: FormValidateService,
-        private _registerColaborattorUseCase: RegisterColaborattorUseCase,
+        private _collaboratorUseCase: CollaboratorUseCase,
+        private toastr: ToastrService,
     ) {}
 
     ngOnInit(): void {
@@ -71,19 +76,28 @@ export class CadastroColaboradorComponent implements OnInit {
 
     onSubmit(): void {
         if (this.collaboratorForm.valid) {
-            console.log(this.collaboratorForm.value);
-            this._registerColaborattorUseCase
-                .registerColaborattor(
-                    this.collaboratorForm.value as RegisterColaborattorDto,
-                )
-                .subscribe((response) => {
-                    alert('Colaborador cadastrado com sucesso!');
-                    this._router.navigate(['/admin/colaboradores']);
+            this._collaboratorUseCase
+                .registerCollaborator({
+                    ...this.collaboratorForm.value,
+                    password: this.defaultPassword,
+                    isEmployee: true,
+                    isProspecting: false,
+                } as CollaboratorDto)
+                .subscribe({
+                    next: (response: CollaboratorResponseDto) => {
+                        this.toastr.success(
+                            'Colaborador cadastrado com sucesso!',
+                            
+                        );
+                        setTimeout(() => {
+                            this._router.navigate(['/admin/colaboradores']);
+                        }, 3000)
+                    },
+                    error: () =>
+                        this.toastr.error('Erro ao cadastrar colaborador.'),
                 });
         } else {
-            console.log('Formulário inválido');
+            this.toastr.error('Formulário Inválido.');
         }
-       
-}
-   
+    }
 }
