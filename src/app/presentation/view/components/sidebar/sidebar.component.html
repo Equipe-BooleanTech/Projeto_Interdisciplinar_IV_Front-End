@@ -10,14 +10,14 @@
 
         <ng-container *ngFor="let item of sidebarItems.slice(0, 5); let i = index">
           <div class="group my-4">
-            <a [href]="item.link" class="flex items-center p-3 text-base font-medium rounded-lg hover:bg-[#d33f3f]">
+            <a [href]="item.link" class="flex items-center p-3 text-base font-medium rounded-lg hover:bg-hover">
               <i [class]="item.icon"></i>
               <span class="ml-4">{{ item.title }}</span>
               <i *ngIf="item.subItems" class="fas fa-chevron-down ml-auto"></i>
             </a>
             <div *ngIf="item.subItems" class="hidden group-hover:block pl-4">
               <ng-container *ngFor="let subItem of item.subItems">
-                <a [href]="subItem.link" class="block p-3 text-sm font-medium rounded-lg hover:bg-[#d33f3f]">
+                <a [href]="subItem.link" class="block p-3 text-sm font-medium rounded-lg hover:bg-hover">
                   <i [class]="subItem.icon"></i>
                   <span class="ml-4">{{ subItem.title }}</span>
                 </a>
@@ -33,14 +33,14 @@
 
         <ng-container *ngFor="let item of sidebarItems.slice(5, 7); let i = index">
           <div class="group my-4">
-            <a [href]="item.link" class="flex items-center p-3 text-base font-medium rounded-lg hover:bg-[#d33f3f]">
+            <a [href]="item.link" class="flex items-center p-3 text-base font-medium rounded-lg hover:bg-hover">
               <i [class]="item.icon"></i>
               <span class="ml-4">{{ item.title }}</span>
               <i *ngIf="item.subItems" class="fas fa-chevron-down ml-auto"></i>
             </a>
             <div *ngIf="item.subItems" class="hidden group-hover:block pl-4">
               <ng-container *ngFor="let subItem of item.subItems">
-                <a [href]="subItem.link" class="block p-3 text-sm font-medium rounded-lg hover:bg-[#d33f3f]">
+                <a [href]="subItem.link" class="block p-3 text-sm font-medium rounded-lg hover:bg-hover">
                   <i [class]="subItem.icon"></i>
                   <span class="ml-4">{{ subItem.title }}</span>
                 </a>
@@ -55,14 +55,14 @@
       <div>
         <ng-container *ngFor="let item of sidebarItems.slice(7); let i = index">
           <div class="group my-4">
-            <a [href]="item.link" class="flex items-center p-3 text-base font-medium rounded-lg hover:bg-[#d33f3f]">
+            <a [href]="item.link" class="flex items-center p-3 text-base font-medium rounded-lg hover:bg-hover">
               <i [class]="item.icon"></i>
               <span class="ml-4">{{ item.title }}</span>
               <i *ngIf="item.subItems" class="fas fa-chevron-down ml-auto"></i>
             </a>
             <div *ngIf="item.subItems" class="hidden group-hover:block pl-4">
               <ng-container *ngFor="let subItem of item.subItems">
-                <a [href]="subItem.link" class="block p-3 text-sm font-medium rounded-lg hover:bg-[#d33f3f]">
+                <a [href]="subItem.link" class="block p-3 text-sm font-medium rounded-lg hover:bg-hover">
                   <i [class]="subItem.icon"></i>
                   <span class="ml-4">{{ subItem.title }}</span>
                 </a>
@@ -86,7 +86,7 @@
   <nav class="flex-1 px-2 py-4 space-y-2">
     <ng-container *ngFor="let item of sidebarItems">
       <div class="group">
-        <a [href]="getItemLink(item)" class="flex items-center p-2 text-base font-medium rounded-lg hover:bg-[#d33f3f]"
+        <a [href]="getItemLink(item)" class="flex items-center p-2 text-base font-medium rounded-lg hover:bg-hover"
           (click)="toggleSubItems(item, $event)" (keyup.enter)="toggleSubItems(item, $event)" tabindex="0">
           <i [class]="item.icon"></i>
           <span class="ml-4">{{ item.title }}</span>
@@ -94,7 +94,7 @@
         </a>
         <div *ngIf="item.subItems" [ngClass]="{'block': item.isExpanded, 'hidden': !item.isExpanded}" class="pl-4">
           <ng-container *ngFor="let subItem of item.subItems">
-            <a [href]="subItem.link" class="block p-2 text-sm font-medium rounded-lg hover:bg-[#d33f3f]">
+            <a [href]="subItem.link" class="block p-2 text-sm font-medium rounded-lg hover:bg-hover">
               <i [class]="subItem.icon"></i>
               <span class="ml-4">{{ subItem.title }}</span>
             </a>
