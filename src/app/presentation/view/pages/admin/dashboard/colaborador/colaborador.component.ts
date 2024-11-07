@@ -1,11 +1,14 @@
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CollaboratorDto, GetAllCollaboratorsDto } from '@domain/dtos';
 import { TableConfig } from '@domain/static/interfaces';
+import { CollaboratorUseCase } from '@domain/usecases/admin';
 import {
     ButtonComponent,
     SidebarComponent,
     TableComponent,
 } from '@presentation/view/components';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-colaborador',
@@ -14,67 +17,82 @@ import {
     templateUrl: './colaborador.component.html',
     styles: ``,
 })
-export class ColaboradorComponent {
-    constructor(private location: Location) {}
+export class ColaboradorComponent implements OnInit, OnDestroy {
+    private subscription: Subscription | null = null;
+    currentPage = 1;
+    pageSize = 6;
+
+    constructor(
+        private location: Location,
+        private collaboratorUseCase: CollaboratorUseCase,
+    ) {}
+
+    ngOnInit(): void {
+        this.subscription = this.collaboratorUseCase.collaborators$.subscribe(
+            (collaborators: CollaboratorDto[]) => {
+                this.tabela.data = collaborators.map(
+                    (collaborator: CollaboratorDto) => ({
+                        rowData: {
+                            role:
+                                collaborator.roles === 'ROLE_ADMIN'
+                                    ? 'Administrador'
+                                    : collaborator.roles === 'ROLE_CHEF'
+                                      ? 'Chefe de Cozinha'
+                                      : 'Garçom',
+                            name: collaborator.fullName,
+                            status: collaborator.isEmployee
+                                ? 'Ativo'
+                                : 'Inativo',
+                            action: 'Ver mais',
+                        },
+                        componentType: ['text', 'text', 'text', 'button'],
+                    }),
+                );
+            },
+        );
+
+        this.fetchCollaborators();
+    }
+
+    fetchCollaborators(): void {
+        this.collaboratorUseCase.getAllCollaborators(this.currentPage - 1, this.pageSize).subscribe(
+            (response: GetAllCollaboratorsDto) => {
+                this.tabela.pagination.totalItems = response.totalElements;
+                this.tabela.pagination.totalPages = Math.ceil(response.totalElements / this.pageSize);
+                this.tabela.metrics = `Mostrando ${response.content.length} de ${response.totalElements} colaboradores`;
+            }
+        );
+    }
+
+    onPageChange(page: number): void {
+        if (page >= 1 && page <= this.tabela.pagination.totalPages!) {
+            this.currentPage = page;
+            this.fetchCollaborators();
+        }
+    }
+
+    ngOnDestroy(): void {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    }
 
     tabela: TableConfig<{
         role: string;
         name: string;
         status: string;
-        lastAccess: string;
         action: string;
     }> = {
-        rowOrder: ['name', 'role', 'status', 'lastAccess', 'action'],
+        rowOrder: ['name', 'role', 'status', 'action'],
         title: 'Colaboradores Cadastrados e Status',
         filters: [
             { isActive: true, text: 'Todos' },
             { isActive: false, text: 'Ativos' },
             { isActive: false, text: 'Inativos' },
         ],
-        metrics: 'Total: 4 colaboradores, 3 ativos, 1 inativo',
-        header: ['Nome', 'Função', 'Status', 'Data de Último Acesso', 'Ações'],
-        data: [
-            {
-                rowData: {
-                    role: 'Chefe de Cozinha',
-                    name: 'Henrique Costa',
-                    status: 'Ativo',
-                    lastAccess: '17/11/2023',
-                    action: 'Detalhes',
-                },
-                componentType: ['text', 'text', 'text', 'text', 'button'],
-            },
-            {
-                rowData: {
-                    role: 'Gerente',
-                    name: 'Henrique Costa',
-                    status: 'Inativo',
-                    lastAccess: '17/11/2023',
-                    action: 'Detalhes',
-                },
-                componentType: ['text', 'text', 'text', 'text', 'button'],
-            },
-            {
-                rowData: {
-                    role: 'Garçom',
-                    name: 'Henrique Costa',
-                    status: 'Ativo',
-                    lastAccess: '17/11/2023',
-                    action: 'Detalhes',
-                },
-                componentType: ['text', 'text', 'text', 'text', 'button'],
-            },
-            {
-                rowData: {
-                    role: 'Recepcionista',
-                    name: 'Julia Almeida',
-                    status: 'Ativo',
-                    lastAccess: '12/09/2023',
-                    action: 'Detalhes',
-                },
-                componentType: ['text', 'text', 'text', 'text', 'button'],
-            },
-        ],
+        metrics: "",
+        header: ['Nome', 'Função', 'Status', 'Ações'],
+        data: [],
         search: {
             placeholder: 'Procure por nome ou função...',
             value: '',
@@ -83,15 +101,14 @@ export class ColaboradorComponent {
             },
         },
         pagination: {
-            pageRange: 4,
-            totalItems: 4,
+            pageRange: 1,
+            totalItems: 0,
+            totalPages: 0,
+            onPageChange: (page: number) => this.onPageChange(page),
         },
     };
-    cadastrarNovoColaborador(): void {
-        // Lógica para abrir o formulário de cadastro ou navegar para a página de cadastro
-        console.log('Abrir formulário de cadastro');
-    }
+
     voltar() {
         this.location.back();
-      }
+    }
 }

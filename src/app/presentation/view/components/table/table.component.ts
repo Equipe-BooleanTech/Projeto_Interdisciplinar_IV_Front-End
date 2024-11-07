@@ -12,7 +12,7 @@ import { SearchbarComponent } from "../searchbar/searchbar.component";
 })
 export class TableComponent<T extends Record<string, unknown>> {
     @Input() tableConfig!: TableConfig<T>;
-    
+
     onFilterClick(filter: { isActive: boolean; text: string }): void {
         if (!this.tableConfig.filters) return;
 
@@ -37,16 +37,27 @@ export class TableComponent<T extends Record<string, unknown>> {
 
     onPageIncrease(): void {
         const pagination = this.tableConfig.pagination;
-        if (pagination && pagination.pageRange !== undefined) {
+        const totalPages = this.tableConfig.pagination.totalPages!;
+        if (
+            pagination &&
+            pagination.pageRange !== undefined &&
+            pagination.pageRange < totalPages
+        ) {
             pagination.pageRange++;
+            if (pagination.onPageChange) {
+                pagination.onPageChange(pagination.pageRange);
+            }
         }
     }
 
     onPageDecrease(): void {
         const pagination = this.tableConfig.pagination;
-        if(pagination.pageRange <= 1) return;
+        if (pagination.pageRange <= 1) return;
         if (pagination && pagination.pageRange !== undefined) {
             pagination.pageRange--;
+            if (pagination.onPageChange) {
+                pagination.onPageChange(pagination.pageRange);
+            }
         }
     }
 }
