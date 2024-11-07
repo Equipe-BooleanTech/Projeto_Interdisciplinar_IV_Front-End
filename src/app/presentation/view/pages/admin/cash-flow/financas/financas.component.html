@@ -1,28 +1,27 @@
 <app-sidebar>
 
     <h1 class="text-4xl font-bold text-center mb-8">Gerenciamento de Finanças</h1>
-    <h3 class="m-8 p-4 text-center">Crie um grupo de finanças e associe-as a um grupo,
+    <h3 class="m-8 p-4 lg:text-center">Crie um grupo de finanças e associe-as a um grupo,
         permitindo um fácil gerenciamento das contas a pagar de seu restaurante.</h3>
-    <div class="flex justify-center space-x-4 mt-8">
+    <div class="flex justify-center space-x-8 mt-8 w-full">
         <app-button [link]="'./admin/controle-caixa/financas/nova-financa'"
-            [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'" [disabled]="false">
+    [disabled]="false">
             Cadastrar Nova Finança
         </app-button>
-        <app-button [link]="'./admin/controle-caixa/financas/relatorio-financa'"
-            [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'" [disabled]="false">
+        <app-button [link]="'./admin/controle-caixa/financas/relatorio-financa'" [disabled]="false">
             Gerar Relatório de Finanças
         </app-button>
 
     </div>
-    <div class="w-full min-h-96 flex justify-center items-center space-x-8">
+    <div class="my-16 content-center place-content-center grid gap-72 lg:gap-16 sm:grid-cols-1 lg:grid-cols-3 w-full">
         <app-card [hasRedirection]="true" title="Grupo de Fornecedores" imgSrc="https://i.ibb.co/1RMHvDz/logo.jpg"
-            [buttonText]="'Ver mais'" link="admin/controle-caixa/financas/grupo-financas" class="w-64 h-64 object-cover"></app-card>
+            [buttonText]="'Ver mais'" link="admin/controle-caixa/financas/grupo-financas" class="object-cover h-64 mx-auto"></app-card>
 
         <app-card [hasRedirection]="true" title="Grupo de Despesas" imgSrc="https://i.ibb.co/1RMHvDz/logo.jpg"
-            [buttonText]="'Ver mais'" class="w-64 h-64 object-cover"></app-card>
+            [buttonText]="'Ver mais'" class="object-cover h-64 mx-auto"></app-card>
 
         <app-card [hasRedirection]="true" title="Grupo de Receitas" imgSrc="https://i.ibb.co/1RMHvDz/logo.jpg"
-            [buttonText]="'Ver mais'" link="./admin/controle-caixa/financas/grupo-financas" class="w-64 h-64 object-cover"></app-card>
+            [buttonText]="'Ver mais'" link="./admin/controle-caixa/financas/grupo-financas" class="object-cover h-64 mx-auto"></app-card>
     </div>
 
 

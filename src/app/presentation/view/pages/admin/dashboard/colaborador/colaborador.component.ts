@@ -7,13 +7,14 @@ import {
     ButtonComponent,
     SidebarComponent,
     TableComponent,
+    WrapperComponent
 } from '@presentation/view/components';
 import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-colaborador',
     standalone: true,
-    imports: [SidebarComponent, TableComponent, ButtonComponent],
+    imports: [SidebarComponent, TableComponent, ButtonComponent, WrapperComponent],
     templateUrl: './colaborador.component.html',
     styles: ``,
 })
