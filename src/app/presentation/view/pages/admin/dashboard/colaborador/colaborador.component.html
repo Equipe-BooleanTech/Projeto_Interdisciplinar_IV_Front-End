@@ -1,23 +1,26 @@
 <app-sidebar>
-    <div class="flex justify-between items-center my-4">
+  <div class="flex flex-wrap lg:justify-between justify-center items-center w-full">
+    <div class="w-full lg:w-auto mb-4 lg:mb-0">
+      <app-button
+        [class]="'w-full lg:w-auto bg-[#741308] hover:bg-[#118632] text-white font-bold py-2 lg:py-4 px-4 lg:px-6 rounded-lg'"
+        [link]="'./admin'"
+        [disabled]="false">
+        Voltar
+      </app-button>
+    </div>
+    <div class="w-full lg:w-auto">
+      <app-button
+        [link]="'admin/colaboradores/cadastrar-colaborador'"
+        [class]="'w-full lg:w-auto bg-[#741308] hover:bg-[#118632] text-white font-bold py-2 lg:py-4 px-4 lg:px-6 rounded-lg'"
+        [disabled]="false">
+        Cadastrar Novo Colaborador
+      </app-button>
+    </div>
+  </div>
 
-        <app-button
-          [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'"
-          [link]="'./admin'"
-          [disabled]="false"
-          >
-          Voltar
-        </app-button>
-        <app-button
-          [link]="'admin/colaboradores/cadastrar-colaborador'"
-          [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'"
-          [disabled]="false">
-          Cadastrar Novo Colaborador
-        </app-button>
-      </div>
-
+  <div class="mx-4 lg:mx-24 my-4">
     <app-table [tableConfig]="tabela">
-        <app-button>
-        </app-button>
+      <app-button></app-button>
     </app-table>
+  </div>
 </app-sidebar>
