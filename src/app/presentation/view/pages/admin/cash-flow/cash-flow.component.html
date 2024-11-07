@@ -1,7 +1,7 @@
 <app-sidebar>
     <h1 class="text-4xl font-bold text-center mb-8">Gerenciamento de Caixa</h1>
    
-    <div class="w-full flex justify-center gap-80 items-center mx-auto">
+    <div class="w-full flex justify-center xl:gap-80 items-center mx-auto flex-wrap">
         
         <app-card class="flex-1 max-w-xs mr-4" [isDemographic]="true" iconClass="icon-[mdi--delivery-dining-outline]"
             [metric]="'R$249'" [percentageChange]="2.84" [isPositive]="true" metricTitle="em Delivery">
@@ -20,7 +20,6 @@
     <div class="flex justify-end">
         <app-button
             [link]="'./admin/controle-caixa/ultimas-transacoes'"
-            [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'"
             [disabled]="false">
             Últimas Transações
         </app-button>

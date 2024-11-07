@@ -4,7 +4,6 @@
     <div class="flex justify-between items-center my-4">
 
         <app-button
-          [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'"
           [link]="'./admin/controle-caixa'"
           [disabled]="false">
             Voltar
@@ -12,7 +11,6 @@
         </app-button>
         <app-button
             [link]="'./admin/controle-caixa/ultimas-transacoes'"
-            [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'"
             [disabled]="false">
             Últimas Transações
         </app-button>
@@ -20,7 +18,7 @@
 
     <app-table [tableConfig]="tabela"></app-table>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 m-8">
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 m-8">
 
         <div class="flex justify-evenly items-center">
             <app-pie class="w-full flex m-auto justify-center items-end"

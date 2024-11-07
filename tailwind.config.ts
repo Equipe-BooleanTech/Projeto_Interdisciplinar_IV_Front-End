@@ -16,11 +16,11 @@ export default {
     theme: {
         colors: {
             primary: '#740318',
+            hover: '#d33f3f',
+            secondary: '#118632',
             base: '#FAFAFA',
             success: '#2E7D32',
-            warning: '#FFA000',
-            danger: '#D32F2F',
-            info: '#1976D2',
+            
         },
         fontFamily: {
             display: ['DM Sans', 'sans-serif'],
