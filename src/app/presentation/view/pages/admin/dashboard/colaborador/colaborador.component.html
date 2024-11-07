@@ -1,23 +1,28 @@
 <app-sidebar>
-    <div class="flex justify-between items-center my-4">
+  <app-wrapper>
+    <h1 class="text-4xl font-black text-center mx-auto my-8">Gerenciamento de Colaboradores</h1>
+    <p class="md:w-2/3 mx-auto md:text-center mb-8">Gerencie os colaboradores do seu restaurante de forma eficiente! Nesta seção, você poderá cadastrá-los, gerenciar seus status e respectivas funções dentro de seu estabelecimento!</p>
+  <div class="flex flex-wrap lg:justify-between justify-center items-center w-full">
+    <div class="w-full lg:w-auto mb-4 lg:ml-16">
+      <app-button
+        [link]="'./admin'"
+        [disabled]="false">
+        Voltar
+      </app-button>
+    </div>
+    <div class="w-full lg:w-auto mb-4 lg:mr-16">
+      <app-button
+        [link]="'admin/colaboradores/cadastrar-colaborador'"
+        [disabled]="false">
+        Cadastrar Novo Colaborador
+      </app-button>
+    </div>
+  </div>
 
-        <app-button
-          [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'"
-          [link]="'./admin'"
-          [disabled]="false"
-          >
-          Voltar
-        </app-button>
-        <app-button
-          [link]="'admin/colaboradores/cadastrar-colaborador'"
-          [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'"
-          [disabled]="false">
-          Cadastrar Novo Colaborador
-        </app-button>
-      </div>
-
+  <div class="mx-4 lg:mx-24 my-4">
     <app-table [tableConfig]="tabela">
-        <app-button>
-        </app-button>
+      <app-button></app-button>
     </app-table>
+  </div>
+</app-wrapper>
 </app-sidebar>

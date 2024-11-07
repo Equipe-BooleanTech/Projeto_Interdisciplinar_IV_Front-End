@@ -20,6 +20,7 @@ import {
     FooterComponent,
 } from '@presentation/view/components';
 import { FormInputComponent } from '@presentation/view/components/form';
+import { ToastrService } from 'ngx-toastr';
 import { TokenService } from 'src/app/security';
 
 @Component({
@@ -41,7 +42,8 @@ export class LoginComponent implements OnInit {
     constructor(
         private _formBuilder: FormBuilder,
         private _authService: AuthenticateUseCase,
-        private _tokenService: TokenService
+        private _tokenService: TokenService,
+        private toastr: ToastrService
     ) {}
     ngOnInit(): void {
         this.form = this._formBuilder.group({});
@@ -97,9 +99,12 @@ export class LoginComponent implements OnInit {
     handleResponse(output: OutputSendLoginFormDto): void {
         if (output.statusCode === 200) {
             document.cookie = `token=${output.token}; expires=${new Date().getDate() + 1}`;
-            window.location.href = '/admin';
+            this.toastr.success("Login efetuado com sucesso! Redirecionando...", "Sucesso")
+            setTimeout(() => {
+                window.location.href = '/admin';
+            }, 3000)
         } else {
-            alert('Usuário ou senha inválidos');
+            this.toastr.error("Credenciais inválidas! Tente novamente...", "Oops...")
         }
     }
 }

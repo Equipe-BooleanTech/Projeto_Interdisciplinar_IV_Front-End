@@ -1,19 +1,20 @@
 import { Location } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CollaboratorDto, GetAllCollaboratorsDto } from '@domain/dtos';
+import { PaginatedResponse, CollaboratorDto } from '@domain/dtos';
 import { TableConfig } from '@domain/static/interfaces';
 import { CollaboratorUseCase } from '@domain/usecases/admin';
 import {
     ButtonComponent,
     SidebarComponent,
     TableComponent,
+    WrapperComponent
 } from '@presentation/view/components';
 import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-colaborador',
     standalone: true,
-    imports: [SidebarComponent, TableComponent, ButtonComponent],
+    imports: [SidebarComponent, TableComponent, ButtonComponent, WrapperComponent],
     templateUrl: './colaborador.component.html',
     styles: ``,
 })
@@ -28,7 +29,7 @@ export class ColaboradorComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        this.subscription = this.collaboratorUseCase.collaborators$.subscribe(
+        this.subscription = this.collaboratorUseCase.base$.subscribe(
             (collaborators: CollaboratorDto[]) => {
                 this.tabela.data = collaborators.map(
                     (collaborator: CollaboratorDto) => ({
@@ -56,7 +57,7 @@ export class ColaboradorComponent implements OnInit, OnDestroy {
 
     fetchCollaborators(): void {
         this.collaboratorUseCase.getAllCollaborators(this.currentPage - 1, this.pageSize).subscribe(
-            (response: GetAllCollaboratorsDto) => {
+            (response: PaginatedResponse<CollaboratorDto>) => {
                 this.tabela.pagination.totalItems = response.totalElements;
                 this.tabela.pagination.totalPages = Math.ceil(response.totalElements / this.pageSize);
                 this.tabela.metrics = `Mostrando ${response.content.length} de ${response.totalElements} colaboradores`;
