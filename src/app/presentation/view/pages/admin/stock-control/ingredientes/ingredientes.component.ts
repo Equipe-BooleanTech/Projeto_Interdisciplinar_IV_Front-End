@@ -7,7 +7,7 @@ import {
     ValidatorFn,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PaginatedResponse, SupplierDto, IngredientDto } from '@domain/dtos';
+import { IngredientDto } from '@domain/dtos';
 import { ingredientFields } from '@domain/static/data/forms/ingredient/ingredient';
 import { FormValidateService } from '@domain/static/services';
 import { IngredientsUseCase, SuppliersUseCase } from '@domain/usecases/admin';
@@ -17,7 +17,6 @@ import {
     SidebarComponent,
 } from '@presentation/view/components';
 import { FormInputComponent } from '@presentation/view/components/form';
-import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-ingredientes',
@@ -47,7 +46,7 @@ export class IngredientesComponent implements OnInit {
 
     ngOnInit(): void {
         this._initForm();
-        this._loadSuppliers();
+        //this._loadSuppliers();
     }
 
     private _initForm(): void {
@@ -66,7 +65,7 @@ export class IngredientesComponent implements OnInit {
             ),
         );
     }
-    private _loadSuppliers(): void {
+    /*private _loadSuppliers(): void {
         this._supplierUseCase
             .getSuppliers()
             .pipe(
@@ -87,7 +86,7 @@ export class IngredientesComponent implements OnInit {
                     supplierField.options = supplierOptions;
                 }
             });
-    }
+    }*/
 
     onSubmit(): void {
         if (this.ingredientForm.valid) {

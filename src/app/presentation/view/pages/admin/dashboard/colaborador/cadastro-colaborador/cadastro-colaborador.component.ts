@@ -6,7 +6,6 @@ import {
     ReactiveFormsModule,
     ValidatorFn,
 } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { CollaboratorDto, CollaboratorResponseDto } from '@domain/dtos';
 import { collaboratorFields } from '@domain/static/data';
@@ -21,6 +20,7 @@ import {
     FormInputComponent,
     FormSelectComponent,
 } from '@presentation/view/components/form';
+import { ToastrService } from 'ngx-toastr';
 
 import { DEFAULT_PASSWORD } from '@shared/constants';
 
