@@ -1,3 +1,4 @@
+
 export const fichaFormFields = {
     fields: [
         {
@@ -12,12 +13,8 @@ export const fichaFormFields = {
         {
             component: 'select',
             options: [
-                { value: '1', label: 'Entrada' },
-                { value: '2', label: 'Prato Principal' },
-                { value: '3', label: 'Sobremesa' },
-                { value: '4', label: 'Bebida' },
-                { value: '5', label: 'Outros' },
-            ],
+                { value: {}, label: 'Selecione uma categoria...'},
+            ],             
             name: 'ingredientes',
             type: 'text',
             label: 'Ingredientes:*',

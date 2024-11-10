@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { IngredientDto, PaginatedResponse } from '@domain/dtos';
 import { TableConfig } from '@domain/static/interfaces';
+import { IngredientsUseCase } from '@domain/usecases';
 import {
     ButtonComponent,
     SidebarComponent,
     TableComponent,
 } from '@presentation/view/components';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-dash-ingredientes',
@@ -13,102 +16,78 @@ import {
     templateUrl: './dash-ingredientes.component.html',
     styles: ``,
 })
-export class DashIngredientesComponent {
-    constructor() {}
+export class DashIngredientesComponent implements OnInit, OnDestroy {
+    
+    constructor(
+        private ingredientsUseCase: IngredientsUseCase,
+    ) {}
+
+    private subscription: Subscription | null = null;
+    currentPage = 1;
+    pageSize = 6;
+
+    ngOnInit(): void {
+        this.subscription = this.ingredientsUseCase.base$.subscribe(
+            (ingredient: IngredientDto[]) => {
+                this.tabela.data = ingredient.map(
+                    (ingredient: IngredientDto) => ({
+                        rowData:{
+                            ingredient: ingredient.name,
+                            quantity: ingredient.quantity,
+                            unit: ingredient.unit,
+                            action: 'Ver mais',
+                        },
+                        componentType: ['text', 'text', 'text', 'button'],
+            }),
+        );
+    },
+        );
+        this.fetchIngredients();
+    }
+
+    fetchIngredients(): void {
+        this.ingredientsUseCase.getIngredients(this.currentPage -1, this.pageSize).subscribe(
+            (response: PaginatedResponse<IngredientDto>) => {
+                this.tabela.pagination.totalItems = response.totalElements;
+                this.tabela.pagination.totalPages = Math.ceil(response.totalElements / this.pageSize);
+                this.tabela.metrics = `Mostrando ${response.totalElements} ingredientes`;
+    })
+    }
+
+    onPageChange(page: number): void {
+        if (page >= 1 && page <= this.tabela.pagination.totalPages!) {
+            this.currentPage = page;
+            this.fetchIngredients();
+        }
+    }
+
+    ngOnDestroy(): void {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    }
 
     tabela: TableConfig<{
-        ingrediente: string;
-        quantidade: string;
-        dataValidade: string;
-        individualRecord: string;
+        ingredient: string;
+        quantity: string;
+        unit: string;
+        action: string;
     }> = {
         rowOrder: [
-            'ingrediente',
-            'quantidade',
-            'dataValidade',
-            'individualRecord',
+            'ingredient',
+            'quantity',
+            'unit',
+            'action',
         ],
-        title: 'Ingredientes Cadastrados e Validade',
+        title: 'Ingredientes Cadastrados',
         filters: [
             { isActive: true, text: 'Disponíveis' },
             { isActive: false, text: 'Indisponíveis' },
         ],
-        metrics: 'Total: 8 ingredientes, 6 Disponíveis, 2 Indisponíveis',
-        header: ['Ingrediente', 'Quantidade', 'Data de Validade', 'Ações'],
-        data: [
-            {
-                rowData: {
-                    ingrediente: 'Tomate',
-                    quantidade: '10 kg',
-                    dataValidade: '12/10/2024',
-                    individualRecord: 'Visualizar última entrada',
-                },
-                componentType: ['text', 'text', 'text', 'button'], // Adicionando o tipo do botão
-            },
-            {
-                rowData: {
-                    ingrediente: 'Cebola',
-                    quantidade: '5 kg',
-                    dataValidade: '01/11/2024',
-                    individualRecord: 'Visualizar última entrada',
-                },
-                componentType: ['text', 'text', 'text', 'button'],
-            },
-            {
-                rowData: {
-                    ingrediente: 'Alho',
-                    quantidade: '2 kg',
-                    dataValidade: '15/08/2024',
-                    individualRecord: 'Visualizar última entrada',
-                },
-                componentType: ['text', 'text', 'text', 'button'],
-            },
-            {
-                rowData: {
-                    ingrediente: 'Molho de Tomate Industrializado',
-                    quantidade: '3 unidades (500g cada)',
-                    dataValidade: '05/12/2024',
-                    individualRecord: 'Visualizar última entrada',
-                },
-                componentType: ['text', 'text', 'text', 'button'],
-            },
-            {
-                rowData: {
-                    ingrediente: 'Azeite de Oliva',
-                    quantidade: '1 litro',
-                    dataValidade: '01/02/2025',
-                    individualRecord: 'Visualizar última entrada',
-                },
-                componentType: ['text', 'text', 'text', 'button'],
-            },
-            {
-                rowData: {
-                    ingrediente: 'Sal Refinado',
-                    quantidade: '1 kg',
-                    dataValidade: 'Indeterminado',
-                    individualRecord: 'Visualizar última entrada',
-                },
-                componentType: ['text', 'text', 'text', 'button'],
-            },
-            {
-                rowData: {
-                    ingrediente: 'Farinha de Trigo',
-                    quantidade: '2 kg',
-                    dataValidade: '15/08/2025',
-                    individualRecord: 'Visualizar última entrada',
-                },
-                componentType: ['text', 'text', 'text', 'button'],
-            },
-            {
-                rowData: {
-                    ingrediente: 'Feijão Preto',
-                    quantidade: '10 kg',
-                    dataValidade: '20/11/2025',
-                    individualRecord: 'Visualizar última entrada',
-                },
-                componentType: ['text', 'text', 'text', 'button'],
-            },
-        ],
+        metrics: "",
+        header: ['Ingrediente', 'Quantidade', 'Unidade Medida', 'Ações'],
+        data: [],
+            
         search: {
             placeholder: 'Buscar por ingrediente',
             value: '',
@@ -117,8 +96,10 @@ export class DashIngredientesComponent {
             },
         },
         pagination: {
-            pageRange: 10,
-            totalItems: 8,
+            pageRange: 1,
+            totalItems: 0,
+            totalPages: 0,
+            onPageChange: (page: number) => this.onPageChange(page),
         },
     };
    

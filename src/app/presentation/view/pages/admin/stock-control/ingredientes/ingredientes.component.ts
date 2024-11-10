@@ -7,7 +7,7 @@ import {
     ValidatorFn,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IngredientDto } from '@domain/dtos';
+import { IngredientDto, PaginatedResponse, SupplierDto } from '@domain/dtos';
 import { ingredientFields } from '@domain/static/data/forms/ingredient/ingredient';
 import { FormValidateService } from '@domain/static/services';
 import { IngredientsUseCase, SuppliersUseCase } from '@domain/usecases/admin';
@@ -17,6 +17,7 @@ import {
     SidebarComponent,
 } from '@presentation/view/components';
 import { FormInputComponent } from '@presentation/view/components/form';
+import { map } from 'rxjs';
 
 @Component({
     selector: 'app-ingredientes',
@@ -46,7 +47,7 @@ export class IngredientesComponent implements OnInit {
 
     ngOnInit(): void {
         this._initForm();
-        //this._loadSuppliers();
+        this._loadSuppliers();
     }
 
     private _initForm(): void {
@@ -65,15 +66,13 @@ export class IngredientesComponent implements OnInit {
             ),
         );
     }
-    /*private _loadSuppliers(): void {
+    private _loadSuppliers(): void {
         this._supplierUseCase
-            .getSuppliers()
+            .getSuppliers(0, 100)
             .pipe(
                 map((response: PaginatedResponse<SupplierDto>) =>
                     response.content.map((supplier) => ({
-                        value: JSON.stringify(
-                            JSON.parse(JSON.stringify(supplier)),
-                        ),
+                        value: supplier.name || '', // Armazenando apenas o nome
                         label: supplier.name,
                     })),
                 ),
@@ -86,13 +85,21 @@ export class IngredientesComponent implements OnInit {
                     supplierField.options = supplierOptions;
                 }
             });
-    }*/
+    }
 
     onSubmit(): void {
         if (this.ingredientForm.valid) {
             console.log(this.ingredientForm.value);
+            const formattedRequest = {
+                ...this.ingredientForm.value,
+                supplier: [{
+                    name: this.ingredientForm.value.supplier,
+                }]
+                
+            };
+
             this._ingredientUseCase
-                .createIngredient(this.ingredientForm.value as IngredientDto)
+                .registerIngredient(formattedRequest as IngredientDto)
                 .subscribe(() => {
                     alert('Ingrediente cadastrado com sucesso!');
                     this._router.navigate(['/admin/estoque/ingredientes']);

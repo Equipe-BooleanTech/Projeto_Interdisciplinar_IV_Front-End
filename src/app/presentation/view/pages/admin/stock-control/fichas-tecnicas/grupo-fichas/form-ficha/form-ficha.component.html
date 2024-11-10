@@ -19,7 +19,6 @@
       <ng-container *ngFor="let field of fichaFields.fields">
         <ng-container [ngSwitch]="field.component">
 
-          <!-- Campo input para Nome do Fornecedor -->
           <label *ngSwitchCase="'input'" [for]="field.name" class="block w-full my-2 text-sm font-medium">{{ field.label }}</label>
           <app-form-input *ngSwitchCase="'input'" [type]="field.type" [id]="field.name" [formControlName]="field.name"
             [placeholder]="field.placeholder" class="w-full my-2 border" />
