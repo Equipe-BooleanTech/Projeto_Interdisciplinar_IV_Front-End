@@ -2,7 +2,7 @@
   <div class="flex justify-between items-center my-4">
 
     <app-button
-          [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'"
+         
           [link]="'./admin/estoque/fichas-tecnicas'"
           [disabled]="false"
           >
@@ -29,14 +29,6 @@
                 {{ field.validations[0].message }}
               </span>
             </div>
-            <label *ngSwitchCase="'select'" [for]="field.name" class="block w-full my-2 text-sm font-medium">{{ field.label }}</label>
-            <select 
-              *ngSwitchCase="'select'" 
-              [id]="field.name" 
-              [formControlName]="field.name" 
-              class="w-full form-select mt-1 outline-[#740318] border-2 border-[#740318] rounded-md shadow-sm focus:border-[#740318] focus:ring-[#740318] focus:ring-opacity-50">
-              <option *ngFor="let option of field.options" [value]="option.value">{{ option.label }}</option>
-            </select>
             <label *ngSwitchCase="'textarea'" [for]="field.id" class="block w-full my-2 text-sm font-medium">
                 {{ field.label }}
             </label>
@@ -44,7 +36,7 @@
             [id]="field.id" 
             [formControlName]="field.name"
             [placeholder]="field.placeholder" 
-            class="w-full p-2 border border-gray-300 rounded"></textarea>
+            class="w-full p-2 border-2 rounded outline-primary border-primary"></textarea>
   
   
           </ng-container>

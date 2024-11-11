@@ -87,16 +87,16 @@ export class IngredientesComponent implements OnInit {
             });
     }
 
-    onSubmit(): void {
+        onSubmit(): void {
         if (this.ingredientForm.valid) {
             console.log(this.ingredientForm.value);
             const formattedRequest = {
                 ...this.ingredientForm.value,
-                supplier: [{
-                    name: this.ingredientForm.value.supplier,
-                }]
-                
+                supplier: this.ingredientForm.value.supplier.map((name: string) => ({
+                    name: name,
+                })),
             };
+            console.log(formattedRequest);
 
             this._ingredientUseCase
                 .registerIngredient(formattedRequest as IngredientDto)

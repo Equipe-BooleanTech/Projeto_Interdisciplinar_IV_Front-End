@@ -50,7 +50,7 @@ export class NovoGrupoComponent {
 
     submit(): void {
         if (this.groupForm.valid) {
-            console.log(this.groupForm.value);
+            
         } else {
             console.log('Form is invalid');
         }

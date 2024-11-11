@@ -1,28 +1,32 @@
 <app-sidebar>
   <div class="flex justify-between items-center my-4">
 
-    <app-button
-          [class]="'bg-[#741308] hover:bg-[#118632] text-white font-bold py-4 px-6 rounded-lg'"
-          [link]="'./admin/estoque/fichas-tecnicas'"
-          [disabled]="false"
-          >
-          Voltar
+    <app-button [link]="'./admin/estoque/fichas-tecnicas'" [disabled]="false">
+      Voltar
     </app-button>
-    </div>
+  </div>
   <div class="w-full flex flex-col justify-center items-center">
     <h1 class="text-4xl font-bold text-center my-6">Cadastrar Ficha Técnica</h1>
     <p class="text-center my-4 w-full lg:w-1/2">Aqui você pode cadastrar uma ficha técnica.</p>
   </div>
 
   <div class="flex justify-center border-2 border-[#740318] w-11/12 mx-auto">
-<app-form [formGroup]="fichaForm" (ngSubmit)="submit()" class="w-full bg-white p-8 rounded-lg">
+    <app-form [formGroup]="fichaForm" (ngSubmit)="submit()" class="w-full bg-white p-8 rounded-lg">
       <ng-container *ngFor="let field of fichaFields.fields">
         <ng-container [ngSwitch]="field.component">
 
-          <label *ngSwitchCase="'input'" [for]="field.name" class="block w-full my-2 text-sm font-medium">{{ field.label }}</label>
+          <label *ngSwitchCase="'input'" [for]="field.name" class="block w-full my-2 text-sm font-medium">{{ field.label
+            }}</label>
           <app-form-input *ngSwitchCase="'input'" [type]="field.type" [id]="field.name" [formControlName]="field.name"
-            [placeholder]="field.placeholder" class="w-full my-2 border" />
-          
+            [placeholder]="field.placeholder" class="w-full my-2 border-primary" />
+
+          <label *ngSwitchCase="'input'" [for]="field.name" class="block w-full my-2 text-sm font-medium">{{ field.label
+            }}</label>
+          <select *ngSwitchCase="'select'"  [id]="field.name" [formControlName]="field.name" multiple
+             class="w-full my-2 border">
+            <option *ngFor="let option of field.options" [value]="option.value">{{ option.label }}</option>
+            </select>
+
           <div *ngIf="fichaForm.get(field.name)?.invalid && fichaForm.get(field.name)?.touched" class="h-6">
             <span *ngIf="field.validations && field.validations[0]" class="text-red-500">
               {{ field.validations[0].message }}

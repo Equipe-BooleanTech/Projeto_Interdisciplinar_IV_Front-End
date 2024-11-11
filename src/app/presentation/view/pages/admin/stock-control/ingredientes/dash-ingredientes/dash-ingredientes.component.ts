@@ -33,11 +33,12 @@ export class DashIngredientesComponent implements OnInit, OnDestroy {
                     (ingredient: IngredientDto) => ({
                         rowData:{
                             ingredient: ingredient.name,
+                            suppliers: ingredient.supplier.map(s => s.name).join(', '),
                             quantity: ingredient.quantity,
                             unit: ingredient.unit,
                             action: 'Ver mais',
                         },
-                        componentType: ['text', 'text', 'text', 'button'],
+                        componentType: ['text', 'text', 'text', 'text', 'button'],
             }),
         );
     },
@@ -50,7 +51,7 @@ export class DashIngredientesComponent implements OnInit, OnDestroy {
             (response: PaginatedResponse<IngredientDto>) => {
                 this.tabela.pagination.totalItems = response.totalElements;
                 this.tabela.pagination.totalPages = Math.ceil(response.totalElements / this.pageSize);
-                this.tabela.metrics = `Mostrando ${response.totalElements} ingredientes`;
+                this.tabela.metrics = `Total: ${response.totalElements} ingredientes`;
     })
     }
 
@@ -69,12 +70,14 @@ export class DashIngredientesComponent implements OnInit, OnDestroy {
 
     tabela: TableConfig<{
         ingredient: string;
+        suppliers: string;
         quantity: string;
         unit: string;
         action: string;
     }> = {
         rowOrder: [
             'ingredient',
+            'suppliers',
             'quantity',
             'unit',
             'action',
@@ -85,7 +88,7 @@ export class DashIngredientesComponent implements OnInit, OnDestroy {
             { isActive: false, text: 'Indisponíveis' },
         ],
         metrics: "",
-        header: ['Ingrediente', 'Quantidade', 'Unidade Medida', 'Ações'],
+        header: ['Ingrediente', 'Fornecedores Associados', 'Quantidade', 'Unidade Medida', 'Ações'],
         data: [],
             
         search: {
