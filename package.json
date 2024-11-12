@@ -1,12 +1,12 @@
 {
   "name": "restaurantto-app",
-  "version": "2.0.7",
+  "version": "3.0.1",
   "description": "Restaurantto App - Front-end System",
   "type": "module",
   "private": true,
   "scripts": {
     "ng": "ng",
-    "dev": "ng serve --proxy-config src/proxy.conf.json",
+    "dev": "ng serve",
     "dev:host": "ng serve --host 0.0.0.0 --disable-host-check",
     "clean": "rm -rf dist",
     "build": "ng build",
@@ -16,21 +16,16 @@
     "test:headless": "ng test --watch=false --browsers ChromeHeadless",
     "lint": "eslint .",
     "lint:staged": "npm run lint-staged",
-    "prettier": "prettier --write src/**/*.{ts,js,css,html}"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run prettier --staged && ng lint && npm test",
-      "pre-push": "ng build --aot true"
-    }
+    "prettier": "prettier --write src/**/*.{ts,js,css,html}",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@angular/animations": "^18.2.11",
-    "@angular/common": "^18.2.8",
+    "@angular/common": "^18.2.11",
     "@angular/compiler": "^18.2.8",
-    "@angular/core": "^18.2.8",
-    "@angular/forms": "^18.2.8",
-    "@angular/platform-browser": "^18.2.8",
+    "@angular/core": "^18.2.11",
+    "@angular/forms": "^18.2.11",
+    "@angular/platform-browser": "^18.2.11",
     "@angular/platform-browser-dynamic": "^18.2.8",
     "@angular/router": "^18.2.8",
     "angular-split": "^18.0.0-beta.1",
@@ -69,7 +64,7 @@
     "eslint": "^9.12.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "husky": "^9.1.6",
+    "husky": "^8.0.0",
     "jasmine-core": "~5.4.0",
     "karma": "^6.4.4",
     "karma-chrome-launcher": "~3.2.0",
@@ -87,5 +82,11 @@
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^5.5.4"
   },
-  "packageManager": "npm@10.9.0"
+  "packageManager": "npm@10.9.0",
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write",
+      "eslint --max-warnings 0 ."
+    ]
+  }
 }
