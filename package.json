@@ -84,7 +84,7 @@
   },
   "packageManager": "npm@10.9.0",
   "lint-staged": {
-    "*.ts": [
+    "**/*.ts": [
       "prettier --write",
       "eslint --max-warnings 0 ."
     ]
