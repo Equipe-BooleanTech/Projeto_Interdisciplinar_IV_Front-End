@@ -1,6 +1,6 @@
 {
   "name": "restaurantto-app",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Restaurantto App - Front-end System",
   "type": "module",
   "private": true,
@@ -22,12 +22,12 @@
   "dependencies": {
     "@angular/animations": "^18.2.11",
     "@angular/common": "^18.2.11",
-    "@angular/compiler": "^18.2.8",
+    "@angular/compiler": "^18.2.11",
     "@angular/core": "^18.2.11",
     "@angular/forms": "^18.2.11",
     "@angular/platform-browser": "^18.2.11",
-    "@angular/platform-browser-dynamic": "^18.2.8",
-    "@angular/router": "^18.2.8",
+    "@angular/platform-browser-dynamic": "^18.2.11",
+    "@angular/router": "^18.2.11",
     "angular-split": "^18.0.0-beta.1",
     "apexcharts": "^3.54.1",
     "axios": "^1.7.7",
@@ -40,14 +40,14 @@
     "zone.js": "~0.14.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^18.2.8",
-    "@angular-eslint/builder": "18.3.1",
-    "@angular-eslint/eslint-plugin": "18.3.1",
-    "@angular-eslint/eslint-plugin-template": "18.3.1",
-    "@angular-eslint/schematics": "18.3.1",
-    "@angular-eslint/template-parser": "18.3.1",
-    "@angular/cli": "~18.2.8",
-    "@angular/compiler-cli": "^18.2.8",
+    "@angular-devkit/build-angular": "^18.2.11",
+    "@angular-eslint/builder": "18.4.0",
+    "@angular-eslint/eslint-plugin": "18.4.0",
+    "@angular-eslint/eslint-plugin-template": "18.4.0",
+    "@angular-eslint/schematics": "18.4.0",
+    "@angular-eslint/template-parser": "18.4.0",
+    "@angular/cli": "~18.2.11",
+    "@angular/compiler-cli": "^18.2.11",
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.12.0",
     "@iconify/json": "^2.2.260",
@@ -91,9 +91,9 @@
     ]
   },
   "eslintConfig": {
-  "rules": {
-   "no-unused-vars": 0,
-   "@typescript-eslint/no-unused-vars": 0
+    "rules": {
+      "no-unused-vars": 0,
+      "@typescript-eslint/no-unused-vars": 0
+    }
   }
-}
 }
