@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    AfterViewInit,
+    OnDestroy,
+    ElementRef,
+} from '@angular/core';
 import { sidebarData } from '@domain/static/data';
 import { SidebarItem } from '@domain/static/interfaces';
 import { SidebarService } from '@domain/static/services';
@@ -18,7 +24,10 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
     viewHeight = new BehaviorSubject<string | number>('100vh');
     private resizeObserver: ResizeObserver | undefined;
 
-    constructor(private _sidebarService: SidebarService, private elRef: ElementRef) {}
+    constructor(
+        private _sidebarService: SidebarService,
+        private elRef: ElementRef,
+    ) {}
 
     ngOnInit(): void {
         this.isOpen$.subscribe((isOpen) => {
@@ -27,9 +36,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
         });
     }
 
-    ngAfterViewInit(): void {
-        
-    }
+    ngAfterViewInit(): void {}
 
     ngOnDestroy(): void {
         if (this.resizeObserver) {

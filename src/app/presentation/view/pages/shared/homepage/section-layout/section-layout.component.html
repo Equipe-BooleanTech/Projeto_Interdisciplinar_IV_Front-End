@@ -1,14 +1,24 @@
-<section class="w-full flex flex-wrap xl:flex-nowrap lg:h-screen p-8 lg:p-10 xl:p-12 2xl:p-16 min-h-screen justify-between items-center my-8 lg:my-10 xl:my-16">
-  <div [ngClass]="{'xl:order-2 justify-end': reverse, 'xl:order-1 justify-start': !reverse}" class="w-full xl:w-1/2 flex justify-center items-center p-4 my-4 lg:my-6 xl:my-8">
-    <img [src]="imageUrl" alt="Imagem ilustrativa da seção" class="w-full lg:w-[50%] h-auto">
-  </div>
-  <div [ngClass]="{'xl:order-1': reverse, 'xl:order-2 justify-end': !reverse}" class="w-full xl:w-1/2 p-4 lg:p-5 xl:p-6 my-4 lg:my-6 xl:my-8">
-    <h1 class="font-bold text-2xl lg:text-4xl mb-4">{{ title }}</h1>
-    <p class="text-lg lg:text-xl mb-4">{{ description }}</p>
-    <app-button
-      [link]="buttonLink"
+<section
+    class="w-full flex flex-wrap xl:flex-nowrap lg:h-screen p-8 lg:p-10 xl:p-12 2xl:p-16 min-h-screen justify-between items-center my-8 lg:my-10 xl:my-16"
+>
+    <div
+        [ngClass]="{ 'xl:order-2 justify-end': reverse, 'xl:order-1 justify-start': !reverse }"
+        class="w-full xl:w-1/2 flex justify-center items-center p-4 my-4 lg:my-6 xl:my-8"
     >
-      {{ buttonText }}
-    </app-button>
-  </div>
+        <img
+            [src]="imageUrl"
+            alt="Imagem ilustrativa da seção"
+            class="w-full lg:w-[50%] h-auto"
+        />
+    </div>
+    <div
+        [ngClass]="{ 'xl:order-1': reverse, 'xl:order-2 justify-end': !reverse }"
+        class="w-full xl:w-1/2 p-4 lg:p-5 xl:p-6 my-4 lg:my-6 xl:my-8"
+    >
+        <h1 class="font-bold text-2xl lg:text-4xl mb-4">{{ title }}</h1>
+        <p class="text-lg lg:text-xl mb-4">{{ description }}</p>
+        <app-button [link]="buttonLink">
+            {{ buttonText }}
+        </app-button>
+    </div>
 </section>

@@ -1,8 +1,13 @@
-<a [href]="link" class="block text-white bg-primary hover:bg-hover no-underline rounded-lg text-center font-semibold transition duration-300 ease-in-out"
+<a
+    [href]="link"
+    class="block text-white bg-primary hover:bg-hover no-underline rounded-lg text-center font-semibold transition duration-300 ease-in-out"
     [ngClass]="{
-      'w-full': !class.includes('w-'),
-      'py-4': !class.includes('py-'),
-      'px-6': !class.includes('px-'),
-    }" [class]="class" [attr.disabled]="disabled ? true : null">
+        'w-full': !class.includes('w-'),
+        'py-4': !class.includes('py-'),
+        'px-6': !class.includes('px-'),
+    }"
+    [class]="class"
+    [attr.disabled]="disabled ? true : null"
+>
     <ng-content></ng-content>
 </a>

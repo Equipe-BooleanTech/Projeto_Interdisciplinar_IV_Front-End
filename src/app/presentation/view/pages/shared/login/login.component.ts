@@ -1,8 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/unbound-method */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -43,7 +38,7 @@ export class LoginComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private _authService: AuthenticateUseCase,
         private _tokenService: TokenService,
-        private toastr: ToastrService
+        private toastr: ToastrService,
     ) {}
     ngOnInit(): void {
         this.form = this._formBuilder.group({});
@@ -99,12 +94,18 @@ export class LoginComponent implements OnInit {
     handleResponse(output: OutputSendLoginFormDto): void {
         if (output.statusCode === 200) {
             document.cookie = `token=${output.token}; expires=${new Date().getDate() + 1}`;
-            this.toastr.success("Login efetuado com sucesso! Redirecionando...", "Sucesso")
+            this.toastr.success(
+                'Login efetuado com sucesso! Redirecionando...',
+                'Sucesso',
+            );
             setTimeout(() => {
                 window.location.href = '/admin';
-            }, 3000)
+            }, 3000);
         } else {
-            this.toastr.error("Credenciais inválidas! Tente novamente...", "Oops...")
+            this.toastr.error(
+                'Credenciais inválidas! Tente novamente...',
+                'Oops...',
+            );
         }
     }
 }

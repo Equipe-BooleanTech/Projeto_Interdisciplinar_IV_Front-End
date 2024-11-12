@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { TableConfig } from '@domain/static/interfaces';
-import { SearchbarComponent } from "../searchbar/searchbar.component";
+import { SearchbarComponent } from '../searchbar/searchbar.component';
 
 @Component({
     selector: 'app-table',

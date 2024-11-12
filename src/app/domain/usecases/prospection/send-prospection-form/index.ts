@@ -1,1 +1,1 @@
-export * from './send-prospection-form.use-case'
+export * from './send-prospection-form.use-case';

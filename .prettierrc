@@ -7,12 +7,30 @@
     "printWidth": 80,
     "tabWidth": 4,
     "useTabs": false,
-    "endOfLine": "auto",
+    "endOfLine": "lf",
     "overrides": [
         {
             "files": ["*.md", "*.json", "*.yml", "*.yaml"],
             "options": {
                 "tabWidth": 2
+            }
+        },
+        {
+            "files": ["*.html"],
+            "options": {
+                "printWidth": 120
+            }
+        },
+        {
+            "files": ["*.ts"],
+            "options": {
+                "parser": "typescript"
+            }
+        },
+        {
+            "files": ["*.css", "*.scss"],
+            "options": {
+                "singleQuote": false
             }
         }
     ]

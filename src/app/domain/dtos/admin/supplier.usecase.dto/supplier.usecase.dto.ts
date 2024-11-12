@@ -1,4 +1,4 @@
-export interface SupplierDto {  
+export interface SupplierDto {
     id?: string;
     name: string;
     cnpj: string;
@@ -9,4 +9,3 @@ export interface SupplierDto {
 export interface SupplierResponseDto {
     message?: string;
 }
-

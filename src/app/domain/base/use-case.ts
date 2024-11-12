@@ -6,49 +6,57 @@ import { ErrorService, BaseUseCaseRepository } from '.';
 import { PaginatedResponse } from '@domain/dtos';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class BaseUseCase<Entity> implements BaseUseCaseRepository<Entity> {
-
     public baseSubject = new BehaviorSubject<Entity[]>([]);
     public base$ = this.baseSubject.asObservable();
 
-    constructor(private http: HttpClient, private errorService: ErrorService) { }
+    constructor(
+        private _http: HttpClient,
+        private _errorService: ErrorService,
+    ) {}
 
-    getAll(url: string, page: number, size: number): Observable<PaginatedResponse<Entity>> {
-        return this.http
+    getAll(
+        url: string,
+        page: number,
+        size: number,
+    ): Observable<PaginatedResponse<Entity>> {
+        return this._http
             .get<PaginatedResponse<Entity>>(`${url}?page=${page}&size=${size}`)
             .pipe(
                 tap((response) => this.baseSubject.next(response.content)),
                 catchError((error: HttpErrorResponse) => {
-                    this.errorService.handleError(error);
-                    return throwError(error); 
-                })
+                    this._errorService.handleError(error);
+                    return throwError(error);
+                }),
             );
     }
 
     getById(url: string, id: string): Observable<Entity> {
-        return this.http.get<Entity>(`${url}/${id}`).pipe(
+        return this._http.get<Entity>(`${url}/${id}`).pipe(
             catchError((error: HttpErrorResponse) => {
-                this.errorService.handleError(error);
+                this._errorService.handleError(error);
                 return throwError(error);
-            })
+            }),
         );
     }
 
     create(url: string, data: Entity): Observable<Entity> {
-        return this.http.post<Entity>(`${url}`, data).pipe(
+        return this._http.post<Entity>(`${url}`, data).pipe(
             catchError((error: HttpErrorResponse) => {
-            this.errorService.handleError(error);
-            return throwError(error);
-        })
-    )
+                this._errorService.handleError(error);
+                return throwError(error);
+            }),
+        );
     }
-    
+
+    /* 
     update(url: string, data: Entity, id: string): Observable<Entity> {
-        throw new Error("Method not implemented.");
+        throw new Error('Method not implemented.');
     }
     delete(url: string, id: string): Observable<Entity> {
-        throw new Error("Method not implemented.");
+        throw new Error('Method not implemented.');
     }
+        */
 }

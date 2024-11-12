@@ -1,18 +1,17 @@
 <app-sidebar>
     <div class="flex flex-wrap justify-center lg:justify-between items-center my-16 space-x-4">
-
         <app-button
-          [link]="'./admin/estoque'"
-          [disabled]="false"
-         >
-          Voltar
-        </app-button>        
-        <app-button
-        [link]="'./admin/estoque/cadastrar-ingrediente'"
-        [disabled]="false">
-                Cadastrar Novo Ingrediente
+            [link]="'./admin/estoque'"
+            [disabled]="false"
+        >
+            Voltar
         </app-button>
-        
+        <app-button
+            [link]="'./admin/estoque/cadastrar-ingrediente'"
+            [disabled]="false"
+        >
+            Cadastrar Novo Ingrediente
+        </app-button>
     </div>
     <app-table [tableConfig]="tabela">
         <app-button></app-button>

@@ -1,3 +1,3 @@
-export * from './prospection'
-export * from './shared'
-export * from './admin'
+export * from './prospection';
+export * from './shared';
+export * from './admin';

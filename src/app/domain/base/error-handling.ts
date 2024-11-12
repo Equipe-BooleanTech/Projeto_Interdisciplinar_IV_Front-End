@@ -5,7 +5,7 @@ import { Observable, throwError } from 'rxjs';
 @Injectable({
     providedIn: 'root',
 })
-export class ErrorService{
+export class ErrorService {
     handleError(error: HttpErrorResponse): Observable<never> {
         let errorMessage = 'Ocorreu um erro desconhecido!';
         if (error.error instanceof ErrorEvent) {

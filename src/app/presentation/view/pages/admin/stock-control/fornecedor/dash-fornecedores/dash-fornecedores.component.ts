@@ -26,11 +26,7 @@ import { Subscription } from 'rxjs';
     styles: ``,
 })
 export class DashFornecedoresComponent implements OnInit, OnDestroy {
-   
-
-    constructor(
-        private suppliersUseCase: SuppliersUseCase,
-    ) {}
+    constructor(private suppliersUseCase: SuppliersUseCase) {}
 
     private subscription: Subscription | null = null;
     currentPage = 1;
@@ -39,31 +35,31 @@ export class DashFornecedoresComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.subscription = this.suppliersUseCase.base$.subscribe(
             (suppliers: SupplierDto[]) => {
-                this.tabela.data = suppliers.map(
-                    (supplier: SupplierDto) => ({
-                        rowData:{
-                            supplier: supplier.name,
-                            contactName: supplier.contact,
-                            phone: supplier.phone,
-                            action: 'Ver mais',
-                        },
-                        componentType: ['text', 'text', 'text', 'button'],
-            }),
+                this.tabela.data = suppliers.map((supplier: SupplierDto) => ({
+                    rowData: {
+                        supplier: supplier.name,
+                        contactName: supplier.contact,
+                        phone: supplier.phone,
+                        action: 'Ver mais',
+                    },
+                    componentType: ['text', 'text', 'text', 'button'],
+                }));
+            },
         );
-    },
-);
         this.fetchSuppliers();
-}
+    }
 
-fetchSuppliers(): void {
-    this.suppliersUseCase.getSuppliers(this.currentPage -1, this.pageSize).subscribe(
-        (response: PaginatedResponse<SupplierDto>) => {
-            this.tabela.pagination.totalItems = response.totalElements;
-            this.tabela.pagination.totalPages = Math.ceil(response.totalElements / this.pageSize);
-            this.tabela.metrics = `Mostrando ${response.totalElements} fornecedores`;
-})
-}
-
+    fetchSuppliers(): void {
+        this.suppliersUseCase
+            .getSuppliers(this.currentPage - 1, this.pageSize)
+            .subscribe((response: PaginatedResponse<SupplierDto>) => {
+                this.tabela.pagination.totalItems = response.totalElements;
+                this.tabela.pagination.totalPages = Math.ceil(
+                    response.totalElements / this.pageSize,
+                );
+                this.tabela.metrics = `Mostrando ${response.totalElements} fornecedores`;
+            });
+    }
 
     onPageChange(page: number): void {
         if (page >= 1 && page <= this.tabela.pagination.totalPages!) {
@@ -82,7 +78,7 @@ fetchSuppliers(): void {
         supplier: string;
         contactName: string;
         phone: string;
-       action: string;
+        action: string;
     }> = {
         rowOrder: ['supplier', 'contactName', 'phone', 'action'],
         title: 'Fornecedores Cadastrados e Atualizações',
@@ -90,7 +86,7 @@ fetchSuppliers(): void {
             { isActive: true, text: 'Ativos' },
             { isActive: false, text: 'Inativos' },
         ],
-        metrics: "",
+        metrics: '',
         header: ['Fornecedor', 'Nome de Contato', 'Telefone', 'Ações'],
         data: [],
 
@@ -108,5 +104,4 @@ fetchSuppliers(): void {
             onPageChange: (page: number) => this.onPageChange(page),
         },
     };
-    
 }

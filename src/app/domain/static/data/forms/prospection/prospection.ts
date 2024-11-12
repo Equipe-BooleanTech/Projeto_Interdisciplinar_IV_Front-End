@@ -12,7 +12,7 @@ export const prospectionFields = {
                 {
                     name: 'required',
                     message: 'Nome completo é obrigatório',
-                    value: '',  
+                    value: '',
                 },
             ],
         },
@@ -28,10 +28,10 @@ export const prospectionFields = {
                 {
                     name: 'required',
                     message: 'E-mail para contato é obrigatório',
-                    value: '',  
+                    value: '',
                 },
-                { 
-                    name: 'email', 
+                {
+                    name: 'email',
                     message: 'Email deve ser válido',
                     value: '',
                 },
@@ -49,7 +49,7 @@ export const prospectionFields = {
                 {
                     name: 'required',
                     message: 'Telefone para contato é obrigatório',
-                    value: '',  
+                    value: '',
                 },
             ],
         },
@@ -75,7 +75,7 @@ export const prospectionFields = {
                 {
                     name: 'required',
                     message: 'Mensagem é obrigatória',
-                    value: '', 
+                    value: '',
                 },
             ],
         },

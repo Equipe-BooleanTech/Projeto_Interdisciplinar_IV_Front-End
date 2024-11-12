@@ -32,6 +32,14 @@
       "@shared/*": ["src/app/shared/*"]
     }
   },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "cypress/**/*.ts",
+    "cypress/**/*.tsx",
+    "cypress/support/component.d.ts",
+    "environment.development.ts"
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

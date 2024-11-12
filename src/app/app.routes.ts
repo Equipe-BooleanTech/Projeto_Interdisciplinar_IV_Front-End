@@ -44,7 +44,6 @@ export const routes: Routes = [
     {
         path: 'forgot-password',
         component: ForgotPasswordComponent,
-        
     },
     {
         path: 'admin/satisfaction',

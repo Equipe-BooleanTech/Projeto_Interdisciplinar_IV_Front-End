@@ -9,7 +9,7 @@ import { API_URL } from 'src/app/shared';
 export class FetchUseCase<T> {
     public apiBase = API_URL;
 
-    constructor(private _http: HttpClient) { }
+    constructor(private _http: HttpClient) {}
 
     get(url: string): Observable<T> {
         return this._http.get<T>(`${this.apiBase}/${url}`).pipe();
@@ -24,7 +24,8 @@ export class FetchUseCase<T> {
     }
 
     delete(url: string): Observable<HttpResponse<any>> {
-        return this._http.delete(`${this.apiBase}/${url}`, { observe: 'response' }).pipe();
+        return this._http
+            .delete(`${this.apiBase}/${url}`, { observe: 'response' })
+            .pipe();
     }
-
 }

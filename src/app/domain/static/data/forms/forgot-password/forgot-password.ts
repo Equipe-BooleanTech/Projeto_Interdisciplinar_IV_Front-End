@@ -7,8 +7,7 @@ export const forgotFields = {
             label: 'Email',
             value: '',
             placeholder: 'Digite a nova senha',
-            validations: [
-            ],
+            validations: [],
         },
         {
             component: 'input',
@@ -17,8 +16,7 @@ export const forgotFields = {
             label: 'Senha',
             value: '',
             placeholder: 'Digite a sua antiga senha',
-            validations: [
-            ],
+            validations: [],
         },
         {
             component: 'input',
@@ -27,9 +25,7 @@ export const forgotFields = {
             value: '',
             label: 'Nova Senha: ',
             placeholder: 'Confirme a nova senha',
-            validations: [
-                
-            ],
+            validations: [],
         },
     ],
 };

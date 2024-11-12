@@ -1,4 +1,4 @@
-import { prospectionFields } from ".";
+import { prospectionFields } from '.';
 
 export const homeData = {
     intro: {

@@ -3,22 +3,21 @@
         <app-button
             [link]="'./admin/pedidos'"
             [disabled]="false"
-            >
+        >
             Voltar
-      </app-button>
-      <app-button
-        [link]="'./admin/estoque/cadastrar-ingrediente'"
-        [disabled]="false">
-                Nova Mesa
+        </app-button>
+        <app-button
+            [link]="'./admin/estoque/cadastrar-ingrediente'"
+            [disabled]="false"
+        >
+            Nova Mesa
         </app-button>
     </div>
     <div class="w-full flex flex-col justify-center items-center">
         <h1 class="text-4xl font-bold text-center my-6">Controle de Mesas</h1>
         <p class="text-center my-4 w-full lg:w-1/2">
-            Verifique os pedidos em andamento de cada mesa de seu restaurante!         </p>
+            Verifique os pedidos em andamento de cada mesa de seu restaurante!
+        </p>
     </div>
-    <app-card-list [cardListConfig]="cardListConfig">
-
-    </app-card-list>
-
+    <app-card-list [cardListConfig]="cardListConfig"> </app-card-list>
 </app-sidebar>

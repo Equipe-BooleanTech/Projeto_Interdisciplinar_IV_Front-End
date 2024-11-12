@@ -1,25 +1,35 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import {
+    FormBuilder,
+    FormGroup,
+    ReactiveFormsModule,
+    ValidatorFn,
+} from '@angular/forms';
 import { groupFormFields } from '@domain/static/data/forms/group/group';
 import { FormValidateService } from '@domain/static/services';
-import { ButtonComponent, FormComponent, SidebarComponent } from '@presentation/view/components';
+import {
+    ButtonComponent,
+    FormComponent,
+    SidebarComponent,
+} from '@presentation/view/components';
 import { FormInputComponent } from '@presentation/view/components/form';
 
 @Component({
-  selector: 'app-novo-grupo',
-  standalone: true,
-  imports: [
-    SidebarComponent,
-    FormComponent,
-    ReactiveFormsModule,
-    CommonModule,
-    FormInputComponent, ButtonComponent],
-  templateUrl: './novo-grupo.component.html',
-  styles: ``
+    selector: 'app-novo-grupo',
+    standalone: true,
+    imports: [
+        SidebarComponent,
+        FormComponent,
+        ReactiveFormsModule,
+        CommonModule,
+        FormInputComponent,
+        ButtonComponent,
+    ],
+    templateUrl: './novo-grupo.component.html',
+    styles: ``,
 })
-export class NovoGrupoComponent {
-
+export class NovoGrupoComponent implements OnInit {
     groupForm: FormGroup = new FormGroup({});
     groupFields = groupFormFields;
     method: 'POST' | 'PUT' = 'POST';
@@ -50,7 +60,6 @@ export class NovoGrupoComponent {
 
     submit(): void {
         if (this.groupForm.valid) {
-            
         } else {
             console.log('Form is invalid');
         }
@@ -59,5 +68,4 @@ export class NovoGrupoComponent {
     goBack(): void {
         console.log('Go back');
     }
-
 }

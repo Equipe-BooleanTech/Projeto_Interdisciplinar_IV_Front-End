@@ -1,4 +1,4 @@
-import { prospectionFields } from "@domain/static/data";
+import { prospectionFields } from '@domain/static/data';
 
 export interface Homepage {
     intro: {

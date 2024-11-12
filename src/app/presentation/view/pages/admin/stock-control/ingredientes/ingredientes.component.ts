@@ -76,7 +76,7 @@ export class IngredientesComponent implements OnInit {
             .pipe(
                 map((response: PaginatedResponse<SupplierDto>) =>
                     response.content.map((supplier) => ({
-                        value: supplier.name || '', 
+                        value: supplier.name || '',
                         label: supplier.name,
                     })),
                 ),
@@ -99,7 +99,10 @@ export class IngredientesComponent implements OnInit {
                         ingredient.name === this.ingredientForm.value.name,
                 );
                 if (ingredient) {
-                    this.toastr.error('Ingrediente já cadastrado, edite-o ou crie um novo ingrediente com outro nome', "Oops...");
+                    this.toastr.error(
+                        'Ingrediente já cadastrado, edite-o ou crie um novo ingrediente com outro nome',
+                        'Oops...',
+                    );
                     return true;
                 }
                 return false;
@@ -107,33 +110,43 @@ export class IngredientesComponent implements OnInit {
             catchError((error) => {
                 console.error('Error checking ingredient existence', error);
                 return of(false);
-            })
+            }),
         );
     }
 
     onSubmit(): void {
         if (this.ingredientForm.valid) {
-            this.checkIfIngredientExists().pipe(
-                switchMap((ingredientExists) => {
-                    if (!ingredientExists) {
-                        const formattedRequest = {
-                            ...this.ingredientForm.value,
-                            supplier: this.ingredientForm.value.supplier.map((name: string) => ({
-                                name: name,
-                            })),
-                        };
+            this.checkIfIngredientExists()
+                .pipe(
+                    switchMap((ingredientExists) => {
+                        if (!ingredientExists) {
+                            const formattedRequest = {
+                                ...this.ingredientForm.value,
+                                supplier:
+                                    this.ingredientForm.value.supplier.map(
+                                        (name: string) => ({
+                                            name: name, //retorna o nome do fornecedor
+                                        }),
+                                    ),
+                            };
 
-                        return this._ingredientUseCase.registerIngredient(formattedRequest as IngredientDto);
-                    } else {
-                        return of(null);
+                            return this._ingredientUseCase.registerIngredient(
+                                formattedRequest as IngredientDto,
+                            );
+                        } else {
+                            return of(null);
+                        }
+                    }),
+                )
+                .subscribe((response) => {
+                    if (response) {
+                        this.toastr.success(
+                            'Ingrediente cadastrado com sucesso!',
+                            'Sucesso',
+                        );
+                        this._router.navigate(['/admin/estoque/ingredientes']);
                     }
-                })
-            ).subscribe((response) => {
-                if (response) {
-                    this.toastr.success('Ingrediente cadastrado com sucesso!', "Sucesso");
-                    this._router.navigate(['/admin/estoque/ingredientes']);
-                }
-            });
+                });
         }
     }
 }

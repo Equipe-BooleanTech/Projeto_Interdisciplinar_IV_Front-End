@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { addDynamicIconSelectors } from '@iconify/tailwind';
 
 const TAILWIND_PLUGINS = [
@@ -20,7 +19,6 @@ export default {
             secondary: '#118632',
             base: '#FAFAFA',
             success: '#2E7D32',
-            
         },
         fontFamily: {
             display: ['DM Sans', 'sans-serif'],
@@ -32,9 +30,10 @@ export default {
         },
         extend: {
             screens: {
-            'xl': '1280px',
-            '2xl': '1440px'
-        }},
+                xl: '1280px',
+                '2xl': '1440px',
+            },
+        },
     },
     plugins: [
         ...TAILWIND_PLUGINS,

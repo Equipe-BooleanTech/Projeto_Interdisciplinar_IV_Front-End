@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { CommonModule, NgClass } from '@angular/common';
 import { Component, forwardRef, Input } from '@angular/core';
 import {

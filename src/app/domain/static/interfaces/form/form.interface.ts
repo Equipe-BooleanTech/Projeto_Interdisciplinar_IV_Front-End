@@ -1,4 +1,4 @@
-import { FormFieldDto } from "@domain/static/dtos";
+import { FormFieldDto } from '@domain/static/dtos';
 
 export interface FormConfig {
     fields: FormFieldDto[];

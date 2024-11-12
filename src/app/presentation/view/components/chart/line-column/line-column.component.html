@@ -1,21 +1,30 @@
 <div class="rounded-lg dark:bg-gray-800 p-4 md:p-6 border-2 border-[#740318] h-full w-full">
-  <div class="flex justify-between pb-4 mb-4 border-b border-gray-200 dark:border-gray-700">
-    <div class="flex items-center">
-      <div>
-        <h5 class="leading-none text-2xl font-bold text-gray-900 dark:text-white pb-1">R${{chartMetrics?.grossAmount}},00</h5>
-        <p class="text-sm font-normal text-gray-500 dark:text-gray-400">{{chartMetrics?.shortDescription}}</p>
-      </div>
+    <div class="flex justify-between pb-4 mb-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex items-center">
+            <div>
+                <h5 class="leading-none text-2xl font-bold text-gray-900 dark:text-white pb-1">
+                    R${{ chartMetrics?.grossAmount }},00
+                </h5>
+                <p class="text-sm font-normal text-gray-500 dark:text-gray-400">{{ chartMetrics?.shortDescription }}</p>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="grid grid-cols-2">
-    <dl class="flex items-center">
-      <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal me-1">Total de {{chartMetrics?.title}}:</dt>
-      <dd class="text-gray-900 text-sm dark:text-white font-semibold">{{chartMetrics?.total}}</dd>
-    </dl>
-    <dl class="flex items-center justify-end">
-      <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal me-1">Média de {{chartMetrics?.title}}: </dt>
-      <dd class="text-gray-900 text-sm dark:text-white font-semibold">{{chartMetrics?.average}}</dd>
-    </dl>
-  </div>
-  <div id="column-chart" class="h-full w-full"></div>
+    <div class="grid grid-cols-2">
+        <dl class="flex items-center">
+            <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal me-1">
+                Total de {{ chartMetrics?.title }}:
+            </dt>
+            <dd class="text-gray-900 text-sm dark:text-white font-semibold">{{ chartMetrics?.total }}</dd>
+        </dl>
+        <dl class="flex items-center justify-end">
+            <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal me-1">
+                Média de {{ chartMetrics?.title }}:
+            </dt>
+            <dd class="text-gray-900 text-sm dark:text-white font-semibold">{{ chartMetrics?.average }}</dd>
+        </dl>
+    </div>
+    <div
+        id="column-chart"
+        class="h-full w-full"
+    ></div>
 </div>

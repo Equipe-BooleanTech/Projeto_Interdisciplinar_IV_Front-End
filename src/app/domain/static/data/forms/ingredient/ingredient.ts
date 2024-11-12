@@ -1,5 +1,3 @@
-
-
 export const ingredientFields = {
     fields: [
         {
@@ -23,9 +21,7 @@ export const ingredientFields = {
             name: 'supplier',
             id: 'categorysupplier',
             label: 'Fornecedor: ',
-            options: [
-                {value: {}, label: "Selecione um fornecedor..."},
-            ],
+            options: [{ value: {}, label: 'Selecione um fornecedor...' }],
         },
         {
             component: 'input',
@@ -33,7 +29,8 @@ export const ingredientFields = {
             type: 'desc',
             label: 'Unidade:',
             id: 'unit',
-            placeholder: 'Digite a unidade de medida (ex: kg, gramas, unitário)',
+            placeholder:
+                'Digite a unidade de medida (ex: kg, gramas, unitário)',
             value: '',
             validations: [],
         },
