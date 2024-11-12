@@ -10,7 +10,12 @@ import { SidebarComponent } from '../../../components/sidebar/sidebar.component'
 @Component({
     selector: 'app-cash-flow',
     standalone: true,
-    imports: [SidebarComponent, LineColumnComponent, CardComponent, ButtonComponent],
+    imports: [
+        SidebarComponent,
+        LineColumnComponent,
+        CardComponent,
+        ButtonComponent,
+    ],
     templateUrl: './cash-flow.component.html',
     styles: ``,
 })

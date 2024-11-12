@@ -4,13 +4,16 @@ import { Observable } from 'rxjs';
 import { API_URL } from 'src/app/shared';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class ForgotPasswordUseCase {
-  public apiBase = API_URL;
-  constructor(private http: HttpClient) {}
+    public apiBase = API_URL;
+    constructor(private http: HttpClient) {}
 
-  resetPassword(data: { newPassword: string }): Observable<any> {
-    return this.http.post(`${this.apiBase}/api/users/update-password`, data);
-  }
+    resetPassword(data: { newPassword: string }): Observable<any> {
+        return this.http.post(
+            `${this.apiBase}/api/users/update-password`,
+            data,
+        );
+    }
 }

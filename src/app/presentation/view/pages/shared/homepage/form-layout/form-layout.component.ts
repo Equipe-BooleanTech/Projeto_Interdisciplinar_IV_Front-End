@@ -7,10 +7,7 @@ import {
     ReactiveFormsModule,
     ValidatorFn,
 } from '@angular/forms';
-import {
-    InputSendProspectionFormDto,
-    OutputSendProspectionFormDto,
-} from '@domain/dtos';
+import { ProspectionDto, DefaultResponseDto } from '@domain/dtos';
 import { prospectionFields } from '@domain/static/data';
 import { Homepage } from '@domain/static/interfaces';
 import {
@@ -53,7 +50,7 @@ export class FormLayoutComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private _dataTransferService: DataTransferService,
         private _formValidateService: FormValidateService,
-        private toastr: ToastrService
+        private toastr: ToastrService,
     ) {}
 
     ngOnInit(): void {
@@ -79,7 +76,7 @@ export class FormLayoutComponent implements OnInit {
         );
     }
 
-    submit(data: InputSendProspectionFormDto): void {
+    submit(data: ProspectionDto): void {
         this._prospectionService
             .sendForm(data)
             .pipe(
@@ -95,23 +92,24 @@ export class FormLayoutComponent implements OnInit {
                 }),
             )
             .subscribe((response) => {
-                const output: OutputSendProspectionFormDto = {
-                    statusCode: response.statusCode,
+                const output: DefaultResponseDto = {
                     message: response.message,
                 };
                 this.handleResponse(output);
-                if (output.statusCode === 201) {                       
-                     this.toastr.success("Agradecemos pelo seu interesse. Entraremos em contato em breve!", "Sucesso!")  
+                if (response.message) {
+                    this.toastr.success(
+                        'Agradecemos pelo seu interesse. Entraremos em contato em breve!',
+                        'Sucesso!',
+                    );
 
                     setTimeout(() => {
                         window.location.reload();
-
-                    }, 3000)
+                    }, 3000);
                 }
             });
     }
 
-    handleResponse(output: OutputSendProspectionFormDto): void {
+    handleResponse(output: DefaultResponseDto): void {
         console.log(output);
     }
 }

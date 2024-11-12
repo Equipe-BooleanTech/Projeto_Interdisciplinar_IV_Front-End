@@ -1,33 +1,55 @@
 <app-sidebar>
     <main class="flex-1 p-4 w-full space-y-16">
-
         <h1 class="text-4xl font-black text-center">Gerenciamento de Pedidos</h1>
         <p>
             Neste módulo do sistema, você poderá conferir os últimos pedidos realizados na plataforma, bem como via apps
             externos (iFood, Rappi, Uber Eats).
         </p>
 
-
         <div class="flex lg:justify-end flex-wrap w-full justify-center items-center mb-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
-                <app-card class="w-full" [isDemographic]="true" iconClass="icon-[mdi--delivery-dining-electric]"
-                    title="Pedidos" [metric]="'60'" [percentageChange]="2.84" [isPositive]="false"
-                    metricTitle="Pedidos Delivery">
+                <app-card
+                    class="w-full"
+                    [isDemographic]="true"
+                    iconClass="icon-[mdi--delivery-dining-electric]"
+                    title="Pedidos"
+                    [metric]="'60'"
+                    [percentageChange]="2.84"
+                    [isPositive]="false"
+                    metricTitle="Pedidos Delivery"
+                >
                 </app-card>
-                <app-card class="w-full" [isDemographic]="true" iconClass="icon-[hugeicons--chair-02]" title="Mesas"
-                    [metric]="'80'" [percentageChange]="0" [isPositive]="true" metricTitle="Mesas Cadastradas">
+                <app-card
+                    class="w-full"
+                    [isDemographic]="true"
+                    iconClass="icon-[hugeicons--chair-02]"
+                    title="Mesas"
+                    [metric]="'80'"
+                    [percentageChange]="0"
+                    [isPositive]="true"
+                    metricTitle="Mesas Cadastradas"
+                >
                 </app-card>
-                <app-card class="w-full" [isDemographic]="true" iconClass="icon-[ion--ticket-outline]"
-                    title="Pedidos Totais" [metric]="'90'" [percentageChange]="1.20" [isPositive]="true"
-                    metricTitle="Pedidos">
+                <app-card
+                    class="w-full"
+                    [isDemographic]="true"
+                    iconClass="icon-[ion--ticket-outline]"
+                    title="Pedidos Totais"
+                    [metric]="'90'"
+                    [percentageChange]="1.2"
+                    [isPositive]="true"
+                    metricTitle="Pedidos"
+                >
                 </app-card>
             </div>
         </div>
 
-
         <div class="flex justify-center lg:justify-start flex-wrap w-full h-full mb-8 overflow-hidden">
-            <app-line-column class="w-full h-full min-h-1" [chartMetrics]="chartMetrics" [options]="chartData"></app-line-column>
+            <app-line-column
+                class="w-full h-full min-h-1"
+                [chartMetrics]="chartMetrics"
+                [options]="chartData"
+            ></app-line-column>
         </div>
-        
     </main>
 </app-sidebar>

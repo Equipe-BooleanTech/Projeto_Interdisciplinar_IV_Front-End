@@ -83,5 +83,4 @@ export class GrupoFichasComponent {
             totalItems: 5,
         },
     };
-    
 }

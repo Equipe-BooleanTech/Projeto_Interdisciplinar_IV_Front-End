@@ -1,51 +1,67 @@
-<div class="border-2 border-[#740310] rounded-lg w-full xl:w-96 xl:h-64 xl:mx-8 xl:my-4 mx-auto p-6" *ngIf="!isDemographic && !hasRedirection">
-  <div class="flex flex-col h-full">
-    
-    <div class="flex xl:justify-between justify-center items-center">
-      <div class="flex lg:items-start flex-col">
-        <span class="{{ iconClass }} text-5xl text-[#741308] mx-auto"></span>
-        <h1 class="font-semibold text-[28px] mb-2 text-center mx-auto">{{ title }}</h1>
-        <p class="text-md text-gray-600">{{ description }}</p>
-      </div>
+<div
+    class="border-2 border-[#740310] rounded-lg w-full xl:w-96 xl:h-64 xl:mx-8 xl:my-4 mx-auto p-6"
+    *ngIf="!isDemographic && !hasRedirection"
+>
+    <div class="flex flex-col h-full">
+        <div class="flex xl:justify-between justify-center items-center">
+            <div class="flex lg:items-start flex-col">
+                <span class="{{ iconClass }} text-5xl text-[#741308] mx-auto"></span>
+                <h1 class="font-semibold text-[28px] mb-2 text-center mx-auto">{{ title }}</h1>
+                <p class="text-md text-gray-600">{{ description }}</p>
+            </div>
+        </div>
     </div>
-
-  </div>
 </div>
 
-<div class="rounded-lg w-11/12 mx-8 my-4 shadow-lg " *ngIf="isDemographic">
-  <div class=" border-2 border-[#800020] rounded-lg p-4 flex flex-col justify-between h-full w-full">
-    <div class="flex justify-between items-center">
-      <div class="flex flex-col">
-        <h1 class="font-semibold text-[40px] text-gray-800">{{ metric }}</h1>
-        <p class="text-gray-600 text-lg font-bold">{{ metricTitle }}</p>
-      </div>
-      <div class="flex items-center justify-center lg:w-20 lg:h-20 h-16 w-16 rounded-full bg-[#f3e4e7]">
-        <span [class]="iconClass + ' text-3xl lg:text-4xl text-[#741308] m-auto'"></span>
-      </div>
+<div
+    class="rounded-lg w-11/12 mx-8 my-4 shadow-lg"
+    *ngIf="isDemographic"
+>
+    <div class="border-2 border-[#800020] rounded-lg p-4 flex flex-col justify-between h-full w-full">
+        <div class="flex justify-between items-center">
+            <div class="flex flex-col">
+                <h1 class="font-semibold text-[40px] text-gray-800">{{ metric }}</h1>
+                <p class="text-gray-600 text-lg font-bold">{{ metricTitle }}</p>
+            </div>
+            <div class="flex items-center justify-center lg:w-20 lg:h-20 h-16 w-16 rounded-full bg-[#f3e4e7]">
+                <span [class]="iconClass + ' text-3xl lg:text-4xl text-[#741308] m-auto'"></span>
+            </div>
+        </div>
+        <div class="flex items-center justify-start">
+            <span
+                [ngClass]="isPositive ? 'text-green-500' : 'text-red-500'"
+                class="font-bold"
+            >
+                {{ percentageChange }}%
+            </span>
+            <span class="text-xs ml-2 text-gray-500">Comparado à semana anterior</span>
+        </div>
     </div>
-    <div class="flex items-center justify-start">
-      <span [ngClass]="isPositive ? 'text-green-500' : 'text-red-500'" class="font-bold">
-        {{ percentageChange }}%
-      </span>
-      <span class="text-xs ml-2 text-gray-500">Comparado à semana anterior</span>
-    </div>
-  </div>
 </div>
 
-<div class="border border-primary rounded-md shadow-md w-full overflow-hidden max-w-sm" *ngIf="hasRedirection">
-  <!-- Imagem -->
-  <div class="image-container">
-    <img src="{{imgSrc}}" class="w-full object-cover" alt="idk"/>
-  </div>
-  <!-- Título -->
-  <div class="text-container p-4 text-center">
-    <h3 class="text-lg font-semibold">{{title}}</h3>
-  </div>
-  <!-- Botão-->
-  <div class="button-container text-center mb-4">
-    <app-button *ngIf="hasRedirection" [link]="link">
-      {{buttonText}}
-    </app-button>
-  </div>
+<div
+    class="border border-primary rounded-md shadow-md w-full overflow-hidden max-w-sm"
+    *ngIf="hasRedirection"
+>
+    <!-- Imagem -->
+    <div class="image-container">
+        <img
+            src="{{ imgSrc }}"
+            class="w-full object-cover"
+            alt="idk"
+        />
+    </div>
+    <!-- Título -->
+    <div class="text-container p-4 text-center">
+        <h3 class="text-lg font-semibold">{{ title }}</h3>
+    </div>
+    <!-- Botão-->
+    <div class="button-container text-center mb-4">
+        <app-button
+            *ngIf="hasRedirection"
+            [link]="link"
+        >
+            {{ buttonText }}
+        </app-button>
+    </div>
 </div>
-

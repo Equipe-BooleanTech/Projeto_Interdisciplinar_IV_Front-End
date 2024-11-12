@@ -1,4 +1,4 @@
-import {IngredientDto} from '@domain/dtos'
+import { IngredientDto } from '@domain/dtos';
 
 export interface DataSheetDto {
     name: string;
@@ -6,5 +6,5 @@ export interface DataSheetDto {
     time: string;
     yieldPerPortion: string;
     finalCost: string;
-    totalYields: string; 
+    totalYields: string;
 }

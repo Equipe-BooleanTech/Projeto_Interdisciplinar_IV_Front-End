@@ -33,10 +33,9 @@ export const supplierFileds = {
                 {
                     name: 'pattern',
                     message: 'Formato de CNPJ inválido',
-                    value: /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$|^\d{14}$/ // Regex para validar o formato do CNPJ
-                }
+                    value: /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$|^\d{14}$/, // Regex para validar o formato do CNPJ
+                },
             ],
-                
         },
         {
             component: 'input',

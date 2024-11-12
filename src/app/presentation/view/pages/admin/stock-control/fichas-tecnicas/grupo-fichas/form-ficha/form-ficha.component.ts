@@ -6,11 +6,20 @@ import {
     ReactiveFormsModule,
     ValidatorFn,
 } from '@angular/forms';
-import { IngredientDto, PaginatedResponse, DefaultResponseDto, DataSheetDto } from '@domain/dtos';
+import {
+    IngredientDto,
+    PaginatedResponse,
+    DefaultResponseDto,
+    DataSheetDto,
+} from '@domain/dtos';
 import { fichaFormFields } from '@domain/static/data';
 import { FormValidateService } from '@domain/static/services';
 import { IngredientsUseCase, DataSheetUseCase } from '@domain/usecases';
-import { ButtonComponent, FormComponent, SidebarComponent } from '@presentation/view/components';
+import {
+    ButtonComponent,
+    FormComponent,
+    SidebarComponent,
+} from '@presentation/view/components';
 import { FormInputComponent } from '@presentation/view/components/form';
 import { map } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
@@ -39,7 +48,7 @@ export class FormFichaComponent implements OnInit {
         private _formValidateService: FormValidateService,
         private ingredientUseCase: IngredientsUseCase,
         private datasheetUseCase: DataSheetUseCase,
-        private toastr: ToastrService
+        private toastr: ToastrService,
     ) {}
 
     ngOnInit(): void {
@@ -99,12 +108,18 @@ export class FormFichaComponent implements OnInit {
                 .registerDataSheet(formattedResponse)
                 .subscribe({
                     next: (response: DataSheetDto) => {
-                        this.toastr.success("Ficha técnica cadastrada com sucesso!", "Sucesso")
+                        this.toastr.success(
+                            'Ficha técnica cadastrada com sucesso!',
+                            'Sucesso',
+                        );
                     },
                     error: (error: DefaultResponseDto) => {
-                        this.toastr.error("Ocorreu um erro ao cadastrar a ficha técnica. Verifique os ingredientes e tente novamente!", "Oops..")
+                        this.toastr.error(
+                            'Ocorreu um erro ao cadastrar a ficha técnica. Verifique os ingredientes e tente novamente!',
+                            'Oops..',
+                        );
                     },
                 });
-        } 
+        }
     }
 }

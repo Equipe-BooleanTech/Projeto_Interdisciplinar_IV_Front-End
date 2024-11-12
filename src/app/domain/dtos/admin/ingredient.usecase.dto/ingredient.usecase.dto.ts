@@ -1,6 +1,6 @@
-import { SupplierDto } from "@domain/dtos";
+import { SupplierDto } from '@domain/dtos';
 
-export interface IngredientDto {  
+export interface IngredientDto {
     id?: string;
     name: string;
     supplier: SupplierDto[];
@@ -12,8 +12,6 @@ export interface IngredientDto {
     sif: string;
 }
 
-export interface IngredientResponseDto  {
+export interface IngredientResponseDto {
     message?: string;
-
 }
-

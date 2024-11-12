@@ -1,1 +1,1 @@
-export * from './form/form-field.dto'
+export * from './form/form-field.dto';

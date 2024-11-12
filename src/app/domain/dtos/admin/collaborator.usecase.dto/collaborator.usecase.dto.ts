@@ -18,6 +18,6 @@ export interface CollaboratorDto {
     isEmployee: boolean;
 }
 
-export interface CollaboratorResponseDto{
+export interface CollaboratorResponseDto {
     message?: string;
 }

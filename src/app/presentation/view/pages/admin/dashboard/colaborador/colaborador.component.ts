@@ -7,14 +7,19 @@ import {
     ButtonComponent,
     SidebarComponent,
     TableComponent,
-    WrapperComponent
+    WrapperComponent,
 } from '@presentation/view/components';
 import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-colaborador',
     standalone: true,
-    imports: [SidebarComponent, TableComponent, ButtonComponent, WrapperComponent],
+    imports: [
+        SidebarComponent,
+        TableComponent,
+        ButtonComponent,
+        WrapperComponent,
+    ],
     templateUrl: './colaborador.component.html',
     styles: ``,
 })
@@ -56,13 +61,15 @@ export class ColaboradorComponent implements OnInit, OnDestroy {
     }
 
     fetchCollaborators(): void {
-        this.collaboratorUseCase.getAllCollaborators(this.currentPage - 1, this.pageSize).subscribe(
-            (response: PaginatedResponse<CollaboratorDto>) => {
+        this.collaboratorUseCase
+            .getAllCollaborators(this.currentPage - 1, this.pageSize)
+            .subscribe((response: PaginatedResponse<CollaboratorDto>) => {
                 this.tabela.pagination.totalItems = response.totalElements;
-                this.tabela.pagination.totalPages = Math.ceil(response.totalElements / this.pageSize);
+                this.tabela.pagination.totalPages = Math.ceil(
+                    response.totalElements / this.pageSize,
+                );
                 this.tabela.metrics = `Mostrando ${response.content.length} de ${response.totalElements} colaboradores`;
-            }
-        );
+            });
     }
 
     onPageChange(page: number): void {
@@ -91,7 +98,7 @@ export class ColaboradorComponent implements OnInit, OnDestroy {
             { isActive: false, text: 'Ativos' },
             { isActive: false, text: 'Inativos' },
         ],
-        metrics: "",
+        metrics: '',
         header: ['Nome', 'Função', 'Status', 'Ações'],
         data: [],
         search: {

@@ -31,9 +31,7 @@
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [
-              "src/theme/styles.css"
-            ],
+            "styles": ["src/theme/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -83,7 +81,7 @@
               "buildTarget": "restaurantto-app:build:development"
             }
           },
-          "defaultConfiguration": "development",
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -111,9 +109,7 @@
     }
   },
   "cli": {
-    "schematicCollections": [
-      "@angular-eslint/schematics"
-    ],
+    "schematicCollections": ["@angular-eslint/schematics"],
     "analytics": "45485f7f-79da-4213-a9ca-7b5326950f2a"
   }
 }

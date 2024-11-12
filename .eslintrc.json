@@ -1,6 +1,22 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*"],
+  "ignorePatterns": [
+    "projects/**/*",
+    ".DS_Store",
+    "node_modules",
+    "build",
+    "**/build",
+    "dist",
+    "**/dist",
+    ".env",
+    ".env.*",
+    "!.env.example",
+    "__generated__",
+    "pnpm-lock.yaml",
+    "package-lock.json",
+    "yarn.lock",
+    "**/coverage"
+  ],
   "overrides": [
     {
       "files": ["*.ts"],
@@ -13,7 +29,7 @@
         "plugin:prettier/recommended"
       ],
       "parserOptions": {
-        "project": true,
+        "project": "./tsconfig.json",
         "tsconfigRootDir": "./"
       },
       "rules": {
@@ -86,7 +102,10 @@
     },
     {
       "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended", "plugin:@angular-eslint/template/accessibility"],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility"
+      ],
       "rules": {}
     }
   ]

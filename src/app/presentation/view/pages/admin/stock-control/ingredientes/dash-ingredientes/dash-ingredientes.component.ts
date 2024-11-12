@@ -17,10 +17,7 @@ import { Subscription } from 'rxjs';
     styles: ``,
 })
 export class DashIngredientesComponent implements OnInit, OnDestroy {
-    
-    constructor(
-        private ingredientsUseCase: IngredientsUseCase,
-    ) {}
+    constructor(private ingredientsUseCase: IngredientsUseCase) {}
 
     private subscription: Subscription | null = null;
     currentPage = 1;
@@ -36,7 +33,8 @@ export class DashIngredientesComponent implements OnInit, OnDestroy {
                             suppliers: ingredient.supplier
                                 .map((s) => s.name)
                                 .join(', '),
-                            quantity_unit: ingredient.quantity + '/' + ingredient.unit,
+                            quantity_unit:
+                                ingredient.quantity + '/' + ingredient.unit,
                             price: ingredient.price.toLocaleString('pt-BR', {
                                 style: 'currency',
                                 currency: 'BRL',
@@ -52,18 +50,21 @@ export class DashIngredientesComponent implements OnInit, OnDestroy {
                         ],
                     }),
                 );
-    },
+            },
         );
         this.fetchIngredients();
     }
 
     fetchIngredients(): void {
-        this.ingredientsUseCase.getIngredients(this.currentPage -1, this.pageSize).subscribe(
-            (response: PaginatedResponse<IngredientDto>) => {
+        this.ingredientsUseCase
+            .getIngredients(this.currentPage - 1, this.pageSize)
+            .subscribe((response: PaginatedResponse<IngredientDto>) => {
                 this.tabela.pagination.totalItems = response.totalElements;
-                this.tabela.pagination.totalPages = Math.ceil(response.totalElements / this.pageSize);
+                this.tabela.pagination.totalPages = Math.ceil(
+                    response.totalElements / this.pageSize,
+                );
                 this.tabela.metrics = `Total: ${response.totalElements} ingredientes`;
-    })
+            });
     }
 
     onPageChange(page: number): void {
@@ -98,10 +99,16 @@ export class DashIngredientesComponent implements OnInit, OnDestroy {
             { isActive: true, text: 'Disponíveis' },
             { isActive: false, text: 'Indisponíveis' },
         ],
-        metrics: "",
-        header: ['Ingrediente', 'Fornecedores Associados', 'Quantidade por Unidade de Medida', 'Preço', 'Ações'],
+        metrics: '',
+        header: [
+            'Ingrediente',
+            'Fornecedores Associados',
+            'Quantidade por Unidade de Medida',
+            'Preço',
+            'Ações',
+        ],
         data: [],
-            
+
         search: {
             placeholder: 'Buscar por ingrediente',
             value: '',
@@ -116,5 +123,4 @@ export class DashIngredientesComponent implements OnInit, OnDestroy {
             onPageChange: (page: number) => this.onPageChange(page),
         },
     };
-   
 }

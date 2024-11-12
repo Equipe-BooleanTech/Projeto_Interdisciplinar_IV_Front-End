@@ -1,61 +1,74 @@
 <app-sidebar>
     <h1 class="text-4xl font-bold text-center mb-8">Controle de Estoque</h1>
     <h3 class="m-8 p-4 text-center">Gerencie o estoque de seu restaurante através dessa página.</h3>
-    
-    
+
     <div class="flex lg:justify-end flex-wrap w-full justify-center items-center mb-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
-            <app-card class="w-full"
-              [isDemographic]="true" 
-              iconClass="icon-[icon-park-outline--tomato]" 
-              title="ingredientes"
-              [metric]="'60'" 
-              [percentageChange]="2.84" 
-              [isPositive]="true" metricTitle="Ingredientes">
+            <app-card
+                class="w-full"
+                [isDemographic]="true"
+                iconClass="icon-[icon-park-outline--tomato]"
+                title="ingredientes"
+                [metric]="'60'"
+                [percentageChange]="2.84"
+                [isPositive]="true"
+                metricTitle="Ingredientes"
+            >
             </app-card>
-            <app-card class="w-full"
-              [isDemographic]="true" 
-              iconClass="icon-[streamline--store-1]" 
-              title="fornecedores"
-              [metric]="'20'" 
-              [percentageChange]="0" 
-              [isPositive]="true" metricTitle="Fornecedores">
+            <app-card
+                class="w-full"
+                [isDemographic]="true"
+                iconClass="icon-[streamline--store-1]"
+                title="fornecedores"
+                [metric]="'20'"
+                [percentageChange]="0"
+                [isPositive]="true"
+                metricTitle="Fornecedores"
+            >
             </app-card>
-            <app-card class="w-full"
-              [isDemographic]="true" 
-              iconClass="icon-[fluent--form-sparkle-20-regular]" 
-              title="fichas"
-              [metric]="'180'" 
-              [percentageChange]="1.20" 
-              [isPositive]="true" metricTitle="Fichas Cadastradas">
+            <app-card
+                class="w-full"
+                [isDemographic]="true"
+                iconClass="icon-[fluent--form-sparkle-20-regular]"
+                title="fichas"
+                [metric]="'180'"
+                [percentageChange]="1.2"
+                [isPositive]="true"
+                metricTitle="Fichas Cadastradas"
+            >
             </app-card>
         </div>
     </div>
 
     <div class="flex lg:justify-between justify-center mt-4 w-full md:px-20 mx-auto flex-wrap gap-4">
-        <app-button 
+        <app-button
             [link]="'./admin/estoque/cadastrar-fornecedor'"
-            [disabled]="false">
+            [disabled]="false"
+        >
             Cadastrar Novo Fornecedor
         </app-button>
-    
-        <app-button 
+
+        <app-button
             [link]="'./admin/estoque/gerar-relatorio'"
-            [disabled]="false">
+            [disabled]="false"
+        >
             Gerar Relatório de Estoque
         </app-button>
-    
-        <app-button 
+
+        <app-button
             [link]="'./admin/estoque/cadastrar-ingrediente'"
-            [disabled]="false">
+            [disabled]="false"
+        >
             Cadastrar Novo Ingrediente
         </app-button>
     </div>
-    
 
     <div class="flex justify-center items-center mx-auto w-full">
-        <app-pie class="w-full flex m-auto justify-center items-center" [options]="data" [metrics]="metrics" [id]="'stock-chart'"></app-pie>
+        <app-pie
+            class="w-full flex m-auto justify-center items-center"
+            [options]="data"
+            [metrics]="metrics"
+            [id]="'stock-chart'"
+        ></app-pie>
     </div>
-    
-
 </app-sidebar>

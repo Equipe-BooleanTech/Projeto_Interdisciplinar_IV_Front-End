@@ -1,21 +1,19 @@
 <app-sidebar>
-  <div class="flex justify-between items-center my-4">
-
-    <app-button
-      
-      [link]="'./admin/estoque/fichas-tecnicas'"
-      [disabled]="false">
-      Voltar
-    </app-button>
-    <app-button
-      [link]="'./admin/estoque/fichas-tecnicas/nova-ficha'"
-      [disabled]="false">
-      Cadastrar Nova Ficha
-    </app-button>
-  </div>
-    <h1 class="text-4xl font-bold text-center mb-8"> Grupos Fichas Técnicas</h1>
+    <div class="flex justify-between items-center my-4">
+        <app-button
+            [link]="'./admin/estoque/fichas-tecnicas'"
+            [disabled]="false"
+        >
+            Voltar
+        </app-button>
+        <app-button
+            [link]="'./admin/estoque/fichas-tecnicas/nova-ficha'"
+            [disabled]="false"
+        >
+            Cadastrar Nova Ficha
+        </app-button>
+    </div>
+    <h1 class="text-4xl font-bold text-center mb-8">Grupos Fichas Técnicas</h1>
     <h3 class="m-8 p-4 text-center">Confira as fichas cadastradas do grupo de fichas Massas</h3>
-    <app-table [tableConfig]="tabela">
-
-    </app-table>
+    <app-table [tableConfig]="tabela"> </app-table>
 </app-sidebar>

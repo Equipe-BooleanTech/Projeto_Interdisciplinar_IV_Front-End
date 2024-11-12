@@ -22,7 +22,8 @@ export const groupFormFields = {
             label: 'Descrição:',
             id: 'description',
             value: '',
-            placeholder: 'Digite uma breve descrição sobre esse grupo de fichas (quais fichas ele será responsável por armazenar, etc.)...',
+            placeholder:
+                'Digite uma breve descrição sobre esse grupo de fichas (quais fichas ele será responsável por armazenar, etc.)...',
             validations: [],
         },
     ],

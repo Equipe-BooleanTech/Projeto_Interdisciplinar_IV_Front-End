@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CollaboratorDto, PaginatedResponse } from '@domain/dtos';
-import { CollaboratorRepositoryUseCase } from '@domain/repositories';
-import { ErrorService, BaseUseCase } from "@domain/base"
-import {API_URL} from '@shared/constants'
+import { ErrorService, BaseUseCase } from '@domain/base';
+import { API_URL } from '@shared/constants';
 
 @Injectable({
     providedIn: 'root',
@@ -24,7 +23,6 @@ export class CollaboratorUseCase extends BaseUseCase<CollaboratorDto> {
     }
 
     registerCollaborator(data: CollaboratorDto): Observable<CollaboratorDto> {
-        return this.create(`${this.apiBase}/api/users/create-complete`, data)
+        return this.create(`${this.apiBase}/api/users/create-complete`, data);
     }
-    
 }

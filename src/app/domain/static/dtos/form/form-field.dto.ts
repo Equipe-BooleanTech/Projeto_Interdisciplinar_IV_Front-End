@@ -7,6 +7,8 @@ export interface FormFieldDto {
     value?: any;
     placeholder?: string;
     required?: boolean;
-    options?: { label: string; value: any }[] | { value: string; label: string }[];
+    options?:
+        | { label: string; value: any }[]
+        | { value: string; label: string }[];
     validations?: Validation[];
 }

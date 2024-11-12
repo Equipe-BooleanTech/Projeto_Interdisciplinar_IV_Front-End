@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { LineColumnChartOptions, LineColumnMetrics } from '@domain/static/interfaces';
+import {
+    LineColumnChartOptions,
+    LineColumnMetrics,
+} from '@domain/static/interfaces';
 import {
     CardComponent,
     SidebarComponent,
@@ -20,7 +23,6 @@ import { LineColumnComponent } from '@presentation/view/components/chart';
     styles: ``,
 })
 export class OrdersComponent {
-
     chartData: LineColumnChartOptions<{ x: string; y: number }> = {
         colors: ['#A21420', '#34A853'],
         series: [
@@ -121,7 +123,7 @@ export class OrdersComponent {
             opacity: 1,
         },
     };
-    
+
     chartMetrics: LineColumnMetrics = {
         grossAmount: 25000,
         shortDescription: 'Faturamento de pedidos nos últimos 30 dias',
@@ -130,6 +132,4 @@ export class OrdersComponent {
         total: 120,
         average: 32,
     };
-    
-
 }

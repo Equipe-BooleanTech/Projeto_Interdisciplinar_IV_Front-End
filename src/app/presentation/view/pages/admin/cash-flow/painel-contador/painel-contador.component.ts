@@ -1,17 +1,23 @@
 import { CommonModule, Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import {
     CardList,
     PieChartOptions,
     PieMetrics,
-    TableConfig
+    TableConfig,
 } from '@domain/static/interfaces';
-import { ButtonComponent, CardComponent, SidebarComponent } from '@presentation/view/components';
-import { LineColumnComponent, PieComponent } from '@presentation/view/components/chart';
+import {
+    ButtonComponent,
+    CardComponent,
+    SidebarComponent,
+} from '@presentation/view/components';
+import {
+    LineColumnComponent,
+    PieComponent,
+} from '@presentation/view/components/chart';
 import ApexCharts from 'apexcharts';
-import { CardListComponent } from "../../../../components/card-list/card-list.component";
-import { TableComponent } from "../../../../components/table/table.component";
-
+import { CardListComponent } from '../../../../components/card-list/card-list.component';
+import { TableComponent } from '../../../../components/table/table.component';
 
 @Component({
     selector: 'app-painel-contador',
@@ -29,7 +35,7 @@ import { TableComponent } from "../../../../components/table/table.component";
     templateUrl: './painel-contador.component.html',
     styles: ``,
 })
-export class PainelContadorComponent {
+export class PainelContadorComponent implements AfterViewInit {
     constructor(private location: Location) {}
 
     tabela: TableConfig<{

@@ -70,28 +70,27 @@ export class FornecedorComponent implements OnInit {
     onSubmit(): void {
         if (this.supplierForm.valid) {
             this._suppliersUseCase
-            
+
                 .registerSupplier({
                     ...this.supplierForm.value,
                 } as SupplierDto)
-                    
+
                 .subscribe({
-                  
                     next: (response: SupplierDto) => {
                         this.toastr.success(
                             'Fornecedor cadastrado com sucesso!',
-
                         );
-                    setTimeout(() => {
-                        this._router.navigate(['/admin/estoque/fornecedores']);
-                    }, 3000);
-                },
-                error: () => 
-                    this.toastr.error('Erro ao cadastrar fornecedor'),
+                        setTimeout(() => {
+                            this._router.navigate([
+                                '/admin/estoque/fornecedores',
+                            ]);
+                        }, 3000);
+                    },
+                    error: () =>
+                        this.toastr.error('Erro ao cadastrar fornecedor'),
                 });
-            }else {
-                this.toastr.error('Erro ao cadastrar fornecedor');
-            }   
-        }     
-    }    
-
+        } else {
+            this.toastr.error('Erro ao cadastrar fornecedor');
+        }
+    }
+}

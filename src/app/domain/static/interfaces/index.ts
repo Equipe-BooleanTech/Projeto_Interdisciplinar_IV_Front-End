@@ -6,4 +6,3 @@ export * from './searchbar/searchbar.interface';
 export * from './sidebar/sidebar.interface';
 export * from './table/table.interface';
 export * from './transaction/transaction.interface';
-

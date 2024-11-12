@@ -87,11 +87,10 @@ export class CadastroColaboradorComponent implements OnInit {
                     next: (response: CollaboratorResponseDto) => {
                         this.toastr.success(
                             'Colaborador cadastrado com sucesso!',
-                            
                         );
                         setTimeout(() => {
                             this._router.navigate(['/admin/colaboradores']);
-                        }, 3000)
+                        }, 3000);
                     },
                     error: () =>
                         this.toastr.error('Erro ao cadastrar colaborador.'),

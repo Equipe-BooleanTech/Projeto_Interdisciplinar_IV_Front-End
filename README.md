@@ -25,8 +25,8 @@ O Restauranto nasceu da necessidade de automatizar processos em restaurantes e l
 
 ### Funcionalidades
 
-- [X] Componentes reutilizáveis, permitindo uma maior flexibilidade e fluidez na construção de páginas.
-- [X] Angular Router, permitindo um gerenciamento eficiente das rotas da aplicação.
+- [x] Componentes reutilizáveis, permitindo uma maior flexibilidade e fluidez na construção de páginas.
+- [x] Angular Router, permitindo um gerenciamento eficiente das rotas da aplicação.
 - [ ] Estruturação de uma arquitetura limpa, empregando boas práticas de desenvolvimento de software aplicadas ao Angular.
 - [ ] Segurança no intercâmbio de informações no sistema, separando-as entre diferentes atores e suas respectivas responsabilidades.
 - [ ] Responsividade e acessibilidade, permitindo a usuários de diferentes dispositivos acessarem a plataforma de forma fácil e eficiente.

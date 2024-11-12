@@ -1,43 +1,60 @@
-<section id="contato" class="h-full w-full">
-  <div class="flex flex-col justify-center items-center h-full">
-    <div class="flex flex-col justify-center items-center w-11/12">
-      <h1 class="text-4xl font-bold text-center my-6">{{homepageData?.form?.title}}</h1>
-      <p class="my-4 w-full lg:w-1/2">{{homepageData?.form?.description}}</p> 
+<section
+    id="contato"
+    class="h-full w-full"
+>
+    <div class="flex flex-col justify-center items-center h-full">
+        <div class="flex flex-col justify-center items-center w-11/12">
+            <h1 class="text-4xl font-bold text-center my-6">{{ homepageData?.form?.title }}</h1>
+            <p class="my-4 w-full lg:w-1/2">{{ homepageData?.form?.description }}</p>
+        </div>
+        <div
+            class="flex flex-col justify-center items-center border-2 border-[#740318] shadow-lg rounded-md w-11/12 max-w-3xl lg:h-3/4"
+        >
+            <app-form
+                class="mx-auto p-4 lg:p-6 my-2 lg:my-0 bg-white w-full"
+                [formGroup]="form"
+                (ngSubmit)="submit(form.value)"
+                aria-labelledby="form-title"
+            >
+                <ng-container *ngFor="let field of config.fields">
+                    <ng-container [ngSwitch]="field.component">
+                        <label
+                            *ngSwitchCase="'input'"
+                            [for]="field.name"
+                            class="block w-full my-2 text-sm font-medium"
+                            >{{ field.label }}</label
+                        >
+
+                        <app-form-input
+                            *ngSwitchCase="'input'"
+                            [formControlName]="field.name"
+                            [type]="field.type"
+                            [placeholder]="field.placeholder"
+                            class="w-full my-2"
+                        />
+                        <label
+                            *ngSwitchCase="'textarea'"
+                            [for]="field.name"
+                            class="block w-full my-2 text-sm font-medium"
+                            >{{ field.label }}</label
+                        >
+                        <app-form-textarea
+                            *ngSwitchCase="'textarea'"
+                            [formControlName]="field.name"
+                            [placeholder]="field.placeholder"
+                            class="lg:h-[300px] w-full my-2 h-[200px]"
+                        />
+                    </ng-container>
+                </ng-container>
+                <button
+                    type="submit"
+                    class="bg-[#740318] hover:bg-[#740318c9] disabled:bg-[#740318c9] text-white font-semibold py-3 px-4 w-full rounded transition ease-in-out duration-300"
+                    [disabled]="!form.valid"
+                    [attr.aria-disabled]="!form.valid"
+                >
+                    {{ homepageData?.form?.submitButtonLabel }}
+                </button>
+            </app-form>
+        </div>
     </div>
-    <div class="flex flex-col justify-center items-center border-2 border-[#740318] shadow-lg rounded-md w-11/12 max-w-3xl lg:h-3/4"> 
-      <app-form class="mx-auto p-4 lg:p-6 my-2 lg:my-0 bg-white w-full" [formGroup]="form" (ngSubmit)="submit(form.value)" aria-labelledby="form-title"> 
-        <ng-container *ngFor="let field of config.fields">
-          <ng-container [ngSwitch]="field.component">
-            <label 
-              *ngSwitchCase="'input'" 
-              [for]="field.name" 
-              class="block w-full my-2 text-sm font-medium">{{field.label}}</label>
-              
-            <app-form-input 
-              *ngSwitchCase="'input'" 
-              [formControlName]="field.name" 
-              [type]="field.type" 
-              [placeholder]="field.placeholder" 
-              class="w-full my-2"
-              />
-            <label 
-              *ngSwitchCase="'textarea'" 
-              [for]="field.name" 
-              class="block w-full my-2 text-sm font-medium">{{field.label}}</label>
-            <app-form-textarea 
-              *ngSwitchCase="'textarea'" 
-              [formControlName]="field.name" 
-              [placeholder]="field.placeholder" 
-              class="lg:h-[300px] w-full my-2 h-[200px]" 
-            />
-          </ng-container>
-        </ng-container>
-        <button 
-          type="submit" 
-          class="bg-[#740318] hover:bg-[#740318c9] disabled:bg-[#740318c9] text-white font-semibold py-3 px-4 w-full rounded transition ease-in-out duration-300"
-          [disabled]="!form.valid" 
-          [attr.aria-disabled]="!form.valid">{{homepageData?.form?.submitButtonLabel}}</button>
-      </app-form>
-    </div>
-  </div>
 </section>

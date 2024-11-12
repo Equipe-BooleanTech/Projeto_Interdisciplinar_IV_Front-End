@@ -1,12 +1,11 @@
 <app-sidebar>
     <div class="flex justify-between items-center my-4">
-
         <app-button
             [link]="'./admin/pedidos'"
             [disabled]="false"
-            >
+        >
             Voltar
-      </app-button>
+        </app-button>
     </div>
     <div class="w-full flex flex-col justify-center items-center my-16">
         <h1 class="text-4xl font-bold text-center my-6">Delivery</h1>
@@ -15,6 +14,5 @@
         </p>
     </div>
 
-    <app-table [tableConfig]="tabela">
-    </app-table>
+    <app-table [tableConfig]="tabela"> </app-table>
 </app-sidebar>

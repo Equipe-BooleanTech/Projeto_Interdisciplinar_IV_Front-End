@@ -1,20 +1,18 @@
 <app-sidebar>
     <div class="flex justify-between items-center my-16">
-
-      <app-button
-          [link]="'./admin/estoque'"
-          [disabled]="false"
-          >
-          Voltar
-    </app-button>
-      <app-button
-        [link]="'./admin/estoque/cadastrar-fornecedor'"
-        [disabled]="false">
-        Cadastrar Novo Fornecedor
-      </app-button>
+        <app-button
+            [link]="'./admin/estoque'"
+            [disabled]="false"
+        >
+            Voltar
+        </app-button>
+        <app-button
+            [link]="'./admin/estoque/cadastrar-fornecedor'"
+            [disabled]="false"
+        >
+            Cadastrar Novo Fornecedor
+        </app-button>
     </div>
-  
-    <app-table [tableConfig]="tabela">
-      <app-button></app-button>
-   
-  
+
+    <app-table [tableConfig]="tabela"> <app-button></app-button> </app-table
+></app-sidebar>

@@ -2,16 +2,16 @@
     <h1 class="text-4xl font-bold text-center mb-8">Painel do Contador</h1>
 
     <div class="flex justify-between items-center my-4">
-
         <app-button
-          [link]="'./admin/controle-caixa'"
-          [disabled]="false">
+            [link]="'./admin/controle-caixa'"
+            [disabled]="false"
+        >
             Voltar
-          
         </app-button>
         <app-button
             [link]="'./admin/controle-caixa/ultimas-transacoes'"
-            [disabled]="false">
+            [disabled]="false"
+        >
             Últimas Transações
         </app-button>
     </div>
@@ -19,35 +19,36 @@
     <app-table [tableConfig]="tabela"></app-table>
 
     <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 m-8">
-
         <div class="flex justify-evenly items-center">
-            <app-pie class="w-full flex m-auto justify-center items-end"
+            <app-pie
+                class="w-full flex m-auto justify-center items-end"
                 [options]="data"
                 [metrics]="metrics"
-                [id]="'stock-chart'">
+                [id]="'stock-chart'"
+            >
             </app-pie>
         </div>
 
         <div class="flex flex-col justify-between items-center">
             <div class="flex flex-row justify-center gap-x-8 m-8 p-8">
-                <app-card 
-                    [hasRedirection]="true" 
-                    title="Relatórios mensais" 
+                <app-card
+                    [hasRedirection]="true"
+                    title="Relatórios mensais"
                     imgSrc="https://i.ibb.co/1RMHvDz/logo.jpg"
-                    [buttonText]="'Baixar PDF'" 
-                    class="w-64 h-64 object-cover">
+                    [buttonText]="'Baixar PDF'"
+                    class="w-64 h-64 object-cover"
+                >
                 </app-card>
-            
-                <app-card 
-                    [hasRedirection]="true" 
-                    title="Impostos e Gastos" 
+
+                <app-card
+                    [hasRedirection]="true"
+                    title="Impostos e Gastos"
                     imgSrc="https://i.ibb.co/1RMHvDz/logo.jpg"
-                    [buttonText]="'Baixar PDF'" 
-                    class="w-64 h-64 object-cover">
+                    [buttonText]="'Baixar PDF'"
+                    class="w-64 h-64 object-cover"
+                >
                 </app-card>
             </div>
         </div>
-        
-
     </div>
 </app-sidebar>
