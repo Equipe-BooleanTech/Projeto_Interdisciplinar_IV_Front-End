@@ -1,36 +1,32 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { DeleteIngredientDto, GetIngredientDto, IngredientDto, IngredientResponseDto, RegisterIngredientDto, UpdateIngredientDto } from "@domain/dtos";
-import { IngredientRepository } from "@domain/repositories";
+import { BaseUseCase, ErrorService } from "@domain/base";
+import { IngredientDto, PaginatedResponse } from "@domain/dtos";
 import { Observable } from "rxjs";
 import { API_URL } from "src/app/shared";
 
 @Injectable({
     providedIn: 'root',
 })
-export class IngredientsUseCase implements IngredientRepository {
+export class IngredientsUseCase extends BaseUseCase<IngredientDto>  {
 
     private apiBase = API_URL;
 
-    constructor(private _http: HttpClient) {}
-
-    getIngredients(): Observable<IngredientDto[]> {
-        return this._http.get<IngredientDto[]>(`${this.apiBase}/api/products/get-ingredients`);
+    constructor(_http: HttpClient, _errorService: ErrorService) {
+        super(_http, _errorService);
+    }
+    getIngredients(
+        page: number,
+        size: number,
+    ): Observable<PaginatedResponse<IngredientDto>>{
+        return this.getAll(`${this.apiBase}/api/products/get-ingredients`, page, size);
     }
 
-    getIngredient(ingredient: GetIngredientDto): Observable<IngredientDto> {
-        return this._http.get<IngredientDto>(`${this.apiBase}/api/products/get-ingredient/${ingredient.id}`);
+    getIngredientById(id: string): Observable<IngredientDto> {
+        return this.getById(`${this.apiBase}/api/products/get-ingredient-by-id/${id}`, id);
     }
-
-    createIngredient(ingredient: RegisterIngredientDto): Observable<IngredientResponseDto> {
-        return this._http.post<IngredientResponseDto>(`${this.apiBase}/api/products/create-ingredient`, ingredient);
-    }
-
-    updateIngredient(ingredient: UpdateIngredientDto): Observable<IngredientResponseDto> {
-        return this._http.put<IngredientResponseDto>(`${this.apiBase}/api/products/update-ingredient/${ingredient.id}`, ingredient);
-    }
-
-    deleteIngredient(ingredient: DeleteIngredientDto): Observable<IngredientResponseDto> {
-        return this._http.delete<IngredientResponseDto>(`${this.apiBase}/api/products/delete-ingredient/${ingredient.id}`, {});
+    
+    registerIngredient(data: IngredientDto): Observable<IngredientDto> {
+        return this.create(`${this.apiBase}/api/products/create-ingredient`, data)
     }
 }

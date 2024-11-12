@@ -1,12 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PaginatedResponse, SupplierDto } from '@domain/dtos';
 import { TableConfig } from '@domain/static/interfaces';
+import { SuppliersUseCase } from '@domain/usecases';
 import {
     ButtonComponent,
     SidebarComponent,
     TableComponent,
 } from '@presentation/view/components';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-dash-fornecedores',
@@ -22,88 +25,74 @@ import {
     templateUrl: './dash-fornecedores.component.html',
     styles: ``,
 })
-export class DashFornecedoresComponent {
-    constructor() {}
+export class DashFornecedoresComponent implements OnInit, OnDestroy {
+   
+
+    constructor(
+        private suppliersUseCase: SuppliersUseCase,
+    ) {}
+
+    private subscription: Subscription | null = null;
+    currentPage = 1;
+    pageSize = 6;
+
+    ngOnInit(): void {
+        this.subscription = this.suppliersUseCase.base$.subscribe(
+            (suppliers: SupplierDto[]) => {
+                this.tabela.data = suppliers.map(
+                    (supplier: SupplierDto) => ({
+                        rowData:{
+                            supplier: supplier.name,
+                            contactName: supplier.contact,
+                            phone: supplier.phone,
+                            action: 'Ver mais',
+                        },
+                        componentType: ['text', 'text', 'text', 'button'],
+            }),
+        );
+    },
+);
+        this.fetchSuppliers();
+}
+
+fetchSuppliers(): void {
+    this.suppliersUseCase.getSuppliers(this.currentPage -1, this.pageSize).subscribe(
+        (response: PaginatedResponse<SupplierDto>) => {
+            this.tabela.pagination.totalItems = response.totalElements;
+            this.tabela.pagination.totalPages = Math.ceil(response.totalElements / this.pageSize);
+            this.tabela.metrics = `Mostrando ${response.totalElements} fornecedores`;
+})
+}
+
+
+    onPageChange(page: number): void {
+        if (page >= 1 && page <= this.tabela.pagination.totalPages!) {
+            this.currentPage = page;
+            this.fetchSuppliers();
+        }
+    }
+
+    ngOnDestroy(): void {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    }
 
     tabela: TableConfig<{
         supplier: string;
-        individualRecord: string;
-        lastUpdate: string;
+        contactName: string;
+        phone: string;
+       action: string;
     }> = {
-        rowOrder: ['supplier', 'individualRecord', 'lastUpdate'],
+        rowOrder: ['supplier', 'contactName', 'phone', 'action'],
         title: 'Fornecedores Cadastrados e Atualizações',
         filters: [
             { isActive: true, text: 'Ativos' },
             { isActive: false, text: 'Inativos' },
         ],
-        metrics: 'Total: 10 fornecedores, 8 Ativos, 2 Inativos',
-        header: ['Fornecedor', 'Cadastro', 'Última Atualização'],
-        data: [
-            {
-                rowData: {
-                    supplier: 'Sabores do Campo',
-                    individualRecord: 'Visualizar cadastro',
-                    lastUpdate: '23/09/2016',
-                },
-                componentType: ['text', 'button', 'text'],
-            },
-            {
-                rowData: {
-                    supplier: 'Sabor e Arte Gourmet',
-                    individualRecord: 'Visualizar cadastro',
-                    lastUpdate: '21/04/2012',
-                },
-                componentType: ['text', 'button', 'text'],
-            },
-            {
-                rowData: {
-                    supplier: 'Naturalmente Fresco',
-                    individualRecord: 'Visualizar cadastro',
-                    lastUpdate: '14/12/2017',
-                },
-                componentType: ['text', 'button', 'text'],
-            },
-            {
-                rowData: {
-                    supplier: 'Delicias do Chef',
-                    individualRecord: 'Visualizar cadastro',
-                    lastUpdate: '18/07/2017',
-                },
-                componentType: ['text', 'button', 'text'],
-            },
-            {
-                rowData: {
-                    supplier: 'Rota dos Sabores',
-                    individualRecord: 'Visualizar cadastro',
-                    lastUpdate: '31/01/2014',
-                },
-                componentType: ['text', 'button', 'text'],
-            },
-            {
-                rowData: {
-                    supplier: 'Mesa Cheia',
-                    individualRecord: 'Visualizar cadastro',
-                    lastUpdate: '10/12/2013',
-                },
-                componentType: ['text', 'button', 'text'],
-            },
-            {
-                rowData: {
-                    supplier: 'Sabor das Estações',
-                    individualRecord: 'Visualizar cadastro',
-                    lastUpdate: '27/05/2015',
-                },
-                componentType: ['text', 'button', 'text'],
-            },
-            {
-                rowData: {
-                    supplier: 'Bons Pratos',
-                    individualRecord: 'Visualizar cadastro',
-                    lastUpdate: '07/05/2016',
-                },
-                componentType: ['text', 'button', 'text'],
-            },
-        ],
+        metrics: "",
+        header: ['Fornecedor', 'Nome de Contato', 'Telefone', 'Ações'],
+        data: [],
 
         search: {
             placeholder: 'Buscar por fornecedor',
@@ -113,8 +102,10 @@ export class DashFornecedoresComponent {
             },
         },
         pagination: {
-            pageRange: 10,
-            totalItems: 10,
+            pageRange: 1,
+            totalItems: 0,
+            totalPages: 0,
+            onPageChange: (page: number) => this.onPageChange(page),
         },
     };
     

@@ -7,16 +7,17 @@ import {
     Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SupplierDto } from '@domain/dtos';
 import { supplierFileds } from '@domain/static/data';
-import { SuppliersUseCase } from '@domain/usecases/admin';
 import { FormValidateService } from '@domain/static/services';
-import { RegisterSupplierDto } from '@domain/dtos';
+import { SuppliersUseCase } from '@domain/usecases/admin';
 import {
     ButtonComponent,
     FormComponent,
     SidebarComponent,
 } from '@presentation/view/components';
 import { FormInputComponent } from '@presentation/view/components/form';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-fornecedor',
@@ -34,7 +35,7 @@ import { FormInputComponent } from '@presentation/view/components/form';
 })
 export class FornecedorComponent implements OnInit {
     supplierForm: FormGroup = new FormGroup({});
-    suppliersFields = supplierFileds;
+    suppliersFormFields = supplierFileds;
     collaboratorForm: any;
 
     constructor(
@@ -42,6 +43,7 @@ export class FornecedorComponent implements OnInit {
         private _formValidateService: FormValidateService,
         private _router: Router,
         private _suppliersUseCase: SuppliersUseCase,
+        private toastr: ToastrService,
     ) {}
 
     ngOnInit(): void {
@@ -50,7 +52,7 @@ export class FornecedorComponent implements OnInit {
 
     private _initForm(): void {
         this.supplierForm = this._fb.group(
-            this.suppliersFields.fields.reduce(
+            this.suppliersFormFields.fields.reduce(
                 (formFields, field) => {
                     formFields[field.name] = [
                         field.value,
@@ -67,15 +69,29 @@ export class FornecedorComponent implements OnInit {
 
     onSubmit(): void {
         if (this.supplierForm.valid) {
-            console.log(this.supplierForm.value);
             this._suppliersUseCase
-                .createSupplier(this.supplierForm.value as RegisterSupplierDto)
-                .subscribe(() => {
-                    alert('Fornecedor cadastrado com sucesso!');
-                    this._router.navigate(['/admin/estoque/fornecedores']);
+            
+                .registerSupplier({
+                    ...this.supplierForm.value,
+                } as SupplierDto)
+                    
+                .subscribe({
+                  
+                    next: (response: SupplierDto) => {
+                        this.toastr.success(
+                            'Fornecedor cadastrado com sucesso!',
+
+                        );
+                    setTimeout(() => {
+                        this._router.navigate(['/admin/estoque/fornecedores']);
+                    }, 3000);
+                },
+                error: () => 
+                    this.toastr.error('Erro ao cadastrar fornecedor'),
                 });
-        } else {
-            console.log('Formulário inválido');
-        }
-    }
-}
+            }else {
+                this.toastr.error('Erro ao cadastrar fornecedor');
+            }   
+        }     
+    }    
+

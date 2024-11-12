@@ -17,7 +17,7 @@
 
     <div class="flex justify-center border-2 border-[#740318] rounded-md w-11/12 items-center mx-auto">
         <app-form [formGroup]="supplierForm" (ngSubmit)="onSubmit()" class="w-full h-full bg-white p-8">
-            <ng-container *ngFor="let field of suppliersFields.fields">
+            <ng-container *ngFor="let field of suppliersFormFields.fields">
                 <ng-container [ngSwitch]="field.component">
 
                     <!-- Campo input para Nome do Fornecedor -->

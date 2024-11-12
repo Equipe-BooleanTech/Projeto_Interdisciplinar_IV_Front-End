@@ -7,7 +7,7 @@ import {
     ValidatorFn,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PaginatedResponse, SupplierDto, IngredientDto } from '@domain/dtos';
+import { IngredientDto, PaginatedResponse, SupplierDto } from '@domain/dtos';
 import { ingredientFields } from '@domain/static/data/forms/ingredient/ingredient';
 import { FormValidateService } from '@domain/static/services';
 import { IngredientsUseCase, SuppliersUseCase } from '@domain/usecases/admin';
@@ -17,7 +17,9 @@ import {
     SidebarComponent,
 } from '@presentation/view/components';
 import { FormInputComponent } from '@presentation/view/components/form';
-import { map } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { map, Observable, of } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-ingredientes',
@@ -43,6 +45,7 @@ export class IngredientesComponent implements OnInit {
         private _router: Router,
         private _ingredientUseCase: IngredientsUseCase,
         private _supplierUseCase: SuppliersUseCase,
+        private toastr: ToastrService,
     ) {}
 
     ngOnInit(): void {
@@ -66,15 +69,14 @@ export class IngredientesComponent implements OnInit {
             ),
         );
     }
+
     private _loadSuppliers(): void {
         this._supplierUseCase
-            .getSuppliers()
+            .getSuppliers(0, 100)
             .pipe(
                 map((response: PaginatedResponse<SupplierDto>) =>
                     response.content.map((supplier) => ({
-                        value: JSON.stringify(
-                            JSON.parse(JSON.stringify(supplier)),
-                        ),
+                        value: supplier.name || '', 
                         label: supplier.name,
                     })),
                 ),
@@ -89,17 +91,49 @@ export class IngredientesComponent implements OnInit {
             });
     }
 
+    private checkIfIngredientExists(): Observable<boolean> {
+        return this._ingredientUseCase.getIngredients(0, 100).pipe(
+            map((response: PaginatedResponse<IngredientDto>) => {
+                const ingredient = response.content.find(
+                    (ingredient) =>
+                        ingredient.name === this.ingredientForm.value.name,
+                );
+                if (ingredient) {
+                    this.toastr.error('Ingrediente já cadastrado, edite-o ou crie um novo ingrediente com outro nome', "Oops...");
+                    return true;
+                }
+                return false;
+            }),
+            catchError((error) => {
+                console.error('Error checking ingredient existence', error);
+                return of(false);
+            })
+        );
+    }
+
     onSubmit(): void {
         if (this.ingredientForm.valid) {
-            console.log(this.ingredientForm.value);
-            this._ingredientUseCase
-                .createIngredient(this.ingredientForm.value as IngredientDto)
-                .subscribe(() => {
-                    alert('Ingrediente cadastrado com sucesso!');
+            this.checkIfIngredientExists().pipe(
+                switchMap((ingredientExists) => {
+                    if (!ingredientExists) {
+                        const formattedRequest = {
+                            ...this.ingredientForm.value,
+                            supplier: this.ingredientForm.value.supplier.map((name: string) => ({
+                                name: name,
+                            })),
+                        };
+
+                        return this._ingredientUseCase.registerIngredient(formattedRequest as IngredientDto);
+                    } else {
+                        return of(null);
+                    }
+                })
+            ).subscribe((response) => {
+                if (response) {
+                    this.toastr.success('Ingrediente cadastrado com sucesso!', "Sucesso");
                     this._router.navigate(['/admin/estoque/ingredientes']);
-                });
-        } else {
-            console.log('Formulário inválido');
+                }
+            });
         }
     }
 }

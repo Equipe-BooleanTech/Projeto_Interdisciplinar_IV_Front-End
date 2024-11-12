@@ -6,10 +6,14 @@ import {
     ReactiveFormsModule,
     ValidatorFn,
 } from '@angular/forms';
+import { IngredientDto, PaginatedResponse, DefaultResponseDto, DataSheetDto } from '@domain/dtos';
 import { fichaFormFields } from '@domain/static/data';
 import { FormValidateService } from '@domain/static/services';
+import { IngredientsUseCase, DataSheetUseCase } from '@domain/usecases';
 import { ButtonComponent, FormComponent, SidebarComponent } from '@presentation/view/components';
 import { FormInputComponent } from '@presentation/view/components/form';
+import { map } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-form-ficha',
@@ -29,9 +33,13 @@ export class FormFichaComponent implements OnInit {
     fichaForm: FormGroup = new FormGroup({});
     fichaFields = fichaFormFields;
     method: 'POST' | 'PUT' = 'POST';
+
     constructor(
         private _formBuilder: FormBuilder,
         private _formValidateService: FormValidateService,
+        private ingredientUseCase: IngredientsUseCase,
+        private datasheetUseCase: DataSheetUseCase,
+        private toastr: ToastrService
     ) {}
 
     ngOnInit(): void {
@@ -52,19 +60,51 @@ export class FormFichaComponent implements OnInit {
                 {} as { [key: string]: [string, ValidatorFn | null] },
             ),
         );
+
+        this.loadIngredients();
+    }
+
+    private loadIngredients(): void {
+        this.ingredientUseCase
+            .getIngredients(0, 100)
+            .pipe(
+                map((response: PaginatedResponse<IngredientDto>) =>
+                    response.content.map((ingredient) => ({
+                        value: ingredient.name,
+                        label: ingredient.name + ' ' + ingredient.description,
+                    })),
+                ),
+            )
+            .subscribe((ingredientOptions) => {
+                const ingredientField = this.fichaFields.fields.find(
+                    (field) => field.name === 'ingredients',
+                );
+                if (ingredientField) {
+                    ingredientField.options = ingredientOptions;
+                }
+            });
     }
 
     submit(): void {
         if (this.fichaForm.valid) {
-            console.log(this.fichaForm.value);
-        } else {
-            console.log('Form is invalid');
-        }
+            const formattedResponse = {
+                ...this.fichaForm.value,
+                ingredients: this.fichaForm.value.ingredients.map(
+                    (name: string) => ({
+                        name: name,
+                    }),
+                ),
+            };
+            this.datasheetUseCase
+                .registerDataSheet(formattedResponse)
+                .subscribe({
+                    next: (response: DataSheetDto) => {
+                        this.toastr.success("Ficha técnica cadastrada com sucesso!", "Sucesso")
+                    },
+                    error: (error: DefaultResponseDto) => {
+                        this.toastr.error("Ocorreu um erro ao cadastrar a ficha técnica. Verifique os ingredientes e tente novamente!", "Oops..")
+                    },
+                });
+        } 
     }
-
-    goBack(): void {
-        console.log('Go back');
-    }
-
-    // merge
 }

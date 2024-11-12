@@ -28,7 +28,12 @@ export class BaseUseCase<Entity> implements BaseUseCaseRepository<Entity> {
     }
 
     getById(url: string, id: string): Observable<Entity> {
-        throw new Error("Method not implemented.");
+        return this.http.get<Entity>(`${url}/${id}`).pipe(
+            catchError((error: HttpErrorResponse) => {
+                this.errorService.handleError(error);
+                return throwError(error);
+            })
+        );
     }
 
     create(url: string, data: Entity): Observable<Entity> {

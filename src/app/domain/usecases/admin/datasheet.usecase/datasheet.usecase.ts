@@ -1,34 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseUseCase, ErrorService } from '@domain/base';
-import {
-    PaginatedResponse,
-    SupplierDto
-} from '@domain/dtos';
+import { DataSheetDto, PaginatedResponse } from '@domain/dtos';
 import { Observable } from 'rxjs';
 import { API_URL } from 'src/app/shared';
 
 @Injectable({
     providedIn: 'root',
 })
-export class SuppliersUseCase extends BaseUseCase<SupplierDto> {
-    public apiBase = API_URL;
+export class DataSheetUseCase extends BaseUseCase<DataSheetDto> {
+    private apiBase = API_URL;
 
     constructor(_http: HttpClient, _errorService: ErrorService) {
         super(_http, _errorService);
     }
-
-    getSuppliers(
+    getDatasheets(
         page: number,
         size: number,
-    ): Observable<PaginatedResponse<SupplierDto>> {
+    ): Observable<PaginatedResponse<DataSheetDto>> {
         return this.getAll(
-            `${this.apiBase}/api/products/get-supplier`,
+            `${this.apiBase}/api/datasheets/get-datasheets`,
             page,
             size,
-    );
+        );
     }
-    registerSupplier(data: SupplierDto): Observable<SupplierDto> {
-        return this.create(`${this.apiBase}/api/products/create-supplier`, data)
+
+    registerDataSheet(data: DataSheetDto): Observable<DataSheetDto> {
+        return this.create(
+            `${this.apiBase}/api/datasheets/create-datasheet`,
+            data,
+        );
     }
 }
