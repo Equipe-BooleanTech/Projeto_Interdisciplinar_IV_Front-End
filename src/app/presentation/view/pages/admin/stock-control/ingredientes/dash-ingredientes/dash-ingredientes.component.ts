@@ -31,16 +31,27 @@ export class DashIngredientesComponent implements OnInit, OnDestroy {
             (ingredient: IngredientDto[]) => {
                 this.tabela.data = ingredient.map(
                     (ingredient: IngredientDto) => ({
-                        rowData:{
+                        rowData: {
                             ingredient: ingredient.name,
-                            suppliers: ingredient.supplier.map(s => s.name).join(', '),
-                            quantity: ingredient.quantity,
-                            unit: ingredient.unit,
+                            suppliers: ingredient.supplier
+                                .map((s) => s.name)
+                                .join(', '),
+                            quantity_unit: ingredient.quantity + '/' + ingredient.unit,
+                            price: ingredient.price.toLocaleString('pt-BR', {
+                                style: 'currency',
+                                currency: 'BRL',
+                            }),
                             action: 'Ver mais',
                         },
-                        componentType: ['text', 'text', 'text', 'text', 'button'],
-            }),
-        );
+                        componentType: [
+                            'text',
+                            'text',
+                            'text',
+                            'text',
+                            'button',
+                        ],
+                    }),
+                );
     },
         );
         this.fetchIngredients();
@@ -71,15 +82,15 @@ export class DashIngredientesComponent implements OnInit, OnDestroy {
     tabela: TableConfig<{
         ingredient: string;
         suppliers: string;
-        quantity: string;
-        unit: string;
+        quantity_unit: string;
+        price: string;
         action: string;
     }> = {
         rowOrder: [
             'ingredient',
             'suppliers',
-            'quantity',
-            'unit',
+            'quantity_unit',
+            'price',
             'action',
         ],
         title: 'Ingredientes Cadastrados',
@@ -88,7 +99,7 @@ export class DashIngredientesComponent implements OnInit, OnDestroy {
             { isActive: false, text: 'Indisponíveis' },
         ],
         metrics: "",
-        header: ['Ingrediente', 'Fornecedores Associados', 'Quantidade', 'Unidade Medida', 'Ações'],
+        header: ['Ingrediente', 'Fornecedores Associados', 'Quantidade por Unidade de Medida', 'Preço', 'Ações'],
         data: [],
             
         search: {

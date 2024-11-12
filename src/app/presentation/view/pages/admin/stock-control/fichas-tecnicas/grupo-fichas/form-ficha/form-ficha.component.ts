@@ -105,12 +105,6 @@ export class FormFichaComponent implements OnInit {
                         this.toastr.error("Ocorreu um erro ao cadastrar a ficha técnica. Verifique os ingredientes e tente novamente!", "Oops..")
                     },
                 });
-        } else {
-            console.log('Form is invalid');
-        }
-    }
-
-    goBack(): void {
-        console.log('Go back');
+        } 
     }
 }

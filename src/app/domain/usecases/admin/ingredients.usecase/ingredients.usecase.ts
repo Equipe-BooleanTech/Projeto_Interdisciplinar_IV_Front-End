@@ -22,6 +22,10 @@ export class IngredientsUseCase extends BaseUseCase<IngredientDto>  {
         return this.getAll(`${this.apiBase}/api/products/get-ingredients`, page, size);
     }
 
+    getIngredientById(id: string): Observable<IngredientDto> {
+        return this.getById(`${this.apiBase}/api/products/get-ingredient-by-id/${id}`, id);
+    }
+    
     registerIngredient(data: IngredientDto): Observable<IngredientDto> {
         return this.create(`${this.apiBase}/api/products/create-ingredient`, data)
     }
