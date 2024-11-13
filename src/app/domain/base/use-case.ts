@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { ErrorService, BaseUseCaseRepository } from '.';
-import { PaginatedResponse } from '@domain/dtos';
+import { PaginatedResponse, ListByPeriodDto } from '@domain/dtos';
 
 @Injectable({
     providedIn: 'root',
@@ -51,11 +51,15 @@ export class BaseUseCase<Entity> implements BaseUseCaseRepository<Entity> {
         );
     }
 
-    listPerTime(url: string, timeRangePath?: string): Observable<Entity[]> {
+    listPerTime(
+        url: string,
+        timeRange: ListByPeriodDto,
+        timeRangePath?: string,
+    ): Observable<Entity[]> {
         return this._http
-            .get<
+            .post<
                 Entity[]
-            >(`${url}${timeRangePath !== undefined ? `?${timeRangePath}` : ''}`)
+            >(`${url}${timeRangePath !== undefined ? `?${timeRangePath}` : ''}`, timeRange)
             .pipe(
                 catchError((error: HttpErrorResponse) => {
                     this._errorService.handleError(error);

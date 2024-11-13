@@ -33,7 +33,10 @@ export class CollaboratorUseCase extends BaseUseCase<CollaboratorDto> {
     listCollaboratorPerTime(): Observable<CollaboratorDto[]> {
         return this.listPerTime(
             `${this.apiBase}/api/users/list-users-by-period`,
-            'groupingType=weekly',
+            {
+                startDate: (new Date().getMonth() - 1).toString(),
+                endDate: new Date().getMonth().toString(),
+            },
         );
     }
 }
