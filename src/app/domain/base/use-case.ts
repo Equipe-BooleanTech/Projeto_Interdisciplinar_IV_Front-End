@@ -51,6 +51,18 @@ export class BaseUseCase<Entity> implements BaseUseCaseRepository<Entity> {
         );
     }
 
+    listPerTime(url: string, timeRangePath?: string): Observable<Entity[]> {
+        return this._http
+            .get<
+                Entity[]
+            >(`${url}${timeRangePath !== undefined ? `?${timeRangePath}` : ''}`)
+            .pipe(
+                catchError((error: HttpErrorResponse) => {
+                    this._errorService.handleError(error);
+                    return throwError(error);
+                }),
+            );
+    }
     /* 
     update(url: string, data: Entity, id: string): Observable<Entity> {
         throw new Error('Method not implemented.');

@@ -1,15 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CollaboratorDto, PaginatedResponse } from '@domain/dtos';
 import {
     LineColumnChartOptions,
     LineColumnMetrics,
     TableConfig,
 } from '@domain/static/interfaces';
+import { CollaboratorUseCase } from '@domain/usecases';
 import {
     CardComponent,
     SidebarComponent,
     TableComponent,
 } from '@presentation/view/components';
 import { LineColumnComponent } from '@presentation/view/components/chart';
+import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
+import { TokenService } from 'src/app/security';
 
 @Component({
     selector: 'app-dashboard',
@@ -23,61 +28,110 @@ import { LineColumnComponent } from '@presentation/view/components/chart';
     templateUrl: './dashboard.component.html',
     styles: ``,
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit, OnDestroy {
+    private subscription: Subscription | null = null;
+    collaboratorName: string = '';
+    currentPage = 1;
+    pageSize = 3;
+
+    constructor(
+        private location: Location,
+        private collaboratorUseCase: CollaboratorUseCase,
+        private _tokenService: TokenService,
+    ) {}
+
+    ngOnInit(): void {
+        this.subscription = this.collaboratorUseCase.base$.subscribe(
+            (collaborators: CollaboratorDto[]) => {
+                this.tabela.data = collaborators.map(
+                    (collaborator: CollaboratorDto) => ({
+                        rowData: {
+                            role:
+                                collaborator.roles === 'ROLE_ADMIN'
+                                    ? 'Administrador'
+                                    : collaborator.roles === 'ROLE_CHEF'
+                                      ? 'Chefe de Cozinha'
+                                      : 'Garçom',
+                            name: collaborator.fullName,
+                            status: collaborator.isEmployee
+                                ? 'Ativo'
+                                : 'Inativo',
+                            action: 'Ver mais',
+                        },
+                        componentType: ['text', 'text', 'text', 'button'],
+                    }),
+                );
+            },
+        );
+
+        this.fetchCollaborators();
+        this.fetchCurrentCollaboratorName();
+    }
+
+    fetchCollaborators(): void {
+        this.collaboratorUseCase
+            .getAllCollaborators(this.currentPage - 1, this.pageSize)
+            .subscribe((response: PaginatedResponse<CollaboratorDto>) => {
+                this.tabela.pagination.totalItems = response.totalElements;
+                this.tabela.pagination.totalPages = Math.ceil(
+                    response.totalElements / this.pageSize,
+                );
+                this.tabela.metrics = `Total: ${response.totalElements} colaboradores`;
+            });
+    }
+
+    fetchCurrentCollaboratorName(): void {
+        const userId = this._tokenService.getUserId();
+        if (userId) {
+            this.collaboratorUseCase
+                .getCollaboratorById(userId)
+                .subscribe((response: CollaboratorDto) => {
+                    this.collaboratorName = response.fullName;
+                });
+        }
+    }
+
+    onPageChange(page: number): void {
+        if (page >= 1 && page <= this.tabela.pagination.totalPages!) {
+            this.currentPage = page;
+            this.fetchCollaborators();
+        }
+    }
+
+    ngOnDestroy(): void {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    }
+
     tabela: TableConfig<{
-        numero: string;
-        data: string;
-        nomeCliente: string;
-        valor: string;
+        role: string;
+        name: string;
         status: string;
+        action: string;
     }> = {
-        rowOrder: ['numero', 'data', 'nomeCliente', 'valor', 'status'],
-        title: 'Histórico de Pedidos',
+        rowOrder: ['name', 'role', 'status', 'action'],
+        title: 'Colaboradores Cadastrados e Status',
         filters: [
-            { isActive: false, text: 'Em entrega' },
-            { isActive: false, text: 'Entregues' },
-            { isActive: false, text: 'Cancelados' },
+            { isActive: true, text: 'Todos' },
+            { isActive: false, text: 'Ativos' },
+            { isActive: false, text: 'Inativos' },
         ],
-        pagination: {
-            pageRange: 10,
-            totalItems: 100,
-        },
-        metrics: 'Total: 5 pedidos',
-        header: [
-            'Número do Pedido',
-            'Data do Pedido',
-            'Nome do Cliente',
-            'Valor Recebido',
-            'Status',
-        ],
-        data: [
-            {
-                rowData: {
-                    numero: '#2841782758',
-                    data: '9/23/16',
-                    nomeCliente: 'John Doe',
-                    valor: '$948.55',
-                    status: 'Shipping',
-                },
-                componentType: ['text', 'text', 'text', 'text', 'text'],
-            },
-            {
-                rowData: {
-                    numero: '#2841782758',
-                    data: '9/23/16',
-                    nomeCliente: 'Jane Smith',
-                    valor: '$948.55',
-                    status: 'Shipping',
-                },
-                componentType: ['text', 'text', 'text', 'text', 'text'],
-            },
-        ],
+        metrics: '',
+        header: ['Nome', 'Função', 'Status', 'Ações'],
+        data: [],
         search: {
-            placeholder: 'Buscar pedido',
+            placeholder: 'Procure por nome ou função...',
+            value: '',
             onSearch: (value: string) => {
                 console.log(value);
             },
-            value: '',
+        },
+        pagination: {
+            pageRange: 1,
+            totalItems: 0,
+            totalPages: 0,
+            onPageChange: (page: number) => this.onPageChange(page),
         },
     };
 

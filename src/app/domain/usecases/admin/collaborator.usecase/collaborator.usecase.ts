@@ -22,7 +22,18 @@ export class CollaboratorUseCase extends BaseUseCase<CollaboratorDto> {
         return this.getAll(`${this.apiBase}/api/users/get-users`, page, size);
     }
 
+    getCollaboratorById(id: string): Observable<CollaboratorDto> {
+        return this.getById(`${this.apiBase}/api/users/get-users-by-id`, id);
+    }
+
     registerCollaborator(data: CollaboratorDto): Observable<CollaboratorDto> {
         return this.create(`${this.apiBase}/api/users/create-complete`, data);
+    }
+
+    listCollaboratorPerTime(): Observable<CollaboratorDto[]> {
+        return this.listPerTime(
+            `${this.apiBase}/api/users/list-users-by-period`,
+            'groupingType=weekly',
+        );
     }
 }

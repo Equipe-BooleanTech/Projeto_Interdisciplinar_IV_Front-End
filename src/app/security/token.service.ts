@@ -32,6 +32,15 @@ export class TokenService {
         return false;
     }
 
+    public getUserId(): string | null {
+        const match = document.cookie.match(/(?:^|;\s*)id\s*=\s*([^;]*)/);
+        return match ? match[1] : null;
+    }
+
+    public setUserId(id: string): void {
+        document.cookie = `id=${id}; expires=${new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toUTCString()}; path=/;`;
+    }
+
     public isTokenValid(): boolean {
         return this.hasToken() && !this.isTokenExpired();
     }

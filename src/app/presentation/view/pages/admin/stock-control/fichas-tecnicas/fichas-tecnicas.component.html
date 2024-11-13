@@ -20,28 +20,13 @@
     </div>
     <div class="my-16 content-center place-content-center grid gap-72 lg:gap-16 sm:grid-cols-1 lg:grid-cols-3 w-full">
         <app-card
+            *ngFor="let card of cards"
             [hasRedirection]="true"
-            title="Massas"
-            imgSrc="https://i.ibb.co/1RMHvDz/logo.jpg"
+            [title]="card.title"
+            [imgSrc]="'https://i.ibb.co/1RMHvDz/logo.jpg'"
             [buttonText]="'Ver mais'"
-            [link]="'./admin/estoque/fichas-tecnicas/grupo-fichas'"
-            class="object-cover h-64 mx-auto"
-        ></app-card>
-
-        <app-card
-            [hasRedirection]="true"
-            title="Proteinas"
-            imgSrc="https://i.ibb.co/1RMHvDz/logo.jpg"
-            [buttonText]="'Ver mais'"
-            class="object-cover h-64 mx-auto"
-        ></app-card>
-
-        <app-card
-            [hasRedirection]="true"
-            title="Verduras"
-            imgSrc="https://i.ibb.co/1RMHvDz/logo.jpg"
-            [buttonText]="'Ver mais'"
-            class="object-cover h-64 mx-auto"
+            [link]="card.link"
+            class="object-cover h-48 mx-auto"
         ></app-card>
     </div>
 </app-sidebar>

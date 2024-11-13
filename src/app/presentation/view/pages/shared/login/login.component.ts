@@ -83,9 +83,11 @@ export class LoginComponent implements OnInit {
             const output: OutputSendLoginFormDto = {
                 statusCode: response.statusCode,
                 token: response.token,
+                id: response.id,
             };
-            if (output.token) {
+            if (output.token && output.id) {
                 this._tokenService.setToken(output.token);
+                this._tokenService.setUserId(output.id);
             }
             this.handleResponse(output);
         });
