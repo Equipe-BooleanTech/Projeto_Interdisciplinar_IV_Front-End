@@ -1,6 +1,6 @@
-import { DatasheetDto } from '@domain/dtos';
+import { DataSheetDto } from '@domain/dtos';
 
 export interface DataSheetGroupDto {
     name: string;
-    datasheets: DatasheetDto[];
+    datasheets: DataSheetDto[];
 }

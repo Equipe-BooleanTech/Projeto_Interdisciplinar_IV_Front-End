@@ -17,14 +17,26 @@ export const groupFormFields = {
             ],
         },
         {
-            component: 'textarea',
-            name: 'description',
-            label: 'Descrição:',
-            id: 'description',
-            value: '',
+            component: 'select',
+            name: 'datasheets',
+            label: 'Fichas Técnicas associadas: *',
+            id: 'datasheets',
+            value: [],
             placeholder:
-                'Digite uma breve descrição sobre esse grupo de fichas (quais fichas ele será responsável por armazenar, etc.)...',
-            validations: [],
+                'Selecione as fichas técnicas que esse grupo irá armazenar...',
+            options: [
+                {
+                    value: '',
+                    label: 'Selecione as fichas técnicas que esse grupo irá armazenar...',
+                },
+            ],
+            validations: [
+                {
+                    name: 'required',
+                    message: 'Fichas Técnicas é obrigatório',
+                    value: '',
+                },
+            ],
         },
     ],
 };
