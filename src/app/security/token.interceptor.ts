@@ -8,11 +8,21 @@ export const tokenInterceptorFn = (
 ): Observable<HttpEvent<unknown>> => {
     const tokenService = new TokenService();
     const token = tokenService.getToken();
+    const userId = tokenService.getUserId();
+
     if (token) {
-        const cloned = req.clone({
+        let cloned = req.clone({
             headers: req.headers.set('Authorization', `Bearer ${token}`),
         });
+
+        if (userId) {
+            cloned = cloned.clone({
+                headers: cloned.headers.set('X-User-Id', userId),
+            });
+        }
+
         return next(cloned);
     }
+
     return next(req);
 };

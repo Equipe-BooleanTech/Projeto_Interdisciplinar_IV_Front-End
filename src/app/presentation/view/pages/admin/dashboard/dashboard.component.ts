@@ -14,6 +14,7 @@ import {
 import { LineColumnComponent } from '@presentation/view/components/chart';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
+import { TokenService } from 'src/app/security';
 
 @Component({
     selector: 'app-dashboard',
@@ -36,6 +37,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     constructor(
         private location: Location,
         private collaboratorUseCase: CollaboratorUseCase,
+        private _tokenService: TokenService,
     ) {}
 
     ngOnInit(): void {
@@ -63,6 +65,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         );
 
         this.fetchCollaborators();
+        this.fetchCurrentCollaboratorName();
     }
 
     fetchCollaborators(): void {
@@ -77,8 +80,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
             });
     }
 
-    fetchCurrentCollaborator(): void {
-        return;
+    fetchCurrentCollaboratorName(): void {
+        const userId = this._tokenService.getUserId();
+        if (userId) {
+            this.collaboratorUseCase
+                .getCollaboratorById(userId)
+                .subscribe((response: CollaboratorDto) => {
+                    this.collaboratorName = response.fullName;
+                });
+        }
     }
 
     onPageChange(page: number): void {

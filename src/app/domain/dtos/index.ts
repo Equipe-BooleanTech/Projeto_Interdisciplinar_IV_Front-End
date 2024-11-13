@@ -1,5 +1,4 @@
-export * from './shared/auth/input.auth.dto';
-export * from './shared/auth/output.auth.dto';
+export * from './shared/auth/auth.usecase.dto';
 export * from './shared/response/paginated.response.dto';
 export * from './shared/response/default.response.dto';
 

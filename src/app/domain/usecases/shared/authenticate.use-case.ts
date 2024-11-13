@@ -27,6 +27,7 @@ export class AuthenticateUseCase {
                     const finalResponse: OutputSendLoginFormDto = {
                         statusCode: response.status,
                         token: response.body?.token,
+                        id: response.body?.id,
                     };
                     return finalResponse;
                 }),
