@@ -2,7 +2,7 @@ export const groupFormFields = {
     fields: [
         {
             component: 'input',
-            name: 'title',
+            name: 'name',
             type: 'text',
             label: 'Título: *',
             id: 'title',

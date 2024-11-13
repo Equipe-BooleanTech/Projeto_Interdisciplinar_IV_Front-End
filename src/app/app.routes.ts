@@ -98,7 +98,7 @@ export const routes: Routes = [
     },
 
     {
-        path: 'admin/estoque/fichas-tecnicas/grupo-fichas',
+        path: 'admin/estoque/fichas-tecnicas/grupo-fichas/:id',
         component: GrupoFichasComponent,
         canActivate: [SecurityGuard],
     },

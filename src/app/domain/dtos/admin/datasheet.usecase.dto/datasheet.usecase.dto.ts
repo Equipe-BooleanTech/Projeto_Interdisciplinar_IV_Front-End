@@ -7,4 +7,5 @@ export interface DataSheetDto {
     yieldPerPortion: string;
     finalCost: string;
     totalYields: string;
+    createdAt?: string;
 }

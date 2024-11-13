@@ -25,6 +25,13 @@ export class DataSheetGroupUseCase extends BaseUseCase<DataSheetGroupDto> {
         );
     }
 
+    getGroupById(id: string): Observable<DataSheetGroupDto> {
+        return this.getById(
+            `${this.apiBase}/api/groupsheets/get-groupsheet/${id}`,
+            id,
+        );
+    }
+
     registerDataSheetGroup(
         data: DataSheetGroupDto,
     ): Observable<DataSheetGroupDto> {
