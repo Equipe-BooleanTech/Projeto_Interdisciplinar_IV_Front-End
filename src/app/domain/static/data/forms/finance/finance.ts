@@ -1,7 +1,7 @@
 export const financeFields = {
     fields: [
         {
-            component: 'input',
+            component: 'select',
             name: 'title',
             type: 'text',
             label: 'Título: *',

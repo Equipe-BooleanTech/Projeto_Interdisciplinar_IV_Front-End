@@ -1,22 +1,29 @@
 <app-sidebar>
     <h1 class="text-4xl font-bold text-center mb-8">Gerenciamento de Finanças</h1>
     <h3 class="m-8 p-4 lg:text-center">
-        Crie um grupo de finanças e associe-as a um grupo, permitindo um fácil gerenciamento das contas a pagar de seu
-        restaurante.
+        Gerencie seu restaurante de forma prática e eficiente com esse módulo do sistema. Nele, você conseguirá
+        cadastrar novas receitas e despesas e agrupá-las em grupos personalizáveis
     </h3>
     <div class="flex justify-center space-x-8 mt-8 w-full">
         <app-button
-            [link]="'./admin/controle-caixa/financas/nova-financa'"
+            [link]="'./admin/controle-caixa/financas/nova-receita'"
             [disabled]="false"
         >
-            Cadastrar Nova Finança
+            Cadastrar Nova Receita
         </app-button>
         <app-button
-            [link]="'./admin/controle-caixa/financas/relatorio-financa'"
+            [link]="'./admin/controle-caixa/financas/nova-despesa'"
             [disabled]="false"
         >
-            Gerar Relatório de Finanças
+            Cadastrar Nova Despesa
         </app-button>
+    </div>
+    <div class="flex justify-center space-x-8 mt-8 w-full">
+        <app-button
+            [link]="'./admin/controle-caixa/financas/novo-grupo'"
+            [disabled]="false"
+            >Novo grupo de finanças</app-button
+        >
     </div>
     <div class="my-16 content-center place-content-center grid gap-72 lg:gap-16 sm:grid-cols-1 lg:grid-cols-3 w-full">
         <app-card
