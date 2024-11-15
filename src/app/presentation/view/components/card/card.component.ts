@@ -19,7 +19,7 @@ export class CardComponent {
     @Input() percentageChange: number = 0;
     @Input() isPositive: boolean = false;
     @Input() metricTitle: string = '';
-    @Input() metric: string = '';
+    @Input() metric: number | string = 0;
     @Input() link: string = '';
     @Input() buttonText: string = '';
     @Input() imgSrc: string = '';

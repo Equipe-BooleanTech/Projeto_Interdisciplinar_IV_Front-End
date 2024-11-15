@@ -36,8 +36,12 @@ export class ColaboradorComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.subscription = this.collaboratorUseCase.base$.subscribe(
             (collaborators: CollaboratorDto[]) => {
-                this.tabela.data = collaborators.map(
-                    (collaborator: CollaboratorDto) => ({
+                this.tabela.data = collaborators
+                    .filter(
+                        (collaborator: CollaboratorDto) =>
+                            collaborator.fullName,
+                    )
+                    .map((collaborator: CollaboratorDto) => ({
                         rowData: {
                             role:
                                 collaborator.roles === 'ROLE_ADMIN'
@@ -52,8 +56,7 @@ export class ColaboradorComponent implements OnInit, OnDestroy {
                             action: 'Ver mais',
                         },
                         componentType: ['text', 'text', 'text', 'button'],
-                    }),
-                );
+                    }));
             },
         );
 
@@ -68,7 +71,7 @@ export class ColaboradorComponent implements OnInit, OnDestroy {
                 this.tabela.pagination.totalPages = Math.ceil(
                     response.totalElements / this.pageSize,
                 );
-                this.tabela.metrics = `Mostrando ${response.content.length} de ${response.totalElements} colaboradores`;
+                this.tabela.metrics = `Total: ${response.totalElements - 1} colaborador(es)`;
             });
     }
 

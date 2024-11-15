@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, map } from 'rxjs/operators';
 import { ErrorService, BaseUseCaseRepository } from '.';
-import { PaginatedResponse } from '@domain/dtos';
+import {
+    PaginatedResponse,
+    ListByPeriodDto,
+    ListByPeriodResponse,
+} from '@domain/dtos';
 
 @Injectable({
     providedIn: 'root',
@@ -51,18 +55,39 @@ export class BaseUseCase<Entity> implements BaseUseCaseRepository<Entity> {
         );
     }
 
-    listPerTime(url: string, timeRangePath?: string): Observable<Entity[]> {
+    listPerPeriod(
+        url: string,
+        timeRange: ListByPeriodDto,
+        timeRangePath?: string,
+    ): Observable<ListByPeriodResponse<Entity>> {
         return this._http
-            .get<
-                Entity[]
-            >(`${url}${timeRangePath !== undefined ? `?${timeRangePath}` : ''}`)
+            .post<{
+                data: Entity[][];
+                total: number;
+            }>(`${url}${timeRangePath ? `?${timeRangePath}` : ''}`, timeRange)
             .pipe(
+                map((response) => {
+                    const flattenedItems = response.data.flat();
+
+                    if (
+                        response.total !== undefined &&
+                        Array.isArray(flattenedItems)
+                    ) {
+                        return {
+                            total: response.total,
+                            items: flattenedItems,
+                        } as ListByPeriodResponse<Entity>;
+                    } else {
+                        throw new Error('Invalid response format');
+                    }
+                }),
                 catchError((error: HttpErrorResponse) => {
                     this._errorService.handleError(error);
                     return throwError(error);
                 }),
             );
     }
+
     /* 
     update(url: string, data: Entity, id: string): Observable<Entity> {
         throw new Error('Method not implemented.');

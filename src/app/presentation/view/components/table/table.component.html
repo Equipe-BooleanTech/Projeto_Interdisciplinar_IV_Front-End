@@ -53,6 +53,14 @@
                         </span>
                     </td>
                 </tr>
+                <tr *ngIf="!tableConfig.data || tableConfig.data.length === 0">
+                    <td
+                        colspan="100%"
+                        class="p-2 text-center"
+                    >
+                        <span class="text-gray-700">Nenhum dado encontrado</span>
+                    </td>
+                </tr>
             </tbody>
 
             <tfoot class="bg-[#74031820]">
