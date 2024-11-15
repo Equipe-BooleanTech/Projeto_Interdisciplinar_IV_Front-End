@@ -2,7 +2,7 @@ import { ListByPeriodDto } from '@domain/dtos';
 
 export interface RevenueDto {
     amount: number;
-    saleDate: string;
+    paymentDate: string;
 }
 
 export interface ExpenseDto {

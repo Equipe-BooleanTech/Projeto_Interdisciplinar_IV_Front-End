@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { CollaboratorDto, PaginatedResponse } from '@domain/dtos';
+import { Observable, map, pipe } from 'rxjs';
+import {
+    CollaboratorDto,
+    PaginatedResponse,
+    ListByPeriodResponse,
+    ListByPeriodDto,
+} from '@domain/dtos';
 import { ErrorService, BaseUseCase } from '@domain/base';
 import { API_URL } from '@shared/constants';
 
@@ -30,13 +35,17 @@ export class CollaboratorUseCase extends BaseUseCase<CollaboratorDto> {
         return this.create(`${this.apiBase}/api/users/create-complete`, data);
     }
 
-    listCollaboratorPerTime(): Observable<CollaboratorDto[]> {
-        return this.listPerTime(
+    listCollaboratorPerTime(
+        timeRange: ListByPeriodDto,
+    ): Observable<CollaboratorDto[]> {
+        return this.listPerPeriod(
             `${this.apiBase}/api/users/list-users-by-period`,
-            {
-                startDate: (new Date().getMonth() - 1).toString(),
-                endDate: new Date().getMonth().toString(),
-            },
+            timeRange,
+        ).pipe(
+            map(
+                (response: ListByPeriodResponse<CollaboratorDto>) =>
+                    response.items,
+            ),
         );
     }
 }

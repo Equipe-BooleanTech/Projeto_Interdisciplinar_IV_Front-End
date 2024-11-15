@@ -4,6 +4,7 @@ import { BaseUseCase, ErrorService } from '@domain/base';
 import {
     DefaultResponseDto,
     PaginatedResponse,
+    ListByPeriodResponse,
     CashFlowDto,
 } from '@domain/dtos';
 import { Observable } from 'rxjs';
@@ -19,8 +20,10 @@ export class CashFlowUseCase extends BaseUseCase<CashFlowDto> {
         super(_http, _errorService);
     }
 
-    createCashFlow(data: CashFlowDto): Observable<CashFlowDto> {
-        return this.listPerTime(
+    createCashFlow(
+        data: CashFlowDto,
+    ): Observable<ListByPeriodResponse<CashFlowDto>> {
+        return this.listPerPeriod(
             `${this.apiBase}/api/financials/cash-flow`,
             data,
         );

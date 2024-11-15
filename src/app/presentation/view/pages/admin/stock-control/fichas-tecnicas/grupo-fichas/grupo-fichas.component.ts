@@ -19,38 +19,66 @@ import { Subscription } from 'rxjs';
 })
 export class GrupoFichasComponent implements OnInit, OnDestroy {
     subscription: Subscription | null = null;
+    groupName = '';
+    currentPage = 1;
+    pageSize = 6;
+    tabela: TableConfig<{
+        prato: string;
+        dataCadastro: string;
+        acoes: string;
+    }> = {
+        rowOrder: ['prato', 'dataCadastro', 'acoes'],
+        title: 'Fichas técnicas cadastradas',
+        filters: [
+            { isActive: true, text: 'Ativas' },
+            { isActive: false, text: 'Inativas' },
+        ],
+        metrics: '',
+        header: ['Prato', 'Data de Cadastro', 'Ações'],
+        data: [],
+        search: {
+            placeholder: 'Buscar por ficha técnica',
+            value: '',
+            onSearch: (value: string): void => {
+                throw new Error('Function not implemented.');
+            },
+        },
+        pagination: {
+            pageRange: 0,
+            totalItems: 0,
+        },
+    };
+
     constructor(
         private _route: ActivatedRoute,
         private _datasheetGroupUseCase: DataSheetGroupUseCase,
     ) {}
-    groupName = '';
-    currentPage = 1;
-    pageSize = 6;
 
     ngOnInit(): void {
-        // Puxa o id da rota e procura o grupo de fichas associado.
         this._retrieveGroupSheet();
-        // Carrega as fichas técnicas do grupo.
-        this._loadDataSheets();
     }
 
-    private _retrieveGroupSheet(): DataSheetGroupDto {
+    private _retrieveGroupSheet() {
         this._route.paramMap.subscribe((params) => {
             const id: string = params.get('id') || '';
-            this._datasheetGroupUseCase
+            this.subscription = this._datasheetGroupUseCase
                 .getGroupById(id)
-                .subscribe((response) => {
-                    console.log(response);
-                    return response;
+                .subscribe((response: DataSheetGroupDto) => {
+                    if (response) {
+                        this.groupName = response.name;
+                        this._loadDataSheets(response);
+                    }
                 });
         });
-        return {} as DataSheetGroupDto;
     }
 
     onPageChange(page: number): void {
-        if (page >= 1 && page <= this.tabela.pagination.totalPages!) {
+        if (
+            page >= 1 &&
+            page <= this.tabela.pagination.totalItems / this.pageSize
+        ) {
             this.currentPage = page;
-            this._loadDataSheets();
+            this._retrieveGroupSheet();
         }
     }
 
@@ -60,49 +88,19 @@ export class GrupoFichasComponent implements OnInit, OnDestroy {
         }
     }
 
-    // Configuração da tabela de pratos cadastrados.
-    private _loadDataSheets = (): void => {
-        const groupSheet = this._retrieveGroupSheet();
-        this.groupName = groupSheet.name;
+    private _loadDataSheets(groupSheet: DataSheetGroupDto): void {
         this.tabela.data = groupSheet.datasheets.map(
             (dataSheet: DataSheetDto) => ({
                 rowData: {
                     prato: dataSheet.name,
-                    fichaIndividual: 'Ver detalhes',
                     dataCadastro: dataSheet.createdAt || '',
+                    acoes: 'Visualizar/Editar Ficha',
                 },
-                componentType: ['text', 'button', 'text'],
+                componentType: ['text', 'text', 'button'],
             }),
         );
         this.tabela.pagination.totalItems = groupSheet.datasheets.length;
-        this.tabela.metrics = 'Total: ' + groupSheet.datasheets.length;
-    };
-
-    tabela: TableConfig<{
-        prato: string;
-        dataCadastro: string;
-        fichaIndividual: string;
-    }> = {
-        rowOrder: ['prato', 'dataCadastro', 'fichaIndividual'],
-        title: 'Fichas técnicas cadastradas',
-        filters: [
-            { isActive: true, text: 'Ativas' },
-            { isActive: false, text: 'Inativas' },
-        ],
-        metrics: '',
-        header: ['Prato', 'Data de Cadastro', 'Ficha individual'],
-        data: [],
-
-        search: {
-            placeholder: 'Buscar por ficha técnica',
-            value: '',
-            onSearch: function (value: string): void {
-                throw new Error('Function not implemented.');
-            },
-        },
-        pagination: {
-            pageRange: 0,
-            totalItems: 0,
-        },
-    };
+        this.tabela.metrics =
+            'Total: ' + groupSheet.datasheets.length + ' fichas técnicas';
+    }
 }

@@ -5,6 +5,7 @@ import {
     DefaultResponseDto,
     PaginatedResponse,
     ExpenseDto,
+    ListByPeriodResponse,
 } from '@domain/dtos';
 import { Observable } from 'rxjs';
 import { API_URL } from 'src/app/shared';
@@ -44,8 +45,10 @@ export class ExpensesUseCase extends BaseUseCase<ExpenseDto> {
         );
     }
 
-    listExpensesPerTime(timeRangePath: string): Observable<ExpenseDto[]> {
-        return this.listPerTime(
+    listExpensesPerTime(
+        timeRangePath: string,
+    ): Observable<ListByPeriodResponse<ExpenseDto>> {
+        return this.listPerPeriod(
             `${this.apiBase}/api/financials/list-expenses-by-period`,
             { startDate: '', endDate: '' },
             timeRangePath,

@@ -1,8 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseUseCase, ErrorService } from '@domain/base';
-import { IngredientDto, PaginatedResponse } from '@domain/dtos';
-import { Observable } from 'rxjs';
+import {
+    IngredientDto,
+    ListByPeriodDto,
+    ListByPeriodResponse,
+    PaginatedResponse,
+} from '@domain/dtos';
+import { Observable, map, catchError } from 'rxjs';
 import { API_URL } from 'src/app/shared';
 
 @Injectable({
@@ -36,6 +41,23 @@ export class IngredientsUseCase extends BaseUseCase<IngredientDto> {
         return this.create(
             `${this.apiBase}/api/products/create-ingredient`,
             data,
+        );
+    }
+
+    listIngredientsPerWeek(): Observable<ListByPeriodResponse<IngredientDto>> {
+        const currentDate = new Date();
+        const startDate = new Date(currentDate);
+        startDate.setDate(currentDate.getDate() - 7);
+
+        const startDateString = startDate.toISOString().split('T')[0];
+        const endDateString = currentDate.toISOString().split('T')[0];
+
+        return this.listPerPeriod(
+            `${this.apiBase}/api/products/list-ingredients-by-period`,
+            { startDate: startDateString, endDate: endDateString },
+            'groupingType=week',
+        ).pipe(
+            map((response: ListByPeriodResponse<IngredientDto>) => response),
         );
     }
 }

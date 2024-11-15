@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, OnInit, Component } from '@angular/core';
 import { PieChartOptions, PieMetrics } from '@domain/static/interfaces';
 import {
     ButtonComponent,
@@ -6,6 +6,9 @@ import {
     PieComponent,
     SidebarComponent,
 } from '@presentation/view/components';
+
+import { IngredientsUseCase } from '@domain/usecases';
+import { IngredientDto, ListByPeriodResponse } from '@domain/dtos';
 
 import ApexCharts from 'apexcharts';
 
@@ -16,8 +19,29 @@ import ApexCharts from 'apexcharts';
     templateUrl: './stock-control.component.html',
     styles: ``,
 })
-export class StockControlComponent implements AfterViewInit {
-    constructor() {}
+export class StockControlComponent implements OnInit, AfterViewInit {
+    constructor(private _ingredientsUseCase: IngredientsUseCase) {}
+
+    cardData = {
+        metric: '0',
+        percentageChange: 0,
+    };
+
+    ngOnInit(): void {
+        this._loadMetrics();
+    }
+
+    private _loadMetrics(): void {
+        this._ingredientsUseCase.listIngredientsPerWeek().subscribe(
+            (response: ListByPeriodResponse<IngredientDto>) => {
+                this.cardData.metric = response.total.toString();
+                this.cardData.percentageChange = 0;
+            },
+            (error) => {
+                console.error(error);
+            },
+        );
+    }
 
     metrics: PieMetrics = {
         title: 'Proporções de estoque',

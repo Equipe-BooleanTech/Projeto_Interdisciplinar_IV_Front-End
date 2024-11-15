@@ -2,6 +2,7 @@ export * from './shared/auth/auth.usecase.dto';
 export * from './shared/response/paginated.response.dto';
 export * from './shared/response/default.response.dto';
 export * from './shared/list-by-period/list-by-period.dto';
+export * from './shared/response/list-by-period.response.dto';
 
 export * from './prospection/prospection-form.usecase.dto/prospection-form.usecase.dto';
 

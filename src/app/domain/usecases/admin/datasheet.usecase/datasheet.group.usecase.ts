@@ -27,7 +27,7 @@ export class DataSheetGroupUseCase extends BaseUseCase<DataSheetGroupDto> {
 
     getGroupById(id: string): Observable<DataSheetGroupDto> {
         return this.getById(
-            `${this.apiBase}/api/groupsheets/get-groupsheet/${id}`,
+            `${this.apiBase}/api/groupsheets/get-groupsheet-by-id`,
             id,
         );
     }
