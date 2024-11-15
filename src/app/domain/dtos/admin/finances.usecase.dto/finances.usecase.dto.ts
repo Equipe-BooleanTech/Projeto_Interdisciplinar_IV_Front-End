@@ -17,3 +17,11 @@ export interface CashFlowDto extends ListByPeriodDto {
     totalExpenses: number;
     finalBalance: number;
 }
+
+export interface FinanceGroupDto {
+    id?: string;
+    name: string;
+    revenues: RevenueDto[];
+    expenses: ExpenseDto[];
+    createdAt: string;
+}

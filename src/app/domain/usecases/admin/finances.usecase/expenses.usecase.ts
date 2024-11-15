@@ -6,6 +6,7 @@ import {
     PaginatedResponse,
     ExpenseDto,
     ListByPeriodResponse,
+    FinanceGroupDto,
 } from '@domain/dtos';
 import { Observable } from 'rxjs';
 import { API_URL } from 'src/app/shared';

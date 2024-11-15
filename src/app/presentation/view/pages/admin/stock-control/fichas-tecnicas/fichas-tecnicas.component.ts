@@ -25,7 +25,7 @@ export class FichasTecnicasComponent implements OnInit {
 
     ngOnInit(): void {
         this._dataSheetGroupUseCase
-            .getDatasheetsGroup(0, 3)
+            .getDatasheetsGroup(0, 9999)
             .subscribe((response) => {
                 this.cards = response.content.map((group) => ({
                     title: group.name,
