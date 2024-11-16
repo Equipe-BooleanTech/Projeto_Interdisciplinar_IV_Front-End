@@ -6,7 +6,7 @@ import {
     ReactiveFormsModule,
     ValidatorFn,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IngredientDto, PaginatedResponse, SupplierDto } from '@domain/dtos';
 import { ingredientFields } from '@domain/static/data/forms/ingredient/ingredient';
 import { FormValidateService } from '@domain/static/services';
@@ -45,12 +45,74 @@ export class IngredientesComponent implements OnInit {
         private _router: Router,
         private _ingredientUseCase: IngredientsUseCase,
         private _supplierUseCase: SuppliersUseCase,
+        private route: ActivatedRoute,
         private toastr: ToastrService,
     ) {}
 
     ngOnInit(): void {
         this._initForm();
         this._loadSuppliers();
+        if (this.retrieveHttpMethod() === 'PUT') {
+            this.retrieveFormFields();
+        }
+    }
+
+    protected confirmExclusion(): void {
+        const confirmation = confirm(
+            'Você realmente deseja excluir o ingrediente? Essa ação é irreversível!',
+        );
+
+        if (!confirmation) {
+            return; // Interrompe a execução se o usuário cancelar
+        }
+
+        this._ingredientUseCase
+            .deleteIngredient(this.route.snapshot.params['id'])
+            .subscribe({
+                next: () => {
+                    this.toastr.success(
+                        'Ingrediente excluído com sucesso! Redirecionando...',
+                    );
+                    setTimeout(() => {
+                        this._router.navigate(['/admin/estoque/ingredientes']);
+                    }, 3000);
+                },
+                error: () => {
+                    this.toastr.error(
+                        'Ocorreu um erro ao excluir o ingrediente. Verifique se há alguma ficha técnica associada e tente novamente.',
+                        'Oops...',
+                    );
+                },
+            });
+    }
+
+    protected retrieveHttpMethod() {
+        return this._router.url.includes('/editar') ? 'PUT' : 'POST';
+    }
+
+    private retrieveFormFields(): void {
+        if (this.retrieveHttpMethod() === 'PUT') {
+            this._ingredientUseCase
+                .getIngredientById(this.route.snapshot.params['id'])
+                .subscribe((ingredient) => {
+                    this.ingredientFormFields.fields.forEach((field) => {
+                        const fieldName = field.name;
+
+                        if (
+                            Object.prototype.hasOwnProperty.call(
+                                ingredient,
+                                fieldName,
+                            )
+                        ) {
+                            field.value = ingredient[
+                                fieldName as keyof IngredientDto
+                            ] as string;
+                        }
+                    });
+
+                    this._updateFormValues();
+                });
+        }
     }
 
     private _initForm(): void {
@@ -70,9 +132,20 @@ export class IngredientesComponent implements OnInit {
         );
     }
 
+    private _updateFormValues(): void {
+        const updatedValues = this.ingredientFormFields.fields.reduce(
+            (acc, field) => {
+                acc[field.name] = field.value || '';
+                return acc;
+            },
+            {} as { [key: string]: string },
+        );
+        this.ingredientForm.patchValue(updatedValues);
+    }
+
     private _loadSuppliers(): void {
         this._supplierUseCase
-            .getSuppliers(0, 100)
+            .getSuppliers(0, 9999)
             .pipe(
                 map((response: PaginatedResponse<SupplierDto>) =>
                     response.content.map((supplier) => ({
@@ -108,26 +181,30 @@ export class IngredientesComponent implements OnInit {
                 return false;
             }),
             catchError((error) => {
-                console.error('Error checking ingredient existence', error);
+                console.error(
+                    'Erro ao verificar a existência do ingrediente',
+                    error,
+                );
                 return of(false);
             }),
         );
     }
 
     onSubmit(): void {
-        if (this.ingredientForm.valid) {
+        if (this.retrieveHttpMethod() === 'POST') {
             this.checkIfIngredientExists()
                 .pipe(
                     switchMap((ingredientExists) => {
                         if (!ingredientExists) {
                             const formattedRequest = {
                                 ...this.ingredientForm.value,
-                                supplier:
-                                    this.ingredientForm.value.supplier.map(
-                                        (name: string) => ({
-                                            name: name, //retorna o nome do fornecedor
-                                        }),
-                                    ),
+                                supplier: Array.isArray(
+                                    this.ingredientForm.value.supplier,
+                                )
+                                    ? this.ingredientForm.value.supplier.map(
+                                          (name: string) => ({ name }),
+                                      )
+                                    : [],
                             };
 
                             return this._ingredientUseCase.registerIngredient(
@@ -146,6 +223,56 @@ export class IngredientesComponent implements OnInit {
                         );
                         this._router.navigate(['/admin/estoque/ingredientes']);
                     }
+                });
+        } else {
+            const currentIngredientId = this.route.snapshot.params['id'];
+
+            this.checkIfIngredientExists()
+                .pipe(
+                    switchMap((ingredientExists) => {
+                        if (
+                            ingredientExists &&
+                            this.ingredientForm.value.name !==
+                                this.ingredientFormFields.fields.find(
+                                    (field) => field.name === 'name',
+                                )?.value
+                        ) {
+                            return of(null);
+                        }
+
+                        const formattedRequest = {
+                            ...this.ingredientForm.value,
+                            supplier: Array.isArray(
+                                this.ingredientForm.value.supplier,
+                            )
+                                ? this.ingredientForm.value.supplier.map(
+                                      (name: string) => ({ name }),
+                                  )
+                                : [],
+                        };
+                        return this._ingredientUseCase.updateIngredient(
+                            currentIngredientId,
+                            formattedRequest,
+                        );
+                    }),
+                )
+                .subscribe({
+                    next: (response) => {
+                        if (response) {
+                            this.toastr.success(
+                                'Ingrediente atualizado com sucesso! Redirecionando...',
+                            );
+                            setTimeout(() => {
+                                this._router.navigate([
+                                    '/admin/estoque/ingredientes',
+                                ]);
+                            }, 3000);
+                        }
+                    },
+                    error: () =>
+                        this.toastr.error(
+                            'Erro ao atualizar ingrediente. Verifique os dados informados e tente novamente!',
+                        ),
                 });
         }
     }

@@ -6,6 +6,7 @@ import {
     ListByPeriodDto,
     ListByPeriodResponse,
     PaginatedResponse,
+    SupplierDto,
 } from '@domain/dtos';
 import { Observable, map, catchError } from 'rxjs';
 import { API_URL } from 'src/app/shared';
@@ -32,7 +33,7 @@ export class IngredientsUseCase extends BaseUseCase<IngredientDto> {
 
     getIngredientById(id: string): Observable<IngredientDto> {
         return this.getById(
-            `${this.apiBase}/api/products/get-ingredient-by-id/${id}`,
+            `${this.apiBase}/api/products/get-ingredient-by-id`,
             id,
         );
     }
@@ -71,6 +72,24 @@ export class IngredientsUseCase extends BaseUseCase<IngredientDto> {
             'groupingType=week',
         ).pipe(
             map((response: ListByPeriodResponse<IngredientDto>) => response),
+        );
+    }
+
+    updateIngredient(
+        id: string,
+        data: IngredientDto,
+    ): Observable<IngredientDto> {
+        return this.update(
+            `${this.apiBase}/api/products/update-ingredient`,
+            data,
+            id,
+        );
+    }
+
+    deleteIngredient(id: string): Observable<IngredientDto> {
+        return this.delete(
+            `${this.apiBase}/api/products/delete-ingredient`,
+            id,
         );
     }
 }

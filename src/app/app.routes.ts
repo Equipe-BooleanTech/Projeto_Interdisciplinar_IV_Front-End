@@ -145,6 +145,11 @@ export const routes: Routes = [
         canActivate: [SecurityGuard],
     },
     {
+        path: 'admin/estoque/editar-ingrediente/:id',
+        component: IngredientesComponent,
+        canActivate: [SecurityGuard],
+    },
+    {
         path: 'admin/estoque/fornecedores',
         component: DashFornecedoresComponent,
         canActivate: [SecurityGuard],
