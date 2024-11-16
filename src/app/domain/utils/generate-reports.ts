@@ -13,7 +13,6 @@ export const generateReport = (sections: SectionData[]) => {
     doc.setFontSize(18);
     doc.text('Relatório de Estoque', 105, 10, { align: 'center' });
 
-    // Promise array to fetch data for each section
     const fetchDataPromises = sections.map((section) =>
         lastValueFrom(section.fetchData()),
     );
@@ -23,13 +22,14 @@ export const generateReport = (sections: SectionData[]) => {
             let currentY = 30;
 
             results.forEach((data, index) => {
+                const section = sections[index]; // Associa explicitamente a seção ao índice
                 const typedData = data;
 
                 currentY = _addSectionToPDF(
                     doc,
-                    sections[index].title,
+                    section.title,
                     typedData.items,
-                    sections[index].formatItem,
+                    section.formatItem,
                     currentY,
                 );
             });
@@ -43,6 +43,7 @@ export const generateReport = (sections: SectionData[]) => {
             );
         });
 };
+
 
 const _addSectionToPDF = (
     doc: jsPDF,

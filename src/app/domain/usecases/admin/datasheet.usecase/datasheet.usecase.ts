@@ -50,7 +50,7 @@ export class DataSheetUseCase extends BaseUseCase<DataSheetDto> {
 
         if (period) {
             return this.listPerPeriod(
-                `${this.apiBase}/api/products/list-suppliers-by-period`,
+                `${this.apiBase}/api/datasheets/list-datasheets-by-period`,
                 period,
                 'groupingType=week',
             ).pipe(
@@ -58,7 +58,7 @@ export class DataSheetUseCase extends BaseUseCase<DataSheetDto> {
             );
         } else {
             return this.listPerPeriod(
-                `${this.apiBase}/api/products/list-suppliers-by-period`,
+                `${this.apiBase}/api/datasheets/list-datasheets-by-period`,
                 { startDate: startDateString, endDate: endDateString },
                 'groupingType=week',
             ).pipe(

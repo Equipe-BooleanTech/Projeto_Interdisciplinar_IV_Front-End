@@ -19,7 +19,6 @@ import {
     LoginComponent,
     NotAuthorizedComponent,
     NotFoundComponent,
-    NovaFinancaComponent,
     NovoGrupoComponent,
     OrdersComponent,
     PainelContadorComponent,
@@ -27,13 +26,14 @@ import {
     StockControlComponent,
     UltimasTransacoesComponent,
     UltimosPedidosComponent,
+    NovoGrupoFinancasComponent,
+    SatisfactionComponent,
+    NovaReceitaComponent,
+    NovaDespesaComponent,
 } from '@presentation/view/pages';
 
 import { ForgotPasswordComponent } from '@presentation/view/pages/shared/login/forgot-password/forgot-password.component';
-import { SatisfactionComponent } from '@presentation/view/pages/shared/satisfaction/satisfaction.component';
 import { SecurityGuard } from './security';
-import { NovaDespesaComponent } from '@presentation/view/pages/admin/cash-flow/financas/nova-despesa/nova-despesa.component';
-import { NovaReceitaComponent } from '@presentation/view/pages/admin/cash-flow/financas/nova-receita/nova-receita.component';
 
 export const routes: Routes = [
     { path: '', component: HomepageComponent },
@@ -85,6 +85,11 @@ export const routes: Routes = [
     {
         path: 'admin/controle-caixa/financas/nova-receita',
         component: NovaReceitaComponent,
+        canActivate: [SecurityGuard],
+    },
+    {
+        path: 'admin/controle-caixa/financas/novo-grupo',
+        component: NovoGrupoFinancasComponent,
         canActivate: [SecurityGuard],
     },
     {
