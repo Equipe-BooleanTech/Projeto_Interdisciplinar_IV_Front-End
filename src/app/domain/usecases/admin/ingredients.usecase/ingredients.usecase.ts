@@ -44,7 +44,9 @@ export class IngredientsUseCase extends BaseUseCase<IngredientDto> {
         );
     }
 
-    listIngredientsPerWeek(): Observable<ListByPeriodResponse<IngredientDto>> {
+    listIngredientsPerWeek(
+        period?: ListByPeriodDto,
+    ): Observable<ListByPeriodResponse<IngredientDto>> {
         const currentDate = new Date();
         const startDate = new Date(currentDate);
         startDate.setDate(currentDate.getDate() - 7);
@@ -52,6 +54,17 @@ export class IngredientsUseCase extends BaseUseCase<IngredientDto> {
         const startDateString = startDate.toISOString().split('T')[0];
         const endDateString = currentDate.toISOString().split('T')[0];
 
+        if (period) {
+            return this.listPerPeriod(
+                `${this.apiBase}/api/products/list-ingredients-by-period`,
+                period,
+                'groupingType=week',
+            ).pipe(
+                map(
+                    (response: ListByPeriodResponse<IngredientDto>) => response,
+                ),
+            );
+        }
         return this.listPerPeriod(
             `${this.apiBase}/api/products/list-ingredients-by-period`,
             { startDate: startDateString, endDate: endDateString },
