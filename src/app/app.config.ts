@@ -12,7 +12,8 @@ export const appConfig: ApplicationConfig = {
         provideHttpClient(withInterceptors([tokenInterceptorFn])),
         provideAnimations(),
         provideToastr({
-            timeOut: 10000,
+            timeOut: 5000,
+            progressBar: true,
             positionClass: 'toast-bottom-right',
             preventDuplicates: true,
         }),

@@ -39,7 +39,12 @@ export class DashIngredientesComponent implements OnInit, OnDestroy {
                                 style: 'currency',
                                 currency: 'BRL',
                             }),
-                            action: 'Ver mais',
+                            action: {
+                                url:
+                                    '/admin/estoque/editar-ingrediente/' +
+                                    ingredient.id,
+                                text: 'Ver mais',
+                            },
                         },
                         componentType: [
                             'text',
@@ -85,7 +90,10 @@ export class DashIngredientesComponent implements OnInit, OnDestroy {
         suppliers: string;
         quantity_unit: string;
         price: string;
-        action: string;
+        action: {
+            url: string;
+            text: string;
+        };
     }> = {
         rowOrder: [
             'ingredient',
