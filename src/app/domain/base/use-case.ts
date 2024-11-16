@@ -88,12 +88,20 @@ export class BaseUseCase<Entity> implements BaseUseCaseRepository<Entity> {
             );
     }
 
-    /* 
     update(url: string, data: Entity, id: string): Observable<Entity> {
-        throw new Error('Method not implemented.');
+        return this._http.put<Entity>(`${url}/${id}`, data).pipe(
+            catchError((error: HttpErrorResponse) => {
+                this._errorService.handleError(error);
+                return throwError(error);
+            }),
+        );
     }
     delete(url: string, id: string): Observable<Entity> {
-        throw new Error('Method not implemented.');
+        return this._http.delete<Entity>(`${url}/${id}`).pipe(
+            catchError((error: HttpErrorResponse) => {
+                this._errorService.handleError(error);
+                return throwError(error);
+            }),
+        );
     }
-        */
 }

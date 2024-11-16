@@ -45,8 +45,9 @@
                         <button
                             *ngIf="dataItem.componentType[j] === 'button'"
                             class="bg-primary px-4 py-2 rounded-md text-white"
+                            [routerLink]="getRowDataValue(dataItem.rowData, key).url"
                         >
-                            {{ dataItem.rowData[key] }}
+                        {{ getRowDataValue(dataItem.rowData, key).text }}
                         </button>
                         <span *ngIf="dataItem.componentType[j] === 'text'">
                             {{ dataItem.rowData[key] }}

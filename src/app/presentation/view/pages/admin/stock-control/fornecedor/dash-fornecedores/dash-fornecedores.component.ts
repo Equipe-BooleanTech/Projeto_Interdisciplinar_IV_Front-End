@@ -40,7 +40,10 @@ export class DashFornecedoresComponent implements OnInit, OnDestroy {
                         supplier: supplier.name,
                         contactName: supplier.contact,
                         phone: supplier.phone,
-                        action: 'Ver mais',
+                        action: {
+                            url: '/admin/estoque/editar-fornecedor/' + supplier.id,
+                            text: 'Ver mais',
+                        },
                     },
                     componentType: ['text', 'text', 'text', 'button'],
                 }));
@@ -78,7 +81,10 @@ export class DashFornecedoresComponent implements OnInit, OnDestroy {
         supplier: string;
         contactName: string;
         phone: string;
-        action: string;
+        action: {
+            url: string;
+            text: string;
+        };
     }> = {
         rowOrder: ['supplier', 'contactName', 'phone', 'action'],
         title: 'Fornecedores Cadastrados e Atualizações',
