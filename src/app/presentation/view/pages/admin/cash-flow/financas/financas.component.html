@@ -2,8 +2,9 @@
     <h1 class="text-4xl font-bold text-center mb-8">Gerenciamento de Finanças</h1>
     <h3 class="m-8 p-4 lg:text-center">
         Gerencie seu restaurante de forma prática e eficiente com esse módulo do sistema. Nele, você conseguirá
-        cadastrar novas receitas e despesas e agrupá-las em grupos personalizáveis
+        cadastrar novas receitas e despesas e agrupá-las em grupos personalizáveis.
     </h3>
+
     <div class="flex justify-center space-x-8 mt-8 w-full">
         <app-button
             [link]="'./admin/controle-caixa/financas/nova-receita'"
@@ -18,38 +19,32 @@
             Cadastrar Nova Despesa
         </app-button>
     </div>
+
     <div class="flex justify-center space-x-8 mt-8 w-full">
         <app-button
             [link]="'./admin/controle-caixa/financas/novo-grupo'"
             [disabled]="false"
-            >Novo grupo de finanças</app-button
         >
+            Novo grupo de finanças
+        </app-button>
     </div>
-    <div class="my-16 content-center place-content-center grid gap-72 lg:gap-16 sm:grid-cols-1 lg:grid-cols-3 w-full">
-        <app-card
-            [hasRedirection]="true"
-            title="Grupo de Fornecedores"
-            imgSrc="https://i.ibb.co/1RMHvDz/logo.jpg"
-            [buttonText]="'Ver mais'"
-            link="admin/controle-caixa/financas/grupo-financas"
-            class="object-cover h-64 mx-auto"
-        ></app-card>
 
+    <div class="my-16 content-center place-content-center grid gap-8 lg:gap-16 sm:grid-cols-1 lg:grid-cols-3 w-full">
         <app-card
+            *ngFor="let card of cards"
             [hasRedirection]="true"
-            title="Grupo de Despesas"
-            imgSrc="https://i.ibb.co/1RMHvDz/logo.jpg"
+            [title]="card.title"
+            [imgSrc]="'https://i.ibb.co/1RMHvDz/logo.jpg'"
             [buttonText]="'Ver mais'"
-            class="object-cover h-64 mx-auto"
-        ></app-card>
-
-        <app-card
-            [hasRedirection]="true"
-            title="Grupo de Receitas"
-            imgSrc="https://i.ibb.co/1RMHvDz/logo.jpg"
-            [buttonText]="'Ver mais'"
-            link="./admin/controle-caixa/financas/grupo-financas"
+            [link]="card.link"
             class="object-cover h-64 mx-auto"
         ></app-card>
     </div>
+
+    <p
+        *ngIf="!cards?.length"
+        class="text-center text-gray-500"
+    >
+        Ainda não existem grupos de finanças cadastrados. Crie um já!
+    </p>
 </app-sidebar>

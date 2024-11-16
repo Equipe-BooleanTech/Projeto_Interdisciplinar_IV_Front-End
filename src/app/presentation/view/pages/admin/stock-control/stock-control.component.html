@@ -4,39 +4,18 @@
 
     <div class="flex lg:justify-end flex-wrap w-full justify-center items-center mb-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
-            <app-card
-                class="w-full"
-                [isDemographic]="true"
-                iconClass="icon-[icon-park-outline--tomato]"
-                title="ingredientes"
-                [metric]="cardData.metric"
-                [percentageChange]="cardData.percentageChange"
-                [isPositive]="true"
-                metricTitle="Ingredientes"
-            >
-            </app-card>
-            <app-card
-                class="w-full"
-                [isDemographic]="true"
-                iconClass="icon-[streamline--store-1]"
-                title="fornecedores"
-                [metric]="'20'"
-                [percentageChange]="0"
-                [isPositive]="true"
-                metricTitle="Fornecedores"
-            >
-            </app-card>
-            <app-card
-                class="w-full"
-                [isDemographic]="true"
-                iconClass="icon-[fluent--form-sparkle-20-regular]"
-                title="fichas"
-                [metric]="'180'"
-                [percentageChange]="1.2"
-                [isPositive]="true"
-                metricTitle="Fichas Cadastradas"
-            >
-            </app-card>
+            <div *ngFor="let card of cardData">
+                <app-card
+                    class="w-full"
+                    [isDemographic]="true"
+                    [iconClass]="card.iconClass"
+                    [title]="card.name"
+                    [metric]="card.metric"
+                    [percentageChange]="card.percentageChange"
+                    [isPositive]="card.percentageChange >= 0"
+                    [metricTitle]="card.metricTitle"
+                />
+            </div>
         </div>
     </div>
 
@@ -48,12 +27,13 @@
             Cadastrar Novo Fornecedor
         </app-button>
 
-        <app-button
-            [link]="'./admin/estoque/gerar-relatorio'"
+        <button
+            class="block text-white bg-primary hover:bg-hover no-underline rounded-lg text-center font-semibold transition duration-300 ease-in-out px-4"
+            (click)="onGenerateReport()"
             [disabled]="false"
         >
             Gerar Relatório de Estoque
-        </app-button>
+        </button>
 
         <app-button
             [link]="'./admin/estoque/cadastrar-ingrediente'"

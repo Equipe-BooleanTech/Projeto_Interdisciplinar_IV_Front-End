@@ -38,25 +38,27 @@
         </div>
     </div>
 </div>
-
 <div
-    class="border border-primary rounded-md shadow-md w-full overflow-hidden max-w-sm"
+    class="border border-primary rounded-md shadow-md w-full max-w-2xl overflow-hidden flex flex-col"
     *ngIf="hasRedirection"
 >
     <!-- Imagem -->
-    <div class="image-container">
+    <div class="image-container flex-grow">
+        <!-- Define uma altura fixa para a imagem -->
         <img
             src="{{ imgSrc }}"
-            class="w-full object-cover"
-            alt="idk"
+            class="w-full h-full object-cover"
+            alt="Logotipo do Sistema Restaurantto"
         />
     </div>
     <!-- Título -->
-    <div class="text-container p-4 text-center">
+    <div class="text-container p-4 text-center flex-none h-16">
+        <!-- Define altura fixa para o título -->
         <h3 class="text-lg font-semibold">{{ title }}</h3>
     </div>
-    <!-- Botão-->
-    <div class="button-container text-center mb-4">
+    <!-- Botão -->
+    <div class="button-container text-center mb-4 flex-none h-12">
+        <!-- Define altura fixa para o botão -->
         <app-button
             *ngIf="hasRedirection"
             [link]="link"

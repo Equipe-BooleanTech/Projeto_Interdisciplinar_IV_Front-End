@@ -38,7 +38,9 @@
     "cypress/**/*.ts",
     "cypress/**/*.tsx",
     "cypress/support/component.d.ts",
-    "environment.development.ts"
+    "environment.development.ts",
+    "node_modules/cypress/types/jquery/misc.d.ts",
+    "node_modules/cypress/types/jquery/misc.d.ts"
   ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

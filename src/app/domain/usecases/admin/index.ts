@@ -6,3 +6,4 @@ export * from './datasheet.usecase/datasheet.group.usecase';
 export * from './finances.usecase/cash-flow.usecase';
 export * from './finances.usecase/expenses.usecase';
 export * from './finances.usecase/revenues.usecase';
+export * from './finances.usecase/finance.group.usecase';

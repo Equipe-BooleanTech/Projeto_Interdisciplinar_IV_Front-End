@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { TableConfig } from '@domain/static/interfaces';
 import { SearchbarComponent } from '../searchbar/searchbar.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-table',
     standalone: true,
-    imports: [CommonModule, SearchbarComponent],
+    imports: [CommonModule, SearchbarComponent, RouterLink],
     templateUrl: './table.component.html',
     styles: ``,
 })
@@ -26,7 +27,8 @@ export class TableComponent<T extends Record<string, unknown>> {
     }
 
     getRowDataValue(rowData: T, key: string): any {
-        return (rowData as any)[key];
+        const value = (rowData as any)[key];
+        return value instanceof Object ? value : value; // Se for um objeto (como `action`), retorna o objeto inteiro
     }
 
     onSearch(value: string): void {
