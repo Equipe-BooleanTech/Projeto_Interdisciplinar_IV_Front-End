@@ -54,6 +54,35 @@ export class FornecedorComponent implements OnInit {
         }
     }
 
+    protected confirmExclusion(): void {
+        const confirmation = confirm(
+            'Você realmente deseja excluir o fornecedor? Essa ação é irreversível!',
+        );
+
+        if (!confirmation) {
+            return; // Interrompe a execução se o usuário cancelar
+        }
+
+        this._suppliersUseCase
+            .deleteSupplier(this.route.snapshot.params['id'])
+            .subscribe({
+                next: () => {
+                    this.toastr.success(
+                        'Fornecedor excluído com sucesso! Redirecionando...',
+                    );
+                    setTimeout(() => {
+                        this._router.navigate(['/admin/estoque/fornecedores']);
+                    }, 3000);
+                },
+                error: () => {
+                    this.toastr.error(
+                        'Ocorreu um erro ao excluir o fornecedor. Verifique se há algum ingrediente associado e tente novamente.',
+                        'Oops...',
+                    );
+                },
+            });
+    }
+
     protected retrieveHttpMethod() {
         return this.router.url.includes('/editar') ? 'PUT' : 'POST';
     }
@@ -63,7 +92,6 @@ export class FornecedorComponent implements OnInit {
             this._suppliersUseCase
                 .getSupplierById(this.route.snapshot.params['id'])
                 .subscribe((supplier) => {
-                    // Dynamically map the supplier data to the form fields
                     this.suppliersFormFields.fields.forEach((field) => {
                         const fieldName = field.name;
 
@@ -79,7 +107,6 @@ export class FornecedorComponent implements OnInit {
                         }
                     });
 
-                    // After populating the fields, update the form values
                     this._updateFormValues();
                 });
         }
@@ -122,7 +149,7 @@ export class FornecedorComponent implements OnInit {
                 .subscribe({
                     next: (response: SupplierDto) => {
                         this.toastr.success(
-                            'Fornecedor cadastrado com sucesso!',
+                            'Fornecedor cadastrado com sucesso! Redirecionando...',
                         );
                         setTimeout(() => {
                             this._router.navigate([
@@ -142,7 +169,7 @@ export class FornecedorComponent implements OnInit {
                 .subscribe({
                     next: (response: SupplierDto) => {
                         this.toastr.success(
-                            'Fornecedor atualizado com sucesso!',
+                            'Fornecedor atualizado com sucesso! Redirecionando...',
                         );
                         setTimeout(() => {
                             this._router.navigate([
