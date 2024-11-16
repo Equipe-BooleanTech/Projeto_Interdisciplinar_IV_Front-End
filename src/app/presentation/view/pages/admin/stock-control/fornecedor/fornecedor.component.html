@@ -8,7 +8,7 @@
         </app-button>
     </div>
     <div class="w-full flex flex-col justify-center items-center">
-        <h1 class="text-4xl font-bold text-center my-6">Cadastrar Novo Fornecedor</h1>
+        <h1 class="text-4xl font-bold text-center my-6">{{retrieveHttpMethod() === 'POST' ? "Cadastrar Novo Fornecedor" : "Atualizar fornecedor"}}</h1>
         <p class="text-center my-4 w-full lg:w-1/2">
             Aqui você pode adicionar um fornecedor, podendo associá-lo a produtos e fichas técnicas.
         </p>

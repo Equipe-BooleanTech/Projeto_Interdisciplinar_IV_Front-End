@@ -6,7 +6,7 @@ import {
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SupplierDto } from '@domain/dtos';
 import { supplierFileds } from '@domain/static/data';
 import { FormValidateService } from '@domain/static/services';
@@ -36,7 +36,6 @@ import { ToastrService } from 'ngx-toastr';
 export class FornecedorComponent implements OnInit {
     supplierForm: FormGroup = new FormGroup({});
     suppliersFormFields = supplierFileds;
-    collaboratorForm: any;
 
     constructor(
         private _fb: FormBuilder,
@@ -44,10 +43,46 @@ export class FornecedorComponent implements OnInit {
         private _router: Router,
         private _suppliersUseCase: SuppliersUseCase,
         private toastr: ToastrService,
+        private router: Router,
+        private route: ActivatedRoute,
     ) {}
 
     ngOnInit(): void {
         this._initForm();
+        if (this.retrieveHttpMethod() === 'PUT') {
+            this.retrieveFormFields();
+        }
+    }
+
+    protected retrieveHttpMethod() {
+        return this.router.url.includes('/editar') ? 'PUT' : 'POST';
+    }
+
+    private retrieveFormFields() {
+        if (this.retrieveHttpMethod() === 'PUT') {
+            this._suppliersUseCase
+                .getSupplierById(this.route.snapshot.params['id'])
+                .subscribe((supplier) => {
+                    // Dynamically map the supplier data to the form fields
+                    this.suppliersFormFields.fields.forEach((field) => {
+                        const fieldName = field.name;
+
+                        if (
+                            Object.prototype.hasOwnProperty.call(
+                                supplier,
+                                fieldName,
+                            )
+                        ) {
+                            field.value = supplier[
+                                fieldName as keyof SupplierDto
+                            ] as string;
+                        }
+                    });
+
+                    // After populating the fields, update the form values
+                    this._updateFormValues();
+                });
+        }
     }
 
     private _initForm(): void {
@@ -67,14 +102,23 @@ export class FornecedorComponent implements OnInit {
         );
     }
 
-    onSubmit(): void {
-        if (this.supplierForm.valid) {
-            this._suppliersUseCase
+    private _updateFormValues() {
+        const updatedValues = this.suppliersFormFields.fields.reduce(
+            (acc, field) => {
+                acc[field.name] = field.value;
+                return acc;
+            },
+            {} as { [key: string]: string },
+        );
+        this.supplierForm.patchValue(updatedValues);
+    }
 
+    onSubmit(): void {
+        if (this.retrieveHttpMethod() === 'POST') {
+            this._suppliersUseCase
                 .registerSupplier({
                     ...this.supplierForm.value,
                 } as SupplierDto)
-
                 .subscribe({
                     next: (response: SupplierDto) => {
                         this.toastr.success(
@@ -90,7 +134,25 @@ export class FornecedorComponent implements OnInit {
                         this.toastr.error('Erro ao cadastrar fornecedor'),
                 });
         } else {
-            this.toastr.error('Erro ao cadastrar fornecedor');
+            this._suppliersUseCase
+                .updateSupplier(
+                    this.route.snapshot.params['id'],
+                    this.supplierForm.value,
+                )
+                .subscribe({
+                    next: (response: SupplierDto) => {
+                        this.toastr.success(
+                            'Fornecedor atualizado com sucesso!',
+                        );
+                        setTimeout(() => {
+                            this._router.navigate([
+                                '/admin/estoque/fornecedores',
+                            ]);
+                        }, 3000);
+                    },
+                    error: () =>
+                        this.toastr.error('Erro ao atualizar fornecedor'),
+                });
         }
     }
 }

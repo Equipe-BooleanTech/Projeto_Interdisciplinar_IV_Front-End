@@ -31,6 +31,13 @@ export class SuppliersUseCase extends BaseUseCase<SupplierDto> {
             size,
         );
     }
+
+    getSupplierById(id: string): Observable<SupplierDto> {
+        return this.getById(
+            `${this.apiBase}/api/products/get-supplier-by-id`,
+            id,
+        );
+    }
     registerSupplier(data: SupplierDto): Observable<SupplierDto> {
         return this.create(
             `${this.apiBase}/api/products/create-supplier`,
@@ -62,5 +69,17 @@ export class SuppliersUseCase extends BaseUseCase<SupplierDto> {
             { startDate: startDateString, endDate: endDateString },
             'groupingType=week',
         ).pipe(map((response: ListByPeriodResponse<SupplierDto>) => response));
+    }
+
+    updateSupplier(id: string, data: SupplierDto): Observable<SupplierDto> {
+        return this.update(
+            `${this.apiBase}/api/products/update-supplier`,
+            data,
+            id,
+        );
+    }
+
+    deleteSupplier(id: string): Observable<SupplierDto> {
+        return this.delete(`${this.apiBase}/api/products/delete-supplier`, id);
     }
 }
