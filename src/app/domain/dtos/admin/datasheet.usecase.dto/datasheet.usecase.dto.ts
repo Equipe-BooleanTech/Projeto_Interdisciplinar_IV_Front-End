@@ -1,6 +1,7 @@
 import { IngredientDto } from '@domain/dtos';
 
 export interface DataSheetDto {
+    id?: string;
     name: string;
     ingredients: IngredientDto[];
     time: string;

@@ -125,7 +125,17 @@ export const routes: Routes = [
         canActivate: [SecurityGuard],
     },
     {
+        path: 'admin/estoque/fichas-tecnicas/editar-ficha/:id',
+        component: FormFichaComponent,
+        canActivate: [SecurityGuard],
+    },
+    {
         path: 'admin/estoque/fichas-tecnicas/novo-grupo',
+        component: NovoGrupoComponent,
+        canActivate: [SecurityGuard],
+    },
+    {
+        path: 'admin/estoque/fichas-tecnicas/editar-grupo/:id',
         component: NovoGrupoComponent,
         canActivate: [SecurityGuard],
     },

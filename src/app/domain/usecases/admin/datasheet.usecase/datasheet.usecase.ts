@@ -66,4 +66,26 @@ export class DataSheetUseCase extends BaseUseCase<DataSheetDto> {
             );
         }
     }
+
+    getDataSheetById(id: string): Observable<DataSheetDto> {
+        return this.getById(
+            `${this.apiBase}/api/datasheets/get-datasheet-by-id`,
+            id,
+        );
+    }
+
+    updateDataSheet(id: string, data: DataSheetDto): Observable<DataSheetDto> {
+        return this.update(
+            `${this.apiBase}/api/datasheets/update-datasheet`,
+            data,
+            id,
+        );
+    }
+
+    deleteDataSheet(id: string): Observable<DataSheetDto> {
+        return this.delete(
+            `${this.apiBase}/api/datasheets/delete-datasheet`,
+            id,
+        );
+    }
 }
