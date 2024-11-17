@@ -25,7 +25,10 @@ export class GrupoFichasComponent implements OnInit, OnDestroy {
     tabela: TableConfig<{
         prato: string;
         dataCadastro: string;
-        acoes: string;
+        acoes: {
+            text: string;
+            url: string;
+        };
     }> = {
         rowOrder: ['prato', 'dataCadastro', 'acoes'],
         title: 'Fichas técnicas cadastradas',
@@ -94,7 +97,10 @@ export class GrupoFichasComponent implements OnInit, OnDestroy {
                 rowData: {
                     prato: dataSheet.name,
                     dataCadastro: dataSheet.createdAt || '',
-                    acoes: 'Visualizar/Editar Ficha',
+                    acoes: {
+                        text: 'Visualizar/Editar Ficha',
+                        url: `/admin/estoque/fichas-tecnicas/editar-ficha/${dataSheet.id}`,
+                    },
                 },
                 componentType: ['text', 'text', 'button'],
             }),

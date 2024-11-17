@@ -23,6 +23,7 @@ import {
 import { FormInputComponent } from '@presentation/view/components/form';
 import { map } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-form-ficha',
@@ -49,7 +50,79 @@ export class FormFichaComponent implements OnInit {
         private ingredientUseCase: IngredientsUseCase,
         private datasheetUseCase: DataSheetUseCase,
         private toastr: ToastrService,
+        private _router: Router,
+        private route: ActivatedRoute,
     ) {}
+
+    protected retrieveHttpMethod() {
+        return this._router.url.includes('/editar') ? 'PUT' : 'POST';
+    }
+
+    private retrieveFormFields(): void {
+        if (this.retrieveHttpMethod() === 'PUT') {
+            this.datasheetUseCase
+                .getDataSheetById(this.route.snapshot.params['id'])
+                .subscribe((datasheet) => {
+                    this.fichaFields.fields.forEach((field) => {
+                        const fieldName = field.name;
+
+                        if (
+                            Object.prototype.hasOwnProperty.call(
+                                datasheet,
+                                fieldName,
+                            )
+                        ) {
+                            field.value = datasheet[
+                                fieldName as keyof DataSheetDto
+                            ] as string;
+                        }
+                    });
+
+                    this._updateFormValues();
+                });
+        }
+    }
+
+    private _updateFormValues(): void {
+        const updatedValues = this.fichaFields.fields.reduce(
+            (acc, field) => {
+                acc[field.name] = field.value || '';
+                return acc;
+            },
+            {} as { [key: string]: string },
+        );
+        this.fichaForm.patchValue(updatedValues);
+    }
+    protected confirmExclusion(): void {
+        const confirmation = confirm(
+            'Você realmente deseja excluir a ficha técnica? Essa ação é irreversível!',
+        );
+
+        if (!confirmation) {
+            return; // Interrompe a execução se o usuário cancelar
+        }
+
+        this.datasheetUseCase
+            .deleteDataSheet(this.route.snapshot.params['id'])
+            .subscribe({
+                next: () => {
+                    this.toastr.success(
+                        'Ficha técnica excluída com sucesso! Redirecionando...',
+                    );
+                    setTimeout(() => {
+                        this._router.navigate([
+                            '/admin/estoque/fichas-tecnicas',
+                        ]);
+                    }, 3000);
+                },
+                error: () => {
+                    this.toastr.error(
+                        'Ocorreu um erro ao excluir a ficha técnica. Verifique se há algum grupo de fichas associado e tente novamente.',
+                        'Oops...',
+                    );
+                },
+            });
+    }
 
     ngOnInit(): void {
         this.fichaForm = this._formBuilder.group(
@@ -71,6 +144,9 @@ export class FormFichaComponent implements OnInit {
         );
 
         this.loadIngredients();
+        if (this.retrieveHttpMethod() === 'PUT') {
+            this.retrieveFormFields();
+        }
     }
 
     private loadIngredients(): void {
