@@ -35,4 +35,11 @@ export class FinanceGroupUsecase extends BaseUseCase<FinanceGroupDto> {
             999,
         );
     }
+
+    getFinanceGroupById(id: string): Observable<FinanceGroupDto> {
+        return this.getById(
+            `${this.apiBase}/api/groupfinancials/get-groupfinancial-by-id`,
+            id,
+        );
+    }
 }
