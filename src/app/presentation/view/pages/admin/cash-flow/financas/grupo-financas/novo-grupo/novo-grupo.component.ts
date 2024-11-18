@@ -83,14 +83,37 @@ export class NovoGrupoFinancasComponent implements OnInit {
         );
     }
 
+    private convertExpenseCategory(category: string) {
+        switch (category) {
+            case 'INGREDIENTS':
+                return 'Ingredientes';
+            case 'SALARIES':
+                return 'Salários';
+            case 'MAINTENANCE':
+                return 'Manutenções';
+            case 'WATER_BILL':
+                return 'Conta de água';
+            case 'ELECTRICITY_BILL':
+                return 'Conta de luz';
+            case 'OTHERS':
+                return 'Outros';
+            default:
+                return category;
+        }
+    }
+
     private _fetchFinances() {
         const expensesRequest = this._expensesUseCase
             .getExpenses(0, 9999)
             .subscribe((response) => {
                 const expensesOptions = response.content.map((expense) => ({
-                    value: expense.category,
-                    label: expense.category + ' - ' + expense.description,
+                    value: String(expense.id),
+                    label:
+                        this.convertExpenseCategory(expense.category) +
+                        ' - R$' +
+                        expense.amount.toFixed(2),
                 }));
+
                 const expensesField = this.fields.fields.find(
                     (field) => field.name === 'expenses',
                 );
@@ -103,9 +126,11 @@ export class NovoGrupoFinancasComponent implements OnInit {
             .getRevenues(0, 9999)
             .subscribe((response) => {
                 const revenuesOptions = response.content.map((revenue) => ({
-                    value: revenue.paymentDate,
-                    label: 'Receita datada em: ' + revenue.paymentDate,
+                    value: String(revenue.id),
+                    label:
+                        '#' + revenue.id + ' -  R$' + revenue.amount.toFixed(2),
                 }));
+
                 const revenuesField = this.fields.fields.find(
                     (field) => field.name === 'revenues',
                 );
@@ -116,8 +141,22 @@ export class NovoGrupoFinancasComponent implements OnInit {
     }
 
     private _sendForm(): void {
+        const formattedResponse = {
+            name: this.financeGroupForm.value.name,
+            revenues: this.financeGroupForm.value.revenues.map(
+                (revenueId: string) => ({
+                    id: revenueId,
+                }),
+            ),
+            expenses: this.financeGroupForm.value.expenses.map(
+                (expenseId: string) => ({
+                    id: expenseId,
+                }),
+            ),
+        };
+
         this._financeGroupUseCase
-            .createFinanceGroup(this.financeGroupForm.value)
+            .createFinanceGroup(formattedResponse)
             .subscribe({
                 next: (response) => {
                     this.toastr.success(

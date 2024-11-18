@@ -38,7 +38,7 @@ export class FinancasComponent implements OnInit {
             .subscribe((response: PaginatedResponse<FinanceGroupDto>) => {
                 this.cards = response.content.map((data) => ({
                     title: data.name,
-                    link: `${this.apiBase}/api/groupfinancials/get-groupfinancial-by-id/${data.id}`,
+                    link: `/admin/controle-caixa/financas/grupo-financas/${data.id}`,
                 }));
             });
     }

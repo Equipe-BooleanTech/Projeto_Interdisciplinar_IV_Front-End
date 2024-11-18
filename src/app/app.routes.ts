@@ -68,7 +68,7 @@ export const routes: Routes = [
         canActivate: [SecurityGuard],
     },
     {
-        path: 'admin/controle-caixa/financas/grupo-financas',
+        path: 'admin/controle-caixa/financas/grupo-financas/:id',
         component: GrupoFinancasComponent,
         canActivate: [SecurityGuard],
     },
@@ -83,12 +83,27 @@ export const routes: Routes = [
         canActivate: [SecurityGuard],
     },
     {
+        path: 'admin/controle-caixa/financas/editar-despesa/:id',
+        component: NovaDespesaComponent,
+        canActivate: [SecurityGuard],
+    },
+    {
         path: 'admin/controle-caixa/financas/nova-receita',
         component: NovaReceitaComponent,
         canActivate: [SecurityGuard],
     },
     {
+        path: 'admin/controle-caixa/financas/editar-receita/:id',
+        component: NovaReceitaComponent,
+        canActivate: [SecurityGuard],
+    },
+    {
         path: 'admin/controle-caixa/financas/novo-grupo',
+        component: NovoGrupoFinancasComponent,
+        canActivate: [SecurityGuard],
+    },
+    {
+        path: 'admin/controle-caixa/financas/editar-grupo/:id',
         component: NovoGrupoFinancasComponent,
         canActivate: [SecurityGuard],
     },
@@ -174,6 +189,7 @@ export const routes: Routes = [
         component: PainelContadorComponent,
         canActivate: [SecurityGuard],
     },
+    /*
     {
         path: 'admin/pedidos',
         component: OrdersComponent,
@@ -194,6 +210,7 @@ export const routes: Routes = [
         component: ControleMesasComponent,
         canActivate: [SecurityGuard],
     },
+    */
     {
         path: 'admin/nao-autorizado',
         component: NotAuthorizedComponent,

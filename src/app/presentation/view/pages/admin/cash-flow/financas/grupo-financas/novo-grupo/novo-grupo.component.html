@@ -52,11 +52,12 @@
                         multiple
                         class="w-full form-select mt-1 outline-[#740318] border-2 border-[#740318] rounded-md shadow-sm focus:border-[#740318] focus:ring-[#740318] focus:ring-opacity-50"                    >
                         <option
+                            *ngIf="!field.options"
                             value=""
                             disabled
                             selected
                         >
-                            Selecione uma opção...
+                            Erro! Crie uma nova finança (receita e/ou despesa) para continuar...
                         </option>
                         <ng-container *ngFor="let option of field.options">
                             <option [value]="option.value">{{ option.label }}</option>
