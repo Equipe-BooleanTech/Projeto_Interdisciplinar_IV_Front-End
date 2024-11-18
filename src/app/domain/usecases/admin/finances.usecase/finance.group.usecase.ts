@@ -42,4 +42,19 @@ export class FinanceGroupUsecase extends BaseUseCase<FinanceGroupDto> {
             id,
         );
     }
+
+    updateFinanceGroup(id: string, data: FinanceGroupDto) {
+        return this.update(
+            `${this.apiBase}/api/groupfinancials/update-groupfinancial`,
+            data,
+            id,
+        );
+    }
+
+    deleteFinanceGroup(id: string) {
+        return this.delete(
+            `${this.apiBase}/api/groupfinancials/delete-groupfinancial`,
+            id,
+        );
+    }
 }

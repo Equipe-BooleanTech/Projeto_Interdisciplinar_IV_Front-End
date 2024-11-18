@@ -53,6 +53,11 @@ export class GrupoFinancasComponent implements OnInit {
         });
     }
 
+    protected getGroupLink() {
+        const id: string = this._route.snapshot.params['id'];
+        return `admin/controle-caixa/financas/editar-grupo/${id}`;
+    }
+
     private _loadFinances(): void {
         if (!this.financeGroupData) {
             return; // Garante que os dados estejam disponíveis
@@ -68,7 +73,7 @@ export class GrupoFinancasComponent implements OnInit {
                     valor: expense.amount,
                     acao: {
                         text: 'Ver mais',
-                        url: `/admin/controle-caixa/financas/editar-receita/${expense.id}`,
+                        url: `/admin/controle-caixa/financas/editar-despesa/${expense.id}`,
                     },
                 },
                 componentType: ['text', 'text', 'button'],

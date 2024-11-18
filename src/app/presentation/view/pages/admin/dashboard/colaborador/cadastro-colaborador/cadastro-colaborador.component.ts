@@ -161,6 +161,7 @@ export class CadastroColaboradorComponent implements OnInit {
             this._collaboratorUseCase
                 .registerCollaborator({
                     ...this.collaboratorForm.value,
+                    password: this.defaultPassword,
                     isProspecting: false,
                     isEmployee: true,
                 } as CollaboratorDto)

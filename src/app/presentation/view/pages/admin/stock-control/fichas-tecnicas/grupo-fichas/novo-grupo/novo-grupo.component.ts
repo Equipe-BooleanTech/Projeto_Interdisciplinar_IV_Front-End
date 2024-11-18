@@ -192,7 +192,7 @@ export class NovoGrupoComponent implements OnInit {
                         );
                         setTimeout(() => {
                             this._router.navigate([
-                                `/admin/estoque/fichas-tecnicas/editar-grupo/${this.route.snapshot.params['id']}`,
+                                `/admin/estoque/fichas-tecnicas`,
                             ]);
                         }, 3000);
                     },

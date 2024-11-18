@@ -11,6 +11,7 @@ import {
     PaginatedResponse,
     DefaultResponseDto,
     DataSheetDto,
+    SupplierDto,
 } from '@domain/dtos';
 import { fichaFormFields } from '@domain/static/data';
 import { FormValidateService } from '@domain/static/services';
@@ -171,30 +172,50 @@ export class FormFichaComponent implements OnInit {
     }
 
     submit(): void {
-        if (this.fichaForm.valid) {
-            const formattedResponse = {
-                ...this.fichaForm.value,
-                ingredients: this.fichaForm.value.ingredients.map(
-                    (name: string) => ({
-                        name: name,
-                    }),
-                ),
-            };
+        const formattedResponse = {
+            ...this.fichaForm.value,
+            ingredients: this.fichaForm.value.ingredients.map(
+                (name: string) => ({
+                    name: name,
+                }),
+            ),
+        };
+        if (this.retrieveHttpMethod() === 'POST') {
             this.datasheetUseCase
                 .registerDataSheet(formattedResponse)
                 .subscribe({
                     next: (response: DataSheetDto) => {
                         this.toastr.success(
-                            'Ficha técnica cadastrada com sucesso!',
-                            'Sucesso',
+                            'Ficha técnica cadastrada com sucesso! Redirecionando...',
                         );
+                        setTimeout(() => {
+                            this._router.navigate([
+                                '/admin/estoque/fichas-tecnicas',
+                            ]);
+                        }, 3000);
                     },
-                    error: (error: DefaultResponseDto) => {
-                        this.toastr.error(
-                            'Ocorreu um erro ao cadastrar a ficha técnica. Verifique os ingredientes e tente novamente!',
-                            'Oops..',
+                    error: () =>
+                        this.toastr.error('Erro ao cadastrar ficha técnica'),
+                });
+        } else {
+            this.datasheetUseCase
+                .updateDataSheet(
+                    this.route.snapshot.params['id'],
+                    formattedResponse,
+                )
+                .subscribe({
+                    next: (response: DataSheetDto) => {
+                        this.toastr.success(
+                            'Ficha técnica atualizada com sucesso! Redirecionando...',
                         );
+                        setTimeout(() => {
+                            this._router.navigate([
+                                '/admin/estoque/fichas-tecnicas',
+                            ]);
+                        }, 3000);
                     },
+                    error: () =>
+                        this.toastr.error('Erro ao atualizar ficha técnica'),
                 });
         }
     }
