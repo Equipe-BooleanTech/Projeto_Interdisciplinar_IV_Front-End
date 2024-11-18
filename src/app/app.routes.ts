@@ -61,7 +61,11 @@ export const routes: Routes = [
         component: CadastroColaboradorComponent,
         canActivate: [SecurityGuard],
     },
-
+    {
+        path: 'admin/colaboradores/editar-colaborador/:id',
+        component: CadastroColaboradorComponent,
+        canActivate: [SecurityGuard],
+    },
     {
         path: 'admin/controle-caixa/ultimas-transacoes',
         component: UltimasTransacoesComponent,

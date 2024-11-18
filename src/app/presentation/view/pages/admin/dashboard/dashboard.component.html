@@ -12,42 +12,18 @@
 
             <div class="flex 2xl:justify-end flex-wrap 2xl:w-1/2 w-full justify-center items-center">
                 <div class="grid md:grid-cols-2 w-full">
-                    <app-card
-                        class="flex-1"
-                        [isDemographic]="true"
-                        iconClass="icon-[icon-park-outline--tomato]"
-                        title="Ingredientes"
-                        [metric]="'80'"
-                        [percentageChange]="12.0"
-                        [isPositive]="true"
-                        metricTitle="Ingredientes"
-                    ></app-card>
-                    <app-card
-                        [isDemographic]="true"
-                        iconClass="icon-[mdi--delivery-dining-electric]"
-                        title="Pedidos iFood"
-                        [metric]="'200'"
-                        [percentageChange]="-2.64"
-                        [isPositive]="false"
-                        metricTitle="Vendas Totais"
-                    ></app-card>
-                    <app-card
-                        [isDemographic]="true"
-                        iconClass="icon-[fluent-emoji-high-contrast--fork-and-knife-with-plate]"
-                        title="Pratos"
-                        [metric]="'40'"
-                        [percentageChange]="-10.64"
-                        [isPositive]="false"
-                        metricTitle="Pratos"
-                    ></app-card>
-                    <app-card
-                        [isDemographic]="true"
-                        iconClass="icon-[octicon--people-24]"
-                        [metric]="'40'"
-                        [percentageChange]="100"
-                        [isPositive]="true"
-                        metricTitle="Colaboradores"
-                    ></app-card>
+                    <div *ngFor="let card of cardData">
+                        <app-card
+                            class="w-full"
+                            [isDemographic]="true"
+                            [iconClass]="card.iconClass"
+                            [title]="card.name"
+                            [metric]="card.metric"
+                            [percentageChange]="card.percentageChange"
+                            [isPositive]="card.percentageChange >= 0"
+                            [metricTitle]="card.metricTitle"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
