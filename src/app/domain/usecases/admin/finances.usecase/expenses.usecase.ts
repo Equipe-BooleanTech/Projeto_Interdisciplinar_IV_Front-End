@@ -55,4 +55,17 @@ export class ExpensesUseCase extends BaseUseCase<ExpenseDto> {
             timeRangePath,
         );
     }
+
+    updateExpense(
+        id: string,
+        data: ExpenseDto
+    ): Observable<ExpenseDto> {
+        return this.update(`${this.apiBase}/api/financials/update-expense`, data, id);
+}
+
+deleteExpense(
+    id: string
+): Observable<ExpenseDto> {
+        return this.delete(`${this.apiBase}/api/financials/delete-expense`, id)
+}
 }

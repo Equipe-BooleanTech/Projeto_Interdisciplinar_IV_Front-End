@@ -15,8 +15,9 @@ import {
 import { CommonModule, NgIf, NgSwitch } from '@angular/common';
 import { FormInputComponent } from '@presentation/view/components/form';
 import { ExpensesUseCase } from '@domain/usecases';
-import { DefaultResponseDto } from '@domain/dtos';
+import { DefaultResponseDto, ExpenseDto, SupplierDto } from '@domain/dtos';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-nova-receita',
@@ -43,26 +44,126 @@ export class NovaDespesaComponent implements OnInit {
         private _formValidateService: FormValidateService,
         private _expenseUseCase: ExpensesUseCase,
         private toastr: ToastrService,
+        private route: ActivatedRoute,
+        private router: Router,
     ) {}
+
     ngOnInit(): void {
         this._initForm();
+        if (this.retrieveHttpMethod() === 'PUT') {
+            this.retrieveFormFields();
+        }
+    }
+    onSubmit(): void {
+        if (this.retrieveHttpMethod() === 'POST') {
+            this._expenseUseCase
+                .createExpense({
+                    ...this.expenseForm.value,
+                } as ExpenseDto)
+                .subscribe({
+                    next: (response: ExpenseDto) => {
+                        this.toastr.success(
+                            'Despesa cadastrada com sucesso! Redirecionando...',
+                        );
+                        setTimeout(() => {
+                            this.router.navigate([
+                                '/admin/controle-caixa/financas',
+                            ]);
+                        }, 3000);
+                    },
+                    error: () => this.toastr.error('Erro ao cadastrar despesa'),
+                });
+        } else {
+            this._expenseUseCase
+                .updateExpense(
+                    this.route.snapshot.params['id'],
+                    this.expenseForm.value,
+                )
+                .subscribe({
+                    next: (response: ExpenseDto) => {
+                        this.toastr.success(
+                            'Despesa atualizada com sucesso! Redirecionando...',
+                        );
+                        setTimeout(() => {
+                            this.router.navigate([
+                                '/admin/controle-caixa/financas',
+                            ]);
+                        }, 3000);
+                    },
+                    error: () => this.toastr.error('Erro ao atualizar despesa'),
+                });
+        }
     }
 
-    private _sendForm(): void {
-        this._expenseUseCase.createExpense(this.expenseForm.value).subscribe({
-            next: (response) => {
-                this.toastr.success(
-                    'Despesa cadastrada com sucesso!',
-                    'Sucesso',
-                );
+    protected retrieveHttpMethod() {
+        return this.router.url.includes('/editar') ? 'PUT' : 'POST';
+    }
+
+    private retrieveFormFields() {
+        if (this.retrieveHttpMethod() === 'PUT') {
+            this._expenseUseCase
+                .getExpenseById(this.route.snapshot.params['id'])
+                .subscribe((expense) => {
+                    this.expenseFormFields.fields.forEach((field) => {
+                        const fieldName = field.name;
+
+                        if (
+                            Object.prototype.hasOwnProperty.call(
+                                expense,
+                                fieldName,
+                            )
+                        ) {
+                            field.value = expense[
+                                fieldName as keyof ExpenseDto
+                            ] as string;
+                        }
+                    });
+
+                    this._updateFormValues();
+                });
+        }
+    }
+
+    private _updateFormValues() {
+        const updatedValues = this.expenseFormFields.fields.reduce(
+            (acc, field) => {
+                acc[field.name] = field.value;
+                return acc;
             },
-            error: (error: DefaultResponseDto) => {
-                this.toastr.error(
-                    'Ocorreu um erro ao cadastrar a despesa. Certifique-se que possui as permissões necessárias!',
-                    'Oops..',
-                );
-            },
-        });
+            {} as { [key: string]: string },
+        );
+        this.expenseForm.patchValue(updatedValues);
+    }
+
+    protected confirmExclusion(): void {
+        const confirmation = confirm(
+            'Você realmente deseja excluir a despesa? Essa ação é irreversível!',
+        );
+
+        if (!confirmation) {
+            return;
+        }
+
+        this._expenseUseCase
+            .deleteExpense(this.route.snapshot.params['id'])
+            .subscribe({
+                next: () => {
+                    this.toastr.success(
+                        'Despesa excluída com sucesso! Redirecionando...',
+                    );
+                    setTimeout(() => {
+                        this.router.navigate([
+                            '/admin/controle-caixa/financas',
+                        ]);
+                    }, 3000);
+                },
+                error: () => {
+                    this.toastr.error(
+                        'Ocorreu um erro ao excluir a despesa. Tente novamente.',
+                        'Oops...',
+                    );
+                },
+            });
     }
 
     private _initForm(): void {
@@ -80,14 +181,5 @@ export class NovaDespesaComponent implements OnInit {
                 {} as { [key: string]: [string, ValidatorFn | null] },
             ),
         );
-    }
-
-    onSubmit(): void {
-        if (this.expenseForm.valid) {
-            console.log(this.expenseForm.value);
-            this._sendForm();
-        } else {
-            console.log('Formulário inválido');
-        }
     }
 }

@@ -6,6 +6,7 @@ import {
     PaginatedResponse,
     ListByPeriodResponse,
     RevenueDto,
+    ExpenseDto,
 } from '@domain/dtos';
 import { Observable } from 'rxjs';
 import { API_URL } from 'src/app/shared';
@@ -53,5 +54,17 @@ export class RevenuesUseCase extends BaseUseCase<RevenueDto> {
             { startDate: '', endDate: '' },
             timeRangePath,
         );
+    }
+
+    updateRevenue(id: string, data: RevenueDto): Observable<RevenueDto> {
+        return this.update(
+            `${this.apiBase}/api/financials/update-revenue`,
+            data,
+            id,
+        );
+    }
+
+    deleteRevenue(id: string): Observable<RevenueDto> {
+        return this.delete(`${this.apiBase}/api/financials/delete-revenue`, id);
     }
 }

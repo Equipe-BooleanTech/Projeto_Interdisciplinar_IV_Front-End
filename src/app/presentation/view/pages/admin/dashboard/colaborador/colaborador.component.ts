@@ -53,7 +53,10 @@ export class ColaboradorComponent implements OnInit, OnDestroy {
                             status: collaborator.isEmployee
                                 ? 'Ativo'
                                 : 'Inativo',
-                            action: 'Ver mais',
+                            action: {
+                                url: `/admin/colaboradores/editar-colaborador/${collaborator.id}`,
+                                text: 'Ver mais',
+                            },
                         },
                         componentType: ['text', 'text', 'text', 'button'],
                     }));
@@ -92,7 +95,10 @@ export class ColaboradorComponent implements OnInit, OnDestroy {
         role: string;
         name: string;
         status: string;
-        action: string;
+        action: {
+            url: string;
+            text: string;
+        };
     }> = {
         rowOrder: ['name', 'role', 'status', 'action'],
         title: 'Colaboradores Cadastrados e Status',

@@ -85,6 +85,11 @@ export class GrupoFichasComponent implements OnInit, OnDestroy {
         }
     }
 
+    protected getGroupLink() {
+        const id: string = this._route.snapshot.params['id'];
+        return `admin/estoque/fichas-tecnicas/editar-grupo/${id}`;
+    }
+
     ngOnDestroy(): void {
         if (this.subscription) {
             this.subscription.unsubscribe();

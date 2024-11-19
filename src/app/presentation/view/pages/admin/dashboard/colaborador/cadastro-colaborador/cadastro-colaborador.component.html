@@ -72,13 +72,24 @@
                 </ng-container>
             </ng-container>
 
-            <button
-                type="submit"
-                class="bg-[#740318] hover:bg-[#740318c9] disabled:bg-[#740318c9] text-white font-semibold py-3 px-4 w-full rounded transition ease-in-out duration-300 mt-4"
-                [disabled]="!collaboratorForm.valid"
-            >
-                Salvar Colaborador
-            </button>
+            <div class="w-full flex md:flex-nowrap gap-4">
+                <button
+                    class="bg-[#740318] hover:bg-[#740318c9] disabled:bg-[#740318c9] text-white font-semibold py-3 px-4 w-full rounded transition ease-in-out duration-300 mt-4"
+                    *ngIf="_retrieveHttpMethod() === 'PUT'"
+                    (click)="confirmExclusion()"
+                    type="button"
+                >
+                    Excluir Colaborador
+                </button>
+                <button
+                    type="submit"
+                    class="bg-[#FDBA8C] hover:bg-[#F8A785] disabled:bg-[#FDBA8C] text-white font-semibold py-3 px-4 w-full rounded transition ease-in-out duration-300 mt-4"
+                    [disabled]="!collaboratorForm.valid"
+                >
+                    Salvar Colaborador
+                </button>
+            </div>
+
         </app-form>
     </div>
 </app-sidebar>

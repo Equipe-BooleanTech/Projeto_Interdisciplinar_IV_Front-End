@@ -15,12 +15,9 @@ import {
 import { CommonModule, NgIf, NgSwitch } from '@angular/common';
 import { FormInputComponent } from '@presentation/view/components/form';
 import { CollaboratorUseCase, RevenuesUseCase } from '@domain/usecases';
-import {
-    CollaboratorDto,
-    DefaultResponseDto,
-    PaginatedResponse,
-} from '@domain/dtos';
+import { CollaboratorDto, PaginatedResponse, RevenueDto } from '@domain/dtos';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-nova-receita',
@@ -47,32 +44,58 @@ export class NovaReceitaComponent implements OnInit {
         private _formValidateService: FormValidateService,
         private _revenueUseCase: RevenuesUseCase,
         private _collaboratorUseCase: CollaboratorUseCase,
+        private route: ActivatedRoute,
+        private router: Router,
         private toastr: ToastrService,
     ) {}
     ngOnInit(): void {
         this._initForm();
         this._mapFieldsFromAPIResponse();
+        if (this.retrieveHttpMethod() === 'PUT') {
+            this.retrieveFormFields();
+        }
+    }
+    onSubmit(): void {
+        if (this.retrieveHttpMethod() === 'POST') {
+            this._revenueUseCase
+                .createRevenue({
+                    ...this.revenueForm.value,
+                } as RevenueDto)
+                .subscribe({
+                    next: (response: RevenueDto) => {
+                        this.toastr.success(
+                            'Receita cadastrada com sucesso! Redirecionando...',
+                        );
+                        setTimeout(() => {
+                            this.router.navigate([
+                                '/admin/controle-caixa/financas',
+                            ]);
+                        }, 3000);
+                    },
+                    error: () => this.toastr.error('Erro ao cadastrar receita'),
+                });
+        } else {
+            this._revenueUseCase
+                .updateRevenue(
+                    this.route.snapshot.params['id'],
+                    this.revenueForm.value,
+                )
+                .subscribe({
+                    next: (response: RevenueDto) => {
+                        this.toastr.success(
+                            'Despesa atualizada com sucesso! Redirecionando...',
+                        );
+                        setTimeout(() => {
+                            this.router.navigate([
+                                '/admin/controle-caixa/financas',
+                            ]);
+                        }, 3000);
+                    },
+                    error: () => this.toastr.error('Erro ao atualizar despesa'),
+                });
+        }
     }
 
-    private _sendForm(): void {
-        this._revenueUseCase.createRevenue(this.revenueForm.value).subscribe({
-            next: (response) => {
-                this.toastr.success(
-                    'Receita cadastrada com sucesso!',
-                    'Sucesso',
-                );
-                setTimeout(() => {
-                    window.location.reload();
-                }, 3000);
-            },
-            error: (error: DefaultResponseDto) => {
-                this.toastr.error(
-                    'Ocorreu um erro ao cadastrar a receita. Tente novamente!',
-                    'Oops..',
-                );
-            },
-        });
-    }
     private _mapFieldsFromAPIResponse(): void {
         this._collaboratorUseCase
             .getAllCollaborators(0, 999)
@@ -92,6 +115,77 @@ export class NovaReceitaComponent implements OnInit {
             });
     }
 
+    protected retrieveHttpMethod() {
+        return this.router.url.includes('/editar') ? 'PUT' : 'POST';
+    }
+
+    private retrieveFormFields() {
+        if (this.retrieveHttpMethod() === 'PUT') {
+            this._revenueUseCase
+                .getRevenueById(this.route.snapshot.params['id'])
+                .subscribe((revenue) => {
+                    this.revenueFormFields.fields.forEach((field) => {
+                        const fieldName = field.name;
+
+                        if (
+                            Object.prototype.hasOwnProperty.call(
+                                revenue,
+                                fieldName,
+                            )
+                        ) {
+                            field.value = revenue[
+                                fieldName as keyof RevenueDto
+                            ] as string;
+                        }
+                    });
+
+                    this._updateFormValues();
+                });
+        }
+    }
+
+    private _updateFormValues() {
+        const updatedValues = this.revenueFormFields.fields.reduce(
+            (acc, field) => {
+                acc[field.name] = field.value;
+                return acc;
+            },
+            {} as { [key: string]: string },
+        );
+        this.revenueForm.patchValue(updatedValues);
+    }
+
+    protected confirmExclusion(): void {
+        const confirmation = confirm(
+            'Você realmente deseja excluir a receita? Essa ação é irreversível!',
+        );
+
+        if (!confirmation) {
+            return;
+        }
+
+        this._revenueUseCase
+            .deleteRevenue(this.route.snapshot.params['id'])
+            .subscribe({
+                next: () => {
+                    this.toastr.success(
+                        'Receita excluída com sucesso! Redirecionando...',
+                    );
+                    setTimeout(() => {
+                        this.router.navigate([
+                            '/admin/controle-caixa/financas',
+                        ]);
+                    }, 3000);
+                },
+                error: () => {
+                    this.toastr.error(
+                        'Ocorreu um erro ao excluir a despesa. Tente novamente.',
+                        'Oops...',
+                    );
+                },
+            });
+    }
+
     private _initForm(): void {
         this.revenueForm = this._fb.group(
             this.revenueFormFields.fields.reduce(
@@ -107,14 +201,5 @@ export class NovaReceitaComponent implements OnInit {
                 {} as { [key: string]: [string, ValidatorFn | null] },
             ),
         );
-    }
-
-    onSubmit(): void {
-        if (this.revenueForm.valid) {
-            console.log(this.revenueForm.value);
-            this._sendForm();
-        } else {
-            console.log('Formulário inválido');
-        }
     }
 }

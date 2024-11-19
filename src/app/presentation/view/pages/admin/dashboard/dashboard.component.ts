@@ -1,11 +1,23 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CollaboratorDto, PaginatedResponse } from '@domain/dtos';
+import {
+    CollaboratorDto,
+    DataSheetDto,
+    IngredientDto,
+    ListByPeriodResponse,
+    PaginatedResponse,
+    SupplierDto,
+} from '@domain/dtos';
 import {
     LineColumnChartOptions,
     LineColumnMetrics,
     TableConfig,
 } from '@domain/static/interfaces';
-import { CollaboratorUseCase } from '@domain/usecases';
+import {
+    CollaboratorUseCase,
+    DataSheetUseCase,
+    IngredientsUseCase,
+    SuppliersUseCase,
+} from '@domain/usecases';
 import {
     CardComponent,
     SidebarComponent,
@@ -13,8 +25,25 @@ import {
 } from '@presentation/view/components';
 import { LineColumnComponent } from '@presentation/view/components/chart';
 import { Subscription } from 'rxjs';
-import { Location } from '@angular/common';
+import { Location, NgForOf } from '@angular/common';
 import { TokenService } from 'src/app/security';
+import { getCurrentWeek, getPastWeek } from '@domain/utils';
+import { API_URL } from '@shared/constants';
+
+type UseCaseType = 'ingredients' | 'suppliers' | 'datasheets' | 'collaborators';
+
+interface CardData {
+    name: string;
+    percentageChange: number;
+    metric: string;
+    useCase: UseCaseType;
+    apiConfig: {
+        endpoint: string;
+        params?: Record<string, any>;
+    };
+    iconClass: string;
+    metricTitle: string;
+}
 
 @Component({
     selector: 'app-dashboard',
@@ -24,6 +53,7 @@ import { TokenService } from 'src/app/security';
         CardComponent,
         LineColumnComponent,
         TableComponent,
+        NgForOf,
     ],
     templateUrl: './dashboard.component.html',
     styles: ``,
@@ -33,11 +63,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
     collaboratorName: string = '';
     currentPage = 1;
     pageSize = 3;
+    cardData: CardData[] = [];
+    apiBase: string = API_URL;
 
     constructor(
         private location: Location,
         private collaboratorUseCase: CollaboratorUseCase,
         private _tokenService: TokenService,
+        private _ingredientsUseCase: IngredientsUseCase,
+        private _suppliersUseCase: SuppliersUseCase,
+        private _dataSheetsUseCase: DataSheetUseCase,
     ) {}
 
     ngOnInit(): void {
@@ -60,7 +95,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
                             status: collaborator.isEmployee
                                 ? 'Ativo'
                                 : 'Inativo',
-                            action: 'Ver mais',
+                            action: {
+                                url: `/admin/colaboradores/editar-colaborador/${collaborator.id}`,
+                                text: 'Ver mais',
+                            },
                         },
                         componentType: ['text', 'text', 'text', 'button'],
                     }));
@@ -69,6 +107,171 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
         this.fetchCollaborators();
         this.fetchCurrentCollaboratorName();
+        this.initializeCards();
+        this._loadMetrics();
+        this._calculatePercentagesForCards();
+    }
+
+    private initializeCards(): void {
+        this.cardData = [
+            {
+                name: 'Ingredientes',
+                percentageChange: 0,
+                metric: '',
+                useCase: 'ingredients',
+                apiConfig: {
+                    endpoint: `${this.apiBase}/api/products/list-ingredients-by-period`,
+                    params: { category: 'food' },
+                },
+                iconClass: 'icon-[icon-park-outline--tomato]',
+                metricTitle: 'Ingredientes',
+            },
+            {
+                name: 'Fornecedores',
+                percentageChange: 0,
+                metric: '',
+                useCase: 'suppliers',
+                apiConfig: {
+                    endpoint: `${this.apiBase}/api/products/list-suppliers-by-period`,
+                },
+                iconClass: 'icon-[streamline--store-1]',
+                metricTitle: 'Fornecedores',
+            },
+            {
+                name: 'Fichas Técnicas',
+                percentageChange: 0,
+                metric: '',
+                useCase: 'datasheets',
+                apiConfig: {
+                    endpoint: `${this.apiBase}/api/products/list-ingredients-by-period`,
+                },
+                iconClass: 'icon-[fluent--form-sparkle-20-regular]',
+                metricTitle: 'Fichas Técnicas',
+            },
+            {
+                name: 'Colaboradores',
+                percentageChange: 0,
+                metric: '',
+                useCase: 'collaborators',
+                apiConfig: {
+                    endpoint: `${this.apiBase}/api/users/list-users-by-period`,
+                },
+                iconClass: 'icon-[lucide--users]',
+                metricTitle: 'Colaboradores',
+            },
+        ];
+    }
+
+    private async _calculatePercentagesForCards(): Promise<void> {
+        const currentWeek = getCurrentWeek();
+        const pastWeek = getPastWeek();
+
+        for (const card of this.cardData) {
+            try {
+                const useCase = this._getUseCase(card.useCase);
+                const listMethodName = this._getListMethodName(card.useCase);
+
+                // Fetch data for the current week
+                const currentWeekData = await new Promise<number>((resolve) => {
+                    useCase[listMethodName]({
+                        ...card.apiConfig.params,
+                        startDate: currentWeek.startDate,
+                        endDate: currentWeek.endDate,
+                    }).subscribe({
+                        next: (
+                            response: ListByPeriodResponse<
+                                | IngredientDto
+                                | SupplierDto
+                                | DataSheetDto
+                                | CollaboratorDto
+                            >,
+                        ) => resolve(response.total),
+                    });
+                });
+
+                // Fetch data for the past week
+                const pastWeekData = await new Promise<number>((resolve) => {
+                    useCase[listMethodName]({
+                        ...card.apiConfig.params,
+                        startDate: pastWeek.startDate,
+                        endDate: pastWeek.endDate,
+                    }).subscribe({
+                        next: (
+                            response: ListByPeriodResponse<
+                                | IngredientDto
+                                | SupplierDto
+                                | DataSheetDto
+                                | CollaboratorDto
+                            >,
+                        ) => resolve(response.total),
+                    });
+                });
+
+                card.percentageChange = Math.floor(
+                    ((currentWeekData - pastWeekData) / pastWeekData) * 100,
+                );
+            } catch (error) {
+                console.error(
+                    `Erro ao calcular a porcentagem para o card ${card.name}:`,
+                    error,
+                );
+            }
+        }
+    }
+
+    private _getUseCase(useCaseType: UseCaseType): any {
+        switch (useCaseType) {
+            case 'ingredients':
+                return this._ingredientsUseCase;
+            case 'suppliers':
+                return this._suppliersUseCase;
+            case 'datasheets':
+                return this._dataSheetsUseCase;
+            case 'collaborators':
+                return this.collaboratorUseCase;
+            default:
+                return null;
+        }
+    }
+
+    private _getListMethodName(useCaseType: UseCaseType): string {
+        switch (useCaseType) {
+            case 'ingredients':
+                return 'listIngredientsPerWeek';
+            case 'suppliers':
+                return 'listSuppliersPerWeek';
+            case 'datasheets':
+                return 'listDataSheetPerWeek';
+            case 'collaborators':
+                return 'listCollaboratorsPerWeek';
+            default:
+                throw new Error(`Método não configurado para o use case`);
+        }
+    }
+
+    private _loadMetrics(): void {
+        const currentWeek = getCurrentWeek();
+        for (const card of this.cardData) {
+            const useCase = this._getUseCase(card.useCase);
+            const listMethodName = this._getListMethodName(card.useCase);
+
+            useCase[listMethodName]({
+                ...card.apiConfig.params,
+                startDate: currentWeek.startDate,
+                endDate: currentWeek.endDate,
+            }).subscribe(
+                (
+                    response: ListByPeriodResponse<
+                        | IngredientDto
+                        | SupplierDto
+                        | DataSheetDto
+                        | CollaboratorDto
+                    >,
+                ) => {
+                    card.metric = response.total.toString();
+                },
+            );
+        }
     }
 
     fetchCollaborators(): void {
@@ -111,7 +314,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         role: string;
         name: string;
         status: string;
-        action: string;
+        action: {
+            url: string;
+            text: string;
+        };
     }> = {
         rowOrder: ['name', 'role', 'status', 'action'],
         title: 'Colaboradores Cadastrados e Status',

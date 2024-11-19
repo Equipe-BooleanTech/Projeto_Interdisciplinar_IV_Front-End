@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseUseCase, ErrorService } from '@domain/base';
-import { DataSheetGroupDto, PaginatedResponse } from '@domain/dtos';
+import {
+    DataSheetDto,
+    DataSheetGroupDto,
+    PaginatedResponse,
+    SupplierDto,
+} from '@domain/dtos';
 import { Observable } from 'rxjs';
 import { API_URL } from 'src/app/shared';
 
@@ -38,6 +43,24 @@ export class DataSheetGroupUseCase extends BaseUseCase<DataSheetGroupDto> {
         return this.create(
             `${this.apiBase}/api/groupsheets/create-groupsheet`,
             data,
+        );
+    }
+
+    deleteDataSheetGroup(id: string): Observable<DataSheetGroupDto> {
+        return this.delete(
+            `${this.apiBase}/api/groupsheets/delete-groupsheet`,
+            id,
+        );
+    }
+
+    updateGroupSheet(
+        id: string,
+        data: DataSheetGroupDto,
+    ): Observable<DataSheetGroupDto> {
+        return this.update(
+            `${this.apiBase}/api/groupsheets/update-groupsheet`,
+            data,
+            id,
         );
     }
 }

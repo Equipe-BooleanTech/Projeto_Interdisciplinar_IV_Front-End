@@ -25,8 +25,14 @@
         </section>
 
         <!-- Tabela de Finanças -->
-        <section class="mt-6">
+        <section class="my-6">
             <app-table [tableConfig]="tabela"></app-table>
         </section>
+        <app-button
+            [link]="getGroupLink()"
+            [disabled]="false"
+        >
+            Editar/Excluir grupo
+        </app-button>
     </div>
 </app-sidebar>
